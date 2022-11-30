@@ -24,7 +24,9 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Git Tools
 ```she
-Add Git Tools to use here
+git checkout -b name/add-name
+git commit -am "leave descriptive note"
+git push -u origin name/add-name
 ```
 
 ## Development
