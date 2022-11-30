@@ -15,7 +15,8 @@ FEC Project
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-1. [Development](#development)
+2. [Git Tools](#Git Tools)
+3. [Development](#development)
 
 ## Usage
 
@@ -27,6 +28,11 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
 - etc
+
+## Git Tools
+```she
+Add Git Tools to use here
+```
 
 ## Development
 
