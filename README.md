@@ -30,6 +30,10 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Development
 
+### Environment Strategy
+main - Primary Branch to hold the working application
+dev - Branch where edits will be pushed into. This will be merged with main after testing.
+
 ### Installing Dependencies
 
 From within the root directory:
