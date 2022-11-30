@@ -1,15 +1,15 @@
-# fec
-FEC Project
-# Project Name
+# FEC - Hyacinth
 
-> Project description
+> Front End Capstone for Team Hyacinth. The project goal is to design a commerical website based on the business documents provided.
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [Requirements](#requirements)
-2. [Git Tools](#Git_Tools)
-3. [Development](#development)
+2. [Requirements](#requirements)
+3. [Git Tools](#git-tools)
+4. [Development](#development)
+5. [Installing Dependencies](#installing-dependencies)
+6. [Additional Info](#additional-info)
 
 ## Usage
 
@@ -24,7 +24,18 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 ## Git Tools
 ```she
-Add Git Tools to use here
+Make New Branch and Push:
+git checkout -b branch-name
+git add .
+git commmit -m "Text"
+git push origin branch-name
+
+
+Resolve Merge Conflict:
+git checkout dev
+git pull origin dev
+git checkout branch-name
+git merge master
 ```
 
 ## Development
@@ -44,5 +55,5 @@ npm install -g webpack
 npm install
 ```
 
-Carter Brooks
-Jon Zimdars
+## Additional Info
+Used this [Repo](https://github.com/DaltonHart/HowTo-React-Webpack-Babel/blob/main/README.md) for project setup
