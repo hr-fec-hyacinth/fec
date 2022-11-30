@@ -45,3 +45,4 @@ npm install
 ```
 
 Carter Brooks
+Jon Zimdars
