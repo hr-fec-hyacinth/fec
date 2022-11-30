@@ -15,7 +15,7 @@ FEC Project
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-2. [Git Tools](#Git Tools)
+2. [Git Tools](#GitTools)
 3. [Development](#development)
 
 ## Usage
