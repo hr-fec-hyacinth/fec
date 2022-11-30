@@ -4,18 +4,11 @@ FEC Project
 
 > Project description
 
-## Related Projects
-
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-
 ## Table of Contents
 
 1. [Usage](#Usage)
 1. [Requirements](#requirements)
-2. [Git Tools](#GitTools)
+2. [Git Tools](#Git_Tools)
 3. [Development](#development)
 
 ## Usage
