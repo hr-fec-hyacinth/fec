@@ -3,6 +3,7 @@ import QnA from './qna/QnA.jsx';
 import Overview from './overview/Overview.jsx';
 import RatingsReviews from './ratingsreviews/RatingsReviews.jsx';
 import RelatedCompare from './relatedcompare/RelatedCompare.jsx';
+import Header from './Header.jsx';
 import api from '../../server/api.js';
 
 const {useState, useEffect} = React;
@@ -12,23 +13,19 @@ const App = () => {
   const [styles, updateStyles] = useState([]);
 
   useEffect(() => {
-    api.getProduct(37311, (product) => {
-      updateProduct(product);
-      api.getStyles(37311, (styles) => {
-        updateStyles(styles.results);
-      })
-    });
+    api.getProduct(37311)
+      .then(product => updateProduct(product))
+      .then(() => api.getStyles(37311))
+      .then(styles => updateStyles(styles.results));
   }, []);
 
   return (
     <div>
-      <div>
-        <h1>Insert Header</h1>
-      </div>
-      <Overview />
-      <RelatedCompare />
-      <QnA />
-      <RatingsReviews />
+      <Header />
+      <Overview product={product} styles={styles}/>
+      <RelatedCompare product = {product} styles={styles}/>
+      <QnA product = {product}/>
+      <RatingsReviews product = {product}/>
     </div>
   )
 }
