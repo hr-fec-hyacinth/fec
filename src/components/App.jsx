@@ -20,12 +20,14 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
-      <Overview product={product} styles={styles}/>
-      <RelatedCompare product = {product} styles={styles}/>
-      <QnA product = {product}/>
-      <RatingsReviews product = {product}/>
+    <div >
+      <div className="w-8/12 justify-center mx-auto min-w-900">
+        <Header />
+        <Overview product={product} styles={styles}/>
+        <RelatedCompare product = {product} styles={styles}/>
+        <QnA product = {product}/>
+        <RatingsReviews product = {product}/>
+      </div>
     </div>
   )
 }
