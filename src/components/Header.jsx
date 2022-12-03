@@ -1,10 +1,11 @@
 import React from 'react';
+import Logo from './shared/logo.jsx'
 
 const Header = () => {
 
   return (
-    <div>
-      <h1>Header</h1>
+    <div className="bg-black w-full">
+      <Logo />
     </div>
   )
 };

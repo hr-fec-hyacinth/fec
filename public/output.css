@@ -513,7 +513,36 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.bg-zinc-700 {
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.w-8\/12 {
+  width: 66.666667%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-52 {
+  width: 13rem;
+}
+
+.min-w-900 {
+  min-width: 900px;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.bg-black {
   --tw-bg-opacity: 1;
-  background-color: rgb(63 63 70 / var(--tw-bg-opacity));
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
