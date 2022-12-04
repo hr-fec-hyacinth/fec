@@ -518,12 +518,24 @@ video {
   margin-right: auto;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
+.flex {
+  display: flex;
+}
+
 .w-8\/12 {
   width: 66.666667%;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .w-52 {
@@ -534,8 +546,16 @@ video {
   min-width: 900px;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .justify-center {
   justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 .bg-black {
