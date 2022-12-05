@@ -14,4 +14,9 @@ api.getStyles = (productId) => {
     .then(res => res.data);
 };
 
+api.getMetaReviews = (productId) => {
+  return axios.get(URL + 'reviews/meta', {headers: {Authorization: AUTHKEY}, params: {product_id: productId}})
+    .then(res => res.data);
+};
+
 export default api;
