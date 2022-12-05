@@ -14,6 +14,18 @@ api.getStyles = (productId) => {
     .then(res => res.data);
 };
 
+api.getQuestions = (product_id, page, count) => {
+
+  return axios.get(URL + `qa/questions`, {
+    headers: {Authorization: AUTHKEY},
+    params: {
+      product_id: product_id,
+      // page: page,
+      // count: count
+    }
+  })
+}
+
 api.getMetaReviews = (productId) => {
   return axios.get(URL + 'reviews/meta', {headers: {Authorization: AUTHKEY}, params: {product_id: productId}})
     .then(res => res.data);
