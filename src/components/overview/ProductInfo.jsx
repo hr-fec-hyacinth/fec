@@ -21,6 +21,7 @@ const ProductInfo = ({product, style}) => {
       <p>{product.name}</p>
       {!salePrice && <p>${price}</p>}
       {salePrice && <p><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through'>${price}</span></p>}
+      <p>{product.description}</p>
     </div>
   )
 };
