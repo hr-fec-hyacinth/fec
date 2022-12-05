@@ -2,6 +2,7 @@ import React from 'react';
 import totalReviews from '../../helper/totalReviews.js';
 import { AiFillFacebook, AiFillTwitterSquare } from "react-icons/ai";
 import { ImPinterest } from "react-icons/im"
+import Social from './Social.jsx';
 
 const {useState, useEffect} = React;
 
@@ -34,7 +35,7 @@ const ProductInfo = ({product, style, metaReview}) => {
       {!salePrice && <p>${price}</p>}
       {salePrice && <p><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through'>${price}</span></p>}
       <p>{product.description}</p>
-      <p className='flex'><AiFillFacebook /><ImPinterest /><AiFillTwitterSquare /></p>
+      <Social />
     </div>
   )
 };
