@@ -16,7 +16,7 @@ const RatingsReviews = ({product, meta}) => {
     <div id='ratings-reviews'>
       RATINGS & REVIEWS
       <div className="flex m-2">
-        <Ratings product={product} meta={meta}/>
+    gio   <Ratings product={product} meta={meta}/>
         <Reviews product={product} />
       </div>
       {renderForm && <ReviewForm product={product} />}
