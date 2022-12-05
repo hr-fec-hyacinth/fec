@@ -3,7 +3,7 @@ import React from 'react';
 const RatingsReviews = () => {
 
   return (
-    <div>
+    <div id='ratings-reviews'>
       Ratings & Reviews
     </div>
   )
