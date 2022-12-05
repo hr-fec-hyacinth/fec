@@ -3,6 +3,7 @@ import totalReviews from '../../helper/totalReviews.js';
 import { AiFillFacebook, AiFillTwitterSquare } from "react-icons/ai";
 import { ImPinterest } from "react-icons/im"
 import Social from './Social.jsx';
+import Stars from '../shared/Stars.jsx';
 
 const {useState, useEffect} = React;
 
@@ -28,6 +29,7 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   return (
     <div>
+      <Stars />
       {reviewCount && <p><a className='text-stone-400 underline' href="#ratings-reviews">Read all {reviewCount} reviews</a></p>}
       <p>{product.category}</p>
       <p>{product.name}</p>
