@@ -14,9 +14,9 @@ const Ratings = ({product, meta}) => {
   }, [meta]);
 
   return (
-    <div id='ratings'>
+    <div id='ratings' className="flexBasis-1/4" >
       {averageRating && <div>{averageRating}</div>}
-      {meta.product_id}
+      {/* {meta.product_id} */}
       {meta.characteristics &&
         <CharacteristicsList characteristics={meta.characteristics}
       />}

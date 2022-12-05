@@ -13,11 +13,11 @@ const RatingsReviews = ({product, meta}) => {
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
-    <div id='ratings-reviews' className="container mx-auto">
+    <div id='ratings-reviews'>
       RATINGS & REVIEWS
-      <div className="flex flex-row">
-        <Ratings className="w-full aspect-video" product={product} meta={meta}/>
-        <Reviews className="w-full aspect-video" product={product} />
+      <div className="flex m-2">
+        <Ratings product={product} meta={meta}/>
+        <Reviews product={product} />
       </div>
       {renderForm && <ReviewForm product={product} />}
     </div>
