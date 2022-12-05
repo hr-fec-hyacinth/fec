@@ -29,7 +29,7 @@ const App = () => {
         <Overview product={product} styles={styles} metaReview={metaReview}/>
         <RelatedCompare product = {product} styles={styles}/>
         <QnA product = {product}/>
-        <RatingsReviews product = {product}/>
+        {metaReview && <RatingsReviews product={product} meta={metaReview} />}
       </div>
     </div>
   )
