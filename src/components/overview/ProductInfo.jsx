@@ -28,7 +28,6 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   return (
     <div>
-      Product Info
       {reviewCount && <p><a className='text-stone-400 underline' href="#ratings-reviews">Read all {reviewCount} reviews</a></p>}
       <p>{product.category}</p>
       <p>{product.name}</p>

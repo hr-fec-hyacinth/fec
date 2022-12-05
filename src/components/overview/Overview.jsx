@@ -14,9 +14,11 @@ const Overview = ({product, styles, metaReview}) => {
   }, [styles])
 
   return (
-    <div>
-      Product Overview
-      <ProductInfo product={product} style={style} metaReview={metaReview}/>
+    <div className='flex'>
+      <div className='w-8/12'></div>
+      <div className='w-4/12'>
+        <ProductInfo product={product} style={style} metaReview={metaReview}/>
+      </div>
     </div>
   )
 }
