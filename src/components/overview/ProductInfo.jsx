@@ -1,10 +1,12 @@
 import React from 'react';
+import totalReviews from '../../helper/totalReviews.js';
 
 const {useState, useEffect} = React;
 
-const ProductInfo = ({product, style}) => {
+const ProductInfo = ({product, style, metaReview}) => {
   const [price, updatePrice] = useState('');
   const [salePrice, updateSalePrice] = useState('');
+  const [reviewCount, updateReviewCount] = useState(0);
 
   // Calculate Price on style change
   useEffect(() => {
@@ -14,9 +16,17 @@ const ProductInfo = ({product, style}) => {
     }
   }, [style]);
 
+  // Update Review Count on metaLoad
+  useEffect(() => {
+    if (metaReview.ratings) {
+      updateReviewCount(totalReviews(metaReview.ratings));
+    }
+  }, [metaReview]);
+
   return (
     <div>
       Product Info
+      {reviewCount && <p>Reviews {reviewCount}</p>}
       <p>{product.category}</p>
       <p>{product.name}</p>
       {!salePrice && <p>${price}</p>}

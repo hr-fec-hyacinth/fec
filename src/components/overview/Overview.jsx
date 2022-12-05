@@ -3,7 +3,7 @@ import ProductInfo from './ProductInfo.jsx';
 
 const {useState, useEffect} = React;
 
-const Overview = ({product, styles}) => {
+const Overview = ({product, styles, metaReview}) => {
   const [style, changeStyle] = useState({});
   const [styleIndex, changeStyleIndex] = useState(0);
 
@@ -16,7 +16,7 @@ const Overview = ({product, styles}) => {
   return (
     <div>
       Product Overview
-      <ProductInfo product={product} style={style}/>
+      <ProductInfo product={product} style={style} metaReview={metaReview}/>
     </div>
   )
 }
