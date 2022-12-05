@@ -1,8 +1,9 @@
 import React from 'react';
 import magnifiyingGlass from './../../assets/loupe.png';
+import QnAList from './QnAList.jsx'
 
 
-const QnA = () => {
+const QnA = ({ product }) => {
 
   return (
     <>
@@ -19,6 +20,7 @@ const QnA = () => {
         HAVE A QUESTION? SEARCH FOR ANSWERS...
         <img src={magnifiyingGlass} alt="magnifiyingGlass" className="w-4 h-fit"/>
       </div>
+      < QnAList product={product}/>
     </>
   )
 }
