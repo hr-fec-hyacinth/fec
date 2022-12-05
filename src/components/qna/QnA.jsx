@@ -7,10 +7,17 @@ const QnA = () => {
   return (
     <>
       <div>QUESTIONS & ANSWERS</div>
-        ml-auto
-      <div className="flex flex-row justify-between">
+      <div className="flex
+                      flex-row
+                      justify-between
+                      items-center
+                      border
+                      border-black
+                      p-2.5
+                      font-bold
+                      text-xs">
         HAVE A QUESTION? SEARCH FOR ANSWERS...
-        <img src={magnifiyingGlass} alt="magnifiyingGlass" className="w-12"/>
+        <img src={magnifiyingGlass} alt="magnifiyingGlass" className="w-4 h-fit"/>
       </div>
     </>
   )
