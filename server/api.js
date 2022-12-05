@@ -26,4 +26,14 @@ api.getQuestions = (product_id, page, count) => {
   })
 }
 
+api.getMetaReviews = (productId) => {
+  return axios.get(URL + 'reviews/meta', {headers: {Authorization: AUTHKEY}, params: {product_id: productId}})
+    .then(res => res.data);
+};
+
+api.getRelated = (productId) => {
+  return axios.get(URL + 'products/' + productId + '/related', {headers: {Authorization: AUTHKEY}})
+    .then(res => res.data)
+}
+
 export default api;
