@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 const RatingsReviews = ({product}) => {
 
   return (
-    <div id='reviews'>
-      Reviews
+    <div id='review'>
+      These are the list of reviews:
     </div>
   )
 }
