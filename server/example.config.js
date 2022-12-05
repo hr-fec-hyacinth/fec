@@ -1,3 +1,3 @@
-const AUTHKEY = 'GIT KEY HERE'
+const AUTHKEY = ''
 
 export default AUTHKEY;

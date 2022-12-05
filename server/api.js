@@ -14,4 +14,9 @@ api.getStyles = (productId) => {
     .then(res => res.data);
 };
 
+api.getRelated = (productId) => {
+  return axios.get(URL + 'products/' + productId + '/related', {headers: {Authorization: AUTHKEY}})
+    .then(res => res.data)
+}
+
 export default api;
