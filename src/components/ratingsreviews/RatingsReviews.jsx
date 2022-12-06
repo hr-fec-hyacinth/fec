@@ -12,7 +12,8 @@ const RatingsReviews = ({product, meta}) => {
   // Sets form render to false on initial load
   const [activeForm, setActiveForm] = useState(false);
   const [reviews, setReviews] = useState ([]);
-  const [sortBy, setSortBy] = useState('Relevance');
+  const [reviewsCount, setReviewsCount] = useState(2);
+  const [sortBy, setSortBy] = useState('relevance');
   const [starFilter, setStarFilter] = useState('');
 
   // if(product) {
@@ -24,14 +25,14 @@ const RatingsReviews = ({product, meta}) => {
   useEffect(()=> {
     // console.log(product.product_id);
     if(product) {
-      api.getReviews(Number(product.id), sortBy)
+      api.getReviews(Number(37313), 1, reviewsCount, sortBy)
       .then(res => {
-        console.log('result from api req', res);
-        console.log('this should be the array of reviews', res);
+        // console.log('result from api req', res);
+        // console.log('this should be the array of reviews', res);
         setReviews(res.results);
       })
     }
-  }, [product, sortBy]);
+  }, [product, sortBy, reviewsCount]);
 
   if(reviews) {
     console.log('reviews can be seen', reviews);
@@ -42,8 +43,19 @@ const RatingsReviews = ({product, meta}) => {
     // moreReviews adds two to the number of reviews to load.
   const handleOnClick = {
     stars: () => {},
-    moreReviews: () => {},
-    addForm: () => {}
+    sortBy: (e) => {
+      e.preventDefault();
+      console.log('this is the event target value', e.target.value);
+      setSortBy(e.target.value);
+    },
+    moreReviews: (e) => {
+      e.preventDefault();
+      setReviewsCount(reviewsCount + 2);
+    },
+    toggleForm: (e) => {
+      e.preventDefault();
+      setActiveForm(!activeForm);
+    }
   }
 
 
@@ -56,24 +68,28 @@ const RatingsReviews = ({product, meta}) => {
           <Ratings product={product} meta={meta} />
         </div>
         <div id='review' className="w-8/12">
-          <SortOptions meta={meta} sortBy={sortBy} />
+          <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
           <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
           <div className="space-x-2">
             <button id='loadMoreReviews'
               className='drop-shadow-lg
                 border-2 border-indigo-300
                 px-2 py-2
-                hover:scale-105'>MORE REVIEWS
+                hover:scale-105'
+              onClick={handleOnClick.moreReviews}
+              >MORE REVIEWS
             </button>
             <button id='submitReview' className='drop-shadow-lg
               border-2 border-indigo-300
               px-2 py-2
-              hover:scale-105'>ADD A REVIEW +
+              hover:scale-105'
+              onClick={handleOnClick.toggleForm}
+              >ADD A REVIEW +
             </button>
           </div>
         </div>
       </div>
-      {activeForm && <ReviewForm product={product} />}
+      {activeForm && <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />}
     </div>
   )
 }

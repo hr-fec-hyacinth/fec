@@ -3,9 +3,9 @@ import ReviewCard from './ReviewCard.jsx';
 
 const ReviewsList = ({reviews, displayNum}) => {
 
-  if (reviews) {
-    console.log('inside ReviewsList', reviews)
-  }
+  // if (reviews) {
+  //   console.log('inside ReviewsList', reviews)
+  // }
 
   // let toRender = [];
   // if(reviews) {
@@ -24,7 +24,7 @@ const ReviewsList = ({reviews, displayNum}) => {
     <div>
       {reviews.map(el => {
         return (
-          <div id="a-review" className="mx-auto px-3">
+          <div key={el.review_id} id="a-review" className="mx-auto px-3">
             <ReviewCard aReview={el} />
           </div>
         )

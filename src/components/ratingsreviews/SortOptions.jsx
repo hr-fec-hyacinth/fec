@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import totalReviews from '../../helper/totalReviews.js'
 
 
-const SortOptions = ({meta, sortBy, cb}) => {
+const SortOptions = ({meta, sortBy, sortCB}) => {
 
   let totalNumReviews = 0;
   if(meta.ratings) {
@@ -16,10 +16,10 @@ const SortOptions = ({meta, sortBy, cb}) => {
       <div>
         {totalNumReviews} reviews, sorted by:
         <div style={{display: 'inline-Block'}}>
-          <select name="sortByList" id="sortReviews">
-            <option value="Relevance"> Relevance </option>
-            <option value="Newest"> Newest </option>
-            <option value="Helpfulness"> Helpfulness </option>
+          <select name="sortByList" id="sortReviews" value={sortBy} onChange={sortCB}>
+            <option value="relevance"> relevance </option>
+            <option value="newest"> newest </option>
+            <option value="helpfulness"> helpfulness </option>
           </select>
         </div>
       </div>}

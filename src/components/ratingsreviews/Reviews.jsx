@@ -8,11 +8,9 @@ import ReviewsList from './ReviewsList.jsx';
 const Reviews = ({product, meta, sortBy, reviews, filterStars}) => {
   // const [sortBy, setSortBy] = useState('')
   // const [reviews, setReviews] = useState([]);
-  const [displayNum, setDisplayNum] = useState(2);
-
-  if (reviews) {
-    console.log('inside ReviewsList', reviews)
-  }
+  // if (reviews) {
+  //   console.log('inside ReviewsList', reviews)
+  // }
 
   return (
     <div>

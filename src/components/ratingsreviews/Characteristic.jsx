@@ -2,6 +2,7 @@ import React from 'react';
 import { AiFillCaretUp } from 'react-icons/ai'
 
 const Characteristic = ({characteristicName, characteristicObj}) => {
+
   const boxFill = {
     height: '100%',
     // width: '100%',
