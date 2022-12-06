@@ -15,11 +15,10 @@ const Ratings = ({product, meta}) => {
   }, [meta]);
 
   return (
-    <div id='ratings' className="w-4/12 p" >
-      {averageRating && <h3>{averageRating}</h3>}
-      <div>100% of reviews recommend this product</div>
-      {/* {meta.product_id} */}
-      {meta.ratings && <RatingsChart metaRatings={meta.ratings}/>}
+    <div id='ratings' className="w-4/12 pt-3" >
+      {averageRating && <p className="text-3xl">{averageRating}</p>}
+      <p className="text-xs"><span>100%</span> of reviews recommend this product</p>
+      {meta.ratings && <RatingsChart metaRatings={meta.ratings} />}
       {meta.characteristics &&
         <CharacteristicsList characteristics={meta.characteristics}
       />}
