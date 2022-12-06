@@ -58,6 +58,19 @@ const RatingsReviews = ({product, meta}) => {
         <div id='review' className="w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} />
           <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
+          <div className="space-x-2">
+            <button id='loadMoreReviews'
+              className='drop-shadow-lg
+                border-2 border-indigo-300
+                px-2 py-2
+                hover:scale-105'>MORE REVIEWS
+            </button>
+            <button id='submitReview' className='drop-shadow-lg
+              border-2 border-indigo-300
+              px-2 py-2
+              hover:scale-105'>ADD A REVIEW +
+            </button>
+          </div>
         </div>
       </div>
       {activeForm && <ReviewForm product={product} />}
