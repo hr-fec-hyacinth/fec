@@ -16,7 +16,7 @@ const ReviewsList = ({reviews, displayNum}) => {
   //   )
   //   console.log('this is to render', toRender);
   // }
-  // }
+  // } .
 
   return (
     <>
@@ -24,7 +24,7 @@ const ReviewsList = ({reviews, displayNum}) => {
     <div>
       {reviews.map(el => {
         return (
-          <div id="areview" className="mx-auto px-3">
+          <div id="a-review" className="mx-auto px-3">
             <ReviewCard aReview={el} />
           </div>
         )

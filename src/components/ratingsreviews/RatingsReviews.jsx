@@ -9,7 +9,7 @@ const RatingsReviews = ({product, meta}) => {
   // Retrieves Reviews of Current Product
   // Retrieves Reviews of Product Metadata
   // Sets form render to false on initial load
-  const [renderForm, setRenderForm] = useState(false);
+  const [activeForm, setActiveForm] = useState(false);
   const [reviews, setReviews] = useState ([]);
   const [sortBy, setSortBy] = useState('Relevance');
   const [starFilter, setStarFilter] = useState('');
@@ -36,16 +36,29 @@ const RatingsReviews = ({product, meta}) => {
     console.log('reviews can be seen', reviews);
   }
 
+  // this is going to be an object that handles the various types of form submissions
+    // stars handles filtering by stars and changes the starFilter
+    // moreReviews adds two to the number of reviews to load.
+  const handleOnClick = {
+    stars: () => {},
+    moreReviews: () => {},
+    addForm: () => {}
+  }
+
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
       <div className="flex space-x-3">
-        <Ratings product={product} meta={meta} />
-        <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
+        <div id='ratings' className="w-4/12 pt-3" >
+          <Ratings product={product} meta={meta} />
+        </div>
+        <div id='review' className="w-8/12">
+          <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
+        </div>
       </div>
-      {renderForm && <ReviewForm product={product} />}
+      {activeForm && <ReviewForm product={product} />}
     </div>
   )
 }

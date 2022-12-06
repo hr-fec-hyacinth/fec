@@ -15,7 +15,7 @@ const Ratings = ({product, meta}) => {
   }, [meta]);
 
   return (
-    <div id='ratings' className="w-4/12 pt-3" >
+    <div>
       {averageRating && <p className="text-3xl">{averageRating}</p>}
       <p className="text-xs"><span>100%</span> of reviews recommend this product</p>
       {meta.ratings && <RatingsChart metaRatings={meta.ratings} />}

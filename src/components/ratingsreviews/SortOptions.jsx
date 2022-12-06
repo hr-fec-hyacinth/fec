@@ -16,7 +16,6 @@ const SortOptions = ({meta, sortBy, cb}) => {
       <div>
         {totalNumReviews} reviews, sorted by:
         <div style={{display: 'inline-Block'}}>
-          {sortBy}
           <select name="sortByList" id="sortReviews">
             <option value="Relevance"> Relevance </option>
             <option value="Newest"> Newest </option>

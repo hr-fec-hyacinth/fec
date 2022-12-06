@@ -5,7 +5,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import ReviewsList from './ReviewsList.jsx';
 
 // filterStars is selected by
-const RatingsReviews = ({product, meta, sortBy, reviews, filterStars}) => {
+const Reviews = ({product, meta, sortBy, reviews, filterStars}) => {
   // const [sortBy, setSortBy] = useState('')
   // const [reviews, setReviews] = useState([]);
   const [displayNum, setDisplayNum] = useState(2);
@@ -15,7 +15,7 @@ const RatingsReviews = ({product, meta, sortBy, reviews, filterStars}) => {
   }
 
   return (
-    <div id='review' className="w-8/12">
+    <div>
       <SortOptions meta={meta} sortBy={sortBy} />
       <ReviewsList reviews={reviews} />
 
@@ -36,4 +36,4 @@ const RatingsReviews = ({product, meta, sortBy, reviews, filterStars}) => {
   );
 };
 
-export default RatingsReviews;
+export default Reviews;
