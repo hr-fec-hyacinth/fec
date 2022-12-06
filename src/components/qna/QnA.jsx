@@ -1,6 +1,6 @@
 import React from 'react';
-import magnifiyingGlass from './../../assets/loupe.png';
 import QnAList from './QnAList.jsx'
+import { HiMagnifyingGlass } from 'react-icons/hi2'
 
 
 const QnA = ({ product }) => {
@@ -18,9 +18,9 @@ const QnA = ({ product }) => {
                       font-bold
                       text-xs">
         HAVE A QUESTION? SEARCH FOR ANSWERS...
-        <img src={magnifiyingGlass} alt="magnifiyingGlass" className="w-4 h-fit"/>
+        <HiMagnifyingGlass size={18}/>
       </div>
-      < QnAList product={product}/>
+      <QnAList product={product}/>
     </>
   )
 }
