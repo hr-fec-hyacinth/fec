@@ -3,7 +3,6 @@ import axios from 'axios';
 import { MdStarBorder } from 'react-icons/md';
 
 const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, setCurrentCompare }) => {
-  console.log(slide)
 
   //Using the first style as default
   let category = slide[1].category;
