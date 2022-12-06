@@ -53,8 +53,8 @@ const ImageView = ({style}) => {
     <div className='h-full'>
     <div style={styling} className='h-full overflow-hidden bg-stone-400 mr-1 bg-center relative ease-linear duration-300'>
       <ImageCarousel imageIndex={imageIndex} updateImageIndex={updateImageIndex} imageList={imageList} updateStyling={updateStyling}/>
-      {imageIndex !== 0 && <BsFillArrowLeftCircleFill className='top-1/2 left-24 absolute z-20' onClick={previous}/>}
-      {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill className='top-1/2 right-4 absolute z-10' onClick={next}/>}
+      {imageIndex !== 0 && <BsFillArrowLeftCircleFill className='border-white border-2 text-blue-400 bg-white rounded-full top-1/2 left-24 absolute z-20 text-2xl hover:text-blue-600' onClick={previous}/>}
+      {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill className='border-white border-2 text-blue-400 top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-blue-600' onClick={next}/>}
       {style &&
       <div style={styling} className='h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30 ease-linear duration-300 cursor-zoom-in' onClick={e => {updateExpand(true);}}>
       </div>

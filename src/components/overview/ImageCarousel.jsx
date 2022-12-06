@@ -51,7 +51,7 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
       <div className='flex w-2/12 h-full flex-col left-4 absolute z-10'>
         {currentImages.map((image) => {
           return (
-            <img key={image.index} className={image.index === imageIndex ? 'border-b-[4px] border-cyan-500 aspect-square object-cover w-12 select-none mt-3' : 'aspect-square object-cover w-12 select-none mt-4'} src={image.url} onClick={e => {
+            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-b-[4px] border-blue-400 aspect-square object-cover w-12 select-none mt-3' : 'aspect-square object-cover w-12 select-none mt-4'} src={image.url} onClick={e => {
               updateImageIndex(image.index);
               updateStyling({backgroundImage: 'url(' + image.url + ')'});
             }}/>
