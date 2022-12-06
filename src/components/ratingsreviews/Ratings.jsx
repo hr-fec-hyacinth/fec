@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { calculateAverageRating } from './reviewsHelper.js';
 import CharacteristicsList from './CharacteristicsList.jsx';
+import RatingsChart from './RatingsChart.jsx';
 
 const Ratings = ({product, meta}) => {
   const [averageRating, setAverageRating] = useState(0);
@@ -14,9 +15,10 @@ const Ratings = ({product, meta}) => {
   }, [meta]);
 
   return (
-    <div id='ratings' className="flexBasis-1/4" >
-      {averageRating && <div>{averageRating}</div>}
-      {/* {meta.product_id} */}
+    <div>
+      {averageRating && <p className="text-3xl">{averageRating}</p>}
+      <p className="text-xs"><span>100%</span> of reviews recommend this product</p>
+      {meta.ratings && <RatingsChart metaRatings={meta.ratings} />}
       {meta.characteristics &&
         <CharacteristicsList characteristics={meta.characteristics}
       />}

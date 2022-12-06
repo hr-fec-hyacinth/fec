@@ -41,4 +41,16 @@ api.addToCart = (skuId, total) => {
     .then(res => res.data);
 }
 
+api.getReviews = (productId, pageNum, count, sortBy) => {
+  return axios.get(URL + 'reviews/', {headers: {Authorization: AUTHKEY}, params: {
+    page: pageNum,
+    product_id: productId,
+    count: count,
+    sort: sortBy}})
+    .then(res => {
+      // console.log('this is the', res)
+      return res.data;
+    });
+}
+
 export default api;
