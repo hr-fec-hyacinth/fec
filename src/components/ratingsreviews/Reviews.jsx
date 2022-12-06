@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const RatingsReviews = ({product}) => {
 
   return (
-    <div id='review' className="flexBasis-3/4">
+    <div id='review' className="w-8/12">
       /* ____ reviews, sorted by ______: */
     </div>
   )

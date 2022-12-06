@@ -13,9 +13,9 @@ const RatingsReviews = ({product, meta}) => {
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
-    <div id='ratings-reviews'>
+    <div id='ratings-reviews' className="pt-3 pb-3">
       RATINGS & REVIEWS
-      <div className="flex m-2">
+      <div className="flex">
         <Ratings product={product} meta={meta}/>
         <Reviews product={product} />
       </div>
