@@ -53,15 +53,26 @@ const QnAList = ({ product }) => {
 
   //when questions change add first two questions to display questions
   useEffect(() => {
-    setDisplayQuestions([questions[0], questions[1]])
+    if (questions.length <= 2)
+      setDisplayQuestions([...questions])
+    else if (questions.length > 2)
+      setDisplayQuestions([questions[0], questions[1]])
   }, [questions])
 
-  //TODO: when load more questions is pressed two more questions should be added to display questions
+  const handleMoreClick = () => {
+    //
+  }
 
   return (
     <>
-    {/* return question comp */}
-      {displayQuestions.map(q => <OneQnA questionData={q}/>)}
+      {/* Give the follow div a max height of screen - searchbar - buttons */}
+      <div>
+        {displayQuestions.map(q => <OneQnA questionData={q}/>)}
+      </div>
+      <div className='flex'>
+        <div onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>
+        <div>ADD A QUESTION "PLUS-ICON"</div>
+      </div>
     </>
   )
 }

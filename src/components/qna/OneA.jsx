@@ -29,9 +29,11 @@ const OneA = ({ answer }) => {
   return (
     <>
       <div>A: {answer.body}</div>
-      <div>by: {answer.answerer_name}, {formattedDate} | Helpful? | Yes ({helpfulness}) | Report</div>
-      <div onClick={handleYesClick}>Yes</div>
-      {reportComp}
+      <div className="flex">
+        <div>by: {answer.answerer_name}, {formattedDate} | Helpful? |</div>
+        <div onClick={handleYesClick}>Yes ({helpfulness}) |</div>
+        {reportComp}
+      </div>
     </>
   )
 }
