@@ -14,4 +14,43 @@ api.getStyles = (productId) => {
     .then(res => res.data);
 };
 
+api.getQuestions = (product_id, page, count) => {
+
+  return axios.get(URL + `qa/questions`, {
+    headers: {Authorization: AUTHKEY},
+    params: {
+      product_id: product_id,
+      // page: page,
+      // count: count
+    }
+  })
+}
+
+api.getMetaReviews = (productId) => {
+  return axios.get(URL + 'reviews/meta', {headers: {Authorization: AUTHKEY}, params: {product_id: productId}})
+    .then(res => res.data);
+};
+
+api.getRelated = (productId) => {
+  return axios.get(URL + 'products/' + productId + '/related', {headers: {Authorization: AUTHKEY}})
+    .then(res => res.data)
+}
+
+api.addToCart = (skuId, total) => {
+  return axios.post(URL + 'cart', {sku_id: skuId}, {headers: {Authorization: AUTHKEY}})
+    .then(res => res.data);
+}
+
+api.getReviews = (productId, pageNum, count, sortBy) => {
+  return axios.get(URL + 'reviews/', {headers: {Authorization: AUTHKEY}, params: {
+    page: pageNum,
+    product_id: productId,
+    count: count,
+    sort: sortBy}})
+    .then(res => {
+      // console.log('this is the', res)
+      return res.data;
+    });
+}
+
 export default api;
