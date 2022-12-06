@@ -36,4 +36,14 @@ api.getRelated = (productId) => {
     .then(res => res.data)
 }
 
+api.getReviews = (productId, sortBy) => {
+  return axios.get(URL + 'reviews/', {headers: {Authorization: AUTHKEY}, params: {
+    product_id: productId,
+    sort: sortBy}})
+    .then(res => {
+      // console.log('this is the', res)
+      return res.data;
+    });
+}
+
 export default api;
