@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CarouselCard from './CarouselCard.jsx'
+import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
 const sliderData = [
@@ -14,10 +14,9 @@ const sliderData = [
 ]
 
 
-const Carousel = () => {
+const YourOutfit = ({ sliderInfo }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = sliderData.length;
-  console.log('index', currentIndex)
 
   const nextSlide = (e) => {
     e.preventDefault();
@@ -43,23 +42,24 @@ const Carousel = () => {
   }
 
   const slides = getSlides();
-  console.log(slides)
 
   return (
     <>
-      <div className='slider relative flex items-center w-8/12'>
-        {currentIndex > 0 &&
-          <MdArrowBackIos className='back-arrow position absolute left-4 top-2/4 z-10 cursor-pointer select-none' onClick={prevSlide}/>
-        }
-        {currentIndex < length - 3 &&
-          <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide}/>
-        }
-        {slides.map((slide, index) => (
-          <CarouselCard slide={slide} key={index}/>
-        ))}
+      <div className='flex justify-center'>
+        <div className='slider relative flex w-10/12'>
+          {currentIndex > 0 &&
+            <MdArrowBackIos className='back-arrow position absolute left-4 top-2/4 z-10 cursor-pointer select-none' onClick={prevSlide} />
+          }
+          {currentIndex < length - 3 &&
+            <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
+          }
+          {slides.map((slide, index) => (
+            <YourOutfitCard slide={slide} key={index} />
+          ))}
+        </div>
       </div>
     </>
   )
 }
 
-export default Carousel;
+export default YourOutfit;

@@ -1,50 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 import axios from 'axios';
-import Carousel from './Carousel.jsx'
+import RelatedProducts from './RelatedProducts.jsx'
+import YourOutfit from './YourOutfit.jsx'
+import CompareModal from './CompareModal.jsx'
 
-const RelatedCompare = ({ product }) => {
-  const [related, updateRelated] = useState([]);
-  const [relatedStyles, setRelatedStyles] = useState([]);
-  let styles = [];
+const RelatedCompare = ({ product, switchProduct }) => {
+  const [currentProduct, setCurrentProduct] = useState('');
+  const [related, setRelated] = useState([]);
+  const [sliderInfo, setSliderInfo] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+  const [currentCompare, setCurrentCompare] = useState('');
 
-  //Need the styles and product details for the related list to pass to carousel/carousel card
   useEffect(() => {
-    if (product !== undefined) {
-      api.getRelated(product.id)
-      .then((res) => {updateRelated(res)})
-      .catch(err => console.log(err))
+    //let id = product.id || 37311;
+    if (37311) {
+      api.getRelated(37311)
+      .then((res) => {setRelated(res)})
+      .catch((err) => {console.log(err)});
     }
   }, [product])
 
-  // let test = related.map((item) => {
-  //   return api.getStyles(item)
-  //   .then((res) => {return res})
-  // })
-
-  // Promise.all(test)
-  // .then((results) => {
-  //   styles = results;
-  // })
-
-  // console.log(styles)
-  // related.forEach((item) => {
-  //   api.getProduct(item)
-  //   .then((res) => {relatedProductInfo.push(res)})
-  // })
-
-  // relatedProductInfo.forEach((item) => {
-  //   console.log('i', item)
-  // })
+  useEffect(() => {
+    //Create an array of promises for the API calls
+    const promises = related.map((item) => {
+      return Promise.all([
+        api.getStyles(item),
+        api.getProduct(item),
+        api.getMetaReviews(item)
+      ])
+      .catch((err) => {console.log(err)})
+    });
+    //Wait for all of the promises to resolve
+    Promise.all(promises)
+    .then((res) => {setSliderInfo(res)})
+    .catch((err) => {console.log(err)});
+  }, [related]);
 
   return (
-    <div className='ml-24'>
-      <br></br>
-      Related Items and Comparison
-      <h4>Related Products</h4>
-      <Carousel related={related}/>
-      <h4>Your Outfit</h4>
-      <Carousel related={related}/>
+    <div className=''>
+      <br/>
+      {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
+      <h4 className='ml-20'>Related Products</h4>
+      <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
+      <br/>
+      <h4 className='ml-20'>Your Outfit</h4>
+      <YourOutfit related={related} />
       <br/>
     </div>
   )
