@@ -5,7 +5,7 @@ const RatingsChart = ({metaRatings}) => {
     { return prev + parseInt(metaRatings[cur])}
     , 0);
 
-  console.log('this is the total ratings', totalRatings);
+  // console.log('this is the total ratings', totalRatings);
 
   return (
     <div>
