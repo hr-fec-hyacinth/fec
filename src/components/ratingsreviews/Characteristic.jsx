@@ -1,34 +1,59 @@
 import React from 'react';
-import { AiOutlineArrowUp } from 'react-icons/ai'
+import { AiFillCaretUp } from 'react-icons/ai'
 
 const Characteristic = ({characteristicName, characteristicObj}) => {
   const boxFill = {
     height: '100%',
     // width: '100%',
-    height: '10px',
+    minHeight: '30px',
     backgroundColor: '#c1cffb',
   }
 
   const arrowStyle = {
     color: 'black',
     position: 'relative',
-    bottom: '0',
+    top: '-5px',
+    padding: '2px',
     left: `${(parseInt(characteristicObj.value) / 5) * 100}%`
+  }
+
+  let leftVar = '--';
+  let rightVar = '++';
+
+  switch(characteristicName) {
+    case 'Fit':
+      leftVar = 'Narrow';
+      rightVar = 'Wide';
+      break;
+    case 'Length':
+      leftVar = 'Short';
+      rightVar = 'Long';
+      break;
+    case 'Comfort':
+      leftVar = 'Poor';
+      rightVar = 'Excellent';
+      break;
+    case 'Quality':
+      leftVar = 'Poor';
+      rightVar = 'Excellent';
+      break;
   }
 
   return (
     <div>
-      {characteristicName} : {parseFloat(characteristicObj.value).toFixed(1)}
+      <span className="text-xl"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
       <div className="flex flex-wrap mx-auto">
-        <div className="w-4/12 border-2 border-x-zinc-500" style={boxFill}>
-          <p style={{textAlight: 'left'}}>--</p>
+        <div className="w-4/12 border-2" style={boxFill}>
+          <p style={{textAlign: 'left', verticalAlign: 'middle'}}>{leftVar}</p>
         </div>
-        <div className="w-4/12 border-2 border-x-zinc-500" style={boxFill}></div>
-        <div className="w-4/12 border-2 border-x-zinc-500" style={boxFill}>
-          <p style={{textAlign: 'right'}}>++</p>
+        <div className="w-4/12 border-2" style={boxFill}>
+          <p style={{textAlign: 'center', verticalAlign: 'middle'}}>perfect</p>
+        </div>
+        <div className="w-4/12 border-2" style={boxFill}>
+          <p style={{textAlign: 'right'}}>{rightVar}</p>
         </div>
         <div className="mx-auto">
-          <AiOutlineArrowUp className='text-blue-400' style={arrowStyle} />
+        <AiFillCaretUp className='text-blue-400' style={arrowStyle} />
         </div>
       </div>
     </div>
