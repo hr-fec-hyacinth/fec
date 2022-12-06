@@ -7,6 +7,7 @@ const QnAList = ({ product }) => {
   const [questions, setQuestions] = useState([]);
   const [sendWarn, setSendWarn] = useState(false);
   const [displayQuestions, setDisplayQuestions] = useState([]);
+  const [more, setMore] = useState(false);
 
   const qHelpfulness = (a, b) => {
     if (a.question_helpfulness > b.question_helpfulness)
@@ -53,15 +54,48 @@ const QnAList = ({ product }) => {
 
   //when questions change add first two questions to display questions
   useEffect(() => {
-    setDisplayQuestions([questions[0], questions[1]])
+    if (questions.length <= 2)
+      setDisplayQuestions([...questions])
+    else if (questions.length > 2)
+      setDisplayQuestions([questions[0], questions[1]])
   }, [questions])
 
-  //TODO: when load more questions is pressed two more questions should be added to display questions
+  useEffect(() => {
+    if (questions.length > 2) {
+      setMore(true)
+    }
+  }, [questions])
+
+  const handleMoreClick = () => {
+    console.log('here')
+    const i = displayQuestions.length;
+    const dif = questions.length - displayQuestions.length;
+    console.log('here3')
+    if(dif === 1) {
+      setDisplayQuestions(displayQuestions.concat([questions[i]]));
+      setMore(false);
+    } else if (dif === 2) {
+      console.log('here4')
+      setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
+      setMore(false);
+    } else if (dif > 2) {
+      console.log('here2')
+      setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
+    } else {
+      console.warn('This should not be hit, you need to handle me.')
+    }
+  }
 
   return (
     <>
-    {/* return question comp */}
-      {displayQuestions.map(q => <OneQnA questionData={q}/>)}
+      {/* Give the follow div a max height of screen - searchbar - buttons */}
+      <div>
+        {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index}/>)}
+      </div>
+      <div className='flex'>
+        {more && <div onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
+        <div>ADD A QUESTION "PLUS-ICON"</div>
+      </div>
     </>
   )
 }

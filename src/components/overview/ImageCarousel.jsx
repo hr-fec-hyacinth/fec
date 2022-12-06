@@ -1,5 +1,5 @@
 import React from 'react';
-import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/Io'
+import {IoIosArrowDown, IoIosArrowUp} from 'react-icons/io'
 
 const {useState, useEffect} = React;
 
