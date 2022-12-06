@@ -4,7 +4,7 @@ const RatingsChart = ({metaRatings}) => {
   const totalRatings = Object.keys(metaRatings).reduce((prev, cur) =>
     { console.log('this is prev', prev);
       console.log('this is cur',cur);
-      console.log('this is number of ratings',metaRatings[cur]);
+      console.log('this is number of',metaRatings[cur]);
       return prev + parseInt(metaRatings[cur])}
     , 0);
 
@@ -13,22 +13,20 @@ const RatingsChart = ({metaRatings}) => {
   return (
     <>
       {metaRatings && Object.keys(metaRatings).map((el, i) => {
-        let styles = {
-          backgroundColor: 'gray',
-          borderLeft: 'solid blue 80%'
+        console.log('what is the metaRatings', metaRatings[el])
+        const styles = {
+          width: `${(metaRatings[el]/totalRatings) * 100}%`,
+          height: '100%',
+          backgroundColor: '#f6fa12'
         }
         return (
           <div key={el + i} className='flex py-1'>
-          <div className='w-3/12'>{el + ' Stars:'}</div>
+          <div className='w-3/12'>{el + ' Star:'}</div>
           <div className='w-8/12' style={{
-            border: 'solid black',
-            backgroundColor: 'gray'
+            border: 'solid black 1px',
+            backgroundColor: 'light gray'
           }}>
-            <div style={{
-              maxWidth: '80%',
-              height: '100%',
-              backgroundColor: 'blue'
-            }}></div>
+            <div style={styles}></div>
           </div>
           </div>
         )
