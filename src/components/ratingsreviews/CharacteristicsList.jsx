@@ -5,8 +5,8 @@ const CharacteristicsList = ({characteristics}) => {
   return (
     <div>
       {Object.keys(characteristics).map((el, i) => {
-        //console.log(el);
-        //console.log(characteristics[i]);
+        // console.log(el);
+        // console.log(characteristics[i]);
         return (
           <div key={el + '_' + characteristics[el].id}>
             <Characteristic characteristicName={el} characteristicObj={characteristics[el]}/>
