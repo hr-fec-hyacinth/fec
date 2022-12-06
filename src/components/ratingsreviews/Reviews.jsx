@@ -8,11 +8,16 @@ import ReviewsList from './ReviewsList.jsx';
 const RatingsReviews = ({product, meta, sortBy, reviews, filterStars}) => {
   // const [sortBy, setSortBy] = useState('')
   // const [reviews, setReviews] = useState([]);
+  const [displayNum, setDisplayNum] = useState(2);
+
+  if (reviews) {
+    console.log('inside ReviewsList', reviews)
+  }
 
   return (
     <div id='review' className="w-8/12">
       <SortOptions meta={meta} sortBy={sortBy} />
-      <ReviewsList />
+      <ReviewsList reviews={reviews} />
 
       <div className="space-x-2">
         <button id='loadMoreReviews'

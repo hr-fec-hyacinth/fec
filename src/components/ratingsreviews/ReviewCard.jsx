@@ -1,27 +1,43 @@
 import React from 'react';
+import { AiFillCheckCircle } from 'react-icons/ai';
+
 
 const ReviewCard = ({aReview}) => {
-  if (aReview) {
-    console.log(aReviews);
+
+  const dateString = aReview.date;
+  const date = new Date(dateString);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+
+  let reviewerName = 'Anonymous User';
+
+  if(aReview.reviewer_name) {
+    reviewerName = aReview.reviewer_name;
   }
 
   return (
-    <div id="ReviewCard" className="h-48 bg-slate-200 mx-auto px-3">
-    <div>
-      <div>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div className="text-xs">Username, January 1, 2019</div>
+    <div id="ReviewCard" className="bg-slate-200 mx-auto px-3 py-5 border-b-2 border-black">
+    <div className="flex flex-wrap">
+      <div className="flex-none">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="grow"></div>
+      <div className="flex-none text-xs align-middle">{reviewerName}, {formattedDate}</div>
     </div>
     <div className='font-semibold truncate'>
-      Review Title with word-break truncation to prevent wrapping onto the next...
+      {aReview.summary}
     </div>
     <div className='font-light'>
       ... line, if necessary
     </div>
     <div>
-      I really like these camisole pants man. Bought the last 100 on blackfriday sale.
+      {aReview.body}
     </div>
+    {aReview.recommend &&
+      <div>
+        <span><AiFillCheckCircle className="text-blue-400 inline-block" /> I recommend this product</span>
+      </div>
+    }
     <div>
-      <p className='text-xs'>Helpful? <span>Yes</span> | <span>Report</span></p>
+      <p className='text-xs'>Helpful? <span>Yes</span> ({aReview.helpfulness}) | <span>Report</span></p>
     </div>
   </div>
   )
