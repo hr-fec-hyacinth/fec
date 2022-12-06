@@ -7,6 +7,7 @@ const QnAList = ({ product }) => {
   const [questions, setQuestions] = useState([]);
   const [sendWarn, setSendWarn] = useState(false);
   const [displayQuestions, setDisplayQuestions] = useState([]);
+  const [more, setMore] = useState(false);
 
   const qHelpfulness = (a, b) => {
     if (a.question_helpfulness > b.question_helpfulness)
@@ -59,8 +60,26 @@ const QnAList = ({ product }) => {
       setDisplayQuestions([questions[0], questions[1]])
   }, [questions])
 
+  useEffect(() => {
+    if (questions.length > 2) {
+      setMore(true)
+    }
+  }, [questions])
+
   const handleMoreClick = () => {
-    //
+    const i = displayQuestions.length;
+    const dif = questions.length - displayQuestions.length;
+    if(dif === 1) {
+      setDisplayQuestions(displayQuestions.concat([questions[i]]));
+      setMore(false);
+    } else if (dif === 2) {
+      setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
+      setMore(false);
+    } else if (dif > 2) {
+      setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
+    } else {
+      console.warn('This should not be hit, you need to handle me.')
+    }
   }
 
   return (
@@ -70,7 +89,7 @@ const QnAList = ({ product }) => {
         {displayQuestions.map(q => <OneQnA questionData={q}/>)}
       </div>
       <div className='flex'>
-        <div onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>
+        {more && <div onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
         <div>ADD A QUESTION "PLUS-ICON"</div>
       </div>
     </>
