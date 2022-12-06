@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import totalReviews from '../../helper/totalReviews.js'
 
 
-const SortOptions = ({meta, cb}) => {
+const SortOptions = ({meta, sortBy, cb}) => {
 
   let totalNumReviews = 0;
   if(meta.ratings) {
@@ -12,9 +12,17 @@ const SortOptions = ({meta, cb}) => {
 
   return (
     <>
-      {totalNumReviews &&
+      {totalNumReviews && sortBy &&
       <div>
-        {totalNumReviews} reviews, sorted by <span style={{backgroundColor: 'YELLOW'}}>Newest</span>
+        {totalNumReviews} reviews, sorted by:
+        <div style={{display: 'inline-Block'}}>
+          {sortBy}
+          <select name="sortByList" id="sortReviews">
+            <option value="Relevance"> Relevance </option>
+            <option value="Newest"> Newest </option>
+            <option value="Helpfulness"> Helpfulness </option>
+          </select>
+        </div>
       </div>}
     </>
   )

@@ -4,13 +4,13 @@ import SortOptions from './SortOptions.jsx';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 // filterStars is selected by
-const RatingsReviews = ({product, meta, filterStars}) => {
-  const [sortBy, setSortBy] = useState('')
-  const [reviews, setReviews] = useState([]);
+const RatingsReviews = ({product, meta, sortBy, reviews, filterStars}) => {
+  // const [sortBy, setSortBy] = useState('')
+  // const [reviews, setReviews] = useState([]);
 
   return (
     <div id='review' className="w-8/12">
-      <SortOptions meta={meta} />
+      <SortOptions meta={meta} sortBy={sortBy} />
       <div id="ReviewList" className="h-48 bg-slate-200 mx-auto px-3">
         <div>
           <div>&#9733;&#9733;&#9733;&#9733;&#9733;</div>
@@ -28,6 +28,19 @@ const RatingsReviews = ({product, meta, filterStars}) => {
         <div>
           <p className='text-xs'>Helpful? <span>Yes</span> | <span>Report</span></p>
         </div>
+      </div>
+      <div className="space-x-2">
+        <button id='loadMoreReviews'
+          className='drop-shadow-lg
+            border-2 border-indigo-300
+            px-2 py-2
+            hover:scale-105'>MORE REVIEWS
+        </button>
+        <button id='submitReview' className='drop-shadow-lg
+          border-2 border-indigo-300
+          px-2 py-2
+          hover:scale-105'>ADD A REVIEW +
+        </button>
       </div>
     </div>
   );
