@@ -67,15 +67,19 @@ const QnAList = ({ product }) => {
   }, [questions])
 
   const handleMoreClick = () => {
+    console.log('here')
     const i = displayQuestions.length;
     const dif = questions.length - displayQuestions.length;
+    console.log('here3')
     if(dif === 1) {
       setDisplayQuestions(displayQuestions.concat([questions[i]]));
       setMore(false);
     } else if (dif === 2) {
+      console.log('here4')
       setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
       setMore(false);
     } else if (dif > 2) {
+      console.log('here2')
       setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
     } else {
       console.warn('This should not be hit, you need to handle me.')

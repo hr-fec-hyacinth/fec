@@ -15,6 +15,10 @@ const AList = ({ answers }) => {
     } else if (answers.length === 1) {
       setDisplay([answers[0]]);
     }
+
+    if(answers.length <= 2) {
+      setMore(false)
+    }
   }
 
   const handleMoreClick = () => {
@@ -28,11 +32,6 @@ const AList = ({ answers }) => {
     setCollapse(false);
     setMore(true);
   }
-
-  if(answers.length === 1 || answers.length === 2) {
-    setMore(false)
-  }
-
 
   return (
     <div className='overflow-y-auto max-h-halfScreen'>
