@@ -5,7 +5,7 @@ const AList = ({ answers }) => {
 
   const [display, setDisplay] = useState([]);
   const [collapse, setCollapse] = useState(false);
-  const [more, setMore] = useState(false);
+  const [more, setMore] = useState(true);
 
   useEffect(() => { setAnswersDefault() }, [answers])
 
@@ -17,7 +17,7 @@ const AList = ({ answers }) => {
     }
   }
 
-  const handleShowClick = () => {
+  const handleMoreClick = () => {
     setDisplay(answers);
     setCollapse(true);
     setMore(false);
@@ -25,19 +25,20 @@ const AList = ({ answers }) => {
 
   const handleCollapseClick = () => {
     setAnswersDefault();
-    s
+    setCollapse(false);
+    setMore(true);
   }
 
-  const element;
-  if(display.length === 2 && answers.length > 2) { //there are two displaying and there are more
-    <div onClick={handleShowClick}>See more answers</div>
-  } else if (display.length === 1 || display) {} //there is one or two displaying and no more
+  if(answers.length === 1 || answers.length === 2) {
+    setMore(false)
+  }
 
 
   return (
     <div className='overflow-y-auto max-h-halfScreen'>
       {display.map(answer => <OneA answer={answer}/>)}
-      {answers.length!==display.length && }
+      {more && <div onClick={handleMoreClick}>See more answers</div>}
+      {collapse && <div onClick={handleCollapseClick}>Collapse</div>}
     </div>
   )
 }
