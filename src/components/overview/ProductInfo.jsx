@@ -17,6 +17,8 @@ const ProductInfo = ({product, style, metaReview}) => {
     updatePrice(style.original_price);
     if (style.sale_price !== '0' && style.sale_price) {
       updateSalePrice(style.sale_price);
+    } else {
+      updateSalePrice(null);
     }
   }, [style]);
 
