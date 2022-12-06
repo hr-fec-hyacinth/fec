@@ -16,7 +16,6 @@ const Reviews = ({product, meta, sortBy, reviews, filterStars}) => {
 
   return (
     <div>
-      <SortOptions meta={meta} sortBy={sortBy} />
       <ReviewsList reviews={reviews} />
 
       <div className="space-x-2">

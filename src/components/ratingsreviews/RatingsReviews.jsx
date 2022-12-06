@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
 import ReviewForm from './ReviewForm.jsx';
+import SortOptions from './SortOptions.jsx';
 import api from '../../../server/api.js';
 
 const RatingsReviews = ({product, meta}) => {
@@ -55,6 +56,7 @@ const RatingsReviews = ({product, meta}) => {
           <Ratings product={product} meta={meta} />
         </div>
         <div id='review' className="w-8/12">
+          <SortOptions meta={meta} sortBy={sortBy} />
           <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
         </div>
       </div>
