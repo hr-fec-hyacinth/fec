@@ -34,9 +34,9 @@ const RatingsReviews = ({product, meta}) => {
     }
   }, [product, sortBy, reviewsCount]);
 
-  if(reviews) {
-    console.log('reviews can be seen', reviews);
-  }
+  // if(reviews) {
+  //   console.log('reviews can be seen', reviews);
+  // }
 
   // this is going to be an object that handles the various types of form submissions
     // stars handles filtering by stars and changes the starFilter
@@ -45,7 +45,7 @@ const RatingsReviews = ({product, meta}) => {
     stars: () => {},
     sortBy: (e) => {
       e.preventDefault();
-      console.log('this is the event target value', e.target.value);
+      // console.log('this is the event target value', e.target.value);
       setSortBy(e.target.value);
     },
     moreReviews: (e) => {

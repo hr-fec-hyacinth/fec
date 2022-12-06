@@ -21,7 +21,7 @@ const ReviewsList = ({reviews, displayNum}) => {
   return (
     <>
     {reviews &&
-    <div>
+    <div className="">
       {reviews.map(el => {
         return (
           <div key={el.review_id} id="a-review" className="mx-auto px-3">

@@ -51,4 +51,6 @@ api.getReviews = (productId, pageNum, count, sortBy) => {
       // console.log('this is the', res)
       return res.data;
     });
+}
+
 export default api;
