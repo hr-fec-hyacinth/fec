@@ -90,7 +90,7 @@ const QnAList = ({ product }) => {
     <>
       {/* Give the follow div a max height of screen - searchbar - buttons */}
       <div>
-        {displayQuestions.map(q => <OneQnA questionData={q}/>)}
+        {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index}/>)}
       </div>
       <div className='flex'>
         {more && <div onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
