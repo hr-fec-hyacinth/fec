@@ -36,4 +36,9 @@ api.getRelated = (productId) => {
     .then(res => res.data)
 }
 
+api.addToCart = (skuId, total) => {
+  return axios.post(URL + 'cart', {sku_id: skuId}, {headers: {Authorization: AUTHKEY}})
+    .then(res => res.data);
+}
+
 export default api;
