@@ -1,13 +1,18 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import totalReviews from '../../helper/totalReviews.js'
+import SortOptions from './SortOptions.jsx';
 
-const RatingsReviews = ({product}) => {
+// filterStars is selected by
+const RatingsReviews = ({product, meta, filterStars}) => {
+  const [sortBy, setSortBy] = useState('')
+  const [reviews, setReviews] = useState([]);
 
   return (
     <div id='review' className="w-8/12">
-      /* ____ reviews, sorted by ______: */
+      <SortOptions meta={meta} />
     </div>
-  )
-}
+  );
+};
 
 export default RatingsReviews;
