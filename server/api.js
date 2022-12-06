@@ -36,6 +36,11 @@ api.getRelated = (productId) => {
     .then(res => res.data)
 }
 
+api.addToCart = (skuId, total) => {
+  return axios.post(URL + 'cart', {sku_id: skuId}, {headers: {Authorization: AUTHKEY}})
+    .then(res => res.data);
+}
+
 api.getReviews = (productId, pageNum, count, sortBy) => {
   return axios.get(URL + 'reviews/', {headers: {Authorization: AUTHKEY}, params: {
     page: pageNum,
@@ -46,6 +51,4 @@ api.getReviews = (productId, pageNum, count, sortBy) => {
       // console.log('this is the', res)
       return res.data;
     });
-}
-
 export default api;

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import api from '../../../server/api.js';
+
 const {useState, useEffect} = React;
 
 
@@ -9,6 +11,7 @@ const Cart = ({style}) => {
   const [allQuantities, updateAllQuantities] = useState([]);
   const [error, updateError] = useState('');
   const [quantity, updateQuantity] = useState(0);
+  const [expand, updateExpand] = useState(false);
 
   useEffect(() => {
     let skuList = [];
@@ -50,7 +53,9 @@ const Cart = ({style}) => {
     if (allQuantities.length === 0) {
       updateError('Please Select Size');
     } else {
-      console.log('Check Out');
+      updateSku({});
+      updateAllQuantities([]);
+      api.addToCart(sku.id, quantity);
     }
   };
 
@@ -77,8 +82,8 @@ const Cart = ({style}) => {
         })}
       </select>}
     </div>
-    <div className='flex justify-end'>
-      <span className='text-red-500'>{error}</span>
+    <div className='flex justify-end text-center'>
+      <span className='text-red-500 mt-5 mr-1'>{error}</span>
       <button className='border-2 mr-4 mt-4 p-1' onClick={e => {
         e.preventDefault();
         checkout();
