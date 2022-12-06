@@ -24,9 +24,9 @@ const ImageView = ({style}) => {
   };
 
   return (
-    <div className='h-full bg-stone-400 mr-1'>
+    <div style={styling} className='h-full bg-stone-400 mr-1 bg-center'>
       {style &&
-      <div style={styling} className='h-full bg-contain bg-no-repeat bg-center'>
+      <div style={styling} className='h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30'>
       </div>
     }
     </div>
