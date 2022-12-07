@@ -59,10 +59,10 @@ const ImageView = ({ style, updateStretch }) => {
 
         <ImageCarousel imageIndex={imageIndex} updateImageIndex={updateImageIndex} imageList={imageList} updateStyling={updateStyling} />
 
-        {imageIndex !== 0 && <div className='sm:hidden min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={previous}></div>}
+        {imageIndex !== 0 && <div className='z-10 sm:hidden min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={previous}></div>}
         {imageIndex !== 0 && <BsFillArrowLeftCircleFill className='hidden sm:block border-white border-2 text-blue-400 bg-white rounded-full top-1/2 left-4 sm:left-24 absolute z-20 text-2xl hover:text-blue-600' onClick={previous} />}
 
-        {imageIndex !== imageList.length - 1 && <div className='sm:hidden right-0 min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={next}></div>}
+        {imageIndex !== imageList.length - 1 && <div className='z-10 sm:hidden right-0 min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={next}></div>}
         {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill className='hidden sm:block border-white border-2 text-blue-400 top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-blue-600' onClick={next} />}
 
         {style &&
