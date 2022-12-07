@@ -16,11 +16,14 @@ const OneQ = ({ questionData }) => {
   var result;
   if (questionData)
     result = (
-      <div className="flex">
-        <div>Q: {questionData.question_body}</div>
-        <div>Helpful?</div>
-        <div onClick={handleYesClick}>Yes ({helpfulness}) |</div>
-        <div>Add Answer</div>
+      <div className="flex my-3 gap-x-3 items-center">
+        <div className='font-bold'>Q:</div>
+        <div className='font-bold'>{questionData.question_body}</div>
+        <div className='self-end self-center ml-auto text-netural-500 text-xs font-semibold'>Helpful?</div>
+        <div className='text-netural-500 text-xs font-semibold underline' onClick={handleYesClick}>Yes</div>
+        <div className='text-netural-500 text-xs'>({helpfulness})</div>
+        <div className='text-netural-500 text-xs'>|</div>
+        <div className='text-netural-500 text-xs underline'>Add Answer</div>
       </div>
     );
   else

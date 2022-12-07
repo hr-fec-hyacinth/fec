@@ -11,7 +11,7 @@ let product = {
   "default_price": "0",
 };
 
-it('Renders the Overview Section', () => {
+it('Renders the Question & Answers Section', () => {
   const placeholder = 'QUESTIONS & ANSWERS';
   const { getByText } = render(<QnA product={product}/>);
   getByText(placeholder);

@@ -36,8 +36,8 @@ const AList = ({ answers }) => {
   return (
     <div className='overflow-y-auto max-h-halfScreen'>
       {display.map((answer, index) => <OneA answer={answer} key={index}/>)}
-      {more && <div onClick={handleMoreClick}>See more answers</div>}
-      {collapse && <div onClick={handleCollapseClick}>Collapse</div>}
+      {more && <div className='ml-7 font-bold text-xs my-4' onClick={handleMoreClick}>LOAD MORE ANSWERS</div>}
+      {collapse && <div className='ml-7 font-bold text-xs my-4' onClick={handleCollapseClick}>COLLAPSE</div>}
     </div>
   )
 }

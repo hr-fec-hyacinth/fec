@@ -50,7 +50,7 @@ const RelatedProducts = ({ sliderInfo, switchProduct, openModal, setOpenModal, s
             <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
           }
           {slides.map((slide, index) => (
-            <RelatedProductsCard slide={slide} switchProduct={switchProduct} key={index} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
+            <RelatedProductsCard slide={slide} switchProduct={switchProduct} key={index} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} setCurrentIndex={setCurrentIndex} />
           ))}
         </div>
       </div>
