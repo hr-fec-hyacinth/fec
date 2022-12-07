@@ -16,8 +16,8 @@ const Zoom = ({url, updateZoomed, zoomEvent}) => {
 
   const mouseMove = (e) => {
     let scale = 1;
-    if (e.target.naturalWidth > maxWidth) {
-      scale = maxWidth/e.target.naturalWidth;
+    if (e.target.naturalHeight > maxHeight) {
+      scale = maxHeight/e.target.naturalHeight;
     }
     let minWidth = scale * 2.5 * e.target.naturalWidth + 'px';
     let xPerc = e.clientX/maxWidth;
@@ -31,7 +31,7 @@ const Zoom = ({url, updateZoomed, zoomEvent}) => {
 
 
   return (
-    <img style={styling} onMouseMove={mouseMove} src={url} onClick={e => {updateZoomed(false)}} className='z-50 absolute'/>
+    <img style={styling} onMouseMove={mouseMove} src={url} onClick={e => {updateZoomed(false)}} className='z-50 absolute select-none'/>
   )
 }
 
