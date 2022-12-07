@@ -24,11 +24,11 @@ const StarDisplayQuarters = ({number, cb}) => {
     <div className="flex flex-column">
         {Array.from({ length: 5}, (v, i) => {
           if (roundedNum - i >= 1) {
-            return (<BsStarFill className="text-orange-400" />)
+            return (<BsStarFill key={'starsDisplay'+i} className="text-orange-400" />)
           } else if (roundedNum - i > 0 && roundedNum - i < 1) {
-            return (<BsStarHalf className="text-orange-400" />)
+            return (<BsStarHalf key={'starsDisplay'+i} className="text-orange-400" />)
           } else {
-            return (<BsStar className="text-orange-400" />)
+            return (<BsStar key={'starsDisplay'+i} className="text-orange-400" />)
           }
         })
           // if(i <= number) {
