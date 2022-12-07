@@ -7,7 +7,6 @@ const CompareModal = ({ product, sliderInfo, currentCompare, openModal, setOpenM
     e.preventDefault();
     setOpenModal(!openModal);
     document.body.style.overflow = "scroll";
-    console.log(currentCompare)
   }
 
   return (
