@@ -31,7 +31,7 @@ const Zoom = ({url, updateZoomed, zoomEvent}) => {
 
 
   return (
-    <img style={styling} onMouseMove={mouseMove} src={url} onClick={e => {updateZoomed(false)}} className='z-50 absolute select-none'/>
+    <img style={styling} onMouseMove={mouseMove} src={url} onClick={e => {updateZoomed(false)}} className='hidden sm:block z-50 absolute select-none'/>
   )
 }
 
