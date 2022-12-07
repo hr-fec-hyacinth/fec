@@ -53,7 +53,7 @@ const ImageView = ({ style, updateStretch }) => {
 
   return (
     <div className='min-h-0 w-full h-full'>
-      <div style={styling} className='block min-h-0 h-screen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
+      <div style={styling} className='block sm:min-h-0 min-h-halfScreen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
 
         <AiOutlineExpand className='hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500' onClick={updateStretch}/>
 
@@ -66,7 +66,7 @@ const ImageView = ({ style, updateStretch }) => {
         {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill className='hidden sm:block border-white border-2 text-blue-400 top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-blue-600' onClick={next} />}
 
         {style &&
-          <div style={styling} className='min-w-full min-h-max h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30 ease-linear duration-300 cursor-zoom-in' onClick={e => { updateExpand(true); }}>
+          <div style={styling} className='min-w-full min-h-halfScreen h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30 ease-linear duration-300 cursor-zoom-in' onClick={e => { updateExpand(true); }}>
           </div>
         }
 
