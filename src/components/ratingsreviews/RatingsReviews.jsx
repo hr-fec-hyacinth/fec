@@ -79,6 +79,7 @@ const RatingsReviews = ({product, meta}) => {
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
+    <div>
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
       <div className="flex space-x-3">
@@ -109,7 +110,10 @@ const RatingsReviews = ({product, meta}) => {
           </div>
         </div>
       </div>
+    </div>
+    <div>
       {activeForm && <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />}
+    </div>
     </div>
   )
 }
