@@ -5,6 +5,7 @@ import Cart from './Cart.jsx';
 import ImageView from './ImageView.jsx';
 import api from '../../../server/api.js';
 import Details from './Details.jsx';
+import Social from './Social.jsx';
 
 const { useState, useEffect } = React;
 
@@ -35,14 +36,22 @@ const Overview = ({ product, styles, metaReview }) => {
         <div className={stretch ? 'w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
           <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
         </div>
-        <div className={stretch ? 'hidden' : 'w-full sm:w-4/12'}>
+        <div className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-evenly'}>
           <ProductInfo product={product} style={style} metaReview={metaReview} />
           <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
           <Cart style={styles[styleIndex]} />
         </div>
       </div>
-      <div>
+      <div className='hidden sm:block'>
         <Details product={product}/>
+      </div>
+      {/* Order of Items for Mobile */}
+      <div className='block sm:hidden'>
+        <ProductInfo product={product} style={style} metaReview={metaReview} />
+        <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
+        <Details product={product}/>
+        <Cart style={styles[styleIndex]}/>
+        <Social />
       </div>
     </div>
   )

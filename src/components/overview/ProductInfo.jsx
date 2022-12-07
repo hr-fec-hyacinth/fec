@@ -30,15 +30,16 @@ const ProductInfo = ({product, style, metaReview}) => {
   }, [metaReview]);
 
   return (
-    <div className='ml-1'>
+    <div className='ml-1 text-center sm:text-left text-2xl sm:text-base'>
       <Stars />
       {reviewCount && <p><a className='text-stone-400 underline' href="#ratings-reviews">Read all {reviewCount} reviews</a></p>}
-      <p>{product.category}</p>
-      <p>{product.name}</p>
-      {!salePrice && <p>${price}</p>}
-      {salePrice && <p><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through'>${price}</span></p>}
-      <p>{product.description}</p>
-      <Social />
+      <p className='sm:text-sm'>{product.category}</p>
+      <p className='sm:text-2xl text-5xl sm:mb-0 mb-2'>{product.name}</p>
+      {!salePrice && <p className='text-4xl sm:text-xl sm:mb-0 mb-2'>${price}</p>}
+      {salePrice && <p className='sm:text-xl text-4xl sm:mb-0 mb-2'><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through sm:mb-0 mb-2'>${price}</span></p>}
+      <div className='sm:block hidden'>
+        <Social />
+      </div>
     </div>
   )
 };
