@@ -20,7 +20,7 @@ const ReviewsList = ({reviews, filterStars, displayNum}) => {
   console
 
   let filteredList = [];
-  filteredList = reviews.filter((el) => {
+  filteredList = reviews.filter((el, i) => {
     return filterStars[el.rating];
   })
   console.log('before filter', reviews)
