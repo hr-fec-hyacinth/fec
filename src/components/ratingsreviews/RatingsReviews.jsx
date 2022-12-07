@@ -14,7 +14,13 @@ const RatingsReviews = ({product, meta}) => {
   const [reviews, setReviews] = useState ([]);
   const [reviewsCount, setReviewsCount] = useState(2);
   const [sortBy, setSortBy] = useState('relevance');
-  const [starFilter, setStarFilter] = useState('');
+  const [starFilter, setStarFilter] = useState({
+      "1": true,
+      "2": true,
+      "3": true,
+      "4": true,
+      "5": true
+    });
 
   // if(product) {
   //   console.log('this is the product being passed in', product);
@@ -42,7 +48,13 @@ const RatingsReviews = ({product, meta}) => {
     // stars handles filtering by stars and changes the starFilter
     // moreReviews adds two to the number of reviews to load.
   const handleOnClick = {
-    stars: () => {},
+    stars: (starNum) => {
+      e.preventDefault();
+      setStarFilter({
+        ...starFilter,
+        [starNum]: !starFilter[e.target.value]
+      })
+    },
     sortBy: (e) => {
       e.preventDefault();
       // console.log('this is the event target value', e.target.value);
@@ -69,7 +81,7 @@ const RatingsReviews = ({product, meta}) => {
         </div>
         <div id='review' className="w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
-          <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
+          <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} filterStars={starFilter}/>
           <div className="space-x-2">
             <button id='loadMoreReviews'
               className='drop-shadow-lg

@@ -28,16 +28,20 @@ const ReviewCard = ({aReview}) => {
     <div className='font-light'>
       ... line, if necessary
     </div>
-    <div>
+    <div className='font-light'>
       {aReview.body}
     </div>
     {aReview.recommend &&
       <div>
-        <span className="text-sm"><AiFillCheckCircle className="text-blue-400 inline-block" /> I recommend this product</span>
+        <span className="text-sm">
+          <AiFillCheckCircle className="text-blue-400 inline-block" /> I recommend this product
+        </span>
       </div>
     }
     <div>
-      <p className='text-xs'>Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>Report</span></p>
+      <p className='text-xs'>
+        Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>No</span>
+      </p>
     </div>
   </div>
   )

@@ -14,7 +14,7 @@ const Reviews = ({product, meta, sortBy, reviews, filterStars}) => {
 
   return (
     <div className="max-h-96 overflow-auto overscroll-contain py-5">
-      <ReviewsList reviews={reviews} />
+      <ReviewsList reviews={reviews} filterStars={filterStars} />
     </div>
   );
 };

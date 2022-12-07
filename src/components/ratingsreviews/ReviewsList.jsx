@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewCard from './ReviewCard.jsx';
 
-const ReviewsList = ({reviews, displayNum}) => {
+const ReviewsList = ({reviews, filterStars, displayNum}) => {
 
   // if (reviews) {
   //   console.log('inside ReviewsList', reviews)
@@ -17,6 +17,14 @@ const ReviewsList = ({reviews, displayNum}) => {
   //   console.log('this is to render', toRender);
   // }
   // } .
+  console
+
+  let filteredList = [];
+  filteredList = reviews.filter((el) => {
+    return filterStars[el.rating];
+  })
+  console.log('before filter', reviews)
+  console.log('after filter', filteredList)
 
   return (
     <>
