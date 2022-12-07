@@ -35,9 +35,9 @@ const StarsInput = ({number, cb}) => {
   return (
     <div onChange={onChangeValue} className="flex flex-column">
       <div className="w-5/12">Leave A Review</div>
-      <div className="w-6/12 flex flex-column">
+      <div className="w-6/12 flex flex-column justify-evenly">
 
-        <label for="star1" key="1">
+        <label htmlFor="star1" key="1">
         <input
           type="radio"
           name="rating"

@@ -117,7 +117,7 @@ const RatingsReviews = ({product, meta}) => {
     <div>
       {/* {activeForm &&
       <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />} */}
-      <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />
+      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />
     </div>
     </div>
   )
