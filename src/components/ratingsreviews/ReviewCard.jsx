@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
+import StarDisplayQuarters from './StarDisplayQuarters.jsx'
 
 
 const ReviewCard = ({aReview}) => {
@@ -18,7 +19,7 @@ const ReviewCard = ({aReview}) => {
   return (
     <div id="ReviewCard" className="bg-slate-200 mx-auto p-3 mb-3 border-b-2 border-black shadow-md hover:shadow-xl">
     <div className="flex flex-wrap">
-      <div className="flex-none">&#9733;&#9733;&#9733;&#9733;&#9733; {aReview.rating}</div>
+      <div className="flex-none"><StarDisplayQuarters number={aReview.rating} /> {aReview.rating}</div>
       <div className="grow"></div>
       <div className="flex-none text-xs align-middle">{reviewerName}, {formattedDate}</div>
     </div>

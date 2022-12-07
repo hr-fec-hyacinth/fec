@@ -5,6 +5,8 @@ import Reviews from './Reviews.jsx';
 import ReviewForm from './ReviewForm.jsx';
 import SortOptions from './SortOptions.jsx';
 import api from '../../../server/api.js';
+import StarDisplayQuarters from './StarDisplayQuarters.jsx'
+import { calculateAverageRating } from './reviewsHelper.js';
 
 const RatingsReviews = ({product, meta}) => {
   // Retrieves Reviews of Current Product
@@ -82,6 +84,7 @@ const RatingsReviews = ({product, meta}) => {
     <div>
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
+      {meta.ratings && <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>}
       <div className="flex space-x-3">
         <div id='ratings' className="w-4/12 pt-3" >
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
@@ -112,7 +115,9 @@ const RatingsReviews = ({product, meta}) => {
       </div>
     </div>
     <div>
-      {activeForm && <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />}
+      {/* {activeForm &&
+      <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />} */}
+      <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />
     </div>
     </div>
   )
