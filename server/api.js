@@ -75,7 +75,6 @@ api.postInteraction = (e, module) => {
   };
 
   return axios.post(URL + 'interactions', params, {headers: {Authorization: AUTHKEY}})
-    .then(res => console.log(res))
 }
 
 export default api;
