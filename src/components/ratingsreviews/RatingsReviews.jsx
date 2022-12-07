@@ -39,7 +39,7 @@ const RatingsReviews = ({product, meta}) => {
       .then(res => {
         // console.log('result from api req', res);
         // console.log('this should be the array of reviews', res);
-        console.log('successful get');
+        // console.log('successful get');
         setReviews(res.results);
       })
     }
@@ -55,8 +55,8 @@ const RatingsReviews = ({product, meta}) => {
   const handleOnClick = {
     stars: (starNum) => {
       // e.preventDefault();
-      console.log('inside handleClick', starNum)
-      console.log('this is the star filter', starFilter);
+      // console.log('inside handleClick', starNum)
+      // console.log('this is the star filter', starFilter);
       setStarFilter({
         ...starFilter,
         // "filterOn": true,

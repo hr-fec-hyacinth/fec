@@ -12,8 +12,8 @@ const StarDisplayQuarters = ({number, cb}) => {
   // let lastStarType = 0;
 
   const roundNearestQuarter = (number) => {
-    console.log(Math.round(number * 4)/4)
-    console.log((Math.round(number * 4) / 4).toFixed(2));
+    // console.log(Math.round(number * 4)/4)
+    // console.log((Math.round(number * 4) / 4).toFixed(2));
     return ((Math.round(number * 4) / 4).toFixed(2))
   }
 
