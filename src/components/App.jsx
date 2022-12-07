@@ -17,10 +17,10 @@ const App = () => {
   useEffect(() => {
     api.getProduct(37314)
       .then(product => updateProduct(product))
-      .then(() => api.getStyles(37311))
+      .then(() => api.getStyles(37314))
       .then(styles => sortDefault(styles.results))
       .then(styles => updateStyles(styles))
-      .then(() => api.getMetaReviews(37311))
+      .then(() => api.getMetaReviews(37314))
       .then(reviews => updateMetaReview(reviews));
   }, []);
 

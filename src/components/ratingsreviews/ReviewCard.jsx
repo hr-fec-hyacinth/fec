@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
+import StarDisplayQuarters from './StarDisplayQuarters.jsx'
 
 
 const ReviewCard = ({aReview}) => {
@@ -18,8 +19,8 @@ const ReviewCard = ({aReview}) => {
   return (
     <div id="ReviewCard" className="bg-slate-200 mx-auto p-3 mb-3 border-b-2 border-black shadow-md hover:shadow-xl">
     <div className="flex flex-wrap">
-      <div className="flex-none">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="grow"></div>
+      <div className="flex-none"><StarDisplayQuarters number={aReview.rating} /> {aReview.rating}</div>
+      <div className="grow"></div>
       <div className="flex-none text-xs align-middle">{reviewerName}, {formattedDate}</div>
     </div>
     <div className='font-semibold truncate'>
@@ -28,16 +29,20 @@ const ReviewCard = ({aReview}) => {
     <div className='font-light'>
       ... line, if necessary
     </div>
-    <div>
+    <div className='font-light'>
       {aReview.body}
     </div>
     {aReview.recommend &&
       <div>
-        <span className="text-sm"><AiFillCheckCircle className="text-blue-400 inline-block" /> I recommend this product</span>
+        <span className="text-sm">
+          <AiFillCheckCircle className="text-blue-400 inline-block" /> I recommend this product
+        </span>
       </div>
     }
     <div>
-      <p className='text-xs'>Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>Report</span></p>
+      <p className='text-xs'>
+        Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>No</span>
+      </p>
     </div>
   </div>
   )

@@ -4,9 +4,9 @@ import { AiFillCaretUp } from 'react-icons/ai'
 const Characteristic = ({characteristicName, characteristicObj}) => {
 
   const boxFill = {
-    height: '100%',
+    height: '10px',
     // width: '100%',
-    minHeight: '30px',
+    minHeight: '10px',
     backgroundColor: '#8fc4fc',
   }
 
@@ -15,7 +15,11 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
     position: 'relative',
     top: '-5px',
     padding: '2px',
-    left: `${(parseInt(characteristicObj.value) / 5) * 100}%`
+    left: `${(Number(characteristicObj.value) / 5) * 100}%`
+  }
+
+  const arrowHolder = {
+    width: `90%`
   }
 
   let leftVar = '--';
@@ -48,13 +52,13 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
           <p style={{textAlign: 'left', verticalAlign: 'middle'}}>{leftVar}</p>
         </div>
         <div className="w-4/12 border-2" style={boxFill}>
-          <p style={{textAlign: 'center', verticalAlign: 'middle'}}>perfect</p>
+          <p style={{textAlign: 'center', verticalAlign: 'middle'}}></p>
         </div>
         <div className="w-4/12 border-2" style={boxFill}>
           <p style={{textAlign: 'right'}}>{rightVar}</p>
         </div>
-        <div className="mx-auto">
-        <AiFillCaretUp className='text-blue-400' style={arrowStyle} />
+        <div style={arrowHolder}>
+        <AiFillCaretUp className='text-blue-400 relative' style={arrowStyle} />
         </div>
       </div>
     </div>

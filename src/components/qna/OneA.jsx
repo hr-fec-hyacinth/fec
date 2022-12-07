@@ -21,17 +21,24 @@ const OneA = ({ answer }) => {
   }
 
   if(reported) {
-    var reportComp = <div>Reported</div>
+    var reportComp = <div  className='ml-3'>Reported</div>
   } else {
-    var reportComp = <div onClick={handleReportClick}>Report</div>
+    var reportComp = <div className='ml-3 underline' onClick={handleReportClick}>Report</div>
   }
 
   return (
     <>
-      <div>A: {answer.body}</div>
-      <div className="flex">
-        <div>by: {answer.answerer_name}, {formattedDate} | Helpful? |</div>
-        <div onClick={handleYesClick}>Yes ({helpfulness}) |</div>
+      <div className='flex gap-x-3 items-center mb-0.5'>
+        <div className='font-bold'>A:</div>
+        <div className='text-sm'>{answer.body}</div>
+      </div>
+      <div className="flex text-xs mb-2 text-neutral-400">
+        <div className='ml-7'>by: {answer.answerer_name}, {formattedDate}</div>
+        <div className='ml-3'>|</div>
+        <div className='ml-3'>Helpful?</div>
+        <div className='ml-1 underline' onClick={handleYesClick}>Yes</div>
+        <div className='ml-1'>({helpfulness})</div>
+        <div className='ml-3'>|</div>
         {reportComp}
       </div>
     </>

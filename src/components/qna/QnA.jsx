@@ -1,13 +1,14 @@
 import React from 'react';
-import magnifiyingGlass from './../../assets/loupe.png';
 import QnAList from './QnAList.jsx'
+import { HiMagnifyingGlass } from 'react-icons/hi2'
 
 
 const QnA = ({ product }) => {
 
   return (
     <>
-      <div>QUESTIONS & ANSWERS</div>
+      <div className="my-4 text-gray-600">
+        QUESTIONS & ANSWERS</div>
       <div className="flex
                       flex-row
                       justify-between
@@ -16,11 +17,11 @@ const QnA = ({ product }) => {
                       border-black
                       p-2.5
                       font-bold
-                      text-xs">
+                      text-s">
         HAVE A QUESTION? SEARCH FOR ANSWERS...
-        <img src={magnifiyingGlass} alt="magnifiyingGlass" className="w-4 h-fit"/>
+        <HiMagnifyingGlass size={18}/>
       </div>
-      < QnAList product={product}/>
+      <QnAList product={product}/>
     </>
   )
 }

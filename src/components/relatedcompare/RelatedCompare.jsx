@@ -6,17 +6,19 @@ import YourOutfit from './YourOutfit.jsx'
 import CompareModal from './CompareModal.jsx'
 
 const RelatedCompare = ({ product, switchProduct }) => {
-  const [currentProduct, setCurrentProduct] = useState('');
   const [related, setRelated] = useState([]);
   const [sliderInfo, setSliderInfo] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [currentCompare, setCurrentCompare] = useState('');
 
   useEffect(() => {
-    //let id = product.id || 37311;
-    if (37311) {
-      api.getRelated(37311)
-      .then((res) => {setRelated(res)})
+    let id = product.id || 37314;
+    if (product.id) {
+      api.getRelated(product.id)
+      .then((res) => {
+        let set = new Set(res)
+        setRelated(Array.from(set))
+      })
       .catch((err) => {console.log(err)});
     }
   }, [product])
