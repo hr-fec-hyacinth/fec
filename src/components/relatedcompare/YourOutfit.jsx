@@ -4,16 +4,14 @@ import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
 const sliderData = [
-  {image: 'https://via.placeholder.com/200?text=1'},
-  {image: 'https://via.placeholder.com/200?text=2'},
-  {image: 'https://via.placeholder.com/200?text=3'},
-  {image: 'https://via.placeholder.com/200?text=4'},
-  {image: 'https://via.placeholder.com/200?text=5'},
-  {image: 'https://via.placeholder.com/200?text=6'},
-  {image: 'https://via.placeholder.com/200?text=7'}
+  {image: 'https://via.placeholder.com/300?text=%2b'},
+  {image: 'https://via.placeholder.com/300?text=%2b'},
+  {image: 'https://via.placeholder.com/300?text=%2b'},
+  {image: 'https://via.placeholder.com/300?text=%2b'},
+  {image: 'https://via.placeholder.com/300?text=%2b'}
 ]
 
-
+//First card of list always needs to be add to outfit list
 const YourOutfit = ({ sliderInfo }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = sliderData.length;
