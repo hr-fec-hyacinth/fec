@@ -5,6 +5,8 @@ import Reviews from './Reviews.jsx';
 import ReviewForm from './ReviewForm.jsx';
 import SortOptions from './SortOptions.jsx';
 import api from '../../../server/api.js';
+import StarDisplayQuarters from './StarDisplayQuarters.jsx'
+import { calculateAverageRating } from './reviewsHelper.js';
 
 const RatingsReviews = ({product, meta}) => {
   // Retrieves Reviews of Current Product
@@ -14,7 +16,15 @@ const RatingsReviews = ({product, meta}) => {
   const [reviews, setReviews] = useState ([]);
   const [reviewsCount, setReviewsCount] = useState(2);
   const [sortBy, setSortBy] = useState('relevance');
-  const [starFilter, setStarFilter] = useState('');
+  const [starFilterActive, setStarFilterActive] = useState(false);
+  const [starFilter, setStarFilter] = useState({
+      "filterOn": false,
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false
+    });
 
   // if(product) {
   //   console.log('this is the product being passed in', product);
@@ -23,16 +33,17 @@ const RatingsReviews = ({product, meta}) => {
 
   // useEffect that calls the API documentation.
   useEffect(()=> {
-    // console.log(product.product_id);
+    // console.log('this is the productId"', product.id);
     if(product) {
-      api.getReviews(Number(37313), 1, reviewsCount, sortBy)
+      api.getReviews(Number(product.id), 1, 20, sortBy)
       .then(res => {
         // console.log('result from api req', res);
         // console.log('this should be the array of reviews', res);
+        // console.log('successful get');
         setReviews(res.results);
       })
     }
-  }, [product, sortBy, reviewsCount]);
+  }, [product, sortBy]);
 
   // if(reviews) {
   //   console.log('reviews can be seen', reviews);
@@ -42,7 +53,16 @@ const RatingsReviews = ({product, meta}) => {
     // stars handles filtering by stars and changes the starFilter
     // moreReviews adds two to the number of reviews to load.
   const handleOnClick = {
-    stars: () => {},
+    stars: (starNum) => {
+      // e.preventDefault();
+      // console.log('inside handleClick', starNum)
+      // console.log('this is the star filter', starFilter);
+      setStarFilter({
+        ...starFilter,
+        // "filterOn": true,
+        [starNum]: !starFilter[starNum]
+      })
+    },
     sortBy: (e) => {
       e.preventDefault();
       // console.log('this is the event target value', e.target.value);
@@ -61,15 +81,19 @@ const RatingsReviews = ({product, meta}) => {
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
+    <div>
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
+      {meta.ratings && <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>}
       <div className="flex space-x-3">
         <div id='ratings' className="w-4/12 pt-3" >
-          <Ratings product={product} meta={meta} />
+          <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
         <div id='review' className="w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
-          <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} />
+          <Reviews product={product} meta={meta}
+                   sortBy={sortBy} reviews={reviews} filterStars={starFilter}
+                   reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
           <div className="space-x-2">
             <button id='loadMoreReviews'
               className='drop-shadow-lg
@@ -89,7 +113,12 @@ const RatingsReviews = ({product, meta}) => {
           </div>
         </div>
       </div>
-      {activeForm && <ReviewForm product={product} onFormSubmit={handleOnClick.toggleForm} />}
+    </div>
+    <div>
+      {activeForm &&
+      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />}
+      {/* <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} /> */}
+    </div>
     </div>
   )
 }

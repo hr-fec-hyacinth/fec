@@ -42,14 +42,19 @@ api.addToCart = (skuId, total) => {
 }
 
 api.getReviews = (productId, pageNum, count, sortBy) => {
-  return axios.get(URL + 'reviews/', {headers: {Authorization: AUTHKEY}, params: {
-    page: pageNum,
-    product_id: productId,
-    count: count,
-    sort: sortBy}})
+  return axios.get(URL + 'reviews/',
+    {headers: {Authorization: AUTHKEY},
+     params: {
+      page: pageNum,
+      product_id: productId,
+      count: count,
+      sort: sortBy }
+    })
     .then(res => {
-      // console.log('this is the', res)
       return res.data;
+    })
+    .catch(err => {
+      return new Error(err);
     });
 }
 
