@@ -18,7 +18,7 @@ const Details = ({ product }) => {
       <div className='w-8/12 sm:w-4/12 flex flex-col justify-evenly p-1 mx-auto'>
         {features && features.map((feature, i) => {
           return (
-            <p className='flex justify-between'>
+            <p key={i} className='flex justify-between'>
               <span>{feature.feature}</span>
               <span>{feature.value}</span>
             </p>
