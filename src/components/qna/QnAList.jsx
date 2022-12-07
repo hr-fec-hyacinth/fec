@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../server/api.js';
-import OneQnA from './OneQnA.jsx'
+import OneQnA from './OneQnA.jsx';
+import { BsPlusLg } from 'react-icons/bs';
 
 const QnAList = ({ product }) => {
 
@@ -93,8 +94,11 @@ const QnAList = ({ product }) => {
         {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index}/>)}
       </div>
       <div className='flex'>
-        {more && <div onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
-        <div>ADD A QUESTION "PLUS-ICON"</div>
+        {more && <div className='border border-black p-2.5 font-bold m-2.5' onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
+        <div className='flex items-center border border-black p-2.5 font-bold m-2.5'>
+          <div>ADD A QUESTION</div>
+          <BsPlusLg className='ml-1'/>
+        </div>
       </div>
     </>
   )
