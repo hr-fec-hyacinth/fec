@@ -38,10 +38,6 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
     e.preventDefault();
   }
 
-  if(meta) {
-    console.log('this is inside reviewForm meta', meta);
-  }
-
   // first div ratings needs to be replaced with selectable stars component
   // map through the keys and turn it into a row
   return (
