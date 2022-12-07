@@ -4,7 +4,7 @@ import StarsInput from './StarsInput.jsx';
 import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 
-const ReviewForm = ({product, meta}) => {
+const ReviewForm = ({product, meta, onFormSubmit}) => {
   // store form fields as controlled states
   const [fields, setFields] = useState({
     "product_id": 37313,
@@ -47,20 +47,21 @@ const ReviewForm = ({product, meta}) => {
   return (
       <div className="flex z-30 flex-col h-full items-center space-x-2 justify-center  ">
         <p>Leave A Review Below:</p>
-        <div className="flex-initial w-5/12 bg-slate-100 py-3 my-4 rounded-xl shadow-md relative">
-          {/* <button name="closeForm" className="z-10 absolute top-5 right-10"><IoIosCloseCircle className="text-emerald-700 rounded-full"/></button> */}
-          {/* <button name="closeForm" className="z-10 absolute top-5 right-2 rounded-full bg-emerald-200 w-24">x</button> */}
+        <div className="flex-initial w-5/12 bg-slate-100 py-3 my-4 rounded-xl
+                        shadow-md relative">
           <IoIosCloseCircle className="text-emerald-700 text-2xl hover:text-emerald-600
-                                       absolute top-3 right-3"/>
-          <form className="space-y-6 my-6 mx-4">
+                                       absolute top-3 right-3"
+                            onClick={onFormSubmit}
+                                       />
+          <form className="space-y-6 my-4 mx-4">
             <div>
               <StarsInput />
             </div>
 
             <div className="flex flex-wrap">
-              <div className="flex w-5/12">
+              <div className="flex w-5/12 overflow-auto	text-sm">
                 <label>
-                  Recommend
+                  Would you recommend this product?
                 </label>
               </div>
               <div className="flex w-6/12 justify-evenly">
@@ -81,36 +82,26 @@ const ReviewForm = ({product, meta}) => {
               </div>
             </div>
 
-            <div className="flex flex-wrap">
-              <div className="flex w-5/12">
-                <label>
-                  Name
-                </label>
-              </div>
-              <div className="flex w-7/12">
-              <input type="text" class="mt-1 block w-10/12 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+            <div className="flex flex-wrap w-full">
+              <span>Name</span>
+              <input type="text" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300
+                  rounded-md text-sm shadow-sm placeholder-slate-400
                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                 invalid:border-pink-500 invalid:text-pink-600
                 focus:invalid:border-pink-500 focus:invalid:ring-pink-500
               "/>
-              </div>
             </div>
 
-            <div className="flex flex-wrap">
-              <div className="flex w-5/12">
-                <label>
-                  Email
-                </label>
-              </div>
-              <div className="flex w-7/12">
-              <input type="text" class="mt-1 block w-10/12 px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+            <div className="flex flex-wrap w-full">
+              <span>Name</span>
+              <input type="text" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300
+                  rounded-md text-sm shadow-sm placeholder-slate-400
                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                 invalid:border-pink-500 invalid:text-pink-600
                 focus:invalid:border-pink-500 focus:invalid:ring-pink-500
               "/>
-              </div>
             </div>
 
             {/* <div>
@@ -123,12 +114,15 @@ const ReviewForm = ({product, meta}) => {
             </div> */}
 
             <div className="flex flex-wrap">
-            <div className="w-full mw-full mx-auto font-extralight">{meta.characteristics && <CharInputTable metaChars={meta.characteristics}  />}</div>
+              <div className="w-full mw-full mx-auto font-extralight">
+                {meta.characteristics && <CharInputTable metaChars={meta.characteristics}  />}
+              </div>
             </div>
 
             <div className="flex flex-wrap w-full">
               <span>Summary</span>
-              <textarea class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              <textarea class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300
+                  rounded-md text-sm shadow-sm placeholder-slate-400
                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                 invalid:border-pink-500 invalid:text-pink-600
@@ -150,6 +144,12 @@ const ReviewForm = ({product, meta}) => {
               </label>
             </div>
 
+
+            <button name="submitForm" onClick={onFormSubmit}
+              className="block w-full text-sm text-slate-500 bg-emerald-50 rounded-2xl p-3
+              hover:bg-emerald-700 hover:text-slate-100">
+              Submit
+            </button>
 
 
           </form>
