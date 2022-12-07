@@ -14,12 +14,14 @@ const RatingsReviews = ({product, meta}) => {
   const [reviews, setReviews] = useState ([]);
   const [reviewsCount, setReviewsCount] = useState(2);
   const [sortBy, setSortBy] = useState('relevance');
+  const [starFilterActive, setStarFilterActive] = useState(false);
   const [starFilter, setStarFilter] = useState({
-      "1": true,
-      "2": true,
-      "3": true,
-      "4": true,
-      "5": true
+      "filterOn": false,
+      "1": false,
+      "2": false,
+      "3": false,
+      "4": false,
+      "5": false
     });
 
   // if(product) {
@@ -29,16 +31,17 @@ const RatingsReviews = ({product, meta}) => {
 
   // useEffect that calls the API documentation.
   useEffect(()=> {
-    // console.log(product.product_id);
+    console.log('this is the productId"', product.id);
     if(product) {
-      api.getReviews(Number(37313), 1, reviewsCount, sortBy)
+      api.getReviews(Number(product.id), 1, 20, sortBy)
       .then(res => {
         // console.log('result from api req', res);
         // console.log('this should be the array of reviews', res);
+        console.log('successful get');
         setReviews(res.results);
       })
     }
-  }, [product, sortBy, reviewsCount]);
+  }, [product, sortBy]);
 
   // if(reviews) {
   //   console.log('reviews can be seen', reviews);
@@ -49,10 +52,13 @@ const RatingsReviews = ({product, meta}) => {
     // moreReviews adds two to the number of reviews to load.
   const handleOnClick = {
     stars: (starNum) => {
-      e.preventDefault();
+      // e.preventDefault();
+      console.log('inside handleClick', starNum)
+      console.log('this is the star filter', starFilter);
       setStarFilter({
         ...starFilter,
-        [starNum]: !starFilter[e.target.value]
+        // "filterOn": true,
+        [starNum]: !starFilter[starNum]
       })
     },
     sortBy: (e) => {
@@ -77,11 +83,13 @@ const RatingsReviews = ({product, meta}) => {
       RATINGS & REVIEWS
       <div className="flex space-x-3">
         <div id='ratings' className="w-4/12 pt-3" >
-          <Ratings product={product} meta={meta} />
+          <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
         <div id='review' className="w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
-          <Reviews product={product} meta={meta} sortBy={sortBy} reviews={reviews} filterStars={starFilter}/>
+          <Reviews product={product} meta={meta}
+                   sortBy={sortBy} reviews={reviews} filterStars={starFilter}
+                   reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
           <div className="space-x-2">
             <button id='loadMoreReviews'
               className='drop-shadow-lg

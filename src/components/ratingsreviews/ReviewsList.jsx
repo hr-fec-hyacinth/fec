@@ -1,36 +1,39 @@
 import React from 'react';
 import ReviewCard from './ReviewCard.jsx';
 
-const ReviewsList = ({reviews, filterStars, displayNum}) => {
+const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
 
-  // if (reviews) {
-  //   console.log('inside ReviewsList', reviews)
-  // }
-
-  // let toRender = [];
-  // if(reviews) {
-  //   for(var i = 0; i < 2; i++) {
-  //   console.log('this should be the el', reviews[i]);
-  //   toRender.push(
-  //     (<ReviewCard aReview={reviews[i]} />)
-  //   )
-  //   console.log('this is to render', toRender);
-  // }
-  // } .
-  console
+  // console.log(reviewsCount);
+  let isFilterOn = false;
+  if(filterStars) {
+    Object.keys(filterStars).forEach(el => {
+      if (filterStars[el] === true) {
+        isFilterOn = true;
+      }
+    })
+  }
 
   let filteredList = [];
-  filteredList = reviews.filter((el, i) => {
-    return filterStars[el.rating];
-  })
-  console.log('before filter', reviews)
-  console.log('after filter', filteredList)
+  if(reviews) {
+    // console.log('this is the number to display', reviewsCount);
+    filteredList = reviews.slice(0, reviewsCount);
+    let filteredList1 = [];
+    // if(filterStars.filterOn)
+    if(isFilterOn) {
+      filteredList1 = reviews.filter((el, i) => {
+        return filterStars[el.rating];
+      })
+      filteredList = filteredList1.slice(0, reviewsCount);
+    }
+  }
+  // console.log('before filter', reviews)
+  // console.log('after filter', filteredList)
 
   return (
     <>
-    {reviews &&
+    {filteredList &&
     <div className="">
-      {reviews.map(el => {
+      {filteredList.map(el => {
         return (
           <div key={el.review_id} id="a-review" className="mx-auto px-3">
             <ReviewCard aReview={el} />

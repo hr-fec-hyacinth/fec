@@ -18,8 +18,8 @@ const ReviewCard = ({aReview}) => {
   return (
     <div id="ReviewCard" className="bg-slate-200 mx-auto p-3 mb-3 border-b-2 border-black shadow-md hover:shadow-xl">
     <div className="flex flex-wrap">
-      <div className="flex-none">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="grow"></div>
+      <div className="flex-none">&#9733;&#9733;&#9733;&#9733;&#9733; {aReview.rating}</div>
+      <div className="grow"></div>
       <div className="flex-none text-xs align-middle">{reviewerName}, {formattedDate}</div>
     </div>
     <div className='font-semibold truncate'>
