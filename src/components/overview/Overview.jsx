@@ -26,6 +26,10 @@ const Overview = ({ product, styles, metaReview }) => {
     }
   }, [styleIndex]);
 
+  useEffect(() => {
+    changeStyleIndex(0);
+  }, [product])
+
   const toggleStretch = () => {
     updateStretch(!stretch);
   }
