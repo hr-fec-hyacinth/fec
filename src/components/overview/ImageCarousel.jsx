@@ -45,7 +45,7 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
   };
 
   return (
-    <div>
+    <div className='hidden sm:block'>
       {sliderIndex !== maxSliderIndex &&<IoIosArrowDown className='left-8 absolute z-20 bottom-1' onClick={next}/>}
       {sliderIndex !== 0 && <IoIosArrowUp className='left-8 absolute z-20' onClick={previous}/>}
       <div className='flex w-2/12 h-full flex-col left-4 absolute z-10'>
