@@ -3,6 +3,7 @@ import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 import Cart from './Cart.jsx';
 import ImageView from './ImageView.jsx';
+import api from '../../../server/api.js';
 
 const {useState, useEffect} = React;
 
@@ -28,7 +29,7 @@ const Overview = ({product, styles, metaReview}) => {
   }
 
   return (
-    <div className='flex min-h-halfScreen overflow-hidden'>
+    <div className='flex min-h-halfScreen overflow-hidden' onClick={e => api.postInteraction(e, 'Overview')}>
       <div className={stretch ? 'w-full ease-linear duration-150' : 'w-8/12 ease-linear duration-150'}>
         <ImageView style={styles[styleIndex]} updateStretch={toggleStretch}/>
       </div>

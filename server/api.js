@@ -53,4 +53,29 @@ api.getReviews = (productId, pageNum, count, sortBy) => {
     });
 }
 
+api.postInteraction = (e, module) => {
+  let time = e.timeStamp;
+  let target = e.target;
+  let classes = '';
+
+  if (typeof target.className === 'string') {
+    classes = target.className.replaceAll(' ', '.');
+  }
+
+  let selector = target.tagName.toLowerCase();
+
+  if (classes.length > 0) {
+    selector = selector + '.' + classes;
+  }
+
+  let params = {
+    element: selector,
+    widget: module,
+    time: String(time)
+  };
+
+  return axios.post(URL + 'interactions', params, {headers: {Authorization: AUTHKEY}})
+    .then(res => console.log(res))
+}
+
 export default api;
