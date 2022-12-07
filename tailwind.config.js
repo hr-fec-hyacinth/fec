@@ -557,6 +557,7 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      zoom: '250%'
     }),
     inset: ({ theme }) => ({
       auto: 'auto',
@@ -937,6 +938,7 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      zoom: '250%'
     }),
     willChange: {
       auto: 'auto',
