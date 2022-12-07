@@ -41,4 +41,40 @@ api.addToCart = (skuId, total) => {
     .then(res => res.data);
 }
 
+api.getReviews = (productId, pageNum, count, sortBy) => {
+  return axios.get(URL + 'reviews/', {headers: {Authorization: AUTHKEY}, params: {
+    page: pageNum,
+    product_id: productId,
+    count: count,
+    sort: sortBy}})
+    .then(res => {
+      // console.log('this is the', res)
+      return res.data;
+    });
+}
+
+api.postInteraction = (e, module) => {
+  let time = e.timeStamp;
+  let target = e.target;
+  let classes = '';
+
+  if (typeof target.className === 'string') {
+    classes = target.className.replaceAll(' ', '.');
+  }
+
+  let selector = target.tagName.toLowerCase();
+
+  if (classes.length > 0) {
+    selector = selector + '.' + classes;
+  }
+
+  let params = {
+    element: selector,
+    widget: module,
+    time: String(time)
+  };
+
+  return axios.post(URL + 'interactions', params, {headers: {Authorization: AUTHKEY}})
+}
+
 export default api;

@@ -30,7 +30,7 @@ const ProductInfo = ({product, style, metaReview}) => {
   }, [metaReview]);
 
   return (
-    <div>
+    <div className='ml-1'>
       <Stars />
       {reviewCount && <p><a className='text-stone-400 underline' href="#ratings-reviews">Read all {reviewCount} reviews</a></p>}
       <p>{product.category}</p>

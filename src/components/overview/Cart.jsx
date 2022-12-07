@@ -11,7 +11,6 @@ const Cart = ({style}) => {
   const [allQuantities, updateAllQuantities] = useState([]);
   const [error, updateError] = useState('');
   const [quantity, updateQuantity] = useState(0);
-  const [expand, updateExpand] = useState(false);
 
   useEffect(() => {
     let skuList = [];
