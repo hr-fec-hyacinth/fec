@@ -33,7 +33,7 @@ const RatingsReviews = ({product, meta}) => {
 
   // useEffect that calls the API documentation.
   useEffect(()=> {
-    console.log('this is the productId"', product.id);
+    // console.log('this is the productId"', product.id);
     if(product) {
       api.getReviews(Number(product.id), 1, 20, sortBy)
       .then(res => {
