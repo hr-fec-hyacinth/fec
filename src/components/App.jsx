@@ -5,6 +5,7 @@ import RatingsReviews from './ratingsreviews/RatingsReviews.jsx';
 import RelatedCompare from './relatedcompare/RelatedCompare.jsx';
 import Header from './Header.jsx';
 import api from '../../server/api.js';
+import sortDefault from '../helper/sortDefault.js';
 
 const {useState, useEffect} = React;
 
@@ -17,7 +18,8 @@ const App = () => {
     api.getProduct(37314)
       .then(product => updateProduct(product))
       .then(() => api.getStyles(37311))
-      .then(styles => updateStyles(styles.results))
+      .then(styles => sortDefault(styles.results))
+      .then(styles => updateStyles(styles))
       .then(() => api.getMetaReviews(37311))
       .then(reviews => updateMetaReview(reviews));
   }, []);
