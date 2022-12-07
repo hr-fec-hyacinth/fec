@@ -2,33 +2,32 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdStarBorder } from 'react-icons/md';
 
-const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, setCurrentCompare }) => {
+const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, setCurrentCompare, setCurrentIndex }) => {
 
   //Using the first style as default
   let category = slide[1].category;
   let name = slide[1].name;
-  let image = slide[0].results[0].photos[0].thumbnail_url;
+  let image = slide[0].results[0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
   let sale_price = '$' + slide[0].results[0].sale_price;
   let original_price = '$' + slide[0].results[0].original_price;
 
-  //Event handler to change the main detail view, selecting product number correctly but updateProduct isn't functioning
   const eventHandler = (e) => {
     e.preventDefault();
-    const product_id = e.currentTarget.getAttribute('productid')
-    console.log(product_id)
-    switchProduct(product_id)
+    switchProduct(e.currentTarget.getAttribute('productid'));
+    setCurrentIndex(0);
   }
 
   const displayModal = (e) => {
     e.preventDefault();
     setOpenModal(!openModal)
     setCurrentCompare(e.currentTarget.getAttribute('productid'))
+    document.body.style.overflow = "hidden"
   }
 
   return (
     <div className='px-2' >
       <MdStarBorder onClick={displayModal} className='absolute cursor-pointer z-8' productid={slide[1].id} />
-      <div onClick={eventHandler} className='container border border-black' productid={slide[1].id}>
+      <div onClick={eventHandler} className='container border border-black cursor-pointer' productid={slide[1].id}>
         <img className='max-h-30' src={image} alt='Product Image' />
         <div>
           {category} <br/>
@@ -43,7 +42,7 @@ const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, se
 
 export default RelatedProductsCard;
 
-
+//Jon's styling to add blur to handle different sized images
 // const ImageView = ({style}) => {
 //   const [imageIndex, updateImageIndex] = useState(-1);
 //   const [imageList, updateImageList] = useState([]);
