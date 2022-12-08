@@ -35,7 +35,7 @@ const RatingsReviews = ({product, meta}) => {
   useEffect(()=> {
     // console.log('this is the productId"', product.id);
     if(product.id) {
-      api.getReviews(Number(product.id), 1, 20, sortBy)
+      api.getReviews(Number(product.id), 1, 50, sortBy)
       .then(res => {
         // console.log('result from api req', res);
         // console.log('this should be the array of reviews', res);
@@ -115,9 +115,9 @@ const RatingsReviews = ({product, meta}) => {
       </div>
     </div>
     <div>
-      {activeForm &&
-      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />}
-      {/* <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} /> */}
+      {/* {activeForm &&
+      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />} */}
+      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />
     </div>
     </div>
   )
