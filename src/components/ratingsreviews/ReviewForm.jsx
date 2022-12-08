@@ -4,6 +4,8 @@ import StarsInput from './StarsInput.jsx';
 import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 import PhotoUpload from '../shared/PhotoUpload.jsx';
+import axios from 'axios';
+import { AUTHKEY } from '../../../server/config.js';
 
 const ReviewForm = ({product, meta, onFormSubmit}) => {
   // store form fields as controlled states
@@ -54,6 +56,14 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   // }
 
   // handles onChange Functionality for everything before
+
+  useEffect(() => {
+    setFields({
+      ...fields,
+      ['product_id']: product.id
+    })
+  }, [product])
+
   const handleOnChange = (e, name) => {
     console.log(e.target);
     // e.preventDefault();
@@ -61,8 +71,8 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
       ...fields,
       [e.target.name]: e.target.value
     })
-    // console.log(fields)
-    // console.log(typeof fields.recommend)
+    console.log(fields)
+    console.log(typeof fields.recommend)
   }
 
   // add validation handler
@@ -72,8 +82,38 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
         ...fields,
         characteristics: {
           ...fields.characteristics,
-          [e.target.name]: e.target.value
+          [e.target.name]: Number(e.target.value)
         }
+      })
+      console.log(fields);
+      console.log(fields.characteristics);
+
+  }
+
+  // submit form
+  const submitForm = (e) => {
+    e.preventDefault();
+    let postBody = {
+      product_id: Number(fields.product_id),
+      rating: Number(fields.rating),
+      summary: fields.summary,
+      recommend: Boolean(fields.recommend),
+      body: fields.body,
+      name: fields.name,
+      email: fields.email,
+      photos: [...fields.photos],
+      characteristics: {
+        ...fields.characteristics
+      }
+
+    }
+    console.log('this is the post body', fields);
+    console.log('this is the remadePostBody,', postBody);
+    axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'+'reviews', postBody, {headers: {Authorization: AUTHKEY}})
+      .then(result => {
+        console.log(result)})
+      .catch(err => {
+        console.log(err)
       })
   }
 
@@ -190,7 +230,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
             <div><PhotoUpload /></div>
 
             <div>
-              <button name="submitForm" onClick={onFormSubmit}
+              <button name="submitForm" onClick={submitForm}
                 className="my-3 bg-emerald-50 hover:file:bg-emerald-100
                 block w-full text-sm text-slate-500">
                 Submit
