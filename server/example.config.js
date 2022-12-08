@@ -1,3 +1,2 @@
-const AUTHKEY = ''
-
-export default AUTHKEY;
+export const AUTHKEY = ''
+export const CLOUDINARYAUTHKEY = '';
