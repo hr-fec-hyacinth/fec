@@ -35,11 +35,11 @@ const ProductInfo = ({product, style, metaReview}) => {
       <div className='sm:block hidden'>
         <Social />
       </div>
-      {reviewCount && <span className='flex justify-evenly mt-1'><Stars ratings={averageRating(metaReview.ratings)}/><a className='text-stone-400 underline text-sm' href="#ratings-reviews">Read all {reviewCount} reviews</a></span>}
-      <p className='text-sm mt-2'>{product.category}</p>
-      <p className='text-2xl sm:mb-0 mb-2'>{product.name}</p>
-      {!salePrice && <p className='text-xl sm:mb-0 mb-2'>${price}</p>}
-      {salePrice && <p className=' text-xl sm:mb-0 mb-2'><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through sm:mb-0 mb-2'>${price}</span></p>}
+      {reviewCount && <span className='flex justify-left mt-1'><Stars ratings={averageRating(metaReview.ratings)}/><a className='text-stone-400 underline text-xs ml-2' href="#ratings-reviews">Read all {reviewCount} reviews</a></span>}
+      <p className='text-sm mt-2 italic'>{product.category}</p>
+      <p className='text-2xl sm:text-4xl font-extrabold sm:mb-0 mb-2'>{product.name}</p>
+      {!salePrice && <p className='text-xl sm:mb-0 mb-2 mt-2'>${price}</p>}
+      {salePrice && <p className=' text-xl sm:mb-0 mb-2 mt-2'><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through sm:mb-0 mb-2'>${price}</span></p>}
 
     </div>
   )

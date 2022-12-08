@@ -61,8 +61,8 @@ const Cart = ({style}) => {
   return (
     <form>
     <div className='flex mt-1 sm:flex-row flex-col justify-evenly'>
-      {skus.length === 0 ? <select data-testid="size-select" className='w-5/12 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
-      <select data-testid="size-select" value={JSON.stringify(sku)} className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center' onChange={e => {
+      {skus.length === 0 ? <select data-testid="size-select" className='sm:pl-1 w-5/12 sm:w-712 sm:py-2 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
+      <select data-testid="size-select" value={JSON.stringify(sku)} className='sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' onChange={e => {
         updateError('');
         selectSku(e.target.value);
       }}>
@@ -72,8 +72,8 @@ const Cart = ({style}) => {
        })}
       </select>
       }
-      {allQuantities.length === 0 ? <select data-testid="quant-select" className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
-      <select data-testid="quant-select" defaultValue='1' className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' onChange={e => {
+      {allQuantities.length === 0 ? <select data-testid="quant-select" className='sm:pl-1 sm:py-2 sm:w-4/12 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
+      <select data-testid="quant-select" defaultValue='1' className='sm:pl-1 sm:py-2 sm:w-4/12 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl text-center sm:text-left' onChange={e => {
         updateQuantity(Number(e.target.value));
       }}>
         {allQuantities.map(quant => {
@@ -81,12 +81,12 @@ const Cart = ({style}) => {
         })}
       </select>}
     </div>
-    <div className='flex sm:flex-row flex-col-reverse justify-center sm:justify-end text-center'>
-      <span className='text-red-500 mt-5 mr-1 ml-2'>{error}</span>
-      <button className='sm:rounded rounded-2xl border-2 sm:mr-4 mt-4 sm:p-1 p-4 sm:w-fit w-6/12 mx-auto' onClick={e => {
+    <div className='flex sm:flex-row flex-col justify-center sm:justify-start text-center'>
+      <button className='sm:text-left border-2 sm:mr-4 mt-4 sm:p-4 sm:py-2 p-4 w-6/12 sm:w-8/12 mx-auto sm:mx-2 flex justify-between' onClick={e => {
         e.preventDefault();
         checkout();
-      }}>Add To Cart</button>
+      }}><span>Add to Bag</span><span>+</span></button>
+      <span className='text-red-500 mt-5 mr-1 ml-2 w-4/12 text-sm text-center'>{error}</span>
     </div>
     </form>
   )
