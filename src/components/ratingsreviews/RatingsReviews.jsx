@@ -34,8 +34,9 @@ const RatingsReviews = ({product, meta}) => {
   // useEffect that calls the API documentation.
   useEffect(()=> {
     // console.log('this is the productId"', product.id);
+
     if(product.id) {
-      api.getReviews(Number(product.id), 1, 50, sortBy)
+      api.getReviews(Number(product.id), 1, 200, sortBy)
       .then(res => {
         // console.log('result from api req', res);
         // console.log('this should be the array of reviews', res);
@@ -54,9 +55,6 @@ const RatingsReviews = ({product, meta}) => {
     // moreReviews adds two to the number of reviews to load.
   const handleOnClick = {
     stars: (starNum) => {
-      // e.preventDefault();
-      // console.log('inside handleClick', starNum)
-      // console.log('this is the star filter', starFilter);
       setStarFilter({
         ...starFilter,
         // "filterOn": true,
@@ -83,7 +81,7 @@ const RatingsReviews = ({product, meta}) => {
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
     <div>
-      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />
+      {/* <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} /> */}
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
       {meta.ratings && <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>}
@@ -117,8 +115,8 @@ const RatingsReviews = ({product, meta}) => {
       </div>
     </div>
     <div>
-      {/* {activeForm &&
-      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />} */}
+      {activeForm &&
+      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />}
 
     </div>
     </div>

@@ -82,7 +82,7 @@ const StarsInput = ({selectedRating, cb}) => {
 
   // these can be mapped out so that thye
   return (
-    <div onChange={(e) => {cb(e, e.target.name)}} className="flex flex-column">
+    <div onChange={(e) => {cb(e, Number(e.target.name))}} className="flex flex-column">
       <div className="flex w-5/12 overflow-auto	text-sm">
         <label>
           How would you rate this product?
