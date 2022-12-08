@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import api from '../../../server/api.js';
 
-const QForm = ({ setModalOpen, product }) => {
-  const [question, setQuestion] = useState('');
+
+const AForm = ({ setModalOpen, question }) => {
+  const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
 
@@ -11,26 +12,26 @@ const QForm = ({ setModalOpen, product }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-
-    if (!question || !nickname || !email) {
+    if (!answer || !nickname || !email) {
       alert('All fields are required! Please fill out all fields.');
     } else if (email.length > 60) {
       alert('Email is too long! Please enter a shorter email.');
-    } else if (question.length > 1000) {
-      alert('Question is too long! Please enter a shorter question.');
+    } else if (answer.length > 1000) {
+      alert('Answer is too long! Please enter a shorter answer.');
     } else if (nickname.length > 60) {
       alert('Nickname is too long! Please enter a shorter nickname.');
     } else if (!mailformat.test(email)) {
       alert('Email not in correct format! Please enter vaild email.');
     } else {
-      //alert(`Form submitted successfully!\nQuestion: ${question}\nNickname: ${nickname}\nEmail: ${email}`);
-      api.postQuestion(product.id, {body:question, name:nickname, email:email})
+      //alert(`Form submitted successfully!\nAnswer: ${answer}\nNickname: ${nickname}\nEmail: ${email}`);
+      // send to api
+      api.postAnswer(question.question_id, {body:answer, name:nickname, email:email})
         .then(response => {
           setModalOpen(false);
           //TODO: Pop-up notifying the user the question has been received
         }).catch(err => {
-          console.log('Error posting question', err)
-          //TODO: Pop-up "Sorry unable to submit you question at this time. Please try again later"
+          console.log('Error posting answer', err)
+          //TODO: Pop-up "Sorry unable to post your answer at this time. Please try again later"
         })
     }
   };
@@ -40,12 +41,12 @@ const QForm = ({ setModalOpen, product }) => {
       <textarea
         className='resize-none border border-gray rounded-lg p-2 m-1'
         autoComplete='off'
-        name="question"
-        value={question}
-        placeholder="Type your question here"
+        name="answer"
+        value={answer}
+        placeholder="Type your answer here"
         rows="5"
         cols="80"
-        onChange={(event) => setQuestion(event.target.value)}
+        onChange={(event) => setAnswer(event.target.value)}
       />
       <label className='m-1'>
         Nickname:
@@ -76,5 +77,5 @@ const QForm = ({ setModalOpen, product }) => {
   );
 };
 
-export default QForm;
+export default AForm;
 
