@@ -3,18 +3,24 @@ import axios from 'axios';
 import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
-const sliderData = [
-  {image: 'https://via.placeholder.com/300?text=%2b'},
-  {image: 'https://via.placeholder.com/300?text=%2b'},
-  {image: 'https://via.placeholder.com/300?text=%2b'},
-  {image: 'https://via.placeholder.com/300?text=%2b'},
-  {image: 'https://via.placeholder.com/300?text=%2b'}
-]
+const sliderData = [{
+  addToOutfit: true,
+  image: 'https://via.placeholder.com/300?text=%2b'
+}]
 
 //First card of list always needs to be add to outfit list
-const YourOutfit = ({ sliderInfo }) => {
+const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const length = sliderData.length;
+  const [outfit, setOutfit] = useState(sliderData)
+  const length = outfit.length;
+
+  useEffect(() => {
+    setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('userOutfit', JSON.stringify(outfit));
+  }, [outfit]);
 
   const nextSlide = (e) => {
     e.preventDefault();
@@ -30,12 +36,12 @@ const YourOutfit = ({ sliderInfo }) => {
     }
   }
 
-  if (!Array.isArray(sliderData) || sliderData.length <= 0) {
+  if (!Array.isArray(outfit) || outfit.length <= 0) {
     return null;
   }
 
   const getSlides = () => {
-    let currentSlides = sliderData.slice(currentIndex, currentIndex + 4);
+    let currentSlides = outfit.slice(currentIndex, currentIndex + 4);
     return currentSlides;
   }
 
@@ -52,7 +58,7 @@ const YourOutfit = ({ sliderInfo }) => {
             <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
           }
           {slides.map((slide, index) => (
-            <YourOutfitCard slide={slide} key={index} />
+            <YourOutfitCard slide={slide} key={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} />
           ))}
         </div>
       </div>

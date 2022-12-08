@@ -99,10 +99,12 @@ module.exports = {
       32: '8rem',
       36: '9rem',
       40: '10rem',
+      42: '10.5rem',
       44: '11rem',
       48: '12rem',
       52: '13rem',
       56: '14rem',
+      58: '14.5rem',
       60: '15rem',
       64: '16rem',
       72: '18rem',
@@ -669,6 +671,9 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      '3/4': '75vh',
+      '6/10': '60vh',
+      '1/10': '10vh'
     },
     minWidth: {
       0: '0px',

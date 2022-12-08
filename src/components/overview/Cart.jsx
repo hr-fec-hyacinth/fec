@@ -60,24 +60,24 @@ const Cart = ({style}) => {
 
   return (
     <form>
-    <div className='flex sm:flex-row flex-col justify-evenly'>
-      {skus.length === 0 ? <select className='w-5/12 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
-      <select value={JSON.stringify(sku)} className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center' onChange={e => {
+    <div className='flex mt-1 sm:flex-row flex-col justify-evenly'>
+      {skus.length === 0 ? <select data-testid="size-select" className='w-5/12 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
+      <select data-testid="size-select" value={JSON.stringify(sku)} className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center' onChange={e => {
         updateError('');
         selectSku(e.target.value);
       }}>
        <option selected disabled hidden value={JSON.stringify({})}>Select Size</option>
        {skus.map((sku, i) => {
-          return <option value={JSON.stringify(sku)} key={i}>{sku.size}</option>
+          return <option data-testid="size-option" value={JSON.stringify(sku)} key={i}>{sku.size}</option>
        })}
       </select>
       }
-      {allQuantities.length === 0 ? <select className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
-      <select defaultValue='1' className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' onChange={e => {
+      {allQuantities.length === 0 ? <select data-testid="quant-select" className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
+      <select data-testid="quant-select" defaultValue='1' className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' onChange={e => {
         updateQuantity(Number(e.target.value));
       }}>
         {allQuantities.map(quant => {
-          return <option value={quant} key={quant}>{quant}</option>
+          return <option data-testid="quant-option" value={quant} key={quant}>{quant}</option>
         })}
       </select>}
     </div>

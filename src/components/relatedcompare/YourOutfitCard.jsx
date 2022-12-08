@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { RxCrossCircled } from 'react-icons/rx';
+import Stars from '../shared/Stars.jsx'
+import AddToOutfitCard from './AddToOutfitCard.jsx';
+import AddOutfitItem from './AddOutfitItem.jsx';
 
-const YourOutfitCard = ({slide}) => {
+const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit, setCurrentIndex }) => {
+  const isAddToOutfitCard = slide.addToOutfit;
 
-  //Should have onClick to allow for main product view to change to this item
   return (
-    <div className='px-2'>
-      <RxCrossCircled className='absolute cursor-pointer z-8'/>
-      <div className='container border border-black'>
-        <img src={slide.image} alt='Product Picture'/>
-        <div>
-          Category <br/>
-          Product Name <br/>
-          Price <br/>
-          Star Rating <br/>
-        </div>
-      </div>
-    </div>
+    <>
+      {isAddToOutfitCard &&
+        <AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} />
+      }
+      {!isAddToOutfitCard &&
+        <AddOutfitItem slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} switchProduct={switchProduct} setCurrentIndex={setCurrentIndex} />
+      }
+    </>
   )
 }
 
