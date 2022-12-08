@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../../../server/api.js';
 import Modal from './Modal.jsx'
 import AForm from './AForm.jsx'
 
@@ -14,6 +15,14 @@ const OneQ = ({ questionData }) => {
 
   const handleYesClick = () => {
     setHelpfulness(questionData.question_helpfulness+1)
+    api.putHelpfulQuestion(questionData.question_id)
+      .then(response => {
+        if (response.status !== 204) {
+          console.warn('Response code is not 204')
+          console.log(response)
+        }
+      })
+      .catch(err => console.log('Error in OneQ putHelpfulQuestion api call:', err));
   }
 
   const handleAddAClick = () => {

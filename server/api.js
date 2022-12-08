@@ -24,7 +24,7 @@ api.getQuestions = (product_id, page, count) => {
       // count: count
     }
   })
-}
+};
 
 api.getMetaReviews = (productId) => {
   return axios.get(URL + 'reviews/meta', {headers: {Authorization: AUTHKEY}, params: {product_id: productId}})
@@ -80,6 +80,18 @@ api.postInteraction = (e, module) => {
   };
 
   return axios.post(URL + 'interactions', params, {headers: {Authorization: AUTHKEY}})
+}
+
+api.putHelpfulQuestion = (question_id) => {
+  return axios.put(URL + `qa/questions/${question_id}/helpful`, {}, {headers: {Authorization: AUTHKEY}})
+};
+
+api.putHelpfulAnswer = (answer_id) => {
+  return axios.put(URL + `qa/answers/${answer_id}/helpful`, {}, {headers: {Authorization: AUTHKEY}})
+};
+
+api.putReportAnswer = (answer_id) => {
+  return axios.put(URL + `qa/answers/${answer_id}/report`, {}, {headers: {Authorization: AUTHKEY}})
 }
 
 export default api;
