@@ -13,11 +13,13 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
     let images = [];
     imageList.forEach((image, i) => images.push({url: image, index: i}));
     updateImageObjects(images);
-    updateCurrentImages(images.slice(sliderIndex, sliderIndex + 7));
     if (imageList.length - 7 < 0) {
       updateMaxSliderIndex(0);
+      updateSliderIndex(0);
+      updateCurrentImages(images.slice(0, 7));
     } else {
       updateMaxSliderIndex(imageList.length - 7);
+      updateCurrentImages(images.slice(sliderIndex, sliderIndex + 7));
     }
 
   }, [imageList])
@@ -46,17 +48,17 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
 
   return (
     <div className='hidden sm:block'>
-      {sliderIndex !== maxSliderIndex &&<IoIosArrowDown className='left-8 absolute z-20 bottom-1' onClick={next}/>}
-      {sliderIndex !== 0 && <IoIosArrowUp className='left-8 absolute z-20' onClick={previous}/>}
-      <div className='flex w-2/12 h-full flex-col left-4 absolute z-10'>
+      <div className='flex h-full flex-col left-4 absolute z-10'>
+        {sliderIndex !== 0 && <IoIosArrowUp data-testid="image-up" className='my-auto z-20 self-center hover:text-slate-500' onClick={previous}/>}
         {currentImages.map((image) => {
           return (
-            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-b-[4px] border-blue-400 aspect-square object-cover w-12 select-none mt-3' : 'aspect-square object-cover w-12 select-none mt-4'} src={image.url} onClick={e => {
+            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-b-[4px] border-blue-400 aspect-square object-cover w-12 select-none my-auto' : 'aspect-square object-cover w-12 select-none my-auto'} src={image.url} onClick={e => {
               updateImageIndex(image.index);
               updateStyling({backgroundImage: 'url(' + image.url + ')'});
             }}/>
           )
         })}
+        {sliderIndex !== maxSliderIndex &&<IoIosArrowDown data-testid="image-down" className='my-auto z-20 self-center hover:text-slate-500' onClick={next}/>}
       </div>
     </div>
   )

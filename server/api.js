@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AUTHKEY from './config.js';
+import { AUTHKEY } from './config.js';
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
 

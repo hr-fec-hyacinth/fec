@@ -21,7 +21,8 @@ const App = () => {
       .then(styles => sortDefault(styles.results))
       .then(styles => updateStyles(styles))
       .then(() => api.getMetaReviews(37314))
-      .then(reviews => updateMetaReview(reviews));
+      .then(reviews => updateMetaReview(reviews))
+      .catch(err => console.log(err));
   }, []);
 
   const switchProduct = (product_id) => {
@@ -30,7 +31,8 @@ const App = () => {
       .then(() => api.getStyles(product_id))
       .then(styles => updateStyles(styles.results))
       .then(() => api.getMetaReviews(product_id))
-      .then(reviews => updateMetaReview(reviews));
+      .then(reviews => updateMetaReview(reviews))
+      .catch(err => console.log(err));
   }
 
   return (
@@ -38,7 +40,7 @@ const App = () => {
       <div className="w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
         <Overview product={product} styles={styles} metaReview={metaReview}/>
-        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles}/>
+        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
         <QnA product = {product}/>
         {metaReview && <RatingsReviews product={product} meta={metaReview} />}
       </div>
