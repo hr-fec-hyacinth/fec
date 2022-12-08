@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { calculateAverageRating } from './reviewsHelper.js';
 import CharacteristicsList from './CharacteristicsList.jsx';
 import RatingsChart from './RatingsChart.jsx';
+import StarDisplayQuarters from './StarDisplayQuarters.jsx'
 
 const Ratings = ({product, meta, ratingsCB, starFilter}) => {
   const [averageRating, setAverageRating] = useState(0);

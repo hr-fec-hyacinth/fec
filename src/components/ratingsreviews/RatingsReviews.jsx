@@ -84,9 +84,9 @@ const RatingsReviews = ({product, meta}) => {
       {/* <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} /> */}
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
-      {meta.ratings && <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>}
       <div className="flex space-x-3">
         <div id='ratings' className="w-4/12 pt-3" >
+          {meta.ratings && <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>}
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
         <div id='review' className="w-8/12">
