@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import RelatedProductsCard from './RelatedProductsCard.jsx'
-import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
+import RelatedProductsCard from './RelatedProductsCard.jsx';
+import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md';
 
 const RelatedProducts = ({ sliderInfo, switchProduct, openModal, setOpenModal, setCurrentCompare }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [sliderData, setSliderData] = useState([])
+  const [sliderData, setSliderData] = useState([]);
   const length = sliderData.length;
 
   useEffect(() => {
     if (sliderInfo) {
-      setSliderData(sliderInfo)
+      setSliderData(sliderInfo);
     }
   }, [sliderInfo])
 

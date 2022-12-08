@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 import axios from 'axios';
-import RelatedProducts from './RelatedProducts.jsx'
-import YourOutfit from './YourOutfit.jsx'
-import CompareModal from './CompareModal.jsx'
+import RelatedProducts from './RelatedProducts.jsx';
+import YourOutfit from './YourOutfit.jsx';
+import CompareModal from './CompareModal.jsx';
 
-const RelatedCompare = ({ product, switchProduct }) => {
+const RelatedCompare = ({ product, switchProduct, styles, metaReview }) => {
   const [related, setRelated] = useState([]);
   const [sliderInfo, setSliderInfo] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -47,7 +47,7 @@ const RelatedCompare = ({ product, switchProduct }) => {
       <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
       <br/>
       <h4 className='ml-20'>Your Outfit</h4>
-      <YourOutfit related={related} />
+      <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
       <br/>
     </div>
   )

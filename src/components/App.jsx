@@ -38,7 +38,7 @@ const App = () => {
       <div className="w-8/12 justify-center mx-auto min-w-900">
         <Header />
         <Overview product={product} styles={styles} metaReview={metaReview}/>
-        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles}/>
+        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
         <QnA product = {product}/>
         {metaReview && <RatingsReviews product={product} meta={metaReview} />}
       </div>

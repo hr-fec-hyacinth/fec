@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MdStarBorder } from 'react-icons/md';
+import Stars from '../shared/Stars.jsx';
 
 const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, setCurrentCompare, setCurrentIndex }) => {
-
   //Using the first style as default
-  let category = slide[1].category;
-  let name = slide[1].name;
-  let image = slide[0].results[0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
-  let sale_price = '$' + slide[0].results[0].sale_price;
-  let original_price = '$' + slide[0].results[0].original_price;
+  const category = slide[1].category;
+  const name = slide[1].name;
+  const image = slide[0].results[0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
+  const sale_price = '$' + slide[0].results[0].sale_price;
+  const original_price = '$' + slide[0].results[0].original_price;
 
   const eventHandler = (e) => {
     e.preventDefault();
@@ -19,9 +19,9 @@ const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, se
 
   const displayModal = (e) => {
     e.preventDefault();
-    setOpenModal(!openModal)
-    setCurrentCompare(e.currentTarget.getAttribute('productid'))
-    document.body.style.overflow = "hidden"
+    setCurrentCompare(e.currentTarget.getAttribute('productid'));
+    setOpenModal(!openModal);
+    document.body.style.overflow = "hidden";
   }
 
   return (
@@ -33,7 +33,7 @@ const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, se
           {category} <br/>
           {name} <br/>
           {original_price} <br/>
-          Star Rating <br/>
+          <Stars /> <br/>
         </div>
       </div>
     </div>

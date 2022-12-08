@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MdCheck } from 'react-icons/md'
+import { MdCheck } from 'react-icons/md';
 
 const CompareTableBody = ({ detail }) => {
   let currentProductValue;
@@ -8,10 +8,10 @@ const CompareTableBody = ({ detail }) => {
 
   detail[1].forEach((characteristic) => {
     if (characteristic.currentProduct) {
-      currentProductValue = characteristic.currentProduct
+      currentProductValue = characteristic.currentProduct;
     }
     if (characteristic.comparedProduct) {
-      comparedProductValue = characteristic.comparedProduct
+      comparedProductValue = characteristic.comparedProduct;
     }
   })
 
