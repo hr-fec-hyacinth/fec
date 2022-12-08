@@ -63,8 +63,7 @@ const QnAList = ({ product, search, questions }) => {
 
   return (
     <>
-      {/* Give the following div a max height of screen - searchbar - buttons */}
-      <div>
+      <div className='grow overflow-auto my-2'>
         {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index}/>)}
       </div>
       <div className='flex'>

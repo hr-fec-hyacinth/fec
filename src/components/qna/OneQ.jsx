@@ -50,7 +50,6 @@ const OneQ = ({ questionData }) => {
 
   var result;
   if (questionData)
-  // gap-x-3 line 56
     result = (
       <>
         <div className="flex my-3 items-center">

@@ -49,7 +49,7 @@ const QnA = ({ product }) => {
   }, [product]);
 
   return (
-    <div>
+    <div className='flex flex-col max-h-screen'>
       <div className="my-4 text-gray-600">QUESTIONS & ANSWERS</div>
       {questions.length > 0 &&
         <div className="flex
