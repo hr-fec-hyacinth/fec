@@ -52,6 +52,11 @@ const QnAList = ({ product, search, questions }) => {
     }
   }
 
+  const handleCollapseClick = () => {
+    setDisplayQuestions([filterQuestions[0], filterQuestions[1]])
+    setMore(true);
+  }
+
   const handleAddQClick = () => {
     setModalOpen(true);
   }
@@ -64,6 +69,7 @@ const QnAList = ({ product, search, questions }) => {
       </div>
       <div className='flex'>
         {more && <div className='border border-black p-2.5 font-bold m-2.5' onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
+        {displayQuestions.length > 2 && <div className='border border-black p-2.5 font-bold m-2.5' onClick={handleCollapseClick}>COLLAPSE</div>}
         <div className='flex items-center border border-black p-2.5 font-bold m-2.5'
           onClick={handleAddQClick}>
           <div>ADD A QUESTION</div>

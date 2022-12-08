@@ -14,14 +14,14 @@ api.getStyles = (productId) => {
     .then(res => res.data);
 };
 
-api.getQuestions = (product_id, page, count) => {
+api.getQuestions = (product_id) => {
 
   return axios.get(URL + `qa/questions`, {
     headers: {Authorization: AUTHKEY},
     params: {
       product_id: product_id,
-      // page: page,
-      // count: count
+      page: 1,
+      count: 100
     }
   })
 };

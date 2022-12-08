@@ -48,13 +48,8 @@ const QnA = ({ product }) => {
       setSendWarn(true);
   }, [product]);
 
-  useEffect(() => {
-    if(questions.length >= 5)
-      console.warn('May need another page of questions for product ', product)
-  }, [questions]);
-
   return (
-    <>
+    <div>
       <div className="my-4 text-gray-600">QUESTIONS & ANSWERS</div>
       {questions.length > 0 &&
         <div className="flex
@@ -84,7 +79,7 @@ const QnA = ({ product }) => {
         </div>
       }
       <QnAList product={product} search={search} questions={questions}/>
-    </>
+    </div>
   )
 }
 
