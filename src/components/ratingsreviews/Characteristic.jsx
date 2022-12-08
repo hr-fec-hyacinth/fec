@@ -47,6 +47,7 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
   return (
     <div>
       <span className="text-xl"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
+      <span> </span>
       <div className="flex flex-wrap mx-auto">
         <div className="w-4/12 border-2" style={boxFill}>
           <p style={{textAlign: 'left', verticalAlign: 'middle'}}>{leftVar}</p>
