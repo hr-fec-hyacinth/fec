@@ -5,8 +5,8 @@ import Stars from '../shared/Stars.jsx'
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 import AddOutfitItem from './AddOutfitItem.jsx';
 
-const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit }) => {
-  const isAddToOutfitCard = slide.addToOutfit
+const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit, setCurrentIndex }) => {
+  const isAddToOutfitCard = slide.addToOutfit;
 
   return (
     <>
@@ -14,7 +14,7 @@ const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, out
         <AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} />
       }
       {!isAddToOutfitCard &&
-        <AddOutfitItem slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} switchProduct={switchProduct} />
+        <AddOutfitItem slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} switchProduct={switchProduct} setCurrentIndex={setCurrentIndex} />
       }
     </>
   )

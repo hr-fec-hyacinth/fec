@@ -25,18 +25,20 @@ const RelatedProductsCard = ({ slide, switchProduct, openModal, setOpenModal, se
   }
 
   return (
-    <div className='px-2' >
-      <MdStarBorder onClick={displayModal} className='absolute cursor-pointer z-8' productid={slide[1].id} />
-      <div onClick={eventHandler} className='container border border-black cursor-pointer' productid={slide[1].id}>
-        <img className='max-h-30' src={image} alt='Product Image' />
-        <div>
-          {category} <br/>
-          {name} <br/>
-          {original_price} <br/>
-          <Stars /> <br/>
+    <>
+      <div className='px-2'>
+      <MdStarBorder onClick={displayModal} className='relative cursor-pointer left-52 top-6 z-8 hover:text-white' productid={slide[1].id} />
+        <div onClick={eventHandler} className='container h-96 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+          <img className='h-58 w-58' src={image} alt='Product Image' />
+          <div>
+            <div className='text-xs'>{category.toUpperCase()}</div>
+            <div className='text-sm font-bold'>{name}</div>
+            <div className='text-xs'>{original_price.slice(0, -3)}</div>
+            <Stars />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

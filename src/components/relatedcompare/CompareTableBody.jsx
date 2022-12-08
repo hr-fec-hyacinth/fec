@@ -17,11 +17,11 @@ const CompareTableBody = ({ detail }) => {
 
   return (
     <>
-      <tbody className='text-xs'>
+      <tbody className='text-xs border'>
         <tr>
-          <td className='text-left'>{currentProductValue}</td>
-          <td className='text-center'>{detail[0]}</td>
-          <td className='text-right'>{comparedProductValue}</td>
+          <td className='text-left border'>{currentProductValue}</td>
+          <td className='text-center border'>{detail[0]}</td>
+          <td className='text-right border'>{comparedProductValue}</td>
         </tr>
       </tbody>
     </>

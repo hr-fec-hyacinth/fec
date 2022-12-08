@@ -21,7 +21,8 @@ const App = () => {
       .then(styles => sortDefault(styles.results))
       .then(styles => updateStyles(styles))
       .then(() => api.getMetaReviews(37314))
-      .then(reviews => updateMetaReview(reviews));
+      .then(reviews => updateMetaReview(reviews))
+      .catch(err => console.log(err));
   }, []);
 
   const switchProduct = (product_id) => {
@@ -30,7 +31,8 @@ const App = () => {
       .then(() => api.getStyles(product_id))
       .then(styles => updateStyles(styles.results))
       .then(() => api.getMetaReviews(product_id))
-      .then(reviews => updateMetaReview(reviews));
+      .then(reviews => updateMetaReview(reviews))
+      .catch(err => console.log(err));
   }
 
   return (

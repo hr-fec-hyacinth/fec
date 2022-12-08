@@ -40,16 +40,18 @@ const RelatedCompare = ({ product, switchProduct, styles, metaReview }) => {
   }, [related]);
 
   return (
-    <div className=''>
-      <br/>
-      {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
-      <h4 className='ml-20'>Related Products</h4>
-      <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
-      <br/>
-      <h4 className='ml-20'>Your Outfit</h4>
-      <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
-      <br/>
-    </div>
+    <>
+      <div className='my-10' onClick={e => api.postInteraction(e, 'Related')}>
+        <br/>
+        {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
+        <h4 className='ml-28'>RELATED PRODUCTS</h4>
+        <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
+        <br/>
+        <h4 className='ml-28'>YOUR OUTFIT</h4>
+        <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
+        <br/>
+      </div>
+    </>
   )
 }
 

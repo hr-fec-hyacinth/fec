@@ -32,8 +32,8 @@ const CompareTable = ({ product, sliderInfo, currentCompare }) => {
 
   return (
     <>
-      <table className='table-auto'>
-        <thead>
+      <table className=''>
+        <thead className='border text-sm'>
           <tr>
             <th className=''>{currentProductName}</th>
             <th></th>

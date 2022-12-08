@@ -6,14 +6,21 @@ import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 const sliderData = [{
   addToOutfit: true,
   image: 'https://via.placeholder.com/300?text=%2b'
-}
-]
+}]
 
 //First card of list always needs to be add to outfit list
 const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [outfit, setOutfit] = useState(sliderData)
   const length = outfit.length;
+
+  useEffect(() => {
+    setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('userOutfit', JSON.stringify(outfit));
+  }, [outfit]);
 
   const nextSlide = (e) => {
     e.preventDefault();
@@ -29,7 +36,7 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
     }
   }
 
-  if (!Array.isArray(sliderData) || sliderData.length <= 0) {
+  if (!Array.isArray(outfit) || outfit.length <= 0) {
     return null;
   }
 
@@ -51,7 +58,7 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
             <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
           }
           {slides.map((slide, index) => (
-            <YourOutfitCard slide={slide} key={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit}/>
+            <YourOutfitCard slide={slide} key={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} />
           ))}
         </div>
       </div>
