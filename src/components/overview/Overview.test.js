@@ -7,6 +7,7 @@ import Styles from './Styles.jsx';
 import mediaQuery from "css-mediaquery";
 import Details from './Details.jsx';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 let product = {
   "id": 11,
@@ -625,6 +626,17 @@ describe('Image View Render', () => {
       })
 
       // Changing a style will keep the image index
+      it('Clicking on a style will keep the image index', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const styleList = await screen.getAllByAltText('style')
+        let image = await screen.getByTestId('image')
+        let right = await screen.getByTestId('image-right')
+        fireEvent.click(right)
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80)`)
+        fireEvent.click(styleList[1])
+        image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
+      })
 
       it('The down arrow in the carousel will shift the images by one', async () => {
         render(<Overview product={product} styles={styles.results} metaReview={meta} />)
@@ -789,5 +801,13 @@ describe('Image View Render', () => {
         fireEvent.click(imageIcons[1])
         let expanded = await screen.getByTestId('expanded-image')
         expect(expanded.src).toBe(`https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80`)
+      })
+
+      it('Clicking on the expand image icon will hide the sidebar', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let expand = await screen.getByTestId('outline-expand')
+        fireEvent.click(expand);
+        let sidebar = await screen.queryByTestId('sidebar', {hidden: true})
+        expect(sidebar).toHaveClass('hidden')
       })
 })
