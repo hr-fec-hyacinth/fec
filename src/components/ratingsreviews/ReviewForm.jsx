@@ -27,8 +27,6 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   const [characteristics, setCharacteristics] = useState({});
   const [hasPosted, setHasPosted] = useState(false)
 
-  console.log('somethign in review form is failing');
-
   // CSS Styling <---------------------------------------------------------------------------------------------------->
   // CSS Styling for table specifically to stretch the whole row
     // Affect Radio Buttons
@@ -42,17 +40,8 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
 
   //------------------------------------------------------------------------------------------->
 
-  // //function to calculate remaining characters and display the characters
-  // const bodyChars = (reviewBodysLengthAsNumber) => {
-  //   // return two different divs depending whether the number is greater or less than 50
-  // }
-
   // // this is a function that runs on every update and handles validation of the form
   // const handleValidation = (inputType, value) => {
-  // }
-
-  // // this is going to be the callback
-  // const postToDB = () => {
   // }
 
   // handles onChange Functionality for everything before
@@ -65,19 +54,19 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   }, [product])
 
   const handleOnChange = (e, name) => {
-    console.log(e.target);
+    // console.log(e.target);
     // e.preventDefault();
     setFields({
       ...fields,
       [e.target.name]: e.target.value
     })
-    console.log(fields)
-    console.log(typeof fields.recommend)
+    // console.log(fields)
+    // console.log(typeof fields.recommend)
   }
 
   // add validation handler
   const handleCharsOnChange = (e, name) => {
-    console.log('inside handleCharsOnChange, ',e.target.name, e.target.value)
+    // console.log('inside handleCharsOnChange, ',e.target.name, e.target.value)
       setFields({
         ...fields,
         characteristics: {
@@ -85,8 +74,8 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
           [e.target.name]: Number(e.target.value)
         }
       })
-      console.log(fields);
-      console.log(fields.characteristics);
+      // console.log(fields);
+      // console.log(fields.characteristics);
 
   }
 
@@ -107,8 +96,8 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
       }
 
     }
-    console.log('this is the post body', fields);
-    console.log('this is the remadePostBody,', postBody);
+    // console.log('this is the post body', fields);
+    // console.log('this is the remadePostBody,', postBody);
     axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'+'reviews', postBody, {headers: {Authorization: AUTHKEY}})
       .then(result => {
         console.log(result)})
@@ -212,20 +201,6 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
               />
               <span className="text-xs">{50 - fields.body.length} needed</span>
             </div>
-
-            {/* <div>
-              Photo Upload
-              <label className="block">
-                <span className="sr-only">Upload your Photos</span>
-                <input type="file" className="block w-full text-sm text-slate-500
-                  file:mr-4 file:py-2 file:px-4
-                  file:rounded-full file:border-0
-                  file:text-sm file:font-semibold
-                  file:bg-emerald-50 file:text-emerald-700
-                  hover:file:bg-emerald-100
-                "/>
-              </label>
-            </div> */}
 
             <div><PhotoUpload /></div>
 
