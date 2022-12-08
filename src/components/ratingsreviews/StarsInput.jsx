@@ -2,11 +2,38 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 // import star_filled from '../../star_filled.svg'
+import StarDisplayQuarters from './StarDisplayQuarters.jsx';
+
+// Input will be passed into the
+// state - Hover that's a boolean
+// state - hoverOnValue - this is a number for 0 - 5=>
+// changing this will rerender the
+
+const SingleStar = ({rating, currentIndex}) => {
+  const starCSS = 'text-orange-400 text-3xl hover:hover:text-blue-600 checked:bg-black';
+
+  if (rating - currentIndex >= 1) {
+    return (<BsStarFill key={'starsDisplay'+ currentIndex} className={starCSS} />)
+    } else if (rating - currentIndex > 0 && rating - currentIndex < 1) {
+    return (<BsStarHalf key={'starsDisplay'+ currentIndex} className={starCSS} />)
+    } else {
+    return (<BsStar key={'starsDisplay'+ currentIndex} className={starCSS} />)
+  }
+}
 
 const StarsInput = ({selectedRating, cb}) => {
   const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(false);
+  const [starsToRender, setStarsToRender] = useState(0);
+
+  // useEffect(() => {
+  //   if (!hover) {
+  //     setStarsToRender(selectedRating);
+  //   }
+  // }, [])
 
   const radioButtonCSS = {
+    display: 'none',
     border: '0',
     clip: 'rect(0, 0, 0, 0)',
     height: '1px',
@@ -17,12 +44,33 @@ const StarsInput = ({selectedRating, cb}) => {
   }
 
   // switch that displays the suggested Text
+  // changes the highlight &
   // 1 star - “Poor”
   // 2 stars - “Fair”
   // 3 stars - “Average”
   // 4 stars - “Good”
   // 5 stars - “Great”
-  const selectionHint = () => {
+  const selectionHint = (selectedRating) => {
+    switch(selectedRating){
+      case null:
+        return (<span></span>)
+        break;
+      case "1":
+        return (<div>Poor</div>);
+        break;
+      case "2":
+        return (<span>Fair</span>);
+        break;
+      case "3":
+        return (<span>Average</span>);
+        break;
+      case "4":
+        return (<span>Good</span>);
+        break;
+      case "5":
+        return (<span>Great</span>);
+        break;
+    }
   }
 
   // onChangeValue changes the
@@ -34,69 +82,52 @@ const StarsInput = ({selectedRating, cb}) => {
 
   // these can be mapped out so that thye
   return (
-    <div onChange={onChangeValue} className="flex flex-column">
+    <div onChange={(e) => {cb(e, Number(e.target.name))}} className="flex flex-column">
       <div className="flex w-5/12 overflow-auto	text-sm">
         <label>
           How would you rate this product?
         </label>
       </div>
       <div className="w-6/12 flex flex-column justify-evenly">
-        {Array.from({ length: 5 }, (v, i) => (
-          <label htmlFor={'starlabel' + i}>
+        {Array.from({ length: 5 }, (v, i) => {
+          return (<label htmlFor={'starlabel' + (i+1)}
+            onMouseOver={(e) => {
+              setHover(true)
+              setStarsToRender(i+1)
+            }}
+            onMouseOut={(e) => {
+              setHover(false)
+              setStarsToRender(selectedRating)
+            }}
+            key={'starInputlabel'+i}
+            >
             <input
               type="radio"
               name="rating"
-              value={i}
-              key={'starinput' + i}
+              value={i + 1}
+              id={'starlabel'+ (i+1)}
+              key={'starRadio' + i}
+              style={radioButtonCSS}
+              // onMouseOver={(e) => {
+              //   setHover(true)
+              //   setStarsToRender(event.target.value)
+              // }}
+              // onMouseOut={(e) => {
+              //   setHover(false)
+              //   setStarsToRender(selectedRating)
+              // }}
             />
-            <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/>
-          </label>
-        ))}
-        {/* <label htmlFor="star1" key="1">
-        <input
-          type="radio"
-          name="rating"
-          value="1"
-          key="1"
-        />
-          <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/>
-        </label>
-        <label>
-          <input
-          type="radio"
-          name="rating"
-          value="2"
-          keys="2"
-          />
-          <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="rating"
-            value="3"
-          />
-          <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="rating"
-            value="4"
-          />
-          <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="rating"
-            value="5"
-          />
-          <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/>
-        </label> */}
+            <SingleStar rating={starsToRender} currentIndex={i}/>
+            {/* <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/> */}
+          </label>)
+      })}
       </div>
+      <div className="flex flex-wrap">{selectionHint(selectedRating)}</div>
     </div>
   )
 }
 
+
+
 export default StarsInput;
+

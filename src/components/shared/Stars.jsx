@@ -20,11 +20,11 @@ const Stars = ({ratings, cb}) => {
         {Array.from({ length: 5}, (v, i) => {
           // replace with switch when implementing quarter stars
           if (roundedNum - i >= 1) {
-            return (<BsStarFill className="text-orange-400 inline" />)
+            return (<BsStarFill key={'starsDisplay'+i} className="text-orange-400 inline" />)
           } else if (roundedNum - i > 0 && roundedNum - i < 1) {
-            return (<BsStarHalf className="text-orange-400 inline" />)
+            return (<BsStarHalf key={'starsDisplay'+i} className="text-orange-400 inline" />)
           } else {
-            return (<BsStar className="text-orange-400 inline" />)
+            return (<BsStar key={'starsDisplay'+i} className="text-orange-400 inline" />)
           }
         })
       }
