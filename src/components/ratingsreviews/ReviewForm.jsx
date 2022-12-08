@@ -18,10 +18,6 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
           "https://cdn.britannica.com/39/7139-050-A88818BB/Himalayan-chocolate-point.jpg"
     ],
     "characteristics": {
-      "125036": 1,
-      "125037": 1,
-      "125038": 1,
-      "125039": 1
     }
   });
 
@@ -51,9 +47,11 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   const handleValidation = () => {
   }
 
+  // this is going to be the callback
   const postToDB = () => {
   }
 
+  // handles onChange Functionality for everything before
   const handleOnChange = (e, name) => {
     console.log(e.target);
     // e.preventDefault();
@@ -65,8 +63,18 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
     console.log(typeof fields.recommend)
   }
 
-  // first div ratings needs to be replaced with selectable stars component
-  // map through the keys and turn it into a row
+  const handleCharsOnChange = (e, name) => {
+    console.log('inside handleCharsOnChange, ',e.target.name, e.target.value)
+    setFields({
+      ...fields,
+      characteristics: {
+        ...fields.characteristics,
+        [e.target.name]: e.target.value
+      }
+    })
+  }
+
+
   return (
       <div className="flex z-30 flex-col h-full items-center space-x-2 justify-center  ">
         <p>Leave A Review Below:</p>
@@ -130,7 +138,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
 
             <div className="flex flex-wrap">
               <div className="w-full mw-full mx-auto font-light">
-                {meta.characteristics && <CharInputTable metaChars={meta.characteristics}  />}
+                {meta.characteristics && <CharInputTable metaChars={meta.characteristics} cb={handleCharsOnChange}/>}
               </div>
             </div>
 

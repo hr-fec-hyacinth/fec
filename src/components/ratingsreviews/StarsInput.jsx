@@ -10,7 +10,8 @@ import StarDisplayQuarters from './StarDisplayQuarters.jsx';
 // changing this will rerender the
 
 const SingleStar = ({rating, currentIndex}) => {
-  const starCSS = 'text-orange-400 hover:hover:text-blue-600 checked:bg-black';
+  const starCSS = 'text-orange-400 text-3xl hover:hover:text-blue-600 checked:bg-black';
+
   if (rating - currentIndex >= 1) {
     return (<BsStarFill key={'starsDisplay'+ currentIndex} className={starCSS} />)
     } else if (rating - currentIndex > 0 && rating - currentIndex < 1) {
@@ -32,6 +33,7 @@ const StarsInput = ({selectedRating, cb}) => {
   }, [])
 
   const radioButtonCSS = {
+    display: 'none',
     border: '0',
     clip: 'rect(0, 0, 0, 0)',
     height: '1px',
@@ -88,21 +90,31 @@ const StarsInput = ({selectedRating, cb}) => {
       </div>
       <div className="w-6/12 flex flex-column justify-evenly">
         {Array.from({ length: 5 }, (v, i) => {
-          return (<label htmlFor={'starlabel' + i}
+          return (<label htmlFor={'starlabel' + (i+1)}
+            onMouseOver={(e) => {
+              setHover(true)
+              setStarsToRender(i+1)
+            }}
+            onMouseOut={(e) => {
+              setHover(false)
+              setStarsToRender(selectedRating)
+            }}
             >
             <input
               type="radio"
               name="rating"
               value={i + 1}
-              key={'starinput' + i}
-              onMouseOver={(e) => {
-                setHover(true)
-                setStarsToRender(event.target.value)
-              }}
-              onMouseOut={(e) => {
-                setHover(false)
-                setStarsToRender(selectedRating)
-              }}
+              id={'starlabel'+ (i+1)}
+              key={'starRadio' + i}
+              style={radioButtonCSS}
+              // onMouseOver={(e) => {
+              //   setHover(true)
+              //   setStarsToRender(event.target.value)
+              // }}
+              // onMouseOut={(e) => {
+              //   setHover(false)
+              //   setStarsToRender(selectedRating)
+              // }}
             />
             <SingleStar rating={starsToRender} currentIndex={i}/>
             {/* <BsStar className="text-orange-400 hover:hover:text-blue-600 checked:bg-black"/> */}

@@ -19,6 +19,7 @@ const CharInputTable = ({metaChars, cb}) => {
   const [tableValues, setTableValues] = useState({});
 
   const handleOnChange = (e, name) => {
+    cb(e, e.target.name)
   }
 
   return (<>
