@@ -36,11 +36,11 @@ const Overview = ({ product, styles, metaReview }) => {
 
   return (
     <div>
-      <div className='flex min-h-halfScreen overflow-hidden flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
-        <div className={stretch ? 'w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
+      <div className='flex min-h-full overflow-hidden flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
+        <div className={stretch ? 'min-h-full w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
           <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
         </div>
-        <div className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-evenly'}>
+        <div className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-between'}>
           <ProductInfo product={product} style={style} metaReview={metaReview} />
           <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
           <Cart style={styles[styleIndex]} />
