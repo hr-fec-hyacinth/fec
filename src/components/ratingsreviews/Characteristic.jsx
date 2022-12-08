@@ -7,7 +7,7 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
     height: '10px',
     // width: '100%',
     minHeight: '10px',
-    backgroundColor: '#8fc4fc',
+    backgroundColor: '#2e93ff',
   }
 
   const arrowStyle = {

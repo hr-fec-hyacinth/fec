@@ -44,7 +44,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   }
 
   // this is a function that runs on every update and handles validation of the form
-  const handleValidation = () => {
+  const handleValidation = (inputType, value) => {
   }
 
   // this is going to be the callback
@@ -63,6 +63,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
     console.log(typeof fields.recommend)
   }
 
+  // add validation handler
   const handleCharsOnChange = (e, name) => {
     console.log('inside handleCharsOnChange, ',e.target.name, e.target.value)
     setFields({
@@ -122,7 +123,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                 name="name"
                 placeholder="Example: jackson11!"
                 onChange={handleOnChange}
-                class={textCSS} />
+                className={textCSS} />
             </div>
 
             <div className="flex flex-wrap w-full">
@@ -143,13 +144,14 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
             </div>
 
             <div className="flex flex-wrap w-full">
-              <span>Summary</span>
+              <span>Review Summary</span>
               <textarea
                 value={fields.summary}
                 name="summary"
                 onChange={handleOnChange}
                 class={textCSS}
                 placeholder="Example: Best purchase ever!"
+                maxLength="60"
                 col="60"
                 rows="1"
               />
@@ -158,13 +160,15 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
             <div className="flex flex-wrap w-full">
               <span>Review</span>
               <textarea
-                value={fields.summary}
-                name="summary"
+                value={fields.body}
+                name="body"
                 onChange={handleOnChange}
                 class={textCSS}
                 placeholder="Example: Best purchase ever!"
+                maxLength={1000}
+                minLength={50}
               />
-              <span text-sm>0 count</span>
+              <span className="text-xs">{50 - fields.body.length} needed</span>
             </div>
 
             <div>

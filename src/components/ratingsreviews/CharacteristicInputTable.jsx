@@ -52,7 +52,7 @@ const CharInputTable = ({metaChars, cb}) => {
       return (
         <tbody className='odd:bg-slate-200 even:bg-slate-100 shrink'>
           <tr className='w-full mx-6 align-baseline'>
-            <td className="pr-2 align-middle justify-center">{el}</td>
+            <td className="pr-2 align-middle">{el}</td>
             {Array.from({length: 5}, (v, j) => {
               return (
                 <td className='pr-2 hover:bg-slate-300'>
@@ -61,7 +61,7 @@ const CharInputTable = ({metaChars, cb}) => {
                     key={'input' + el + j + 1}
                     type='radio'
                     name={metaChars[el].id}
-                    value={j}
+                    value={j + 1}
                     onChange={handleOnChange}
                   />
                   <p className="text-xs text-extralight font-thin break-all">{inputHints[el][j]}</p>
