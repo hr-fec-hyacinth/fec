@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+import api from '../../../server/api.js';
 
-const AForm = ({ setModalOpen }) => {
+
+const AForm = ({ setModalOpen, question }) => {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+
+  const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,10 +20,19 @@ const AForm = ({ setModalOpen }) => {
       alert('Answer is too long! Please enter a shorter answer.');
     } else if (nickname.length > 60) {
       alert('Nickname is too long! Please enter a shorter nickname.');
+    } else if (!mailformat.test(email)) {
+      alert('Email not in correct format! Please enter vaild email.');
     } else {
       //alert(`Form submitted successfully!\nAnswer: ${answer}\nNickname: ${nickname}\nEmail: ${email}`);
       // send to api
-      setModalOpen(false);
+      api.postAnswer(question.question_id, {body:answer, name:nickname, email:email})
+        .then(response => {
+          setModalOpen(false);
+          //TODO: Pop-up notifying the user the question has been received
+        }).catch(err => {
+          console.log('Error posting answer', err)
+          //TODO: Pop-up "Sorry unable to post your answer at this time. Please try again later"
+        })
     }
   };
 
@@ -52,7 +65,7 @@ const AForm = ({ setModalOpen }) => {
         <input
           className='border border-gray rounded p-1 ml-1'
           autoComplete='off'
-          type="email"
+          type="text"
           name="email"
           value={email}
           placeholder="example@email.com"

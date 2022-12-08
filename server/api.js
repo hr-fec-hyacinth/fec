@@ -94,4 +94,24 @@ api.putReportAnswer = (answer_id) => {
   return axios.put(URL + `qa/answers/${answer_id}/report`, {}, {headers: {Authorization: AUTHKEY}})
 }
 
+api.putReportQuestion = (question_id) => {
+  return axios.put(URL + `qa/questions/${question_id}/report`, {}, {headers: {Authorization: AUTHKEY}})
+}
+
+api.postQuestion = (product_id, formResponse) => {
+  formResponse['product_id'] = product_id;
+  const data = formResponse;
+  const config = {
+    headers: {Authorization: AUTHKEY}
+  }
+  return axios.post(URL + `qa/questions`, data, config)
+}
+
+api.postAnswer = (question_id, data) => {
+  const config = {
+    headers: {Authorization: AUTHKEY}
+  }
+  return axios.post(URL + `qa/questions/${question_id}/answers`, data, config)
+}
+
 export default api;

@@ -1,63 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../../server/api.js';
 import OneQnA from './OneQnA.jsx';
 import Modal from './Modal.jsx';
 import QForm from './QForm.jsx';
 import { BsPlusLg } from 'react-icons/bs';
 
-const QnAList = ({ product, search }) => {
+const QnAList = ({ product, search, questions }) => {
 
-  const [questions, setQuestions] = useState([]);
-  const [sendWarn, setSendWarn] = useState(false);
   const [displayQuestions, setDisplayQuestions] = useState([]);
   const [filterQuestions, setFilterQuestions] = useState([]);
   const [more, setMore] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const qHelpfulness = (a, b) => {
-    if (a.question_helpfulness > b.question_helpfulness)
-      return -1;
-    if (a.question_helpfulness < b.question_helpfulness)
-      return 1;
-    return 0;
-  }
-
-  const aHelpfulness = (a, b) => {
-    if (a.helpfulness > b.helpfulness)
-      return -1;
-    if (a.helpfulness < b.helpfulness)
-      return 1;
-    return 0;
-  }
-
-  const sortAnswers = (questions) => {
-    return questions.map(q => {
-      q.answers = Object.values(q.answers);
-      q.answers.sort(aHelpfulness);
-      return q;
-    })
-  }
-
   const filterFunc = q => q.question_body.toLowerCase().includes(search.toLowerCase());
-
-  useEffect(() => {
-    if (product.id)
-      api.getQuestions(product.id)
-        .then(response => response.data.results.sort(qHelpfulness))
-        .then(sortedResponse => sortAnswers(sortedResponse))
-        .then(sortedResponse => setQuestions(sortedResponse))
-        .then()
-        .catch(err => console.log('Error in QnAList getQuestions api call:', err));
-    else if (sendWarn)
-      console.warn("Product ID not defined, questions not requested");
-    else
-      setSendWarn(true);
-  }, [product]);
-
-  useEffect(() => {
-    if(questions.length >= 5)
-      console.warn('May need another page of questions for product ', product)
-  }, [questions]);
 
   //when questions change add first two questions to display questions
   useEffect(() => {
@@ -118,7 +72,7 @@ const QnAList = ({ product, search }) => {
       </div>
       {modalOpen &&
         <Modal setModalOpen={setModalOpen}>
-          <QForm setModalOpen={setModalOpen}/>
+          <QForm setModalOpen={setModalOpen} product={product}/>
         </Modal>
       }
     </>

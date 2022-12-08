@@ -15,7 +15,7 @@ const App = () => {
   const [metaReview, updateMetaReview] = useState({});
 
   useEffect(() => {
-    api.getProduct(37314)
+    api.getProduct(37312)
       .then(product => updateProduct(product))
       .then(() => api.getStyles(37314))
       .then(styles => sortDefault(styles.results))
