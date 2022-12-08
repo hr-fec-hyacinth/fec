@@ -18,7 +18,14 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, metaReview, outf
   const removeFromOutfitList = (e) => {
     e.preventDefault();
     console.log(e.currentTarget.getAttribute('productid'))
-    console.log(outfit.slice(1))
+    setOutfit(outfit.filter((item, index) => {
+      if (index === 0) {
+        return item;
+      } else if (JSON.stringify(item[1].id) !== e.currentTarget.getAttribute('productid')) {
+        return item;
+      }
+      return false;
+    }))
   }
 
   return (
