@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../../server/api.js';
 import OneQnA from './OneQnA.jsx';
-import QModal from './QModal.jsx';
+import Modal from './Modal.jsx';
+import QForm from './QForm.jsx';
 import { BsPlusLg } from 'react-icons/bs';
 
 const QnAList = ({ product }) => {
@@ -10,7 +11,7 @@ const QnAList = ({ product }) => {
   const [sendWarn, setSendWarn] = useState(false);
   const [displayQuestions, setDisplayQuestions] = useState([]);
   const [more, setMore] = useState(false);
-  const [qModalOpen, setQModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const qHelpfulness = (a, b) => {
     if (a.question_helpfulness > b.question_helpfulness)
@@ -86,7 +87,7 @@ const QnAList = ({ product }) => {
   }
 
   const handleAddQClick = () => {
-    setQModalOpen(true);
+    setModalOpen(true);
   }
 
   return (
@@ -103,7 +104,11 @@ const QnAList = ({ product }) => {
           <BsPlusLg className='ml-1'/>
         </div>
       </div>
-      {qModalOpen && <QModal setQModalOpen={setQModalOpen}/>}
+      {modalOpen &&
+        <Modal setModalOpen={setModalOpen}>
+          <QForm />
+        </Modal>
+      }
     </>
   )
 }

@@ -60,9 +60,9 @@ const Cart = ({style}) => {
 
   return (
     <form>
-    <div className='flex justify-evenly'>
+    <div className='flex sm:flex-row flex-col justify-evenly'>
       {skus.length === 0 ? <select className='w-5/12 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
-      <select value={JSON.stringify(sku)} className='w-5/12 border-2' onChange={e => {
+      <select value={JSON.stringify(sku)} className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center' onChange={e => {
         updateError('');
         selectSku(e.target.value);
       }}>
@@ -72,8 +72,8 @@ const Cart = ({style}) => {
        })}
       </select>
       }
-      {allQuantities.length === 0 ? <select className='w-5/12 border-2' disabled defaultValue='-'><option value='-'>-</option></select> :
-      <select defaultValue='1' className='w-5/12 border-2' onChange={e => {
+      {allQuantities.length === 0 ? <select className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
+      <select defaultValue='1' className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' onChange={e => {
         updateQuantity(Number(e.target.value));
       }}>
         {allQuantities.map(quant => {
@@ -81,9 +81,9 @@ const Cart = ({style}) => {
         })}
       </select>}
     </div>
-    <div className='flex justify-end text-center'>
-      <span className='text-red-500 mt-5 mr-1'>{error}</span>
-      <button className='border-2 mr-4 mt-4 p-1' onClick={e => {
+    <div className='flex sm:flex-row flex-col-reverse justify-center sm:justify-end text-center'>
+      <span className='text-red-500 mt-5 mr-1 ml-2'>{error}</span>
+      <button className='sm:rounded rounded-2xl border-2 sm:mr-4 mt-4 sm:p-1 p-4 sm:w-fit w-6/12 mx-auto' onClick={e => {
         e.preventDefault();
         checkout();
       }}>Add To Cart</button>

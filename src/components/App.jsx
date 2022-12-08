@@ -35,7 +35,7 @@ const App = () => {
 
   return (
     <div >
-      <div className="w-8/12 justify-center mx-auto min-w-900">
+      <div className="w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
         <Overview product={product} styles={styles} metaReview={metaReview}/>
         <RelatedCompare product={product} switchProduct={switchProduct} styles={styles}/>
