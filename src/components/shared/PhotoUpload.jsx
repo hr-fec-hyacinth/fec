@@ -4,22 +4,17 @@ import { PHOTOAUTHKEY } from '../../../server/config.js';
 import { cloudinaryCloudName } from '../../../server/config.js';
 
 const PhotoUpload = ({callback}) => {
-  //States:
-    //selected files
-    //picked files
   const [selectedFile, setSelectedFile] = useState('');
   const [photosSrcList, setPhotosSrcList] = useState([
     'http://res.cloudinary.com/dq6rqplja/image/upload/v1670526146/Home/FECImages/x2lz4uzsypp3djwtuzdg.png',
     'http://res.cloudinary.com/dq6rqplja/image/upload/v1670526137/Home/FECImages/nkmtelenrimckuwey8mr.png']
   );
 
-
-  const myCloudName = cloudinaryCloudName;
   const uploadPreset = 'wjuxohsi'
 
   var myWidget = window.cloudinary.createUploadWidget(
     {
-      cloudName: myCloudName,
+      cloudName: cloudinaryCloudName,
       uploadPreset: uploadPreset, // Must set or it will not work (create in)
       sources: [ "local", "url"], // restrict the upload sources to URL and local files
       folder: "Home/FECImages", //upload files to the specified folder
@@ -35,7 +30,7 @@ const PhotoUpload = ({callback}) => {
     },
     (error, result) => {
       if (!error && result && result.event === "success") {
-        console.log("Done! Here is the image info: ", result.info);
+        // console.log("Done! Here is the image info: ", result.info);
         setPhotosSrcList([...photosSrcList, result.info.url])
         document
           .getElementById("uploadedimage")
@@ -44,7 +39,6 @@ const PhotoUpload = ({callback}) => {
           callback(result.info.url);
         }
       }
-
     }
   );
 
@@ -56,14 +50,12 @@ const PhotoUpload = ({callback}) => {
   }
 
   //callback to update Parent Component (with properties, if provided);
-   //functionality defined in parent component
-   // should return the response of the upload
 
   //onChangeHandler ->
     // saves file
 
   //handlesubmission
-    // once we have submitted, we post API request,=
+    // once we have submitted, we post API request
 
   return (
     <div className="flex flex-col">
