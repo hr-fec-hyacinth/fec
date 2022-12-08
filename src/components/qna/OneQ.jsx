@@ -35,7 +35,7 @@ const OneQ = ({ questionData }) => {
         </div>
         {modalOpen &&
           <Modal setModalOpen={setModalOpen}>
-            <AForm />
+            <AForm setModalOpen={setModalOpen}/>
           </Modal>
         }
       </>

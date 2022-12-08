@@ -5,11 +5,12 @@ import Modal from './Modal.jsx';
 import QForm from './QForm.jsx';
 import { BsPlusLg } from 'react-icons/bs';
 
-const QnAList = ({ product }) => {
+const QnAList = ({ product, search }) => {
 
   const [questions, setQuestions] = useState([]);
   const [sendWarn, setSendWarn] = useState(false);
   const [displayQuestions, setDisplayQuestions] = useState([]);
+  const [filterQuestions, setFilterQuestions] = useState([]);
   const [more, setMore] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -37,6 +38,8 @@ const QnAList = ({ product }) => {
     })
   }
 
+  const filterFunc = q => q.question_body.toLowerCase().includes(search.toLowerCase());
+
   useEffect(() => {
     if (product.id)
       api.getQuestions(product.id)
@@ -58,29 +61,38 @@ const QnAList = ({ product }) => {
 
   //when questions change add first two questions to display questions
   useEffect(() => {
-    if (questions.length <= 2)
-      setDisplayQuestions([...questions])
-    else if (questions.length > 2)
-      setDisplayQuestions([questions[0], questions[1]])
-  }, [questions])
+    if (filterQuestions.length <= 2)
+      setDisplayQuestions([...filterQuestions])
+    else if (filterQuestions.length > 2)
+      setDisplayQuestions([filterQuestions[0], filterQuestions[1]])
+  }, [filterQuestions])
 
   useEffect(() => {
-    if (questions.length > 2) {
+    if (filterQuestions.length > 2) {
       setMore(true)
+    } else {
+      setMore(false)
     }
-  }, [questions])
+  }, [filterQuestions])
+
+  useEffect(() => {
+    if (search.length < 3)
+      setFilterQuestions(questions)
+    else
+      setFilterQuestions(questions.filter(filterFunc))
+  },[questions, search])
 
   const handleMoreClick = () => {
     const i = displayQuestions.length;
-    const dif = questions.length - displayQuestions.length;
+    const dif = filterQuestions.length - displayQuestions.length;
     if(dif === 1) {
-      setDisplayQuestions(displayQuestions.concat([questions[i]]));
+      setDisplayQuestions(displayQuestions.concat([filterQuestions[i]]));
       setMore(false);
     } else if (dif === 2) {
-      setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
+      setDisplayQuestions(displayQuestions.concat([filterQuestions[i], filterQuestions[i+1]]));
       setMore(false);
     } else if (dif > 2) {
-      setDisplayQuestions(displayQuestions.concat([questions[i], questions[i+1]]));
+      setDisplayQuestions(displayQuestions.concat([filterQuestions[i], filterQuestions[i+1]]));
     } else {
       console.warn('This should not be hit, you need to handle me.')
     }
@@ -92,7 +104,7 @@ const QnAList = ({ product }) => {
 
   return (
     <>
-      {/* Give the follow div a max height of screen - searchbar - buttons */}
+      {/* Give the following div a max height of screen - searchbar - buttons */}
       <div>
         {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index}/>)}
       </div>
@@ -106,7 +118,7 @@ const QnAList = ({ product }) => {
       </div>
       {modalOpen &&
         <Modal setModalOpen={setModalOpen}>
-          <QForm />
+          <QForm setModalOpen={setModalOpen}/>
         </Modal>
       }
     </>
