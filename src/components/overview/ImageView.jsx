@@ -52,21 +52,21 @@ const ImageView = ({ style, updateStretch }) => {
   };
 
   return (
-    <div className='min-h-0 w-full h-full'>
-      <div style={styling} className='block min-h-0 h-screen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
+    <div className='min-h-6/10 w-full h-full'>
+      <div style={styling} className='block sm:min-h-0 min-h-halfScreen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
 
-        <AiOutlineExpand className='hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500' onClick={updateStretch}/>
+        <AiOutlineExpand data-testid="outline-expand" className='hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500' onClick={updateStretch}/>
 
         <ImageCarousel imageIndex={imageIndex} updateImageIndex={updateImageIndex} imageList={imageList} updateStyling={updateStyling} />
 
         {imageIndex !== 0 && <div className='z-10 sm:hidden min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={previous}></div>}
-        {imageIndex !== 0 && <BsFillArrowLeftCircleFill className='hidden sm:block border-white border-2 text-blue-400 bg-white rounded-full top-1/2 left-4 sm:left-24 absolute z-20 text-2xl hover:text-blue-600' onClick={previous} />}
+        {imageIndex !== 0 && <BsFillArrowLeftCircleFill data-testid="image-left" className='hidden sm:block border-white border-2 text-blue-400 bg-white rounded-full top-1/2 left-4 sm:left-24 absolute z-20 text-2xl hover:text-blue-600' onClick={previous} />}
 
         {imageIndex !== imageList.length - 1 && <div className='z-10 sm:hidden right-0 min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={next}></div>}
-        {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill className='hidden sm:block border-white border-2 text-blue-400 top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-blue-600' onClick={next} />}
+        {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill data-testid="image-right" className='hidden sm:block border-white border-2 text-blue-400 top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-blue-600' onClick={next} />}
 
         {style &&
-          <div style={styling} className='min-w-full min-h-max h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30 ease-linear duration-300 cursor-zoom-in' onClick={e => { updateExpand(true); }}>
+          <div style={styling} data-testid="image" className='min-w-full min-h-6/10 h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30 ease-linear duration-300 cursor-zoom-in' onClick={e => { updateExpand(true); }}>
           </div>
         }
 

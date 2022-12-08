@@ -671,6 +671,9 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      '3/4': '75vh',
+      '6/10': '60vh',
+      '1/10': '10vh'
     },
     minWidth: {
       0: '0px',
