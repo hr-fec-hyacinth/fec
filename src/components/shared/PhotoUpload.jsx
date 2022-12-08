@@ -10,7 +10,7 @@ const PhotoUpload = ({callback}) => {
     'http://res.cloudinary.com/dq6rqplja/image/upload/v1670526137/Home/FECImages/nkmtelenrimckuwey8mr.png']
   );
 
-  const uploadPreset = 'wjuxohsi'
+  const uploadPreset = 'wjuxohsi';
 
   var myWidget = window.cloudinary.createUploadWidget(
     {
