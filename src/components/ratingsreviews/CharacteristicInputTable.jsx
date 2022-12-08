@@ -26,7 +26,6 @@ const CharInputTable = ({metaChars, cb}) => {
     cb(e, e.target.name)
   }
 
-  // present an object that changes based on
   const inputHints = {
     Size: ['A size too small', '1/2 size too small', 'Perfect', '½ a size too big', 'A size too wide'],
     Width: ['Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],

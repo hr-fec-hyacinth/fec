@@ -119,15 +119,15 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
 
 
   return (
-      <div className="flex z-30 flex-col h-full items-center space-x-2 justify-center  ">
+      <div className="fixed flex z-30 flex-col items-center space-x-2 justify-center bg-black/30 w-full h-full left-0 top-0">
         <p>Leave A Review Below:</p>
         <div className="flex-initial w-6/12 bg-slate-100 py-3 my-4 rounded-xl
-                        shadow-md relative">
+                        shadow-md relative overflow-auto max-h-full">
           <IoIosCloseCircle className="text-emerald-700 text-2xl hover:text-emerald-600
                                        absolute top-3 right-3"
                             onClick={onFormSubmit}/>
 
-          <form className="space-y-3 my-5 mx-4">
+          <form className="space-y-2 my-5 mx-4 overflow-auto">
             <div>
               <StarsInput selectedRating={fields.rating} cb={handleOnChange}/>
             </div>

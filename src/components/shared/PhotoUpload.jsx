@@ -64,18 +64,10 @@ const PhotoUpload = ({callback}) => {
 
   //handlesubmission
     // once we have submitted, we post API request,=
-  console.log('I want to see photos sorce list', photosSrcList)
-  console.log('what is my widget', myWidget);
 
   return (
     <div className="flex flex-col">
       {myWidget && <>
-
-        {/* <label class="block">
-          <span class="sr-only">Upload your Photos</span>
-          <input type="file" class={buttonCSS}
-            onClick={handleUploadOnClick}/>
-        </label> */}
 
         <button id='upload_widget' className="block w-full text-sm text-slate-500
           bg-emerald-50 hover:file:bg-100 cloudinary-button"
