@@ -21,7 +21,6 @@ const QForm = ({ setModalOpen }) => {
       //alert(`Form submitted successfully!\nQuestion: ${question}\nNickname: ${nickname}\nEmail: ${email}`);
       setModalOpen(false);
       //TODO: API call
-
     }
   };
 

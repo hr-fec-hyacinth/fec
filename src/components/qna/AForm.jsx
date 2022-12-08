@@ -21,8 +21,6 @@ const AForm = ({ setModalOpen }) => {
       // send to api
       setModalOpen(false);
     }
-
-
   };
 
   return (
