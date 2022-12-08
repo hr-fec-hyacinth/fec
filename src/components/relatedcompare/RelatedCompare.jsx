@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 import axios from 'axios';
-import RelatedProducts from './RelatedProducts.jsx'
-import YourOutfit from './YourOutfit.jsx'
-import CompareModal from './CompareModal.jsx'
+import RelatedProducts from './RelatedProducts.jsx';
+import YourOutfit from './YourOutfit.jsx';
+import CompareModal from './CompareModal.jsx';
 
-const RelatedCompare = ({ product, switchProduct }) => {
+const RelatedCompare = ({ product, switchProduct, styles, metaReview }) => {
   const [related, setRelated] = useState([]);
   const [sliderInfo, setSliderInfo] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -40,16 +40,18 @@ const RelatedCompare = ({ product, switchProduct }) => {
   }, [related]);
 
   return (
-    <div className=''>
-      <br/>
-      {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
-      <h4 className='ml-20'>Related Products</h4>
-      <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
-      <br/>
-      <h4 className='ml-20'>Your Outfit</h4>
-      <YourOutfit related={related} />
-      <br/>
-    </div>
+    <>
+      <div className='my-10' onClick={e => api.postInteraction(e, 'Related')}>
+        <br/>
+        {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
+        <h4 className='ml-28'>RELATED PRODUCTS</h4>
+        <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
+        <br/>
+        <h4 className='ml-28'>YOUR OUTFIT</h4>
+        <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
+        <br/>
+      </div>
+    </>
   )
 }
 

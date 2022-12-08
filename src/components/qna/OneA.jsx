@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../../../server/api.js';
 
 const OneA = ({ answer }) => {
   const date = new Date(answer.date);
@@ -14,10 +15,26 @@ const OneA = ({ answer }) => {
 
   const handleYesClick = () => {
     setHelpfulness(answer.helpfulness+1)
+    api.putHelpfulAnswer(answer.id)
+    .then(response => {
+      if (response.status !== 204) {
+        console.warn('Response code is not 204')
+        console.log(response)
+      }
+    })
+    .catch(err => console.log('Error in OneA putHelpfulAnswer api call:', err));
   }
 
   const handleReportClick = () => {
     setReported(true);
+    api.putReportAnswer(answer.id)
+    .then(response => {
+      if (response.status !== 204) {
+        console.warn('Response code is not 204')
+        console.log(response)
+      }
+    })
+    .catch(err => console.log('Error in OneA putReportAnswer api call:', err));
   }
 
   if(reported) {

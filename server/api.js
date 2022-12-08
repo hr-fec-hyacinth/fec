@@ -1,5 +1,5 @@
 import axios from 'axios';
-import AUTHKEY from './config.js';
+import { AUTHKEY } from './config.js';
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
 
@@ -14,17 +14,17 @@ api.getStyles = (productId) => {
     .then(res => res.data);
 };
 
-api.getQuestions = (product_id, page, count) => {
+api.getQuestions = (product_id) => {
 
   return axios.get(URL + `qa/questions`, {
     headers: {Authorization: AUTHKEY},
     params: {
       product_id: product_id,
-      // page: page,
-      // count: count
+      page: 1,
+      count: 100
     }
   })
-}
+};
 
 api.getMetaReviews = (productId) => {
   return axios.get(URL + 'reviews/meta', {headers: {Authorization: AUTHKEY}, params: {product_id: productId}})
@@ -80,6 +80,38 @@ api.postInteraction = (e, module) => {
   };
 
   return axios.post(URL + 'interactions', params, {headers: {Authorization: AUTHKEY}})
+}
+
+api.putHelpfulQuestion = (question_id) => {
+  return axios.put(URL + `qa/questions/${question_id}/helpful`, {}, {headers: {Authorization: AUTHKEY}})
+};
+
+api.putHelpfulAnswer = (answer_id) => {
+  return axios.put(URL + `qa/answers/${answer_id}/helpful`, {}, {headers: {Authorization: AUTHKEY}})
+};
+
+api.putReportAnswer = (answer_id) => {
+  return axios.put(URL + `qa/answers/${answer_id}/report`, {}, {headers: {Authorization: AUTHKEY}})
+}
+
+api.putReportQuestion = (question_id) => {
+  return axios.put(URL + `qa/questions/${question_id}/report`, {}, {headers: {Authorization: AUTHKEY}})
+}
+
+api.postQuestion = (product_id, formResponse) => {
+  formResponse['product_id'] = product_id;
+  const data = formResponse;
+  const config = {
+    headers: {Authorization: AUTHKEY}
+  }
+  return axios.post(URL + `qa/questions`, data, config)
+}
+
+api.postAnswer = (question_id, data) => {
+  const config = {
+    headers: {Authorization: AUTHKEY}
+  }
+  return axios.post(URL + `qa/questions/${question_id}/answers`, data, config)
 }
 
 export default api;
