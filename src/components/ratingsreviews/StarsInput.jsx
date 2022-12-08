@@ -26,11 +26,11 @@ const StarsInput = ({selectedRating, cb}) => {
   const [hover, setHover] = useState(false);
   const [starsToRender, setStarsToRender] = useState(0);
 
-  useEffect(() => {
-    if (!hover) {
-      setStarsToRender(selectedRating);
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!hover) {
+  //     setStarsToRender(selectedRating);
+  //   }
+  // }, [])
 
   const radioButtonCSS = {
     display: 'none',
@@ -99,6 +99,7 @@ const StarsInput = ({selectedRating, cb}) => {
               setHover(false)
               setStarsToRender(selectedRating)
             }}
+            key={'starInputlabel'+i}
             >
             <input
               type="radio"

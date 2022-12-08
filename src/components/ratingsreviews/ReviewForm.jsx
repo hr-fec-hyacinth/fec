@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import StarsInput from './StarsInput.jsx';
 import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
+import PhotoUpload from '../shared/PhotoUpload.jsx';
 
 const ReviewForm = ({product, meta, onFormSubmit}) => {
   // store form fields as controlled states
@@ -24,6 +25,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   const [characteristics, setCharacteristics] = useState({});
   const [hasPosted, setHasPosted] = useState(false)
 
+  console.log('somethign in review form is failing');
 
   // CSS Styling <---------------------------------------------------------------------------------------------------->
   // CSS Styling for table specifically to stretch the whole row
@@ -38,18 +40,18 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
 
   //------------------------------------------------------------------------------------------->
 
-  //function to calculate remaining characters and display the characters
-  const bodyChars = (reviewBodysLengthAsNumber) => {
-    // return two different divs depending whether the number is greater or less than 50
-  }
+  // //function to calculate remaining characters and display the characters
+  // const bodyChars = (reviewBodysLengthAsNumber) => {
+  //   // return two different divs depending whether the number is greater or less than 50
+  // }
 
-  // this is a function that runs on every update and handles validation of the form
-  const handleValidation = (inputType, value) => {
-  }
+  // // this is a function that runs on every update and handles validation of the form
+  // const handleValidation = (inputType, value) => {
+  // }
 
-  // this is going to be the callback
-  const postToDB = () => {
-  }
+  // // this is going to be the callback
+  // const postToDB = () => {
+  // }
 
   // handles onChange Functionality for everything before
   const handleOnChange = (e, name) => {
@@ -59,20 +61,20 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
       ...fields,
       [e.target.name]: e.target.value
     })
-    console.log(fields)
-    console.log(typeof fields.recommend)
+    // console.log(fields)
+    // console.log(typeof fields.recommend)
   }
 
   // add validation handler
   const handleCharsOnChange = (e, name) => {
     console.log('inside handleCharsOnChange, ',e.target.name, e.target.value)
-    setFields({
-      ...fields,
-      characteristics: {
-        ...fields.characteristics,
-        [e.target.name]: e.target.value
-      }
-    })
+      setFields({
+        ...fields,
+        characteristics: {
+          ...fields.characteristics,
+          [e.target.name]: e.target.value
+        }
+      })
   }
 
 
@@ -133,7 +135,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                 name="email"
                 onChange={handleOnChange}
                 placeholder="Example: jackson11@email.com"
-                class={textCSS}/>
+                className={textCSS}/>
               <span className="text-xs">For authentication reasons, you will not be emailed</span>
             </div>
 
@@ -149,7 +151,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                 value={fields.summary}
                 name="summary"
                 onChange={handleOnChange}
-                class={textCSS}
+                className={textCSS}
                 placeholder="Example: Best purchase ever!"
                 maxLength="60"
                 col="60"
@@ -163,7 +165,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                 value={fields.body}
                 name="body"
                 onChange={handleOnChange}
-                class={textCSS}
+                className={textCSS}
                 placeholder="Example: Best purchase ever!"
                 maxLength={1000}
                 minLength={50}
@@ -171,11 +173,11 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
               <span className="text-xs">{50 - fields.body.length} needed</span>
             </div>
 
-            <div>
+            {/* <div>
               Photo Upload
-              <label class="block">
-                <span class="sr-only">Upload your Photos</span>
-                <input type="file" class="block w-full text-sm text-slate-500
+              <label className="block">
+                <span className="sr-only">Upload your Photos</span>
+                <input type="file" className="block w-full text-sm text-slate-500
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
                   file:text-sm file:font-semibold
@@ -183,14 +185,17 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                   hover:file:bg-emerald-100
                 "/>
               </label>
+            </div> */}
+
+            <div><PhotoUpload /></div>
+
+            <div>
+              <button name="submitForm" onClick={onFormSubmit}
+                className="my-3 bg-emerald-50 hover:file:bg-emerald-100
+                block w-full text-sm text-slate-500">
+                Submit
+              </button>
             </div>
-
-
-            <button name="submitForm" onClick={onFormSubmit}
-              className="block w-full text-sm text-slate-500 bg-emerald-50 rounded-2xl p-3
-              hover:bg-emerald-700 hover:text-slate-100">
-              Submit
-            </button>
 
 
           </form>
