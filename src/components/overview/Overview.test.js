@@ -1,9 +1,13 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, within } from '@testing-library/react';
 import Overview from './Overview.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import Cart from './Cart.jsx';
 import Styles from './Styles.jsx';
+import mediaQuery from "css-mediaquery";
+import Details from './Details.jsx';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
 let product = {
   "id": 11,
@@ -26,7 +30,7 @@ let style = {
           "url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
       },
       {
-          "thumbnail_url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+          "thumbnail_url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80",
           "url": "https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80"
       },
       {
@@ -445,61 +449,365 @@ let styles = {
   ]
 };
 
-it('Renders the product name', () => {
-  const name = 'Air Minis 250';
-  const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
-  getByText(name);
-})
+describe('Details Section Render', () => {
 
-it('Renders the product description', () => {
-  const description = 'This optimized air cushion pocket reduces impact but keeps a perfect balance underfoot.';
-  const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
-  getByText(description);
+    it('Renders the product description', () => {
+        const description = 'This optimized air cushion pocket reduces impact but keeps a perfect balance underfoot.';
+        const { getByText } = render(<Details product={product}/>);
+        getByText(description);
+      });
+
+      it('Renders the product slogan', () => {
+        const description = 'Full court support';
+        const { getByText } = render(<Details product={product}/>);
+        getByText(description);
+      });
 });
 
-it('Displays original price when there is not a sale price', () => {
-  const price = '$140.00';
-  const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
-  getByText(price);
+describe('Product Overview Renders Correct Information', () => {
+
+    it('Renders the product name', () => {
+        const name = 'Air Minis 250';
+        const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
+        getByText(name);
+      })
+
+      it('Displays original price when there is not a sale price', () => {
+        const price = '$140.00';
+        const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
+        getByText(price);
+      })
+
+      it('Displays sale price and original price when on sale', () => {
+        const price = '$140.00';
+        const sale_price = '$100';
+        style.sale_price = '100';
+        const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
+        getByText(price);
+        getByText(sale_price);
+      })
+
+      it('Displays product category', () => {
+        const category = 'Basketball Shoes';
+        const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
+        getByText(category);
+      })
+
+      it('Display correct number of ratings', () => {
+        const category = 'Read all 5 reviews';
+        const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
+        getByText(category);
+      })
+
 })
 
-it('Displays sale price and original price when on sale', () => {
-  const price = '$140.00';
-  const sale_price = '$100';
-  style.sale_price = '100';
-  const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
-  getByText(price);
-  getByText(sale_price);
-});
+describe('Add to Cart Render', () => {
 
-it('Displays product category', () => {
-  const category = 'Basketball Shoes';
-  const { getByText } = render(<ProductInfo product={product} style={style} metaReview={meta}/>);
-  getByText(category);
+    it('Displays error if size is not selected', async () => {
+        const { getByText } = render(<Cart style={style} />)
+        fireEvent.click(screen.getByText('Add To Cart'))
+        getByText('Please Select Size');
+      })
+
+    it('Size Selector lists all available sizes', async () => {
+        const { getByTestId, getAllByTestId } = render(<Cart style={style} />)
+        let options = getAllByTestId('size-option')
+        expect(options.length).toBe(Object.keys(styles.results[0].skus).length)
+      })
+
+    it('Quanity Select does not have options when size is not selected', async () => {
+        const { getByTestId, getAllByTestId, queryByTestId } = render(<Cart style={style} />)
+        let options = queryByTestId('quant-option')
+        expect(options).toBe(null)
+      })
+
+
+    // it('Size Selector lists all available sizes', async () => {
+    //     const { getByTestId, getAllByTestId } = render(<Cart style={style} />)
+    //     const user = userEvent.setup()
+    //     //user.selectOptions(getByTestId('size-select'), "{\"id\":\"1281032\",\"size\":\"XS\",\"quantity\":8}")
+    //     //let options = getAllByTestId('size-option')
+    //     //expect(options.length).toBe(styles.results[0].skus['1281032'].quantity)
+    //     let sizeSelect = screen.getByTestId('size-select')
+    //     userEvent.selectOptions(
+    //         // Find the select element, like a real user would.
+    //         sizeSelect,
+    //         // Find and select the Ireland option, like a real user would.
+    //         //screen.getAllByTestId('size-option')[0],
+    //         "{\"id\":\"1281032\",\"size\":\"XS\",\"quantity\":8}"
+    //     )
+    //       //userEvent.selectOptions(select, ["second"], { bubbles: true });
+    //       //expect(screen.getAllByTestId("size-option")[0].selected).toBe(true)
+    //       expect(sizeSelect.value).toBe('45')
+    //   })
+
 })
 
-test('Displays error if size is not selected', async () => {
-  const { getByText } = render(<Cart style={style} />)
-  fireEvent.click(screen.getByText('Add To Cart'))
-  getByText('Please Select Size');
+describe('Style Select Render', () => {
+
+    it('Clicking a new style changes the style name', async () => {
+        let styleIndex = 0;
+        let changeStylesIndex = (index) => {
+            styleIndex = index;
+        }
+        const { rerender, getByText } = render(<Styles styles={styles.results} styleIndex={styleIndex} changeStyleIndex={changeStylesIndex} />)
+        getByText(/Forest Green/)
+        const icons = await screen.getAllByAltText('style')
+        fireEvent.click(icons[1])
+        rerender(<Styles styles={styles.results} styleIndex={styleIndex} changeStyleIndex={changeStylesIndex} />)
+        getByText(/Desert Brown & Tan/)
+    })
+
+    it('Clicking on a style will adjust the style index', async () => {
+        let styleIndex = 0;
+        let changeStylesIndex = (index) => {
+            styleIndex = index;
+        }
+        const { rerender, getByText } = render(<Styles styles={styles.results} styleIndex={styleIndex} changeStyleIndex={changeStylesIndex} />)
+        const icons = await screen.getAllByAltText('style')
+        expect(styleIndex).toBe(0);
+        fireEvent.click(icons[1])
+        expect(styleIndex).toBe(1);
+        fireEvent.click(icons[3])
+        expect(styleIndex).toBe(3);
+    })
+
+    it('Displays the style name', async () => {
+        const { getByText } = render(<Styles styles={styles.results} styleIndex={0} changeStylesIndex={() => {}} />)
+        getByText(/Forest Green/)
+    })
+
+    it('Loads Accurate Number of Style Selectors', async () => {
+        render(<Styles styles={styles.results} stylesIndex={0} changeStylesIndex={() => {}} />)
+        const items = await screen.getAllByAltText('style', { hidden: true })
+        expect(items).toHaveLength(styles.results.length)
+      })
+
+    it('Clicking on a different style will update the thumbnail list', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const styleList = await screen.getAllByAltText('style')
+        let photo = {
+            "thumbnail_url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+            "url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        };
+        styles.results[1].photos.pop();
+        styles.results[1].photos.pop();
+        // Second style now has four images
+        const loadThumbnails = await screen.getAllByAltText('view_thumbnail')
+        expect(loadThumbnails).toHaveLength(styles.results[0].photos.length);
+        fireEvent.click(styleList[1]);
+        const changedThumbnails = await screen.getAllByAltText('view_thumbnail')
+        expect(changedThumbnails).toHaveLength(styles.results[1].photos.length);
+    })
+
 })
 
-test('Loads Accurate Number of Style Selectors', async () => {
-  render(<Overview product={product} styles={styles.results} metaReview={meta} />)
-  const items = await screen.getAllByAltText('style')
-  expect(items).toHaveLength(6)
-})
 
-test('Loads Accurate Number of View Thumbnails', async () => {
-  render(<Overview product={product} styles={styles.results} metaReview={meta} />)
-  const items = await screen.getAllByAltText('view_thumbnail')
-  expect(items).toHaveLength(6)
-})
+describe('Image View Render', () => {
 
-test('Clicking on a style thumbnail switches the style', async () => {
-  const { getByText } = render(<Overview product={product} styles={styles.results} metaReview={meta} />)
-  const items = await screen.getAllByAltText('style')
-  getByText('Style > Forest Green & Black')
-  fireEvent.click(items[1])
-  getByText('Style > Desert Brown & Tan')
+    it('Loads Accurate Number of View Thumbnails', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const items = await screen.getAllByAltText('view_thumbnail')
+        expect(items).toHaveLength(6)
+      })
+
+
+    it('Loads Only 7 thumbnails if there are more than 7', async () => {
+        let photo = {
+            "thumbnail_url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
+            "url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
+        };
+        styles.results[0].photos.push(photo);
+        styles.results[0].photos.push(photo);
+        // 8 Photos Currently Available
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const items = await screen.getAllByAltText('view_thumbnail')
+        expect(items).toHaveLength(7)
+      })
+
+      // Changing a style will keep the image index
+      it('Clicking on a style will keep the image index', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const styleList = await screen.getAllByAltText('style')
+        let image = await screen.getByTestId('image')
+        let right = await screen.getByTestId('image-right')
+        fireEvent.click(right)
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80)`)
+        fireEvent.click(styleList[1])
+        image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1560567546-4c6dbc16877b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
+      })
+
+      it('The down arrow in the carousel will shift the images by one', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let items = await screen.getAllByAltText('view_thumbnail')
+        const down = await screen.getByTestId('image-down')
+        expect(items[0].src).toBe('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80');
+        fireEvent.click(down)
+        items = await screen.getAllByAltText('view_thumbnail')
+        expect(items[0].src).toBe('https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80');
+      })
+
+      it('The up arrow in the carousel will shift the images by one', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const down = await screen.getByTestId('image-down')
+        fireEvent.click(down)
+        let items = await screen.getAllByAltText('view_thumbnail')
+        expect(items[0].src).toBe('https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80');
+        const up = await screen.getByTestId('image-up')
+        fireEvent.click(up)
+        items = await screen.getAllByAltText('view_thumbnail')
+        expect(items[0].src).toBe('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80');
+      })
+
+      it('Up Arrow Does not show if on the first image', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const up = await screen.queryByTestId('image-up')
+        expect(up).toBe(null);
+      })
+
+      it('Down Arrow Does not show if last image shows', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let down = await screen.getByTestId('image-down')
+        fireEvent.click(down)
+        down = await screen.queryByTestId('image-down')
+        expect(down).toBe(null);
+      })
+
+      it('Left Arrow Does not show if on the first image', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const left = await screen.queryByTestId('image-left')
+        expect(left).toBe(null);
+      })
+
+      it('Right arrow does not show on last image', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let right = await screen.getByTestId('image-right')
+        fireEvent.click(right)
+        fireEvent.click(right)
+        fireEvent.click(right)
+        fireEvent.click(right)
+        fireEvent.click(right)
+        fireEvent.click(right)
+        fireEvent.click(right)
+        right = await screen.queryByTestId('image-right')
+        expect(right).toBe(null);
+      })
+
+      it('Clicking on a thumbnail will change the image', async () => {
+        // 8 Photos Currently Available
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        const items = await screen.getAllByAltText('view_thumbnail')
+        let image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
+        fireEvent.click(items[1])
+        image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80)`)
+      })
+
+      it('Clicking the right arrow will change the image', async () => {
+        // 8 Photos Currently Available
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
+        let right = await screen.getByTestId('image-right')
+        fireEvent.click(right)
+        image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80)`)
+      })
+
+      it('Clicking the left arrow will change the image', async () => {
+        // 8 Photos Currently Available
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        let right = await screen.getByTestId('image-right')
+        fireEvent.click(right)
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80)`)
+        let left = await screen.getByTestId('image-left')
+        fireEvent.click(left);
+        image = await screen.getByTestId('image')
+        expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
+      })
+
+      it('Clicking the right arrow in the expanded view will shift the image by one', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let expanded = await screen.getByTestId('expanded-image')
+        expect(expanded.src).toBe(`https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80`)
+        let right = await screen.getByTestId('expanded-right')
+        fireEvent.click(right)
+        expanded = await screen.getByTestId('expanded-image')
+        expect(expanded.src).toBe(`https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80`)
+      })
+
+      it('Clicking the left arrow in the expanded view will shift the image by one', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let right = await screen.getByTestId('expanded-right')
+        fireEvent.click(right)
+        let expanded = await screen.getByTestId('expanded-image')
+        expect(expanded.src).toBe(`https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80`)
+        let left = await screen.getByTestId('expanded-left')
+        fireEvent.click(left)
+        expanded = await screen.getByTestId('expanded-image')
+        expect(expanded.src).toBe(`https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80`)
+      })
+
+      it('Clicking on the expanded image will render the zoomed image', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let expanded = await screen.getByTestId('expanded-image')
+        fireEvent.click(expanded)
+        let zoom = await screen.getByTestId('zoom-image')
+        expect(zoom.src).toBe(`https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80`)
+      })
+
+      it('Clicking the default image will render the expanded image', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let expanded = await screen.getByTestId('expanded-image')
+        expect(expanded.src).toBe(`https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80`)
+      })
+
+      it('Clicking on the Zoom image will end it', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let expanded = await screen.getByTestId('expanded-image')
+        fireEvent.click(expanded)
+        let zoom = await screen.getByTestId('zoom-image')
+        fireEvent.click(zoom)
+        zoom = await screen.queryByTestId('zoom-image')
+        expect(zoom).toBe(null)
+      })
+
+      it('Displays one icon per image in the expanded view', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let imageIcons = await screen.getAllByTestId('image-icon')
+        expect(imageIcons.length).toBe(8)
+      })
+
+      it('Clicking on an image icon in expnaded view will switch the image', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let image = await screen.getByTestId('image')
+        fireEvent.click(image);
+        let imageIcons = await screen.getAllByTestId('image-icon')
+        fireEvent.click(imageIcons[1])
+        let expanded = await screen.getByTestId('expanded-image')
+        expect(expanded.src).toBe(`https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80`)
+      })
+
+      it('Clicking on the expand image icon will hide the sidebar', async () => {
+        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let expand = await screen.getByTestId('outline-expand')
+        fireEvent.click(expand);
+        let sidebar = await screen.queryByTestId('sidebar', {hidden: true})
+        expect(sidebar).toHaveClass('hidden')
+      })
 })
