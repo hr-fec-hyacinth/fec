@@ -4,7 +4,7 @@ import { MdStarBorder } from 'react-icons/md';
 import Stars from '../shared/Stars.jsx';
 import averageRating from '../../helper/averageRating.js';
 
-const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenModal, setCurrentCompare, setCurrentIndex }) => {
+const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenModal, setCurrentCompare, setCurrentIndex, style }) => {
   //Using the first style as default
   const category = slide[1].category;
   const name = slide[1].name;

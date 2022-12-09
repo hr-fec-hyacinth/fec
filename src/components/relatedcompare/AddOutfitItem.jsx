@@ -10,7 +10,7 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, metaReview, outf
   const image = slide[0][0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
   const sale_price = slide[0][0].sale_price || '1.00';
   const original_price = '$' + slide[0][0].original_price;
-  const starRating = averageRating()
+  const starRating = averageRating(ratings)
 
   const eventHandler = (e) => {
     e.preventDefault();

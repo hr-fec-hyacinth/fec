@@ -20,6 +20,13 @@ const App = () => {
   const [metaReview, updateMetaReview] = useState({});
   const [style, changeStyle] = useState({});
   const [outfit, setOutfit] = useState(sliderData)
+ 
+
+  useEffect(() => {
+    console.log(style)
+
+  }, [style])
+
 
   useEffect(() => {
     api.getProduct(37314)
@@ -47,7 +54,7 @@ const App = () => {
       <div className="w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
         <Overview product={product} styles={styles} metaReview={metaReview} style={style} changeStyle={changeStyle}/>
-        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
+        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} style={style} />
         <QnA product = {product}/>
         {metaReview && <RatingsReviews product={product} meta={metaReview} />}
       </div>
