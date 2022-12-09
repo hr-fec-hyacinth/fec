@@ -24,6 +24,7 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfi
 
   const removeFromOutfitList = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setOutfit(outfit.filter((item, index) => {
       if (index === 0) {
         return item;
@@ -38,11 +39,17 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfi
   return (
     <>
       <div className='px-2'>
-      {index !== 3 && <RxCrossCircled onClick={removeFromOutfitList} className='relative cursor-pointer z-8 left-52 top-6 hover:text-white' productid={slide[1].id} />}
+      {index !== 3 && <RxCrossCircled onClick={removeFromOutfitList} className='relative cursor-pointer z-10 left-52 top-6 hover:text-white' productid={slide[1].id} />}
       {index === 3 && <RxCrossCircled className='relative -z-20 left-52 top-6 text-transparent' />}
-        <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
-          <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center' >
+      {index === 3 && <div className='absolute bg-gradient-to-l from-white h-84 w-58 z-10'></div>}
+      <div onClick={eventHandler} className='absolute h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+          <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center object-contain' >
             <img className='object-contain h-58 w-58 backdrop-blur' src={image} alt='Product Picture'/>
+          </div>
+      </div>
+        <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+          <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center object-contain' >
+            <img className='object-contain h-58 w-58 bg-white/[.5]' src={image} alt='Product Picture'/>
           </div>
           <div className='p-2'>
             <div className='text-xs'>{category.toUpperCase()}</div>
