@@ -58,7 +58,7 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
             }}/>
           )
         })}
-        {sliderIndex !== maxSliderIndex &&<IoIosArrowDown data-testid="image-down" className='my-1 z-20 self-center hover:text-slate-500' onClick={next}/>}
+        {sliderIndex !== maxSliderIndex && <IoIosArrowDown data-testid="image-down" className='my-1 z-20 self-center hover:text-slate-500' onClick={next}/>}
       </div>
     </div>
   )
