@@ -35,10 +35,6 @@ const CharInputTable = ({metaChars, cb}) => {
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Run slightly long', 'Runs Long']
   }
 
-
-
-  console.log(metaChars);
-
   return (<>{metaChars && <div>
     <table className="mx-auto">
     <>
