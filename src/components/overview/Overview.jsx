@@ -36,7 +36,7 @@ const Overview = ({ product, styles, metaReview, style, changeStyle, outfit, set
 
   return (
     <div>
-      <div className='flex min-h-full overflow-hidden flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
+      <div className='flex min-h-full flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
         <div className={stretch ? 'min-h-full w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
           <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
         </div>
