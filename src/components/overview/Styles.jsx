@@ -1,7 +1,10 @@
 import React from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
-//const safariStyle = {'};
+const safariStyle = {
+  width: '25%',
+  //height: '25%'
+ };
 
 const Styles = ({ styles, styleIndex, changeStyleIndex }) => {
 
@@ -17,7 +20,7 @@ const Styles = ({ styles, styleIndex, changeStyleIndex }) => {
             }
           }}>
             {index === styleIndex && <div className='absolute mt-1 bg-white rounded-full'><AiFillCheckCircle className='text-blue-400 sm:text-base text-2xl' /></div>}
-            <img alt='style' className='aspect-square min-w-full object-cover rounded-full' src={style.photos[0].thumbnail_url}></img></div>)
+            <img alt='style' style={safariStyle} className='aspect-square min-w-full max-h-halfScreen object-cover rounded-full' src={style.photos[0].thumbnail_url}></img></div>)
         })}
       </div>
     </div>

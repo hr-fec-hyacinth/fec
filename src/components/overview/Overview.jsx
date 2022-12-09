@@ -34,9 +34,6 @@ const Overview = ({ product, styles, metaReview, style, changeStyle }) => {
     updateStretch(!stretch);
   }
 
-  useEffect(() => {
-    console.log(style);
-  }, [style])
 
   return (
     <div>

@@ -641,6 +641,8 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      '1/12': '8.333333%',
+      '3/12': '25%'
     }),
     maxWidth: ({ theme, breakpoints }) => ({
       none: 'none',
