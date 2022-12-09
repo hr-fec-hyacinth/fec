@@ -32,9 +32,6 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   return (
     <div className='ml-2 mt-1 text-center sm:text-left text-xl sm:text-base'>
-      <div className='sm:block hidden'>
-        <Social />
-      </div>
       {reviewCount && <span className='flex justify-left mt-1'><Stars ratings={averageRating(metaReview.ratings)}/><a className='text-stone-400 underline text-xs ml-2' href="#ratings-reviews">Read all {reviewCount} reviews</a></span>}
       <p className='text-sm mt-2 italic'>{product.category}</p>
       <p className='text-2xl sm:text-4xl font-extrabold sm:mb-0 mb-2'>{product.name}</p>

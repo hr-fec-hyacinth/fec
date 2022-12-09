@@ -47,7 +47,7 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
   };
 
   return (
-    <div className='hidden sm:block'>
+    <div className='hidden sm:block h-fit'>
       <div className='flex h-full flex-col left-4 absolute z-10'>
         {sliderIndex !== 0 && <IoIosArrowUp data-testid="image-up" className='my-auto z-20 self-center hover:text-slate-500' onClick={previous}/>}
         {currentImages.map((image) => {
