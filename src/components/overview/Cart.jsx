@@ -5,7 +5,7 @@ import api from '../../../server/api.js';
 const {useState, useEffect} = React;
 
 
-const Cart = ({style}) => {
+const Cart = ({style, outfit, setOutfit}) => {
   const [skus, updateSkus] = useState([]);
   const [sku, updateSku] =useState({});
   const [allQuantities, updateAllQuantities] = useState([]);
@@ -70,7 +70,7 @@ const Cart = ({style}) => {
   return (
     <form>
     <div className='flex mt-1 sm:flex-row flex-col justify-between'>
-      {skus.length === 0 ? <select data-testid="size-select" className='bg-white sm:pl-1 w-5/12 sm:w-712 sm:py-2 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
+      {skus.length === 0 ? <select data-testid="size-select" className='bg-white sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
       <select data-testid="size-select" value={JSON.stringify(sku)} className='bg-white sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' onChange={e => {
         updateError('');
         selectSku(e.target.value);
