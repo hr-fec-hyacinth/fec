@@ -64,19 +64,23 @@ const QnAList = ({ product, search, questions }) => {
   return (
     <>
       <div className='grow overflow-auto my-2'>
-        {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index}/>)}
+        {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index} product={product}/>)}
       </div>
       <div className='flex'>
-        {more && <div className='border border-black p-2.5 font-bold m-2.5' onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</div>}
-        {displayQuestions.length > 2 && <div className='border border-black p-2.5 font-bold m-2.5' onClick={handleCollapseClick}>COLLAPSE</div>}
-        <div className='flex items-center border border-black p-2.5 font-bold m-2.5'
+        {more && <button className='border border-black p-2.5 font-bold m-2.5' onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</button>}
+        {displayQuestions.length > 2 && <button className='border border-black p-2.5 font-bold m-2.5' onClick={handleCollapseClick}>COLLAPSE</button>}
+        <button className='flex items-center border border-black p-2.5 font-bold m-2.5'
           onClick={handleAddQClick}>
           <div>ADD A QUESTION</div>
           <BsPlusLg className='ml-1'/>
-        </div>
+        </button>
       </div>
       {modalOpen &&
         <Modal setModalOpen={setModalOpen}>
+          <div className='flex flex-col items-center'>
+            <div className='font-thin text-xl text-netural-500'>Ask Your Question</div>
+            <div className='mb-3 font-thin text-sm text-netural-500'>About the {product.name}</div>
+          </div>
           <QForm setModalOpen={setModalOpen} product={product}/>
         </Modal>
       }

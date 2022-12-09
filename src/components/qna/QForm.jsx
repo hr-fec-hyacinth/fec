@@ -5,13 +5,13 @@ const QForm = ({ setModalOpen, product }) => {
   const [question, setQuestion] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [nickClick, setNickClick] = useState(false);
+  const [mailClick, setMailClick] = useState(false);
 
   const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-
     if (!question || !nickname || !email) {
       alert('All fields are required! Please fill out all fields.');
     } else if (email.length > 60) {
@@ -35,44 +35,72 @@ const QForm = ({ setModalOpen, product }) => {
     }
   };
 
+  const handleNicknameClick = () => {
+    setNickClick(true);
+  }
+
+  const handleEmailClick = () => {
+    setMailClick(true);
+  }
+
+  var nickWarn;
+  if(!nickClick) {
+    nickWarn = <div className='my-2.5'></div>
+  } else {
+    nickWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For privacy reasons, do not use your full name or email address</div>
+  }
+
+  var mailWarn;
+  if(!mailClick) {
+    mailWarn = <div className='my-2.5'></div>
+  } else {
+    mailWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For authentication reasons, you will not be emailed</div>
+  }
+
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col'>
-      <textarea
-        className='resize-none border border-gray rounded-lg p-2 m-1'
-        autoComplete='off'
-        name="question"
-        value={question}
-        placeholder="Type your question here"
-        rows="5"
-        cols="80"
-        onChange={(event) => setQuestion(event.target.value)}
-      />
-      <label className='m-1'>
-        Nickname:
-        <input
-          className='border border-gray rounded p-1 ml-1'
+    <div className='font-thin'>
+      <form onSubmit={handleSubmit} className='flex flex-col'>
+        <textarea
+          className='resize-none border border-gray rounded-lg p-2 m-1'
           autoComplete='off'
-          type="text"
-          name="nickname"
-          value={nickname}
-          placeholder="jackson11!"
-          onChange={(event) => setNickname(event.target.value)}
+          name="question"
+          value={question}
+          placeholder="Type your question here"
+          rows="5"
+          cols="80"
+          onChange={(event) => setQuestion(event.target.value)}
         />
-      </label>
-      <label className='m-1'>
-        Email:
-        <input
-          className='border border-gray rounded p-1 ml-1'
-          autoComplete='off'
-          type="text"
-          name="email"
-          value={email}
-          placeholder="example@email.com"
-          onChange={(event) => setEmail(event.target.value)}
-        />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+        <label className='m-1'>
+          Nickname:
+          <input
+            className='border border-gray rounded p-1 ml-1'
+            autoComplete='off'
+            type="text"
+            name="nickname"
+            value={nickname}
+            placeholder="jackson11!"
+            onChange={(event) => setNickname(event.target.value)}
+            onClick={handleNicknameClick}
+          />
+        </label>
+        {nickWarn}
+        <label className='m-1'>
+          Email:
+          <input
+            className='border border-gray rounded p-1 ml-1'
+            autoComplete='off'
+            type="text"
+            name="email"
+            value={email}
+            placeholder="example@email.com"
+            onChange={(event) => setEmail(event.target.value)}
+            onClick={handleEmailClick}
+          />
+        </label>
+        {mailWarn}
+        <input className='font-normal' type="submit" value="Submit" />
+      </form>
+    </div>
   );
 };
 

@@ -12,3 +12,17 @@ export const calculateAverageRating = (metaRatings) => {
   // return parseFloat((totalRating / totalVotes)).toFixed(2) ;
   return (totalRating / totalVotes).toFixed(1);
 }
+
+// Renders the Headers if invoked with the Column text
+export const renderTableHeader = (columnNumber, arrayOfColumnHeader) => {
+    let defaultHeader = [1, 2, 3, 4, 5] || arrayOfColumnHeader;
+    return (
+      <tbody>
+        <trow>
+        {Array.from({length: columnNumber}, (v, i) => {
+          <td key={'colHeader'+i}>{defaultHeader[i]}</td>
+        })}
+        </trow>
+      </tbody>
+    )
+  }

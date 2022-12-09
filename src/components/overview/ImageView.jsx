@@ -19,12 +19,7 @@ const ImageView = ({ style, updateStretch }) => {
       style.photos.forEach(photoSet => {
         images.push(photoSet.url);
       });
-      // Delete this for testing
-      // style.photos.forEach(photoSet => {
-      //   images.push(photoSet.url);
-      // });
       updateImageList(images);
-      // Handle index across style changes
       if (imageIndex > images.length - 1) {
         updateImageIndex(images.length - 1);
         updateStyling({ backgroundImage: 'url(' + images[images.length - 1] + ')' });
@@ -55,7 +50,7 @@ const ImageView = ({ style, updateStretch }) => {
     <div className='min-h-6/10 w-full h-full'>
       <div style={styling} className='block sm:min-h-0 min-h-halfScreen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
 
-        <AiOutlineExpand data-testid="outline-expand" className='hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500' onClick={updateStretch}/>
+        <div className='rounded-full bg-white/30 w-6 h-6 hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500'><AiOutlineExpand data-testid="outline-expand" className='m-auto mt-1' onClick={updateStretch}/></div>
 
         <ImageCarousel imageIndex={imageIndex} updateImageIndex={updateImageIndex} imageList={imageList} updateStyling={updateStyling} />
 
