@@ -15,10 +15,6 @@ const ReviewCard = ({aReview}) => {
     reviewerName = aReview.reviewer_name;
   }
 
-  console.log('this is a review', aReview)
-  console.log('this is the photos array', aReview.photos)
-  console.log('this is the photo url', aReview.photos[0]);
-
   //renders the response.
   const renderResponse = aReview.response ? (<div className="w-9/12 justify-center">aReview.response</div>) : (<div></div>);
   // var loadImages = if (aReview.photos) {

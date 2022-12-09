@@ -35,19 +35,7 @@ const CharInputTable = ({metaChars, cb}) => {
     Fit: ['Runs tight', 'Runs slightly tight', 'Perfect', 'Run slightly long', 'Runs Long']
   }
 
-  // Renders the Headers if invoked with the Column text
-  // const renderTableHeader = (columnNumber, arrayOfColumnHeader) => {
-  //   let defaultHeader = [1, 2, 3, 4, 5] || arrayOfColumnHeader;
-  //   return (
-  //     <tbody>
-  //       <trow>
-  //       {Array.from({length: columnNumber}, (v, i) => {
-  //         <td key={'colHeader'+i}>{defaultHeader[i]}</td>
-  //       })}
-  //       </trow>
-  //     </tbody>
-  //   )
-  // }
+
 
   console.log(metaChars);
 

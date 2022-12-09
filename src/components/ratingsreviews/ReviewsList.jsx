@@ -31,7 +31,7 @@ const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
     <div className="">
       {filteredList.map(el => {
         return (
-          <div key={el.review_id} id="a-review" className="mx-auto px-3">
+          <div key={el.review_id} className="ReviewCardContainer mx-auto px-3 ">
             <ReviewCard aReview={el} />
           </div>
         )
