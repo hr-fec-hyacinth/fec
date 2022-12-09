@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 
 
@@ -6,6 +6,10 @@ const AForm = ({ setModalOpen, question }) => {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
+  const [nickClick, setNickClick] = useState(false);
+  const [mailClick, setMailClick] = useState(false);
+  const [photos, setPhotos] = useState([]);
+  const [photosSrcList, setPhotosSrcList] = useState([]);
 
   const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -36,44 +40,108 @@ const AForm = ({ setModalOpen, question }) => {
     }
   };
 
+
+  const handleNicknameClick = () => {
+    setNickClick(true);
+  }
+
+  const handleEmailClick = () => {
+    setMailClick(true);
+  }
+
+  const handleFiles = e => {
+    // console.log(event.target.files)
+    // let files = Array.from(event.target.files)
+
+    // const promises = files.map(f => {
+    //   var formData = new FormData();
+    //   formData.append("file", f);
+    //   formData.append("upload_preset", 'wjuxohsi');
+    //   api.postPhotos(formData)
+    // });
+
+    // Promise.all(promises)
+    //   .then(responses => {
+    //     console.log(responses)
+    //     let data = [];
+    //     responses.forEach(response => {
+    //         data = data.concat(response.data.url);
+    //     });
+    //     setPhotosSrcList(photosSrcList.concat(data))
+    //   }).catch(err => console.warn('Error uploading picture', err));
+  }
+
+  // useEffect(()=>{
+  //   console.log('List:', photosSrcList);
+  // }, [photosSrcList])
+
+  var nickWarn;
+  if(!nickClick) {
+    nickWarn = <div className='my-2.5'></div>
+  } else {
+    nickWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For privacy reasons, do not use your full name or email address</div>
+  }
+
+  var mailWarn;
+  if(!mailClick) {
+    mailWarn = <div className='my-2.5'></div>
+  } else {
+    mailWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For authentication reasons, you will not be emailed</div>
+  }
+
   return (
-    <form onSubmit={handleSubmit} className='flex flex-col'>
-      <textarea
-        className='resize-none border border-gray rounded-lg p-2 m-1'
-        autoComplete='off'
-        name="answer"
-        value={answer}
-        placeholder="Type your answer here"
-        rows="5"
-        cols="80"
-        onChange={(event) => setAnswer(event.target.value)}
-      />
-      <label className='m-1'>
-        Nickname:
-        <input
-          className='border border-gray rounded p-1 ml-1'
+    <div className='font-thin'>
+      <form onSubmit={handleSubmit} className='flex flex-col'>
+        <textarea
+          className='resize-none border border-gray rounded-lg p-2 m-1'
           autoComplete='off'
-          type="text"
-          name="nickname"
-          value={nickname}
-          placeholder="jackson11!"
-          onChange={(event) => setNickname(event.target.value)}
+          name="answer"
+          value={answer}
+          placeholder="Type your answer here"
+          rows="5"
+          cols="80"
+          onChange={(event) => setAnswer(event.target.value)}
         />
-      </label>
-      <label className='m-1'>
-        Email:
+        <label className='m-1'>
+          Nickname:
+          <input
+            className='border border-gray rounded p-1 ml-1'
+            autoComplete='off'
+            type="text"
+            name="nickname"
+            value={nickname}
+            placeholder="jackson11!"
+            onChange={(event) => setNickname(event.target.value)}
+            onClick={handleNicknameClick}
+          />
+        </label>
+        {nickWarn}
+        <label className='m-1'>
+          Email:
+          <input
+            className='border border-gray rounded p-1 ml-1'
+            autoComplete='off'
+            type="text"
+            name="email"
+            value={email}
+            placeholder="example@email.com"
+            onChange={(event) => setEmail(event.target.value)}
+            onClick={handleEmailClick}
+          />
+        </label>
+        {mailWarn}
         <input
-          className='border border-gray rounded p-1 ml-1'
-          autoComplete='off'
-          type="text"
-          name="email"
-          value={email}
-          placeholder="example@email.com"
-          onChange={(event) => setEmail(event.target.value)}
+          type='file'
+          name='image'
+          onChange={handleFiles}
+          multiple
         />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+        {/* <div className='self-center'>
+          <PhotoUpload photosSrcList={photosSrcList} setPhotosSrcList={setPhotosSrcList} />
+        </div> */}
+        <input className='font-normal' type="submit" value="Submit"/>
+      </form>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AUTHKEY } from './config.js';
+import { AUTHKEY, cloudinaryCloudName } from './config.js';
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
 
@@ -112,6 +112,10 @@ api.postAnswer = (question_id, data) => {
     headers: {Authorization: AUTHKEY}
   }
   return axios.post(URL + `qa/questions/${question_id}/answers`, data, config)
+}
+
+api.postPhotos = (data) => {
+  return axios.post(`https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`, data)
 }
 
 export default api;

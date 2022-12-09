@@ -2,7 +2,7 @@ import React from 'react';
 import OneQ from './OneQ.jsx'
 import AList from './AList.jsx'
 
-const OneQnA = ({ questionData }) => {
+const OneQnA = ({ questionData, product }) => {
 
   var aList;
   if (questionData) {
@@ -13,7 +13,7 @@ const OneQnA = ({ questionData }) => {
 
   return (
     <>
-      <OneQ questionData={questionData}/>
+      <OneQ questionData={questionData} product={product}/>
       {aList}
     </>
   )
