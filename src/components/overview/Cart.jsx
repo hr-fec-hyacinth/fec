@@ -1,11 +1,12 @@
 import React from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import api from '../../../server/api.js';
+import averageRating from '../../helper/averageRating.js';
 
 const {useState, useEffect} = React;
 
 
-const Cart = ({style, outfit, setOutfit}) => {
+const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
   const [skus, updateSkus] = useState([]);
   const [sku, updateSku] =useState({});
   const [allQuantities, updateAllQuantities] = useState([]);
@@ -51,9 +52,38 @@ const Cart = ({style, outfit, setOutfit}) => {
 
   const toggleOutfit = (e) => {
     e.preventDefault();
-    updateInOutfit(!inOutfit);
+    for (let i = 1; i < outfit.length; i++) {
+      let outfitProduct = outfit[i][1];
+      if (product.id === outfitProduct.id) {
+        let newOutfit = [...outfit];
+        newOutfit.splice(i, 1);
+        setOutfit(newOutfit);
+        return;
+      }
+    }
+    let newOutfit = [...outfit];
+    newOutfit.push([styles, product, averageRating(metaReview.ratings)]);
+    setOutfit(newOutfit);
   }
 
+  useEffect(() => {
+    let foundProduct = false;
+
+    for (let i = 1; i < outfit.length; i++) {
+      let outfitProduct = outfit[i][1];
+      if (product.id === outfitProduct.id) {
+        updateInOutfit(true);
+        foundProduct = true;
+      }
+    }
+    if (!foundProduct) {
+      updateInOutfit(false);
+    }
+  }, [outfit, product, styles]);
+
+ // styles - index 0
+ // product - index 1
+ // Rating - index 2 averageRating(metaReview.ratings)
   const checkout = () => {
     if (allQuantities.length === 0) {
       updateError('Please Select Size');

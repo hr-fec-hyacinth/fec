@@ -46,13 +46,8 @@ const App = () => {
     <div >
       <div className="overflow-hidden w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
-<<<<<<< HEAD
         <Overview product={product} styles={styles} metaReview={metaReview} style={style} changeStyle={changeStyle} outfit={outfit} setOutfit={setOutfit}/>
-        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
-=======
-        <Overview product={product} styles={styles} metaReview={metaReview} style={style} changeStyle={changeStyle}/>
         <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style} />
->>>>>>> dev
         <QnA product = {product}/>
         {metaReview && <RatingsReviews product={product} meta={metaReview} />}
       </div>

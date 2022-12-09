@@ -46,7 +46,7 @@ const Overview = ({ product, styles, metaReview, style, changeStyle, outfit, set
            </div>
           <ProductInfo product={product} style={style} metaReview={metaReview} />
           <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
-          <Cart style={styles[styleIndex]} outfit={outfit} setOutfit={setOutfit}/>
+          <Cart style={styles[styleIndex]} outfit={outfit} setOutfit={setOutfit} product={product} styles={styles} metaReview={metaReview}/>
         </div>
       </div>
       <div className='hidden sm:block'>
@@ -57,7 +57,7 @@ const Overview = ({ product, styles, metaReview, style, changeStyle, outfit, set
         <ProductInfo product={product} style={style} metaReview={metaReview} />
         <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
         <Details product={product}/>
-        <Cart style={styles[styleIndex]} outfit={outfit} setOutfit={setOutfit}/>
+        <Cart style={styles[styleIndex]} outfit={outfit} setOutfit={setOutfit} product={product} styles={styles} metaReview={metaReview}/>
         <Social />
       </div>
     </div>
