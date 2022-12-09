@@ -81,9 +81,6 @@ const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
     }
   }, [outfit, product, styles]);
 
- // styles - index 0
- // product - index 1
- // Rating - index 2 averageRating(metaReview.ratings)
   const checkout = () => {
     if (allQuantities.length === 0) {
       updateError('Please Select Size');
