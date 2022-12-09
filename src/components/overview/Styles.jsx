@@ -3,7 +3,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 const Styles = ({ styles, styleIndex, changeStyleIndex }) => {
 
   return (
-    <div data-testid="custom" className='sm:m-0 mx-8 text-center text-xl sm:text-base'>
+    <div data-testid="custom" className='sm:m-0 mx-8 text-xl sm:mt-2 sm:text-base sm:ml-2'>
       <p><b>Style > </b>{styles[styleIndex] && styles[styleIndex].name}</p>
       <div className='flex flex-wrap mx-auto'>
         {styles.map((style, index) => {
