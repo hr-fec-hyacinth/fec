@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import api from '../../../server/api.js';
 
 const {useState, useEffect} = React;
@@ -11,6 +11,7 @@ const Cart = ({style}) => {
   const [allQuantities, updateAllQuantities] = useState([]);
   const [error, updateError] = useState('');
   const [quantity, updateQuantity] = useState(0);
+  const [inOutfit, updateInOutfit] = useState(false);
 
   useEffect(() => {
     let skuList = [];
@@ -48,6 +49,11 @@ const Cart = ({style}) => {
     updateAllQuantities(amounts);
   }
 
+  const toggleOutfit = (e) => {
+    e.preventDefault();
+    updateInOutfit(!inOutfit);
+  }
+
   const checkout = () => {
     if (allQuantities.length === 0) {
       updateError('Please Select Size');
@@ -60,9 +66,9 @@ const Cart = ({style}) => {
 
   return (
     <form>
-    <div className='flex mt-1 sm:flex-row flex-col justify-evenly'>
-      {skus.length === 0 ? <select data-testid="size-select" className='w-5/12 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
-      <select data-testid="size-select" value={JSON.stringify(sku)} className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center' onChange={e => {
+    <div className='flex mt-1 sm:flex-row flex-col justify-between'>
+      {skus.length === 0 ? <select data-testid="size-select" className='sm:pl-1 w-5/12 sm:w-712 sm:py-2 border-2 text-sm' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
+      <select data-testid="size-select" value={JSON.stringify(sku)} className='sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' onChange={e => {
         updateError('');
         selectSku(e.target.value);
       }}>
@@ -72,8 +78,8 @@ const Cart = ({style}) => {
        })}
       </select>
       }
-      {allQuantities.length === 0 ? <select data-testid="quant-select" className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
-      <select data-testid="quant-select" defaultValue='1' className='rounded sm:w-5/12 w-8/12 border-2 sm:p-1 p-4 mx-auto sm:text-base text-2xl text-center' onChange={e => {
+      {allQuantities.length === 0 ? <select data-testid="quant-select" className='sm:pl-1 sm:py-2 sm:w-4/12 w-8/12 border-2 sm:p-4 p-4 ml-auto sm:text-base text-2xl text-center' disabled defaultValue='-'><option value='-'>-</option></select> :
+      <select data-testid="quant-select" defaultValue='1' className='sm:pl-1 sm:py-2 sm:w-4/12 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl text-center sm:text-left' onChange={e => {
         updateQuantity(Number(e.target.value));
       }}>
         {allQuantities.map(quant => {
@@ -81,13 +87,14 @@ const Cart = ({style}) => {
         })}
       </select>}
     </div>
-    <div className='flex sm:flex-row flex-col-reverse justify-center sm:justify-end text-center'>
-      <span className='text-red-500 mt-5 mr-1 ml-2'>{error}</span>
-      <button className='sm:rounded rounded-2xl border-2 sm:mr-4 mt-4 sm:p-1 p-4 sm:w-fit w-6/12 mx-auto' onClick={e => {
+    <div className='flex sm:flex-row flex-col justify-center sm:justify-start text-center'>
+      <button className='sm:text-left border-2 sm:mr-4 mt-4 sm:p-4 sm:py-2 p-4 w-6/12 sm:w-9/12 mx-auto sm:ml-2 flex justify-between' onClick={e => {
         e.preventDefault();
         checkout();
-      }}>Add To Cart</button>
+      }}><span>Add to Bag</span><span>+</span></button>
+      <button className='border-2 sm:mr-0 mt-4 sm:p-4 sm:pt-3 p-4 w-1/12 sm:w-fit mx-auto sm:mx-0 flex justify-center text-xl' onClick={toggleOutfit}>{!inOutfit && <AiOutlineHeart />}{inOutfit && <AiFillHeart />}</button>
     </div>
+    <span className='text-red-500 mt-5 mr-1 ml-2 w-4/12 text-sm text-center'>{error}</span>
     </form>
   )
 };

@@ -40,7 +40,10 @@ const Overview = ({ product, styles, metaReview }) => {
         <div className={stretch ? 'min-h-full w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
           <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
         </div>
-        <div data-testid="sidebar" className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-between'}>
+        <div data-testid="sidebar" className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-between sm:ml-4'}>
+           <div className='sm:block hidden my-1'>
+             <Social />
+           </div>
           <ProductInfo product={product} style={style} metaReview={metaReview} />
           <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
           <Cart style={styles[styleIndex]} />
