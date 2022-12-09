@@ -1,6 +1,10 @@
 import React from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
+
+//const safariStyle = {'};
+
 const Styles = ({ styles, styleIndex, changeStyleIndex }) => {
+
 
   return (
     <div data-testid="custom" className='sm:m-0 mx-8 text-xl sm:mt-2 sm:text-base sm:ml-2'>

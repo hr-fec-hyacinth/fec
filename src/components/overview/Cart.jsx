@@ -92,7 +92,7 @@ const Cart = ({style}) => {
         e.preventDefault();
         checkout();
       }}><span>Add to Bag</span><span>+</span></button>
-      <button className='border-2 sm:mr-0 mt-4 sm:p-4 sm:pt-3 p-4 w-1/12 sm:w-fit mx-auto sm:mx-0 flex justify-center text-xl' onClick={toggleOutfit}>{!inOutfit && <AiOutlineHeart />}{inOutfit && <AiFillHeart />}</button>
+      <button className='border-2 sm:mr-0 mt-4  w-1/12 sm:w-fit mx-auto sm:mx-0 align-middle text-xl' onClick={toggleOutfit}>{!inOutfit && <AiOutlineHeart />}{inOutfit && <AiFillHeart />}</button>
     </div>
     <span className='text-red-500 mt-5 mr-1 ml-2 w-4/12 text-sm text-center'>{error}</span>
     </form>

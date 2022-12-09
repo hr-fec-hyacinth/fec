@@ -9,8 +9,8 @@ import Social from './Social.jsx';
 
 const { useState, useEffect } = React;
 
-const Overview = ({ product, styles, metaReview }) => {
-  const [style, changeStyle] = useState({});
+const Overview = ({ product, styles, metaReview, style, changeStyle }) => {
+  // const [style, changeStyle] = useState({});
   const [styleIndex, changeStyleIndex] = useState(0);
   const [stretch, updateStretch] = useState(false);
 
@@ -33,6 +33,10 @@ const Overview = ({ product, styles, metaReview }) => {
   const toggleStretch = () => {
     updateStretch(!stretch);
   }
+
+  useEffect(() => {
+    console.log(style);
+  }, [style])
 
   return (
     <div>
