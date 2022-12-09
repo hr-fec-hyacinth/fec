@@ -3,7 +3,7 @@ import axios from 'axios';
 import RelatedProductsCard from './RelatedProductsCard.jsx';
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md';
 
-const RelatedProducts = ({ sliderInfo, switchProduct, openModal, setOpenModal, setCurrentCompare }) => {
+const RelatedProducts = ({ sliderInfo, switchProduct, openModal, setOpenModal, setCurrentCompare, style, product }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderData, setSliderData] = useState([]);
   const length = sliderData.length;
@@ -50,7 +50,7 @@ const RelatedProducts = ({ sliderInfo, switchProduct, openModal, setOpenModal, s
             <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
           }
           {slides.map((slide, index) => (
-            <RelatedProductsCard slide={slide} switchProduct={switchProduct} key={index} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} setCurrentIndex={setCurrentIndex} />
+            <RelatedProductsCard slide={slide} switchProduct={switchProduct} index={index} key={index} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} setCurrentIndex={setCurrentIndex} style={style} product={product} />
           ))}
         </div>
       </div>

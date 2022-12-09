@@ -5,7 +5,7 @@ import RelatedProducts from './RelatedProducts.jsx';
 import YourOutfit from './YourOutfit.jsx';
 import CompareModal from './CompareModal.jsx';
 
-const RelatedCompare = ({ product, switchProduct, styles, metaReview }) => {
+const RelatedCompare = ({ product, switchProduct, styles, metaReview, outfit, setOutfit, style }) => {
   const [related, setRelated] = useState([]);
   const [sliderInfo, setSliderInfo] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -44,11 +44,11 @@ const RelatedCompare = ({ product, switchProduct, styles, metaReview }) => {
       <div className='my-10' onClick={e => api.postInteraction(e, 'Related')}>
         <br/>
         {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
-        <h4 className='ml-28'>RELATED PRODUCTS</h4>
-        <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} />
+        <h4 className='ml-28 text-stone-500'>RELATED PRODUCTS</h4>
+        <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} style={style} product={product} />
         <br/>
-        <h4 className='ml-28'>YOUR OUTFIT</h4>
-        <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
+        <h4 className='ml-28 text-stone-500 pt-8'>YOUR OUTFIT</h4>
+        <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style} />
         <br/>
       </div>
     </>
