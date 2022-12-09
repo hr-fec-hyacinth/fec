@@ -43,6 +43,13 @@ const OneA = ({ answer }) => {
     var reportComp = <div className='ml-3 underline' onClick={handleReportClick}>Report</div>
   }
 
+  var nameComp;
+  if(answer && answer.answerer_name === 'seller') {
+    nameComp = <div className='font-bold text-neutral-600 ml-2'>{answer.answerer_name}</div>;
+  } else {
+    nameComp = <div className='ml-2'>{answer.answerer_name}</div>;
+  }
+
   return (
     <>
       <div className='flex gap-x-3 items-center mb-0.5'>
@@ -50,7 +57,9 @@ const OneA = ({ answer }) => {
         <div className='text-sm'>{answer.body}</div>
       </div>
       <div className="flex text-xs mb-2 text-neutral-400">
-        <div className='ml-7'>by: {answer.answerer_name}, {formattedDate}</div>
+        <div className='ml-7'>by</div>
+        {nameComp}
+        <div>, {formattedDate}</div>
         <div className='ml-3'>|</div>
         <div className='ml-3'>Helpful?</div>
         <div className='ml-1 underline' onClick={handleYesClick}>Yes</div>

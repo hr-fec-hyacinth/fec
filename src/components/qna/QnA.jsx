@@ -19,11 +19,18 @@ const QnA = ({ product }) => {
   }
 
   const aHelpfulness = (a, b) => {
-    if (a.helpfulness > b.helpfulness)
+    if ((a.answerer_name === 'seller' && b.answerer_name === 'seller') || (a.answerer_name !== 'seller' && b.answerer_name !== 'seller')) {
+      if (a.helpfulness > b.helpfulness)
+        return -1;
+      if (a.helpfulness < b.helpfulness)
+        return 1;
+      return 0;
+    }
+    if(a.answerer_name === 'seller')
+      console.log('here1')
       return -1;
-    if (a.helpfulness < b.helpfulness)
+    if(b.answerer_name === 'seller')
       return 1;
-    return 0;
   }
 
   const sortAnswers = (questions) => {
