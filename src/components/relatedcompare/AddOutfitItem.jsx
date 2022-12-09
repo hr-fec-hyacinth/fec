@@ -10,6 +10,7 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, metaReview, outf
   const image = slide[0][0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
   const sale_price = slide[0][0].sale_price || '1.00';
   const original_price = '$' + slide[0][0].original_price;
+  const starRating = averageRating()
 
   const eventHandler = (e) => {
     e.preventDefault();
@@ -36,7 +37,7 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, metaReview, outf
       {index === 3 && <RxCrossCircled className='relative -z-20 left-52 top-6 text-transparent' />}
         <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
           <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center' >
-            <img className='object-contain h-58 w-58' src={image} alt='Product Picture'/>
+            <img className='object-contain h-58 w-58 backdrop-blur' src={image} alt='Product Picture'/>
           </div>
           <div className='p-2'>
             <div className='text-xs'>{category.toUpperCase()}</div>

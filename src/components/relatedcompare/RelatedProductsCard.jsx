@@ -32,8 +32,8 @@ const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenMo
       {index !== 3 && <MdStarBorder onClick={displayModal} className='relative cursor-pointer left-52 top-6 z-8 hover:text-white' productid={slide[1].id} />}
       {index === 3 && <MdStarBorder onClick={displayModal} className='relative -z-20 left-52 top-6 text-transparent' />}
         <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
-          <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center bg-white' >
-            <img className='object-contain h-58 w-58' src={image} alt='Product Image'/>
+          <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center' >
+            <img className='object-contain h-58 w-58 backdrop-blur' src={image} alt='Product Image'/>
           </div>
           <div className='p-2'>
             <div className='text-xs'>{category.toUpperCase()}</div>
