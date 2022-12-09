@@ -38,9 +38,9 @@ const OneA = ({ answer }) => {
   }
 
   if(reported) {
-    var reportComp = <div  className='ml-3'>Reported</div>
+    var reportComp = <button className='ml-3'>Reported</button>
   } else {
-    var reportComp = <div className='ml-3 underline' onClick={handleReportClick}>Report</div>
+    var reportComp = <button className='ml-3 underline' onClick={handleReportClick}>Report</button>
   }
 
   var nameComp;
@@ -62,7 +62,7 @@ const OneA = ({ answer }) => {
         <div>, {formattedDate}</div>
         <div className='ml-3'>|</div>
         <div className='ml-3'>Helpful?</div>
-        <div className='ml-1 underline' onClick={handleYesClick}>Yes</div>
+        <button className='ml-1 underline' onClick={handleYesClick}>Yes</button>
         <div className='ml-1'>({helpfulness})</div>
         <div className='ml-3'>|</div>
         {reportComp}

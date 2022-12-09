@@ -27,7 +27,6 @@ const QnA = ({ product }) => {
       return 0;
     }
     if(a.answerer_name === 'seller')
-      console.log('here1')
       return -1;
     if(b.answerer_name === 'seller')
       return 1;

@@ -3,7 +3,7 @@ import api from '../../../server/api.js';
 import Modal from './Modal.jsx'
 import AForm from './AForm.jsx'
 
-const OneQ = ({ questionData }) => {
+const OneQ = ({ questionData, product }) => {
 
   const [helpfulness, setHelpfulness] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
@@ -43,28 +43,31 @@ const OneQ = ({ questionData }) => {
   }
 
   if(reported) {
-    var reportComp = <div  className='text-netural-500 text-xs ml-3'>Reported</div>
+    var reportComp = <button  className='text-netural-500 text-xs ml-3'>Reported</button>
   } else {
-    var reportComp = <div className='underline text-netural-500 text-xs ml-3' onClick={handleReportClick}>Report</div>
+    var reportComp = <button className='underline text-netural-500 text-xs ml-3' onClick={handleReportClick}>Report</button>
   }
 
   var result;
   if (questionData)
     result = (
       <>
-        <div className="flex my-3 items-center">
+        <div className="flex my-3 items-center mr-2">
           <div className='font-bold'>Q:</div>
           <div className='font-bold ml-3'>{questionData.question_body}</div>
           <div className='self-end self-center ml-auto text-netural-500 text-xs font-semibold'>Helpful?</div>
-          <div className='text-netural-500 text-xs font-semibold underline ml-3' onClick={handleYesClick}>Yes</div>
+          <button className='text-netural-500 text-xs font-semibold underline ml-3' onClick={handleYesClick}>Yes</button>
           <div className='text-netural-500 text-xs ml-1'>({helpfulness})</div>
           <div className='text-netural-500 text-xs ml-3'>|</div>
-          <div className='text-netural-500 text-xs underline ml-3' onClick={handleAddAClick}>Add Answer</div>
+          <button className='text-netural-500 text-xs underline ml-3' onClick={handleAddAClick}>Add Answer</button>
           <div className='text-netural-500 text-xs ml-3'>|</div>
           {reportComp}
         </div>
         {modalOpen &&
           <Modal setModalOpen={setModalOpen}>
+            <div className='flex flex-col items-center'>
+              <div className='mx-2 mb-3 font-thin text-xl text-netural-500'>{product.name}: {questionData.question_body}</div>
+            </div>
             <AForm setModalOpen={setModalOpen} question={questionData}/>
           </Modal>
         }
