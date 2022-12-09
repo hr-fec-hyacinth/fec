@@ -15,6 +15,9 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   // Calculate Price on style change
   useEffect(() => {
+    if (!style) {
+      return;
+    }
     updatePrice(style.original_price);
     if (style.sale_price !== '0' && style.sale_price) {
       updateSalePrice(style.sale_price);
@@ -32,7 +35,7 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   return (
     <div className='ml-2 mt-1 text-center sm:text-left text-xl sm:text-base'>
-      {reviewCount && <span className='flex justify-left mt-1'><Stars ratings={averageRating(metaReview.ratings)}/><a className='text-stone-400 underline text-xs ml-2' href="#ratings-reviews">Read all {reviewCount} reviews</a></span>}
+      {reviewCount && <span className='flex sm:justify-start justify-evenly mt-1'><Stars ratings={averageRating(metaReview.ratings)}/><a className='text-stone-400 underline text-xs ml-2' href="#ratings-reviews">Read all {reviewCount} reviews</a></span>}
       <p className='text-sm mt-2 italic'>{product.category}</p>
       <p className='text-2xl sm:text-4xl font-extrabold sm:mb-0 mb-2'>{product.name}</p>
       {!salePrice && <p className='text-xl sm:mb-0 mb-2 mt-2'>${price}</p>}
