@@ -101,9 +101,9 @@ const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
   return (
     <form>
       {error && <span className='sm:ml-2 text-red-500'>{error}</span>}
-    <div className='flex mt-1 sm:flex-row flex-col relative w-full h-8'>
-      {skus.length === 0 ? <select data-testid="size-select" className='absolute left-2 bg-white sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
-      <select data-testid="size-select" id='size-select' ref={selectSize} value={JSON.stringify(sku)} className='z-20 absolute left-2 bg-white sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' onChange={e => {
+    <div className='flex mt-1 sm:flex-row flex-col relative w-full sm:h-8 h-32'>
+      {skus.length === 0 ? <select data-testid="size-select" className='absolute sm:left-2 left-2/12 bg-white sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' disabled defaultValue='1'><option value='1' disabled hidden>OUT OF STOCK</option></select> :
+      <select data-testid="size-select" id='size-select' ref={selectSize} value={JSON.stringify(sku)} className='z-20 absolute sm:left-2 left-2/12 bg-white sm:w-7/12 sm:py-2 w-8/12 border-2 sm:p-4 p-4 mx-auto sm:text-base text-2xl sm:mb-0 mb-4 text-center sm:text-left sm:pl-1' onChange={e => {
         updateError('');
         selectSku(e.target.value);
       }}>
@@ -113,8 +113,8 @@ const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
        })}
       </select>
       }
-      {allQuantities.length === 0 ? <select data-testid="quant-select" className='sm:pl-1 py-2 sm:w-4/12 w-8/12 border-2 mx-auto sm:text-base text-2xl text-center absolute right-0' disabled defaultValue='-'><option value='-'>-</option></select> :
-      <select data-testid="quant-select" defaultValue='1' className='sm:pl-1 py-2 sm:w-4/12 w-8/12 border-2 mx-auto sm:text-base text-2xl text-center sm:text-left bg-white absolute right-0' onChange={e => {
+      {allQuantities.length === 0 ? <select data-testid="quant-select" className='sm:pl-1 py-2 sm:w-4/12 w-8/12 border-2 mx-auto sm:text-base text-2xl text-center absolute sm:right-0 right-2/12 sm:mt-0 mt-20' disabled defaultValue='-'><option value='-'>-</option></select> :
+      <select data-testid="quant-select" defaultValue='1' className='sm:pl-1 py-2 sm:w-4/12 w-8/12 border-2 mx-auto sm:text-base text-2xl text-center sm:text-left bg-white absolute sm:right-0 right-2/12 sm:mt-0 mt-20' onChange={e => {
         updateQuantity(Number(e.target.value));
       }}>
         {allQuantities.map(quant => {
@@ -127,7 +127,7 @@ const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
         e.preventDefault();
         checkout();
       }}><span>Add to Bag</span><span>+</span></button>
-      <button className={skus.length === 0 ? 'sm:ml-2 border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle text-xl p-4 sm:p-2' : 'border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle text-xl p-4 sm:p-0'} onClick={toggleOutfit}>{!inOutfit && <AiOutlineHeart className='mx-auto transition-colors'/>}{inOutfit && <AiFillHeart className='mx-auto transition-colors'/>}</button>
+      <button className={skus.length === 0 ? 'sm:ml-2 border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle text-xl p-4 sm:p-2 sm:mb-0 mb-2' : 'border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle text-xl p-4 sm:p-0 sm:mb-0 mb-2'} onClick={toggleOutfit}>{!inOutfit && <AiOutlineHeart className='mx-auto transition-colors'/>}{inOutfit && <AiFillHeart className='mx-auto transition-colors'/>}</button>
     </div>
     </form>
   )
