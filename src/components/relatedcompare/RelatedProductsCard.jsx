@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MdStarBorder } from 'react-icons/md';
 import Stars from '../shared/Stars.jsx';
 import averageRating from '../../helper/averageRating.js';
+import RelatedProducts from './RelatedProducts.jsx';
 
 const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenModal, setCurrentCompare, setCurrentIndex, style, product }) => {
   //Using the first style as default
