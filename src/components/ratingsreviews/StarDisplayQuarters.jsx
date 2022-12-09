@@ -6,11 +6,6 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs'
 const StarDisplayQuarters = ({number, cb}) => {
   const [rating, setRating] = useState(0);
 
-  // 0 represents full star
-  // 1 represents 1/4
-  // 2 represents
-  // let lastStarType = 0;
-
   const roundNearestQuarter = (number) => {
     // console.log(Math.round(number * 4)/4)
     // console.log((Math.round(number * 4) / 4).toFixed(2));
@@ -18,7 +13,6 @@ const StarDisplayQuarters = ({number, cb}) => {
   }
 
   let roundedNum = roundNearestQuarter(number);
-  // console.log(roundedNum);
 
   return (
     <div className="flex flex-column">
@@ -31,11 +25,6 @@ const StarDisplayQuarters = ({number, cb}) => {
             return (<BsStar key={'starsDisplay'+i} className="text-orange-400" />)
           }
         })
-          // if(i <= number) {
-          //   (\<BsStarFill className="text-orange-400"/>)
-          // } else if (i > number) {
-          //   (<BsStar className="text-orange-400" />)
-          // }
       }
     </div>
   )

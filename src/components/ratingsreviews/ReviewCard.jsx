@@ -11,27 +11,45 @@ const ReviewCard = ({aReview}) => {
   const formattedDate = date.toLocaleDateString("en-US", options);
 
   let reviewerName = 'Anonymous User';
-
   if(aReview.reviewer_name) {
     reviewerName = aReview.reviewer_name;
   }
 
+  //renders the response.
+  const renderResponse = aReview.response ? (<div className="w-9/12 justify-center">aReview.response</div>) : (<div></div>);
+  // var loadImages = if (aReview.photos) {
+  //   ({aReview.photos.map(el, i => {
+  //     <img src={el} key={el, i}/>
+  //   })})
+  // } else {
+  //   <></>
+  // };
+
   return (
-    <div id="ReviewCard" className="bg-slate-200 mx-auto p-3 mb-3 border-b-2 border-black shadow-md hover:shadow-xl">
+    <div id="ReviewCard" className="bg-slate-100 mx-auto p-3 mb-3 border-b-2 border-black shadow-md hover:shadow-xl">
     <div className="flex flex-wrap">
       <div className="flex-none"><StarDisplayQuarters number={aReview.rating} /> {aReview.rating}</div>
       <div className="grow"></div>
       <div className="flex-none text-xs align-middle">{reviewerName}, {formattedDate}</div>
     </div>
-    <div className='font-semibold truncate'>
-      {aReview.summary}
-    </div>
-    <div className='font-light'>
-      ... line, if necessary
-    </div>
+    <div className='font-semibold truncate'>{aReview.summary}</div>
+    <div className='font-light'></div>
     <div className='font-light'>
       {aReview.body}
+      {renderResponse}
     </div>
+
+    {aReview.photos.length > 0 &&
+    <div className='flex flex-row flex-shrink flex-grow overflow-auto'>
+      {aReview.photos.map(el => {
+        return (
+          <div className="w-2/12 space-x-4" key={'photo' + el.id}>
+            <img src={el.url} key={'url_id' + el.id} className="object-contain" />
+          </div>
+
+      )})}
+    </div>}
+
     {aReview.recommend &&
       <div>
         <span className="text-sm">
@@ -39,11 +57,11 @@ const ReviewCard = ({aReview}) => {
         </span>
       </div>
     }
-    <div>
-      <p className='text-xs'>
-        Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>No</span>
-      </p>
+
+    <div className='text-xs'>
+      Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>No</span>
     </div>
+
   </div>
   )
 };

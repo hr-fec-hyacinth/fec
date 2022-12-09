@@ -54,19 +54,13 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
   }, [product])
 
   const handleOnChange = (e, name) => {
-    // console.log(e.target);
-    // e.preventDefault();
     setFields({
       ...fields,
       [e.target.name]: e.target.value
     })
-    // console.log(fields)
-    // console.log(typeof fields.recommend)
   }
 
-  // add validation handler
   const handleCharsOnChange = (e, name) => {
-    // console.log('inside handleCharsOnChange, ',e.target.name, e.target.value)
       setFields({
         ...fields,
         characteristics: {
@@ -165,7 +159,8 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                 onChange={handleOnChange}
                 placeholder="Example: jackson11@email.com"
                 className={textCSS}/>
-              <span className="text-xs">For authentication reasons, you will not be emailed</span>
+              <span className="text-xs">
+                For authentication reasons, you will not be emailed</span>
             </div>
 
             <div className="flex flex-wrap">
@@ -206,12 +201,12 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
 
             <div>
               <button name="submitForm" onClick={submitForm}
-                className="my-3 bg-emerald-50 hover:file:bg-emerald-100
+                className="my-3 bg-emerald-50
+                hover:file:bg-emerald-100
                 block w-full text-sm text-slate-500">
                 Submit
               </button>
             </div>
-
 
           </form>
 
