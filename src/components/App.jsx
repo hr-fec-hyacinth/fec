@@ -42,9 +42,13 @@ const App = () => {
       .catch(err => console.log(err));
   }
 
+  useEffect(() => {
+    console.log('Style Change', style);
+  }, [style])
+
   return (
     <div >
-      <div className="w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
+      <div className="overflow-hidden w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
         <Overview product={product} styles={styles} metaReview={metaReview} style={style} changeStyle={changeStyle}/>
         <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
