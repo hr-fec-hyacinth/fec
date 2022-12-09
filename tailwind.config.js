@@ -947,7 +947,10 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
-      zoom: '250%'
+      zoom: '250%',
+      '5v': '5vh',
+      '6v': '6vh',
+      '7v': '7vh'
     }),
     willChange: {
       auto: 'auto',

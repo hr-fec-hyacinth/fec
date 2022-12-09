@@ -47,7 +47,7 @@ const ImageView = ({ style, updateStretch }) => {
   };
 
   return (
-    <div className='min-h-3/4 w-full h-full'>
+    <div className='min-h-6/10 w-full h-full'>
       <div style={styling} className='block sm:min-h-0 min-h-halfScreen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
 
         <AiOutlineExpand data-testid="outline-expand" className='hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500' onClick={updateStretch}/>
