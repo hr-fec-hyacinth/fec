@@ -15,6 +15,9 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   // Calculate Price on style change
   useEffect(() => {
+    if (!style) {
+      return;
+    }
     updatePrice(style.original_price);
     if (style.sale_price !== '0' && style.sale_price) {
       updateSalePrice(style.sale_price);

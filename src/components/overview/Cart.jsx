@@ -91,7 +91,7 @@ const Cart = ({style}) => {
       </select>}
     </div>
     <div className='flex sm:flex-row flex-col justify-center sm:justify-start text-center'>
-      <button className='sm:text-left border-2 sm:mr-4 mt-4 sm:p-4 sm:py-2 p-4 w-8/12 sm:w-9/12 mx-auto sm:ml-2 flex justify-between' onClick={e => {
+      <button data-testid="add-bag" className='sm:text-left border-2 sm:mr-4 mt-4 sm:p-4 sm:py-2 p-4 w-8/12 sm:w-9/12 mx-auto sm:ml-2 flex justify-between' onClick={e => {
         e.preventDefault();
         checkout();
       }}><span>Add to Bag</span><span>+</span></button>
