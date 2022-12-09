@@ -10,7 +10,7 @@ const AddToOutfitCard = ({ slide, product, styles, metaReview, outfit, setOutfit
     e.preventDefault();
     const starRating = averageRating(metaReview.ratings)
     let count = 1;
-    
+
     outfit.forEach((item, index) => {
       if (outfit.length === 1) {
         setOutfit([...outfit, [styles, product, starRating]]);
@@ -27,12 +27,12 @@ const AddToOutfitCard = ({ slide, product, styles, metaReview, outfit, setOutfit
   return (
     <>
       <div className='px-2'>
-      <RxCrossCircled className='relative cursor-pointer z-8 left-42 top-6 text-transparent' />
+      <RxCrossCircled className='relative cursor-pointer -z-8 left-42 top-6 text-transparent' />
         <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer'>
           <img className='max-h-58' src={slide.image} alt='Product Picture'/>
           <div>
             <br/>
-            <div className='text-center font-bold'>Add to Outfit</div><br/>
+            <div className='pt-6 text-center font-bold'>Add to Outfit</div><br/>
             <br/>
             <br/>
           </div>

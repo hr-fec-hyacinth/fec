@@ -32,14 +32,21 @@ const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenMo
     document.body.style.overflow = "hidden";
   }
 
+
   return (
     <>
       <div className='px-2'>
-      {index !== 3 && <MdStarBorder onClick={displayModal} className='relative cursor-pointer left-52 top-6 z-8 hover:text-white' productid={slide[1].id} />}
+      {index !== 3 && <MdStarBorder onClick={displayModal} className='relative cursor-pointer left-52 top-6 z-10 hover:text-white' productid={slide[1].id} />}
       {index === 3 && <MdStarBorder onClick={displayModal} className='relative -z-20 left-52 top-6 text-transparent' />}
-        <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+      {index === 3 && <div className='absolute bg-gradient-to-l from-white h-84 w-58 z-10'></div>}
+      <div onClick={eventHandler} className='absolute h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
           <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center' >
             <img className='object-contain h-58 w-58 backdrop-blur' src={image} alt='Product Image'/>
+          </div>
+      </div>
+        <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+          <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center' >
+            <img className='object-contain h-58 w-58 bg-white/[.5]' src={image} alt='Product Image'/>
           </div>
           <div className='p-2'>
             <div className='text-xs'>{category.toUpperCase()}</div>
@@ -55,35 +62,3 @@ const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenMo
 }
 
 export default RelatedProductsCard;
-
-//Jon's styling to add blur to handle different sized images
-// const ImageView = ({style}) => {
-//   const [imageIndex, updateImageIndex] = useState(-1);
-//   const [imageList, updateImageList] = useState([]);
-//   const [imageUrl, updateUrl] = useState('');
-
-//   useEffect(() => {
-//     if (style) {
-//       let images = [];
-//       style.photos.forEach(photoSet => {
-//         images.push(photoSet.url);
-//       })
-//       updateImageList('Image List', images);
-//       updateImageIndex(0);
-//       updateUrl(images[0]);
-//     }
-//   }, [style])
-
-//   const styling = {
-//     backgroundImage: 'url(' + imageUrl + ')',
-//   };
-
-//   return (
-    // <div style={styling} className='h-full bg-stone-400 mr-1 bg-center'>
-    //   {style &&
-    //   <div style={styling} className='h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30'>
-    //   </div>
-    // }
-    // </div>
-//   )
-// }
