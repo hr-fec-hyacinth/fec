@@ -3,19 +3,15 @@ import axios from 'axios';
 import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
-const sliderData = [{
-  addToOutfit: true,
-  image: 'https://via.placeholder.com/300?text=%2b'
-}]
-
 //First card of list always needs to be add to outfit list
-const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
+const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOutfit, style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [outfit, setOutfit] = useState(sliderData)
   const length = outfit.length;
 
   useEffect(() => {
-    setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+    if (metaReview) {
+      setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+    }
   }, []);
 
   useEffect(() => {
@@ -52,14 +48,14 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
       <div className='flex justify-center'>
         <div className='slider relative flex w-10/12'>
           {currentIndex > 0 &&
-            <MdArrowBackIos className='back-arrow position absolute left-4 top-2/4 z-10 cursor-pointer select-none' onClick={prevSlide} />
-          }
-          {currentIndex < length - 3 &&
-            <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
+            <MdArrowBackIos className='back-arrow position relative left-12 top-2/4 z-20 cursor-pointer select-none' onClick={prevSlide} />
           }
           {slides.map((slide, index) => (
-            <YourOutfitCard slide={slide} key={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} />
+            <YourOutfitCard slide={slide} key={index}index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} style={style} />
           ))}
+          {currentIndex < length - 3 &&
+            <MdArrowForwardIos className='forward-arrow position relative right-12 top-2/4 z-20 cursor-pointer select-none' onClick={nextSlide} />
+          }
         </div>
       </div>
     </>

@@ -109,6 +109,7 @@ module.exports = {
       64: '16rem',
       72: '18rem',
       80: '20rem',
+      84: '21.5rem',
       96: '24rem',
     },
     animation: {
@@ -570,6 +571,7 @@ module.exports = {
       '1/4': '25%',
       '2/4': '50%',
       '3/4': '75%',
+      '2/12': '16.666666%',
       full: '100%',
     }),
     keyframes: {
@@ -641,6 +643,8 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      '1/12': '8.333333%',
+      '3/12': '25%'
     }),
     maxWidth: ({ theme, breakpoints }) => ({
       none: 'none',
@@ -944,7 +948,10 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
-      zoom: '250%'
+      zoom: '250%',
+      '5v': '5vh',
+      '6v': '6vh',
+      '7v': '7vh'
     }),
     willChange: {
       auto: 'auto',

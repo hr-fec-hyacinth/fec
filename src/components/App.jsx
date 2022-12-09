@@ -9,10 +9,17 @@ import sortDefault from '../helper/sortDefault.js';
 
 const {useState, useEffect} = React;
 
+const sliderData = [{
+  addToOutfit: true,
+  image: 'https://via.placeholder.com/300?text=%2b'
+}]
+
 const App = () => {
   const [product, updateProduct] = useState({});
   const [styles, updateStyles] = useState([]);
   const [metaReview, updateMetaReview] = useState({});
+  const [style, changeStyle] = useState({});
+  const [outfit, setOutfit] = useState(sliderData)
 
   useEffect(() => {
     api.getProduct(37314)
@@ -37,10 +44,10 @@ const App = () => {
 
   return (
     <div >
-      <div className="w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
+      <div className="overflow-hidden w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
-        <Overview product={product} styles={styles} metaReview={metaReview}/>
-        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview}/>
+        <Overview product={product} styles={styles} metaReview={metaReview} style={style} changeStyle={changeStyle} outfit={outfit} setOutfit={setOutfit}/>
+        <RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style} />
         <QnA product = {product}/>
         {metaReview && <RatingsReviews product={product} meta={metaReview} />}
       </div>

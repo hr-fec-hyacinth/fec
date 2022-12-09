@@ -504,8 +504,8 @@ describe('Product Overview Renders Correct Information', () => {
 describe('Add to Cart Render', () => {
 
     it('Displays error if size is not selected', async () => {
-        const { getByText } = render(<Cart style={style} />)
-        fireEvent.click(screen.getByText('Add To Cart'))
+        const { getByText, getAllByAltText, getByTestId } = render(<Cart style={style} />)
+        fireEvent.click(screen.getByTestId('add-bag'))
         getByText('Please Select Size');
       })
 
@@ -584,7 +584,9 @@ describe('Style Select Render', () => {
       })
 
     it('Clicking on a different style will update the thumbnail list', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const styleList = await screen.getAllByAltText('style')
         let photo = {
             "thumbnail_url": "https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80",
@@ -606,7 +608,9 @@ describe('Style Select Render', () => {
 describe('Image View Render', () => {
 
     it('Loads Accurate Number of View Thumbnails', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const items = await screen.getAllByAltText('view_thumbnail')
         expect(items).toHaveLength(6)
       })
@@ -620,14 +624,18 @@ describe('Image View Render', () => {
         styles.results[0].photos.push(photo);
         styles.results[0].photos.push(photo);
         // 8 Photos Currently Available
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const items = await screen.getAllByAltText('view_thumbnail')
         expect(items).toHaveLength(7)
       })
 
       // Changing a style will keep the image index
       it('Clicking on a style will keep the image index', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const styleList = await screen.getAllByAltText('style')
         let image = await screen.getByTestId('image')
         let right = await screen.getByTestId('image-right')
@@ -639,7 +647,9 @@ describe('Image View Render', () => {
       })
 
       it('The down arrow in the carousel will shift the images by one', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let items = await screen.getAllByAltText('view_thumbnail')
         const down = await screen.getByTestId('image-down')
         expect(items[0].src).toBe('https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80');
@@ -649,7 +659,9 @@ describe('Image View Render', () => {
       })
 
       it('The up arrow in the carousel will shift the images by one', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const down = await screen.getByTestId('image-down')
         fireEvent.click(down)
         let items = await screen.getAllByAltText('view_thumbnail')
@@ -661,13 +673,17 @@ describe('Image View Render', () => {
       })
 
       it('Up Arrow Does not show if on the first image', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const up = await screen.queryByTestId('image-up')
         expect(up).toBe(null);
       })
 
       it('Down Arrow Does not show if last image shows', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let down = await screen.getByTestId('image-down')
         fireEvent.click(down)
         down = await screen.queryByTestId('image-down')
@@ -675,13 +691,17 @@ describe('Image View Render', () => {
       })
 
       it('Left Arrow Does not show if on the first image', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const left = await screen.queryByTestId('image-left')
         expect(left).toBe(null);
       })
 
       it('Right arrow does not show on last image', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let right = await screen.getByTestId('image-right')
         fireEvent.click(right)
         fireEvent.click(right)
@@ -696,7 +716,9 @@ describe('Image View Render', () => {
 
       it('Clicking on a thumbnail will change the image', async () => {
         // 8 Photos Currently Available
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         const items = await screen.getAllByAltText('view_thumbnail')
         let image = await screen.getByTestId('image')
         expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
@@ -707,7 +729,9 @@ describe('Image View Render', () => {
 
       it('Clicking the right arrow will change the image', async () => {
         // 8 Photos Currently Available
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         expect(image.style.backgroundImage).toBe(`url(https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80)`)
         let right = await screen.getByTestId('image-right')
@@ -718,7 +742,9 @@ describe('Image View Render', () => {
 
       it('Clicking the left arrow will change the image', async () => {
         // 8 Photos Currently Available
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         let right = await screen.getByTestId('image-right')
         fireEvent.click(right)
@@ -730,7 +756,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking the right arrow in the expanded view will shift the image by one', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let expanded = await screen.getByTestId('expanded-image')
@@ -742,7 +770,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking the left arrow in the expanded view will shift the image by one', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let right = await screen.getByTestId('expanded-right')
@@ -756,7 +786,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking on the expanded image will render the zoomed image', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let expanded = await screen.getByTestId('expanded-image')
@@ -766,7 +798,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking the default image will render the expanded image', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let expanded = await screen.getByTestId('expanded-image')
@@ -774,7 +808,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking on the Zoom image will end it', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let expanded = await screen.getByTestId('expanded-image')
@@ -786,7 +822,9 @@ describe('Image View Render', () => {
       })
 
       it('Displays one icon per image in the expanded view', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let imageIcons = await screen.getAllByTestId('image-icon')
@@ -794,7 +832,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking on an image icon in expnaded view will switch the image', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let image = await screen.getByTestId('image')
         fireEvent.click(image);
         let imageIcons = await screen.getAllByTestId('image-icon')
@@ -804,7 +844,9 @@ describe('Image View Render', () => {
       })
 
       it('Clicking on the expand image icon will hide the sidebar', async () => {
-        render(<Overview product={product} styles={styles.results} metaReview={meta} />)
+        let style = styles.results[0];
+        const changeStyle = (value) => {style = value};
+        render(<Overview product={product} styles={styles.results} style={style} changeStyle={changeStyle} metaReview={meta} />)
         let expand = await screen.getByTestId('outline-expand')
         fireEvent.click(expand);
         let sidebar = await screen.queryByTestId('sidebar', {hidden: true})

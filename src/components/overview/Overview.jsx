@@ -9,8 +9,7 @@ import Social from './Social.jsx';
 
 const { useState, useEffect } = React;
 
-const Overview = ({ product, styles, metaReview }) => {
-  const [style, changeStyle] = useState({});
+const Overview = ({ product, styles, metaReview, style, changeStyle, outfit, setOutfit }) => {
   const [styleIndex, changeStyleIndex] = useState(0);
   const [stretch, updateStretch] = useState(false);
 
@@ -34,16 +33,20 @@ const Overview = ({ product, styles, metaReview }) => {
     updateStretch(!stretch);
   }
 
+
   return (
     <div>
-      <div className='flex min-h-full overflow-hidden flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
+      <div className='flex min-h-full flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
         <div className={stretch ? 'min-h-full w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
           <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
         </div>
-        <div data-testid="sidebar" className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-between'}>
+        <div data-testid="sidebar" className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-between sm:ml-4'}>
+           <div className='sm:block hidden my-1'>
+             <Social />
+           </div>
           <ProductInfo product={product} style={style} metaReview={metaReview} />
           <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
-          <Cart style={styles[styleIndex]} />
+          <Cart style={styles[styleIndex]} outfit={outfit} setOutfit={setOutfit} product={product} styles={styles} metaReview={metaReview}/>
         </div>
       </div>
       <div className='hidden sm:block'>
@@ -54,7 +57,7 @@ const Overview = ({ product, styles, metaReview }) => {
         <ProductInfo product={product} style={style} metaReview={metaReview} />
         <Styles styles={styles} styleIndex={styleIndex} changeStyleIndex={changeStyleIndex} />
         <Details product={product}/>
-        <Cart style={styles[styleIndex]}/>
+        <Cart style={styles[styleIndex]} outfit={outfit} setOutfit={setOutfit} product={product} styles={styles} metaReview={metaReview}/>
         <Social />
       </div>
     </div>
