@@ -42,10 +42,6 @@ const App = () => {
       .catch(err => console.log(err));
   }
 
-  useEffect(() => {
-    console.log('Style Change', style);
-  }, [style])
-
   return (
     <div >
       <div className="overflow-hidden w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
