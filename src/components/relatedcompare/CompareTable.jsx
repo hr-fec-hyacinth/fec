@@ -32,12 +32,12 @@ const CompareTable = ({ product, sliderInfo, currentCompare }) => {
 
   return (
     <>
-      <table className=''>
-        <thead className='border text-sm'>
+      <table className='w-full'>
+        <thead className='text-xs sticky top-0'>
           <tr>
-            <th className=''>{currentProductName}</th>
-            <th></th>
-            <th className=''>{comparedProductName}</th>
+            <th className='w-1/3 pt-2 pb-6 text-left'>{currentProductName}</th>
+            <th className='w-1/3 pt-2 pb-6'></th>
+            <th className='w-1/3 pt-2 pb-6 text-right'>{comparedProductName}</th>
           </tr>
         </thead>
         {detailsArray.map((detail, index) => (
