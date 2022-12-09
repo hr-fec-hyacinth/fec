@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 
 
@@ -8,6 +8,8 @@ const AForm = ({ setModalOpen, question }) => {
   const [email, setEmail] = useState('');
   const [nickClick, setNickClick] = useState(false);
   const [mailClick, setMailClick] = useState(false);
+  const [photos, setPhotos] = useState([]);
+  const [photosSrcList, setPhotosSrcList] = useState([]);
 
   const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -46,6 +48,32 @@ const AForm = ({ setModalOpen, question }) => {
   const handleEmailClick = () => {
     setMailClick(true);
   }
+
+  const handleFiles = e => {
+    // console.log(event.target.files)
+    // let files = Array.from(event.target.files)
+
+    // const promises = files.map(f => {
+    //   var formData = new FormData();
+    //   formData.append("file", f);
+    //   formData.append("upload_preset", 'wjuxohsi');
+    //   api.postPhotos(formData)
+    // });
+
+    // Promise.all(promises)
+    //   .then(responses => {
+    //     console.log(responses)
+    //     let data = [];
+    //     responses.forEach(response => {
+    //         data = data.concat(response.data.url);
+    //     });
+    //     setPhotosSrcList(photosSrcList.concat(data))
+    //   }).catch(err => console.warn('Error uploading picture', err));
+  }
+
+  // useEffect(()=>{
+  //   console.log('List:', photosSrcList);
+  // }, [photosSrcList])
 
   var nickWarn;
   if(!nickClick) {
@@ -102,6 +130,15 @@ const AForm = ({ setModalOpen, question }) => {
           />
         </label>
         {mailWarn}
+        <input
+          type='file'
+          name='image'
+          onChange={handleFiles}
+          multiple
+        />
+        {/* <div className='self-center'>
+          <PhotoUpload photosSrcList={photosSrcList} setPhotosSrcList={setPhotosSrcList} />
+        </div> */}
         <input className='font-normal' type="submit" value="Submit"/>
       </form>
     </div>
