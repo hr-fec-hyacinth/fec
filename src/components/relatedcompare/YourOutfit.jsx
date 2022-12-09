@@ -3,15 +3,9 @@ import axios from 'axios';
 import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
-const sliderData = [{
-  addToOutfit: true,
-  image: 'https://via.placeholder.com/300?text=%2b'
-}]
-
 //First card of list always needs to be add to outfit list
-const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
+const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOutfit, style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [outfit, setOutfit] = useState(sliderData)
   const length = outfit.length;
 
   useEffect(() => {
@@ -19,7 +13,6 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
       setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
     }
   }, []);
-
 
   useEffect(() => {
     window.localStorage.setItem('userOutfit', JSON.stringify(outfit));
@@ -61,7 +54,7 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
             <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
           }
           {slides.map((slide, index) => (
-            <YourOutfitCard slide={slide} key={index}index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} />
+            <YourOutfitCard slide={slide} key={index}index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} style={style} />
           ))}
         </div>
       </div>

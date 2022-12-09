@@ -4,7 +4,7 @@ import { RxCrossCircled } from 'react-icons/rx';
 import AddToOutfitCard from './AddToOutfitCard.jsx';
 import AddOutfitItem from './AddOutfitItem.jsx';
 
-const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit, setCurrentIndex, index }) => {
+const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit, setCurrentIndex, index, style }) => {
   const isAddToOutfitCard = slide.addToOutfit;
 
   return (
@@ -13,7 +13,7 @@ const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, out
         <AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} />
       }
       {!isAddToOutfitCard &&
-        <AddOutfitItem slide={slide} index={index} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} switchProduct={switchProduct} setCurrentIndex={setCurrentIndex} />
+        <AddOutfitItem slide={slide} index={index} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} switchProduct={switchProduct} setCurrentIndex={setCurrentIndex} style={style} />
       }
     </>
   )

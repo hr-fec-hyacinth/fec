@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { RxCrossCircled } from 'react-icons/rx';
 import Stars from '../shared/Stars.jsx'
-import averageRating from '../../helper/averageRating.js';
 
-const AddOutfitItem = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit, setCurrentIndex, index }) => {
+const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfit, setCurrentIndex, index, style }) => {
   const category = slide[1].category;
   const name = slide[1].name;
   const image = slide[0][0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
-  const sale_price = slide[0][0].sale_price || '1.00';
   const original_price = '$' + slide[0][0].original_price;
-  const starRating = averageRating(ratings)
+  const rating = slide[2];
+  let sale_price;
+
+  if (product.id === slide[1].id) {
+    sale_price = style.sale_price;
+  } else {
+    sale_price = slide[0][0].sale_price;
+  }
 
   const eventHandler = (e) => {
     e.preventDefault();
@@ -43,8 +48,8 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, metaReview, outf
             <div className='text-xs'>{category.toUpperCase()}</div>
             <div className='pt-1 text-sm font-bold'>{name}</div>
             {sale_price && <><span className='text-red-500 py-2 text-xs'>{'$' + sale_price.slice(0, -3)}</span> <span className='line-through py-2 pl-4 text-xs'>{original_price.slice(0, -3)}</span></>}
-            {!sale_price && <div className='py-2 text-xs'>{original_price.slice(0, -3)}</div>}
-            <div className='pt-2.5'> <Stars  /> </div>
+            {(!sale_price || sale_price === '0') && <div className='py-2 text-xs'>{original_price.slice(0, -3)}</div>}
+            <div className='pt-2.5'> <Stars  ratings={rating} /> </div>
           </div>
         </div>
 
