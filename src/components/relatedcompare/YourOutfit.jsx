@@ -15,8 +15,11 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
   const length = outfit.length;
 
   useEffect(() => {
-    setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+    if (metaReview) {
+      setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+    }
   }, []);
+
 
   useEffect(() => {
     window.localStorage.setItem('userOutfit', JSON.stringify(outfit));
@@ -58,7 +61,7 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview }) => {
             <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
           }
           {slides.map((slide, index) => (
-            <YourOutfitCard slide={slide} key={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} />
+            <YourOutfitCard slide={slide} key={index} index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} />
           ))}
         </div>
       </div>

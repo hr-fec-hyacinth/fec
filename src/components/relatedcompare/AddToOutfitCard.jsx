@@ -23,7 +23,7 @@ const AddToOutfitCard = ({ slide, product, styles, metaReview, outfit, setOutfit
     <>
       <div className='px-2'>
       <RxCrossCircled className='relative cursor-pointer z-8 left-42 top-6 text-transparent' />
-        <div onClick={eventHandler} className='container h-96 w-58 border border-black cursor-pointer'>
+        <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer'>
           <img className='max-h-58' src={slide.image} alt='Product Picture'/>
           <div>
             <br/>
