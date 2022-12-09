@@ -11,7 +11,6 @@ let product = {
   "default_price": "0",
 };
 
-
 let metaReview = {
 
   "product_id": "2",

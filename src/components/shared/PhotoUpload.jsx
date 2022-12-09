@@ -49,18 +49,9 @@ const PhotoUpload = ({callback}) => {
     }
   }
 
-  //callback to update Parent Component (with properties, if provided);
-
-  //onChangeHandler ->
-    // saves file
-
-  //handlesubmission
-    // once we have submitted, we post API request
-
   return (
     <div className="flex flex-col">
       {myWidget && <>
-
         <button id='upload_widget' className="block w-full text-sm text-slate-500
           bg-emerald-50 hover:file:bg-100 cloudinary-button"
                 onClick={handleUploadOnClick}>Upload Photo
@@ -70,7 +61,6 @@ const PhotoUpload = ({callback}) => {
       { photosSrcList.length > 0 && <div className='flex flex-row'>
         {Array.from({ length : 5},(v, i) =>
           <div className='w-2/12 max-h-12 my-2 overflow-auto mx-2' key={'img' + i}>
-            {/* <img className="object-fill object-scale-down" src={photosSrcList[i]}></img> */}
             <img className="object-cover" src={photosSrcList[i]}></img>
           </div>
         )}

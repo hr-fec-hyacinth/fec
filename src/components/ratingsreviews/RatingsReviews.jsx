@@ -76,12 +76,13 @@ const RatingsReviews = ({product, meta}) => {
       setActiveForm(!activeForm);
     }
   }
+  //---CSS--------------------------------------//
+  const buttonCSS = 'drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105';
+
 
   //----------------------RENDERS---------------//
   const totalNumReviews = 0;
-  const renderingButton = () => {
-
-  }
+  const renderingButton = () => {}
 
 
   // ReviewForm component purposefully added in but prevented from being rendered
@@ -102,11 +103,11 @@ const RatingsReviews = ({product, meta}) => {
                     reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
           <div className="space-x-2">
             {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) && <button id='loadMoreReviews'
-              className='drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105'
+              className={buttonCSS}
               onClick={handleOnClick.moreReviews}
               >MORE REVIEWS
             </button>}
-            <button id='submitReview' className='drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105'
+            <button id='submitReview' className={buttonCSS}
               onClick={handleOnClick.toggleForm}
               >ADD A REVIEW +
             </button>
