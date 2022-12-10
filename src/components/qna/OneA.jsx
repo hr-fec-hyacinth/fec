@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
+import Expanded from './Expanded.jsx'
 
 const OneA = ({ answer }) => {
   const date = new Date(answer.date);
@@ -8,6 +9,9 @@ const OneA = ({ answer }) => {
 
   const [helpfulness, setHelpfulness] = useState(0);
   const [reported, setReported] = useState(false);
+  const [expand, setExpand] = useState(false);
+  const [clickIndex, setClickIndex] =useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
   useEffect(() => {
     setHelpfulness(answer.helpfulness)
@@ -37,11 +41,25 @@ const OneA = ({ answer }) => {
     .catch(err => console.log('Error in OneA putReportAnswer api call:', err));
   }
 
-  if(reported) {
-    var reportComp = <div  className='ml-3'>Reported</div>
-  } else {
-    var reportComp = <div className='ml-3 underline' onClick={handleReportClick}>Report</div>
+  const handleThumbnailClick = e => {
+    setImageIndex(Number(e.currentTarget.getAttribute('index')));
+    setExpand(true);
   }
+
+  if(reported) {
+    var reportComp = <button className='ml-3'>Reported</button>
+  } else {
+    var reportComp = <button className='ml-3 underline' onClick={handleReportClick}>Report</button>
+  }
+
+  var nameComp;
+  if(answer && answer.answerer_name === 'seller') {
+    nameComp = <div className='font-bold text-neutral-600 ml-1'>{answer.answerer_name}</div>;
+  } else {
+    nameComp = <div className='ml-1'>{answer.answerer_name}</div>;
+  }
+
+  const thumbnails = answer.photos.map((src, i) => <img className='max-w-[5rem] p-[3px] border rounded border-slate-300 my-3' src={src} key={i} onClick={handleThumbnailClick} index={i}/>);
 
   return (
     <>
@@ -49,14 +67,22 @@ const OneA = ({ answer }) => {
         <div className='font-bold'>A:</div>
         <div className='text-sm'>{answer.body}</div>
       </div>
+      <div className='flex flex-row gap-3 ml-7'>
+        {thumbnails}
+      </div>
       <div className="flex text-xs mb-2 text-neutral-400">
-        <div className='ml-7'>by: {answer.answerer_name}, {formattedDate}</div>
+        <div className='ml-7'>by</div>
+        {nameComp}
+        <div>, {formattedDate}</div>
         <div className='ml-3'>|</div>
         <div className='ml-3'>Helpful?</div>
-        <div className='ml-1 underline' onClick={handleYesClick}>Yes</div>
+        <button className='ml-1 underline' onClick={handleYesClick}>Yes</button>
         <div className='ml-1'>({helpfulness})</div>
         <div className='ml-3'>|</div>
         {reportComp}
+      </div>
+      <div>
+        {expand && <Expanded setExpand={setExpand} imageIndex={imageIndex} setImageIndex={setImageIndex} imageList={answer.photos} />}
       </div>
     </>
   )
