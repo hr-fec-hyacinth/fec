@@ -56,7 +56,7 @@ const QnA = ({ product }) => {
 
   return (
     <div className='flex flex-col max-h-screen'>
-      <div className="my-4 text-gray-600">QUESTIONS & ANSWERS</div>
+      <div className="my-4 text-neutral-400">QUESTIONS & ANSWERS</div>
       {questions.length > 0 &&
         <div className="flex
                         flex-row
@@ -66,10 +66,11 @@ const QnA = ({ product }) => {
                         border-black
                         p-2.5
                         font-bold
-                        text-s">
+                        text-s
+                        bg-white/30">
           <form>
             <textarea
-              className='resize-none focus:outline-none ml-2'
+              className='resize-none focus:outline-none ml-2 bg-transparent  dark:placeholder:text-white'
               autoComplete='off'
               type="text"
               name="search"

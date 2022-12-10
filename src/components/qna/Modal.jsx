@@ -10,9 +10,9 @@ const Modal = ({ setModalOpen, children }) => {
   return (
     <>
       <div
-        className='fixed top-0 left-0 z-30 w-full h-full backdrop-blur bg-black/30 flex justify-center items-center'
+        className='fixed top-0 left-0 z-30 w-full h-full backdrop-blur bg-black/30 flex justify-center items-center dark:bg-white/30'
         onClick={handleCloseClick}>
-        <div className='w-fit h-fit rounded-lg bg-white flex flex-col px-6 pb-6 pt-3'
+        <div className='w-fit h-fit rounded-lg dark:bg-[#091E42] bg-white flex flex-col px-6 pb-6 pt-3'
         onClick={e => e.stopPropagation()}>
           <MdClose onClick={handleCloseClick} className='self-end'/>
           {children}

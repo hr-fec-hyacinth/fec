@@ -61,7 +61,7 @@ const QForm = ({ setModalOpen, product }) => {
     <div className='font-thin'>
       <form onSubmit={handleSubmit} className='flex flex-col'>
         <textarea
-          className='resize-none border border-gray rounded-lg p-2 m-1'
+          className='resize-none border border-gray rounded-lg p-2 m-1 bg-white/30'
           autoComplete='off'
           name="question"
           value={question}
@@ -73,7 +73,7 @@ const QForm = ({ setModalOpen, product }) => {
         <label className='m-1'>
           Nickname:
           <input
-            className='border border-gray rounded p-1 ml-1'
+            className='border border-gray rounded p-1 ml-1 bg-white/30'
             autoComplete='off'
             type="text"
             name="nickname"
@@ -87,7 +87,7 @@ const QForm = ({ setModalOpen, product }) => {
         <label className='m-1'>
           Email:
           <input
-            className='border border-gray rounded p-1 ml-1'
+            className='border border-gray rounded p-1 ml-1 bg-white/30'
             autoComplete='off'
             type="text"
             name="email"
