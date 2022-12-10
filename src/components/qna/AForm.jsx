@@ -61,7 +61,6 @@ const AForm = ({ setModalOpen, question }) => {
 
     Promise.all(promises)
       .then(responses => {
-        console.log(responses)
         const data = responses.map(response => response.data.url)
         setPhotosSrcList(photosSrcList.concat(data))
       }).catch(err => console.warn('Error uploading picture', err));
