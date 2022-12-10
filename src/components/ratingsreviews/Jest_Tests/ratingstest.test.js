@@ -1,11 +1,14 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { screen, configure } from '@testing-library/react'
+import { render, fireEvent, screen, within, configure } from '@testing-library/react';
 import RatingsReviews from '../RatingsReviews.jsx';
 import SortOptions from '../SortOptions.jsx';
 import Ratings from '../Ratings.jsx';
 import Reviews from '../Reviews.jsx';
 import CharacteristicInputTable from '../CharacteristicInputTable.jsx';
+import ReviewForm from '../ReviewForm.jsx';
+
+
+// jest.setupFiles(['../../../../public/index.html']);
 
 let product = {
   "id": 11,
@@ -169,6 +172,7 @@ describe('Checking SortOptions Renders with Ratings',  () => {
 });
 
 describe('ReviewList', () => {
+  let cardsClassName = 'ReviewCardContainer mx-auto px-3';
 
   it('Check that I recommend this product works', async () => {
     const numberOfReviews = reviews.length;
@@ -183,20 +187,32 @@ describe('ReviewList', () => {
 
   it('Counts the Number of Reviews', async () => {
     const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterNone} reviewsCount={2} starFilterActive={false}/>);
-    let cards = container.getElementsByClassName('ReviewCardContainer mx-auto px-3');
+    let cards = container.getElementsByClassName(cardsClassName);
     expect(cards).toHaveLength(2);
   });
 
-  const starFilterFive = {
+  const starFilterOne = {
     ...starFilterNone,
     "1": true
   }
 
-  it('Filter By 1 Star Works', async () => {
-    const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterFive} reviewsCount={2} starFilterActive={false}/>);
-    let cards = container.getElementsByClassName('ReviewCardContainer mx-auto px-3');
+  it('Filter Reviews By 1 Star Works', async () => {
+    const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterOne} reviewsCount={2} starFilterActive={false}/>);
+    let cards = container.getElementsByClassName(cardsClassName);
     expect(cards).toHaveLength(1);
   });
+
+  it('Filtering Reviews By 2 Stars', async () => {
+    const starFilterOneAndFive = {
+      ...starFilterNone,
+      "1": true,
+      "5": true
+    }
+
+    const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterOneAndFive} reviewsCount={4} starFilterActive={false}/>);
+    let cards = container.getElementsByClassName(cardsClassName);
+    expect(cards).toHaveLength(4);
+  })
 
 
 });
@@ -204,3 +220,25 @@ describe('ReviewList', () => {
 // it('Clicking the form button loads the form', async () => {
 
 // });
+
+describe('Unit Test for Posting A Review Form', () => {
+
+  it('Should Open the Form', async () => {
+    // setupFiles(["https://widget.cloudinary.com/v2.0/global/all.js"])
+  //   <script
+  //     src="https://widget.cloudinary.com/v2.0/global/all.js"
+  //     type="text/javascript"
+  // ></script>
+    jest.mock()
+
+    await render(<RatingsReviews product={product} meta={metaReview} />);
+    let formButton = await document.getElementById('submitReview');
+    fireEvent.click(formButton);
+    let form = await document.getElementById('formDiv');
+    // form load is breaking here due to widget 
+    screen.getByText('Leave A Review Below:', {exact: false})
+  })
+
+
+
+});
