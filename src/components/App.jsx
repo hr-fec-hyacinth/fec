@@ -43,7 +43,7 @@ const App = () => {
   }
 
   return (
-    <div >
+    <div className='text-[#091E42] dark:text-white dark:bg-[#091E42]'>
       <div className="overflow-hidden w-full sm:w-8/12 justify-center mx-auto min-w-0 sm:min-w-900">
         <Header />
         <Overview product={product} styles={styles} metaReview={metaReview} style={style} changeStyle={changeStyle} outfit={outfit} setOutfit={setOutfit}/>

@@ -52,7 +52,7 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
         {sliderIndex !== 0 && <IoIosArrowUp data-testid="image-up" className='my-1 z-20 self-center hover:text-slate-500' onClick={previous}/>}
         {currentImages.map((image) => {
           return (
-            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-b-[4px] border-blue-400 aspect-square object-cover w-6v select-none my-1' : 'aspect-square object-cover w-12 select-none my-1 w-6v'} src={image.url} onClick={e => {
+            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-[2px] border-b-[4px] border-blue-400 aspect-square object-cover w-6v select-none my-1' : 'aspect-square object-cover w-12 select-none my-1 w-6v border-slate-400 border-[2px]'} src={image.url} onClick={e => {
               updateImageIndex(image.index);
               updateStyling({backgroundImage: 'url(' + image.url + ')'});
             }}/>
