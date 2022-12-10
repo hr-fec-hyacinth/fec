@@ -4,6 +4,7 @@ import { RxCrossCircled } from 'react-icons/rx';
 import Stars from '../shared/Stars.jsx'
 
 const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfit, setCurrentIndex, index, style }) => {
+  console.log(slide)
   const category = slide[1].category;
   const name = slide[1].name;
   const image = slide[0][0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
