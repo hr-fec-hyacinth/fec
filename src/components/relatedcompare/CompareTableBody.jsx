@@ -25,13 +25,13 @@ const CompareTableBody = ({ detail }) => {
     <>
       <tbody className='text-xs overflow-auto'>
         <tr>
-          {currentProductValue && <td className='text-left w-1/3 py-1.5'>{currentProductValue}</td>}
-          {currentProductTrue && <td className='pr-28 text-left w-1/3 py-1.5'><MdCheck /></td>}
-          {!currentProductTrue && !currentProductValue && <td className='text-left w-1/3 py-1.5'></td>}
-          <td className='text-neutral-400 w-1/3 text-center py-1.5'>{detail[0]}</td>
-          {comparedProductValue && <td className='text-right w-1/3 py-1.5'>{comparedProductValue}</td>}
-          {comparedProductTrue && <td className='pl-28 w-1/3 py-1.5'><MdCheck /></td>}
-          {!comparedProductTrue && !comparedProductValue && <td className='text-left w-1/3 py-1.5'></td>}
+          {currentProductValue && <td className='text-left w-1/3 py-3'>{currentProductValue}</td>}
+          {currentProductTrue && <td className='pr-28 text-left w-1/3 py-3'><MdCheck /></td>}
+          {!currentProductTrue && !currentProductValue && <td className='text-left w-1/3 py-3'></td>}
+          <td className='text-neutral-400 w-1/3 text-center py-3'>{detail[0]}</td>
+          {comparedProductValue && <td className='text-right w-1/3 py-3'>{comparedProductValue}</td>}
+          {comparedProductTrue && <td className='pl-28 w-1/3 py-3'><MdCheck /></td>}
+          {!comparedProductTrue && !comparedProductValue && <td className='text-left w-1/3 py-3'></td>}
         </tr>
       </tbody>
     </>
