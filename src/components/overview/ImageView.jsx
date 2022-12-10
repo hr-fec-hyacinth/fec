@@ -50,15 +50,15 @@ const ImageView = ({ style, updateStretch }) => {
     <div className='min-h-6/10 w-full h-full'>
       <div style={styling} className='block sm:min-h-0 min-h-halfScreen w-full sm:h-full overflow-hidden bg-stone-400 bg-center relative ease-linear duration-300'>
 
-        <div className='rounded-full bg-white/30 w-6 h-6 hidden sm:block absolute top-4 right-4 z-20 hover:text-slate-500'><AiOutlineExpand data-testid="outline-expand" className='m-auto mt-1' onClick={updateStretch}/></div>
+        <div className='rounded-full bg-white hover:bg-[#6E6E6E] hover:text-white w-6 h-6 hidden sm:block absolute top-4 right-4 z-20 text-[#091E42]'><AiOutlineExpand data-testid="outline-expand" className='m-auto mt-1' onClick={updateStretch}/></div>
 
         <ImageCarousel imageIndex={imageIndex} updateImageIndex={updateImageIndex} imageList={imageList} updateStyling={updateStyling} />
 
         {imageIndex !== 0 && <div className='z-10 sm:hidden min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={previous}></div>}
-        {imageIndex !== 0 && <BsFillArrowLeftCircleFill data-testid="image-left" className='hidden sm:block border-white border-2 text-blue-400 bg-white rounded-full top-1/2 left-4 sm:left-24 absolute z-20 text-2xl hover:text-blue-600' onClick={previous} />}
+        {imageIndex !== 0 && <BsFillArrowLeftCircleFill data-testid="image-left" className='hidden sm:block border-white border-2 text-[#1E54B1] bg-white rounded-full top-1/2 left-4 sm:left-24 absolute z-20 text-2xl hover:text-[#091E42]' onClick={previous} />}
 
         {imageIndex !== imageList.length - 1 && <div className='z-10 sm:hidden right-0 min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={next}></div>}
-        {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill data-testid="image-right" className='hidden sm:block border-white border-2 text-blue-400 top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-blue-600' onClick={next} />}
+        {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill data-testid="image-right" className='hidden sm:block border-white border-2 text-[#1E54B1] top-1/2 right-4 bg-white rounded-full absolute z-10 text-2xl hover:text-[#091E42]' onClick={next} />}
 
         {style &&
           <div style={styling} data-testid="image" className='min-w-full min-h-6/10 h-full bg-contain bg-no-repeat bg-center backdrop-blur bg-white/30 ease-linear duration-300 cursor-zoom-in' onClick={e => { updateExpand(true); }}>
@@ -68,7 +68,7 @@ const ImageView = ({ style, updateStretch }) => {
         <div className='block sm:hidden absolute w-full bottom-4 flex justify-center'>
           {imageList.map((image, i) => {
             if (i === imageIndex) {
-              return (<VscCircleLargeFilled key={i} className='rounded-full text-blue-400 border-2 border-white mx-1 cursor-default' />);
+              return (<VscCircleLargeFilled key={i} className='rounded-full text-[#1E54B1] border-2 border-white mx-1 cursor-default' />);
             }
             return (<VscCircleLargeFilled key={i} className='text-white mx-1 cursor-default' />);
           })}
