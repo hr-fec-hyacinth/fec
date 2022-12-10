@@ -119,6 +119,7 @@ module.exports = {
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
+      fade: 'fadeOut 3s ease-in-out'
     },
     aria: {
       checked: 'checked="true"',
@@ -575,7 +576,7 @@ module.exports = {
       '2/12': '16.666666%',
       full: '100%',
     }),
-    keyframes: {
+    keyframes: ({ theme }) => ({
       spin: {
         to: {
           transform: 'rotate(360deg)',
@@ -602,7 +603,11 @@ module.exports = {
           animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
         },
       },
-    },
+      fadeOut: {
+        '0%': { backgroundColor: theme('colors.red.300') },
+        '100%': { backgroundColor: theme('colors.transparent') },
+      },
+    }),
     letterSpacing: {
       tighter: '-0.05em',
       tight: '-0.025em',

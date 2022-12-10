@@ -29,7 +29,7 @@ const AForm = ({ setModalOpen, question }) => {
     } else {
       //alert(`Form submitted successfully!\nAnswer: ${answer}\nNickname: ${nickname}\nEmail: ${email}`);
       // send to api
-      api.postAnswer(question.question_id, {body:answer, name:nickname, email:email})
+      api.postAnswer(question.question_id, {body:answer, name:nickname, email:email, photos: photosSrcList})
         .then(response => {
           setModalOpen(false);
           //TODO: Pop-up notifying the user the question has been received
@@ -50,30 +50,21 @@ const AForm = ({ setModalOpen, question }) => {
   }
 
   const handleFiles = e => {
-    // console.log(event.target.files)
-    // let files = Array.from(event.target.files)
+    let files = Array.from(event.target.files)
 
-    // const promises = files.map(f => {
-    //   var formData = new FormData();
-    //   formData.append("file", f);
-    //   formData.append("upload_preset", 'wjuxohsi');
-    //   api.postPhotos(formData)
-    // });
+    const promises = files.map(f => {
+      var formData = new FormData();
+      formData.append("file", f);
+      formData.append("upload_preset", 'wjuxohsi');
+      return api.postPhotos(formData)
+    });
 
-    // Promise.all(promises)
-    //   .then(responses => {
-    //     console.log(responses)
-    //     let data = [];
-    //     responses.forEach(response => {
-    //         data = data.concat(response.data.url);
-    //     });
-    //     setPhotosSrcList(photosSrcList.concat(data))
-    //   }).catch(err => console.warn('Error uploading picture', err));
+    Promise.all(promises)
+      .then(responses => {
+        const data = responses.map(response => response.data.url)
+        setPhotosSrcList(photosSrcList.concat(data))
+      }).catch(err => console.warn('Error uploading picture', err));
   }
-
-  // useEffect(()=>{
-  //   console.log('List:', photosSrcList);
-  // }, [photosSrcList])
 
   var nickWarn;
   if(!nickClick) {
@@ -88,6 +79,15 @@ const AForm = ({ setModalOpen, question }) => {
   } else {
     mailWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For authentication reasons, you will not be emailed</div>
   }
+
+  var uploadButton;
+  if(photosSrcList.length >= 5) {
+    uploadButton = <div className='my-3.5'></div>
+  } else {
+    uploadButton = <input type='file' name='image' onChange={handleFiles} multiple/>
+  }
+
+  const thumbnails = photosSrcList.map((src, i) => <img className='max-w-[5rem] p-[3px] border rounded border-slate-300' src={src} key={i} />);
 
   return (
     <div className='font-thin'>
@@ -130,15 +130,10 @@ const AForm = ({ setModalOpen, question }) => {
           />
         </label>
         {mailWarn}
-        <input
-          type='file'
-          name='image'
-          onChange={handleFiles}
-          multiple
-        />
-        {/* <div className='self-center'>
-          <PhotoUpload photosSrcList={photosSrcList} setPhotosSrcList={setPhotosSrcList} />
-        </div> */}
+        {uploadButton}
+        <div className='flex flex-row gap-3 m-3 self-center'>
+          {thumbnails}
+        </div>
         <input className='font-normal' type="submit" value="Submit"/>
       </form>
     </div>
