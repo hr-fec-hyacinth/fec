@@ -19,13 +19,13 @@ const RatingsReviews = ({product, meta}) => {
   const [sortBy, setSortBy] = useState('relevance');
   const [starFilterActive, setStarFilterActive] = useState(false);
   const [starFilter, setStarFilter] = useState({
-      "filterOn": false,
-      "1": false,
-      "2": false,
-      "3": false,
-      "4": false,
-      "5": false
-    });
+    "filterOn": false,
+    "1": false,
+    "2": false,
+    "3": false,
+    "4": false,
+    "5": false
+  });
 
   // if(product) {
   //   console.log('this is the product being passed in', product);
@@ -38,9 +38,6 @@ const RatingsReviews = ({product, meta}) => {
     if(product.id) {
       api.getReviews(Number(product.id), 1, 200, sortBy)
       .then(res => {
-        // console.log('result from api req', res);
-        // console.log('this should be the array of reviews', res);
-        // console.log('successful get');
         setReviews(res.results);
       })
     }
@@ -91,17 +88,17 @@ const RatingsReviews = ({product, meta}) => {
     {meta.ratings &&
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
-      <div className="flex flex-row space-x-3">
-        <div id='ratings' className="w-4/12 pt-3" >
+      <div className="flex flex-col sm:flex-row space-x-3">
+        <div id='ratings' className="w-10/12 m-x-3 mx-auto justify-center sm:w-4/12 pt-3" >
           <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
-        <div id='review' className="w-8/12">
+        <div id='review' className="w-10/12 mx-auto sm:w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
           <Reviews product={product} meta={meta}
                     sortBy={sortBy} reviews={reviews} filterStars={starFilter}
                     reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
-          <div className="space-x-2">
+          <div className="mx-auto space-x-2">
             {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) && <button id='loadMoreReviews'
               className={buttonCSS}
               onClick={handleOnClick.moreReviews}

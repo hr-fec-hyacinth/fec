@@ -1,9 +1,15 @@
 import React from 'react';
+import { useState , useEffect} from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
-import StarDisplayQuarters from './StarDisplayQuarters.jsx'
+import StarDisplayQuarters from './StarDisplayQuarters.jsx';
+import ExpandedImage from './ExpandedImage.jsx';
 
 
 const ReviewCard = ({aReview}) => {
+  const [expand, setExpand] = useState(false);
+  const [clickIndex, setClickIndex] = useState(0)
+  const [imageIndex, setImageIndex] = useState(0);
+
 
   const dateString = aReview.date;
   const date = new Date(dateString);
@@ -25,10 +31,18 @@ const ReviewCard = ({aReview}) => {
   //   <></>
   // };
 
+  // text for
   const sometext = '';
 
+  const handleOnImageClick = (e) => {
+    setImageIndex(Number(e.currentTarget.getAttribute('i')));
+    setExpand(true);
+  }
+
   return (
-    <div id="ReviewCard" className="bg-slate-100 mx-auto p-3 mb-3 border-b-2 border-black shadow-md hover:shadow-xl">
+    <div id="ReviewCard" className="bg-slate-100 mx-auto p-3 mb-3 border-b-2 border-slate-700 shadow-md hover:shadow-xl
+         dark:text-white dark:bg-white/20 dark:border-white rounded-lg
+      ">
       <div className="flex flex-wrap">
         <div className="flex-none"><StarDisplayQuarters number={aReview.rating} /></div>
         <div className="grow"></div>
@@ -43,13 +57,15 @@ const ReviewCard = ({aReview}) => {
 
       {aReview.photos.length > 0 &&
       <div className='flex flex-row flex-shrink flex-grow overflow-auto'>
-        {aReview.photos.map(el => {
+        {aReview.photos.map((el, i) => {
           return (
-            <div className="w-2/12 space-x-4" key={'photo' + el.id}>
-              <img src={el.url} key={'url_id' + el.id} className="object-contain" />
+            <div className="max-w-[5rem] p-x-2 border rounded border-slate-300" key={'photo' + el.id}>
+              <img src={el.url} key={'url_id' + el.id} className="object-contain"
+              i={i} onClick={handleOnImageClick}/>
             </div>
           )}
         )}
+        {(expand && aReview.photos) && <ExpandedImage setExpand={setExpand} imageIndex={imageIndex} setImageIndex={setImageIndex} imageList={aReview.photos} />}
       </div>}
 
       {aReview.recommend &&

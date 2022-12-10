@@ -68,9 +68,6 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
           [e.target.name]: Number(e.target.value)
         }
       })
-      // console.log(fields);
-      // console.log(fields.characteristics);
-
   }
 
   // submit form
@@ -88,8 +85,8 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
       characteristics: {
         ...fields.characteristics
       }
-
     }
+
     // console.log('this is the post body', fields);
     // console.log('this is the remadePostBody,', postBody);
     axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'+'reviews', postBody, {headers: {Authorization: AUTHKEY}})
@@ -100,11 +97,10 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
       })
   }
 
-
   return (
-      <div className="fixed flex z-30 flex-col items-center space-x-2 justify-center bg-black/30 w-full h-full left-0 top-0">
+      <div className="fixed flex z-30 flex-col items-center space-x-2 justify-center bg-black/30 w-full h-full left-0 top-0 text-neutral-800">
         <p>Leave A Review Below:</p>
-        <div className="flex-initial w-6/12 bg-slate-100 py-3 my-4 rounded-xl
+        <div className="flex-initial w-10/12 sm:w-6/12 bg-slate-100 py-3 my-4 rounded-xl
                         shadow-md relative overflow-auto max-h-full">
           <IoIosCloseCircle className="text-emerald-700 text-2xl hover:text-emerald-600
                                        absolute top-3 right-3"
@@ -207,9 +203,7 @@ const ReviewForm = ({product, meta, onFormSubmit}) => {
                 Submit
               </button>
             </div>
-
           </form>
-
         </div>
       </div>
   )
