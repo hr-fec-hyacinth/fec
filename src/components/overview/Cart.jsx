@@ -101,7 +101,7 @@ const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
 
   return (
     <form>
-      {error && <span className='sm:ml-2 text-red-500 dark:text-yellow-400'>{error}</span>}
+      {error && <div className='w-full flex justify-center'><span className='sm:ml-2 text-red-500 dark:text-yellow-400'>{error}</span></div>}
     <div className='flex mt-1 sm:flex-row flex-col relative w-full sm:h-8 h-32'>
       {skus.length === 0 ?
       <select
