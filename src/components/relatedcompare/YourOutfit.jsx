@@ -48,13 +48,13 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOut
       <div className='flex justify-center'>
         <div className='slider relative flex w-10/12'>
           {currentIndex > 0 &&
-            <MdArrowBackIos className='back-arrow position relative left-12 top-2/4 z-20 cursor-pointer select-none' onClick={prevSlide} />
+            <MdArrowBackIos className='flex-none back-arrow absolute left-12 top-2/4 z-20 cursor-pointer select-none' onClick={prevSlide} />
           }
           {slides.map((slide, index) => (
             <YourOutfitCard slide={slide} key={index}index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} style={style} />
           ))}
           {currentIndex < length - 3 &&
-            <MdArrowForwardIos className='forward-arrow position relative right-12 top-2/4 z-20 cursor-pointer select-none' onClick={nextSlide} />
+            <MdArrowForwardIos className='flex-none forward-arrow absolute right-tenVH top-2/4 z-20 cursor-pointer select-none' onClick={nextSlide} />
           }
         </div>
       </div>
