@@ -7,6 +7,7 @@ import SortOptions from './SortOptions.jsx';
 import api from '../../../server/api.js';
 import StarDisplayQuarters from './StarDisplayQuarters.jsx'
 import { calculateAverageRating } from './reviewsHelper.js';
+import totalReviews from '../../helper/totalReviews.js'; // calculate total helper
 
 const RatingsReviews = ({product, meta}) => {
   // Retrieves Reviews of Current Product
@@ -34,7 +35,6 @@ const RatingsReviews = ({product, meta}) => {
   // useEffect that calls the API documentation.
   useEffect(()=> {
     // console.log('this is the productId"', product.id);
-
     if(product.id) {
       api.getReviews(Number(product.id), 1, 200, sortBy)
       .then(res => {
@@ -76,44 +76,45 @@ const RatingsReviews = ({product, meta}) => {
       setActiveForm(!activeForm);
     }
   }
+  //---CSS--------------------------------------//
+  const buttonCSS = 'drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105';
+
+
+  //----------------------RENDERS---------------//
+  const totalNumReviews = 0;
+  const renderingButton = () => {}
 
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
     <div>
-      {/* <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} /> */}
+    {meta.ratings &&
     <div id='ratings-reviews' className="pt-10 pb-3">
       RATINGS & REVIEWS
-      <div className="flex space-x-3">
+      <div className="flex flex-row space-x-3">
         <div id='ratings' className="w-4/12 pt-3" >
-          {meta.ratings && <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>}
+          <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
         <div id='review' className="w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
           <Reviews product={product} meta={meta}
-                   sortBy={sortBy} reviews={reviews} filterStars={starFilter}
-                   reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
+                    sortBy={sortBy} reviews={reviews} filterStars={starFilter}
+                    reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
           <div className="space-x-2">
-            <button id='loadMoreReviews'
-              className='drop-shadow-lg
-                border-2 border-indigo-300
-                px-2 py-2
-                hover:scale-105'
+            {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) && <button id='loadMoreReviews'
+              className={buttonCSS}
               onClick={handleOnClick.moreReviews}
               >MORE REVIEWS
-            </button>
-            <button id='submitReview' className='drop-shadow-lg
-              border-2 border-indigo-300
-              px-2 py-2
-              hover:scale-105'
+            </button>}
+            <button id='submitReview' className={buttonCSS}
               onClick={handleOnClick.toggleForm}
               >ADD A REVIEW +
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </div>}
     <div>
       {activeForm &&
       <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />}

@@ -3,7 +3,6 @@ import ReviewCard from './ReviewCard.jsx';
 
 const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
 
-  // console.log(reviewsCount);
   let isFilterOn = false;
   if(filterStars) {
     Object.keys(filterStars).forEach(el => {
@@ -15,7 +14,6 @@ const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
 
   let filteredList = [];
   if(reviews) {
-    // console.log('this is the number to display', reviewsCount);
     filteredList = reviews.slice(0, reviewsCount);
     let filteredList1 = [];
     // if(filterStars.filterOn)
@@ -26,8 +24,6 @@ const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
       filteredList = filteredList1.slice(0, reviewsCount);
     }
   }
-  // console.log('before filter', reviews)
-  // console.log('after filter', filteredList)
 
   return (
     <>
@@ -35,7 +31,7 @@ const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
     <div className="">
       {filteredList.map(el => {
         return (
-          <div key={el.review_id} id="a-review" className="mx-auto px-3">
+          <div key={el.review_id} className="ReviewCardContainer mx-auto px-3 ">
             <ReviewCard aReview={el} />
           </div>
         )
