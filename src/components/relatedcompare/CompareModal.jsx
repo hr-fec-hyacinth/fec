@@ -14,7 +14,7 @@ const CompareModal = ({ product, sliderInfo, currentCompare, openModal, setOpenM
       <div onClick={displayModal} className='bg-transparent w-full h-full z-30 fixed top-0 left-0'>
         <div className='modalContainer border rounded-lg bg-white h-84 w-96 z-20 top-1/2 left-1/2 flex flex-col px-4 pb-6 pt-3 fixed'>
           <div className='title'>
-            <h3 className='text-stone-500 text-xs'>Comparing</h3>
+            <h3 className='text-neutral-400 text-xs'>Comparing</h3>
             <CompareTable product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} />
           </div>
         </div>

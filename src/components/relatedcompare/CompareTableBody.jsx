@@ -28,7 +28,7 @@ const CompareTableBody = ({ detail }) => {
           {currentProductValue && <td className='text-left w-1/3 py-1.5'>{currentProductValue}</td>}
           {currentProductTrue && <td className='pr-28 text-left w-1/3 py-1.5'><MdCheck /></td>}
           {!currentProductTrue && !currentProductValue && <td className='text-left w-1/3 py-1.5'></td>}
-          <td className='text-stone-500 w-1/3 text-center py-1.5'>{detail[0]}</td>
+          <td className='text-neutral-400 w-1/3 text-center py-1.5'>{detail[0]}</td>
           {comparedProductValue && <td className='text-right w-1/3 py-1.5'>{comparedProductValue}</td>}
           {comparedProductTrue && <td className='pl-28 w-1/3 py-1.5'><MdCheck /></td>}
           {!comparedProductTrue && !comparedProductValue && <td className='text-left w-1/3 py-1.5'></td>}

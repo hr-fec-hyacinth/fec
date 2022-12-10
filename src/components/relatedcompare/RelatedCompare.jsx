@@ -44,10 +44,10 @@ const RelatedCompare = ({ product, switchProduct, styles, metaReview, outfit, se
       <div className='my-10' onClick={e => api.postInteraction(e, 'Related')}>
         <br/>
         {openModal && <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={currentCompare} openModal={openModal} setOpenModal={setOpenModal} />}
-        <h4 className='ml-28 text-stone-500'>RELATED PRODUCTS</h4>
+        <h4 className='ml-28 text-neutral-400'>RELATED PRODUCTS</h4>
         <RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} style={style} product={product} />
         <br/>
-        <h4 className='ml-28 text-stone-500 pt-8'>YOUR OUTFIT</h4>
+        <h4 className='ml-28 text-neutral-400 pt-8'>YOUR OUTFIT</h4>
         <YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style} />
         <br/>
       </div>

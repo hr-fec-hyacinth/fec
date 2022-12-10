@@ -42,17 +42,17 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfi
       <div className='px-2'>
       {index !== 3 && <RxCrossCircled onClick={removeFromOutfitList} className='relative cursor-pointer z-10 left-52 top-6 hover:text-white' productid={slide[1].id} />}
       {index === 3 && <RxCrossCircled className='relative -z-20 left-52 top-6 text-transparent' />}
-      {index === 3 && <div className='absolute bg-gradient-to-l from-white h-84 w-58 z-10'></div>}
-      <div onClick={eventHandler} className='absolute h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+      {index === 3 && <div className='absolute bg-gradient-to-l from-white dark:from-[#091E42] h-84 w-58 z-10'></div>}
+      <div onClick={eventHandler} className='absolute h-84 w-58 border border-black dark:border-white cursor-pointer' productid={slide[1].id}>
           <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center object-contain' >
             <img className='object-contain h-58 w-58 backdrop-blur' src={image} alt='Product Picture'/>
           </div>
       </div>
-        <div onClick={eventHandler} className='container h-84 w-58 border border-black cursor-pointer' productid={slide[1].id}>
+        <div onClick={eventHandler} className='container h-84 w-58 border border-black dark:border-white cursor-pointer' productid={slide[1].id}>
           <div style={{backgroundImage: 'url(' + image + ')'}} className='bg-center object-contain' >
             <img className='object-contain h-58 w-58 bg-white/[.5]' src={image} alt='Product Picture'/>
           </div>
-          <div className='p-2'>
+          <div className='p-1.5 bg-white/30'>
             <div className='text-xs'>{category.toUpperCase()}</div>
             <div className='pt-1 text-sm font-bold'>{name}</div>
             {sale_price && <><span className='text-red-500 py-2 text-xs'>{'$' + sale_price.slice(0, -3)}</span> <span className='line-through py-2 pl-4 text-xs'>{original_price.slice(0, -3)}</span></>}
