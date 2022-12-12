@@ -13,7 +13,6 @@ const QnAList = ({ product, search, questions }) => {
 
   const filterFunc = q => q.question_body.toLowerCase().includes(search.toLowerCase());
 
-  //when questions change add first two questions to display questions
   useEffect(() => {
     if (filterQuestions.length <= 2)
       setDisplayQuestions([...filterQuestions])
@@ -67,9 +66,9 @@ const QnAList = ({ product, search, questions }) => {
         {displayQuestions.map((q, index) => <OneQnA questionData={q} key={index} product={product}/>)}
       </div>
       <div className='flex'>
-        {more && <button className='border border-black p-2.5 font-bold m-2.5' onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</button>}
-        {displayQuestions.length > 2 && <button className='border border-black p-2.5 font-bold m-2.5' onClick={handleCollapseClick}>COLLAPSE</button>}
-        <button className='flex items-center border border-black p-2.5 font-bold m-2.5'
+        {more && <button className='border border-black p-2.5 font-bold m-2.5 bg-white/30' onClick={handleMoreClick}>MORE ANSWERED QUESTIONS</button>}
+        {displayQuestions.length > 2 && <button className='border border-black p-2.5 font-bold m-2.5 bg-white/30' onClick={handleCollapseClick}>COLLAPSE</button>}
+        <button className='flex items-center border border-black p-2.5 font-bold m-2.5 bg-white/30'
           onClick={handleAddQClick}>
           <div>ADD A QUESTION</div>
           <BsPlusLg className='ml-1'/>
