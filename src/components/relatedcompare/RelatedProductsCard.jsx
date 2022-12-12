@@ -13,6 +13,7 @@ const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenMo
   const original_price = '$' + slide[0].results[0].original_price;
   const ratings = slide[2].ratings;
   let sale_price;
+  console.log(slide)
 
   if (product.id === slide[1].id) {
     sale_price = style.sale_price;
@@ -37,7 +38,7 @@ const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenMo
   return (
     <>
       <div className='px-2'>
-      {index !== 3 && <MdStarBorder onClick={displayModal} className='relative cursor-pointer left-52 top-6 z-10 hover:text-white' productid={slide[1].id} />}
+      {index !== 3 && <MdStarBorder data-testid='modal-star' onClick={displayModal} className='relative cursor-pointer left-52 top-6 z-10 hover:text-white' productid={slide[1].id} />}
       {index === 3 && <MdStarBorder onClick={displayModal} className='relative -z-20 left-52 top-6 text-transparent' />}
       {index === 3 && <div className='absolute bg-gradient-to-l from-white dark:from-[#091E42] h-84 w-58 z-10'></div>}
       <div onClick={eventHandler} className='absolute h-84 w-58 border border-black cursor-pointer dark:border-white' productid={slide[1].id}>

@@ -15,13 +15,48 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 let product = {
-  "id": 11,
-  "name": "Air Minis 250",
-  "slogan": "Full court support",
-  "description": "This optimized air cushion pocket reduces impact but keeps a perfect balance underfoot.",
-  "category": "Basketball Shoes",
-  "default_price": "0",
+  "id": 37311,
+  "campus": "hr-rfe",
+  "name": "Camo Onesie",
+  "slogan": "Blend in to your crowd",
+  "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+  "category": "Jackets",
+  "default_price": "140.00",
+  "created_at": "2021-08-13T14:37:33.145Z",
+  "updated_at": "2021-08-13T14:37:33.145Z",
+  "features": [
+      {
+          "feature": "Fabric",
+          "value": "Canvas"
+      },
+      {
+          "feature": "Buttons",
+          "value": "Brass"
+      }
+  ]
 };
+
+let product2 = {
+    "id": 37312,
+    "campus": "hr-rfe",
+    "name": "Camo Onesie",
+    "slogan": "Blend in to your crowd",
+    "description": "The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.",
+    "category": "Test",
+    "default_price": "140.00",
+    "created_at": "2021-08-13T14:37:33.145Z",
+    "updated_at": "2021-08-13T14:37:33.145Z",
+    "features": [
+        {
+            "feature": "Fabric",
+            "value": "Canvas"
+        },
+        {
+            "feature": "Buttons",
+            "value": "Brass"
+        }
+    ]
+  };
 
 let style = [{
   "style_id": 220998,
@@ -454,7 +489,40 @@ let styles = {
   ]
 };
 
-let metaReview = {
+let metaReview1 = {
+  "product_id": "37311",
+  "ratings": {
+      "1": "53",
+      "2": "32",
+      "3": "88",
+      "4": "131",
+      "5": "307"
+  },
+  "recommended": {
+      "false": "105",
+      "true": "506"
+  },
+  "characteristics": {
+      "Fit": {
+          "id": 125031,
+          "value": "3.0992555831265509"
+      },
+      "Length": {
+          "id": 125032,
+          "value": "3.1322115384615385"
+      },
+      "Comfort": {
+          "id": 125033,
+          "value": "3.2133676092544987"
+      },
+      "Quality": {
+          "id": 125034,
+          "value": "3.2447368421052632"
+      }
+  }
+};
+
+let metaReview2 = {
   "product_id": "37313",
   "ratings": {
       "1": "5",
@@ -487,39 +555,165 @@ let metaReview = {
   }
 };
 
-let outfit = [[style, product, 3]]
+let outfit = [[style, product, 3]];
 
-let setOutfit = () => {}
+let setOutfit = () => {};
 
+const sliderInfo = [[styles, product, metaReview1]];
 
+const slide = [styles, product, metaReview1]
 
-const switchProduct = (product_id) => {
-  api.getProduct(product_id)
-    .then(product => updateProduct(product))
-    .then(() => api.getStyles(product_id))
-    .then(styles => updateStyles(styles.results))
-    .then(() => api.getMetaReviews(product_id))
-    .then(reviews => updateMetaReview(reviews))
-    .catch(err => console.log(err));
-}
+const currentCompare = 37314;
+
+const switchProduct = (product_id) => {product_id = 37314};
+
+// const switchProduct = (product_id) => {
+//   api.getProduct(product_id)
+//     .then(product => updateProduct(product))
+//     .then(() => api.getStyles(product_id))
+//     .then(styles => updateStyles(styles.results))
+//     .then(() => api.getMetaReviews(product_id))
+//     .then(reviews => updateMetaReview(reviews))
+//     .catch(err => console.log(err));
+// };
 
 describe('Renders the Related Products', () => {
   it('Renders the Related Products Section', async () => {
     const placeholder = 'RELATED PRODUCTS';
-    const { getByText } = render(<RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style}/>);
+    const { getByText } = render(<RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview1} outfit={outfit} setOutfit={setOutfit} style={style}/>);
     getByText(placeholder);
   });
+
   it('Renders the Outfit List Section', async () => {
     const placeholder = 'YOUR OUTFIT';
-    const { getByText } = render(<RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style}/>);
+    const { getByText } = render(<RelatedCompare product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview1} outfit={outfit} setOutfit={setOutfit} style={style}/>);
     getByText(placeholder);
+  });
+});
+
+// describe('Renders the Related Products', () => {
+//   it('Renders the Related Products Card', async () => {
+//     const placeholder = 'RELATED PRODUCTS';
+//     const { getByText } = render(<RelatedProductsCard product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style}/>);
+//     getByText(placeholder);
+//   });
+// })
+
+
+describe('Renders the Modal', () => {
+  it ('toggles modal off', async () => {
+    const mockSetOpenModal = jest.fn();
+    const { getByText } = render( <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={'37311'} openModal={false} setOpenModal={mockSetOpenModal} />);
+    const modalElement = getByText("Comparing");
+    fireEvent.click(modalElement);
+    expect(mockSetOpenModal).toHaveBeenCalled();
+  })
+
+  it ("renders modal", async () => {
+    const { getByText } = render( <CompareModal product={product} sliderInfo={sliderInfo} currentCompare={'37311'} openModal={false} setOpenModal={() => {}} />);
+    const modalElement = getByText("Comparing");
+    expect(modalElement).toBeInTheDocument();
   });
 })
 
-describe('Renders the Related Products', () => {
-  it('Renders the Related Products Card', async () => {
-    const placeholder = 'RELATED PRODUCTS';
-    const { getByText } = render(<RelatedProductsCard product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style}/>);
-    getByText(placeholder);
+
+describe('Renders the Add to Outfit Card', () => {
+    it('Renders Add to Outfit on Add to Outfit card', async () => {
+      const placeholder = 'Add to Outfit';
+      const slide = [{
+        addToOutfit: true,
+        image: 'https://via.placeholder.com/300?text=%2b'
+      }]
+      let outfit1 = [slide, [style, product, 3]];
+      const { getByText } = render(<AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview1} outfit={outfit1} setOutfit={setOutfit} />);
+      getByText(placeholder);
+    });
+
+    it('Adds Item to Outfit', async () => {
+        const placeholder = 'Add to Outfit';
+        const slide = [{
+          addToOutfit: true,
+          image: 'https://via.placeholder.com/300?text=%2b'
+        }]
+        let outfit1 = [slide];
+        const { rerender, getByText } = render(<AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview1} outfit={outfit1} setOutfit={setOutfit} />);
+        fireEvent.click(screen.getByTestId('add-outfit'))
+        rerender(<AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview1} outfit={outfit1} setOutfit={setOutfit} />);
+        //getByText(placeholder);
+        expect(outfit1).toHaveLength(1);
+      });
+
+      it('Adds Item to Outfit2', async () => {
+        const placeholder = 'Add to Outfit';
+        const slide = [{
+          addToOutfit: true,
+          image: 'https://via.placeholder.com/300?text=%2b'
+        }]
+        let outfit1 = [slide, [styles, product, metaReview1]];
+        const { rerender, getByText } = render(<AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview1} outfit={outfit1} setOutfit={setOutfit} />);
+        fireEvent.click(screen.getByTestId('add-outfit'))
+        rerender(<AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview1} outfit={outfit1} setOutfit={setOutfit} />);
+        //getByText(placeholder);
+        expect(outfit1).toHaveLength(2);
+      });
   });
-})
+
+describe('Renders the Related Products Card', () => {
+    it('Renders Category on Related Product Card', async () => {
+      const placeholder = 'JACKETS';
+      const { getByText } = render(<RelatedProductsCard slide={slide} switchProduct={switchProduct} index={0} key={0} openModal={() => {}} setOpenModal={() => {}} setCurrentCompare={() => {}} setCurrentIndex={() => {}} style={style} product={product} />);
+      getByText(placeholder);
+    });
+  });
+
+describe('Renders the Related Products Carousel', () => {
+    const user = userEvent.setup();
+
+    it('Renders Category on Related Product Card', async () => {
+      const placeholder = 'JACKETS';
+      const { getByText } = render(<RelatedProducts sliderInfo={sliderInfo} switchProduct={switchProduct} openModal={() => {}} setOpenModal={() => {}} setCurrentCompare={() => {}} style={style} product={product} />);
+      getByText(placeholder);
+    });
+
+    it('Increase current index by 1', async () => {
+        const placeholder = 'TEST';
+        let sliderInfo2 = [[styles, product, metaReview1], [styles, product2, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1] ]
+        const { getByText } = render(<RelatedProducts sliderInfo={sliderInfo2} switchProduct={switchProduct} openModal={() => {}} setOpenModal={() => {}} setCurrentCompare={() => {}} style={style} product={product} />);
+        await fireEvent.click(screen.getByTestId('forward-arrow'));
+        getByText(placeholder);
+      });
+
+    //   it('Decrease current index by 1', async () => {
+    //     let sliderInfo2 = [[styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1] ]
+    //     const { getByText } = render(<RelatedProducts sliderInfo={sliderInfo2} switchProduct={switchProduct} openModal={() => {}} setOpenModal={() => {}} setCurrentCompare={() => {}} style={style} product={product} />);
+    //     await fireEvent.click(screen.getByTestId('back-arrow'));
+    //     getByText(placeholder);
+    //   });
+  });
+
+describe('Renders the Add to Outfit Card', () => {
+  it('Removes an Item from Outfit List', async () => {
+    const placeholder = 'Add to Outfit';
+    const slide = [style, product, metaReview1]
+    let outfit1 = [[styles, product, metaReview1]];
+    const { rerender, getByText } = render(<AddOutfitItem slide={slide} index={1} product={product} styles={styles} metaReview={metaReview1} outfit={outfit1} setOutfit={setOutfit} switchProduct={switchProduct} setCurrentIndex={() => {}} style={style} />);
+    await fireEvent.click(screen.getByTestId('remove-outfit'));
+    expect(outfit1).toHaveLength(1);
+  });
+});
+
+describe('Renders the Your Outfit Carousel', () => {
+
+    it('Renders Category on Related Product Card', async () => {
+      const { getByText } = render(<YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview1} outfit={[]} setOutfit={setOutfit} style={style} />);
+
+    });
+
+    it('Increase current index by 1', async () => {
+        const placeholder = 'TEST';
+        let outfit2 = [[style, product, metaReview1], [style, product2, metaReview1], [style, product, metaReview1], [style, product, metaReview1], [style, product, metaReview1] ]
+        const { getByText } = render(<YourOutfit product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview1} outfit={outfit2} setOutfit={setOutfit} style={style} />);
+        await fireEvent.click(screen.getByTestId('forward-arrow'));
+        getByText(placeholder);
+      });
+  });

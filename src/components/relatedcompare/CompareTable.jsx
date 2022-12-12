@@ -11,6 +11,7 @@ const CompareTable = ({ product, sliderInfo, currentCompare }) => {
       comparedProduct = item[1];
     }
   })
+
   //Adding the related product characteristics to table object
   comparedProduct.features.forEach((char) => {
     if (tableDetails[char.feature] === undefined) {

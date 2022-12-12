@@ -4,7 +4,6 @@ import { RxCrossCircled } from 'react-icons/rx';
 import Stars from '../shared/Stars.jsx'
 
 const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfit, setCurrentIndex, index, style }) => {
-  console.log(slide)
   const category = slide[1].category;
   const name = slide[1].name;
   const image = slide[0][0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
@@ -40,7 +39,7 @@ const AddOutfitItem = ({ slide, product, switchProduct, styles, outfit, setOutfi
   return (
     <>
       <div className='px-2'>
-      {index !== 3 && <RxCrossCircled onClick={removeFromOutfitList} className='relative cursor-pointer z-10 left-52 top-6 hover:text-white' productid={slide[1].id} />}
+      {index !== 3 && <RxCrossCircled data-testid='remove-outfit' onClick={removeFromOutfitList} className='relative cursor-pointer z-10 left-52 top-6 hover:text-white' productid={slide[1].id} />}
       {index === 3 && <RxCrossCircled className='relative -z-20 left-52 top-6 text-transparent' />}
       {index === 3 && <div className='absolute bg-gradient-to-l from-white dark:from-[#091E42] h-84 w-58 z-10'></div>}
       <div onClick={eventHandler} className='absolute h-84 w-58 border border-black dark:border-white cursor-pointer' productid={slide[1].id}>
