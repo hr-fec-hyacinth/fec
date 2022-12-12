@@ -23,7 +23,6 @@ const QForm = ({ setModalOpen, product }) => {
     } else if (!mailformat.test(email)) {
       alert('Email not in correct format! Please enter vaild email.');
     } else {
-      //alert(`Form submitted successfully!\nQuestion: ${question}\nNickname: ${nickname}\nEmail: ${email}`);
       api.postQuestion(product.id, {body:question, name:nickname, email:email})
         .then(response => {
           setModalOpen(false);
@@ -61,13 +60,11 @@ const QForm = ({ setModalOpen, product }) => {
     <div className='font-thin'>
       <form onSubmit={handleSubmit} className='flex flex-col'>
         <textarea
-          className='resize-none border border-gray rounded-lg p-2 m-1 bg-white/30'
+          className='resize-none border border-gray rounded-lg p-2 m-1 bg-white/30 w-[40vw] h-[20vh] min-w-[20rem]'
           autoComplete='off'
           name="question"
           value={question}
           placeholder="Type your question here"
-          rows="5"
-          cols="80"
           onChange={(event) => setQuestion(event.target.value)}
         />
         <label className='m-1'>

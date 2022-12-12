@@ -8,7 +8,6 @@ const QnA = ({ product }) => {
 
   const [search, setSearch] = useState('')
   const [questions, setQuestions] = useState([]);
-  const [sendWarn, setSendWarn] = useState(false);
 
   const qHelpfulness = (a, b) => {
     if (a.question_helpfulness > b.question_helpfulness)
@@ -43,19 +42,16 @@ const QnA = ({ product }) => {
   useEffect(() => {
     if (product.id)
       api.getQuestions(product.id)
-        .then(response => response.data.results.sort(qHelpfulness))
-        .then(sortedResponse => sortAnswers(sortedResponse))
-        .then(sortedResponse => setQuestions(sortedResponse))
-        .then()
+        .then(response => {
+          var sortResult = response.data.results.sort(qHelpfulness)
+          sortResult = sortAnswers(sortResult)
+          setQuestions(sortResult)
+        })
         .catch(err => console.log('Error in QnAList getQuestions api call:', err));
-    else if (sendWarn)
-      console.warn("Product ID not defined, questions not requested");
-    else
-      setSendWarn(true);
   }, [product]);
 
   return (
-    <div className='flex flex-col max-h-screen'>
+    <div className='flex flex-col max-h-screen mx-1' onClick={e => api.postInteraction(e, 'Questions and Answers')}>
       <div className="my-4 text-neutral-400">QUESTIONS & ANSWERS</div>
       {questions.length > 0 &&
         <div className="flex

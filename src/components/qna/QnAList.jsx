@@ -13,7 +13,6 @@ const QnAList = ({ product, search, questions }) => {
 
   const filterFunc = q => q.question_body.toLowerCase().includes(search.toLowerCase());
 
-  //when questions change add first two questions to display questions
   useEffect(() => {
     if (filterQuestions.length <= 2)
       setDisplayQuestions([...filterQuestions])

@@ -27,8 +27,6 @@ const AForm = ({ setModalOpen, question }) => {
     } else if (!mailformat.test(email)) {
       alert('Email not in correct format! Please enter vaild email.');
     } else {
-      //alert(`Form submitted successfully!\nAnswer: ${answer}\nNickname: ${nickname}\nEmail: ${email}`);
-      // send to api
       api.postAnswer(question.question_id, {body:answer, name:nickname, email:email, photos: photosSrcList})
         .then(response => {
           setModalOpen(false);
@@ -93,13 +91,11 @@ const AForm = ({ setModalOpen, question }) => {
     <div className='font-thin'>
       <form onSubmit={handleSubmit} className='flex flex-col'>
         <textarea
-          className='resize-none border border-gray rounded-lg p-2 m-1 bg-white/30'
+          className='resize-none border border-gray rounded-lg p-2 m-1 bg-white/30 w-[40vw] h-[20vh] min-w-[20rem]'
           autoComplete='off'
           name="answer"
           value={answer}
           placeholder="Type your answer here"
-          rows="5"
-          cols="80"
           onChange={(event) => setAnswer(event.target.value)}
         />
         <label className='m-1'>
