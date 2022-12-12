@@ -29,7 +29,7 @@ const ExpandedImage = ({ setExpand, imageIndex, setImageIndex, imageList }) => {
       {imageIndex !== imageList.length - 1 && <div className='z-10 sm:hidden right-0 min-h-full w-1/12 absolute flex flex-col justify-center text-2xl text-center' onClick={next}></div>}
       {imageIndex !== imageList.length - 1 && <BsFillArrowRightCircleFill data-testid="expanded-right" className='hidden sm:block hover:text-gray-500 text-2xl text-white top-1/2 right-24 absolute z-10 cursor-default' onClick={next} />}
 
-      <div className='absolute bottom-4 flex'>
+      <div className='ExpandedImageDiv absolute bottom-4 flex'>
         {imageList.map((image, i) => {
           if (i === imageIndex) {
             return (<VscCircleLargeFilled key={i} data-testid="image-icon" className='sm:text-base text-2xl rounded-full text-blue-400 border-2 border-white mx-1 cursor-default' />);

@@ -21,11 +21,11 @@ const RatingsChart = ({metaRatings, ratingsCB, starFilter}) => {
 
         return (
           <div key={el + i} className='flex py-1 hover:bg-sky-300'
+            data-testid={el + 'starrating'}
             onClick={(e) => {
               e.preventDefault();
               ratingsCB(el);
-            }}
-          >
+            }} >
           <div className='w-3/12 text-xs'> {el + ' Star:'} </div>
           <div className='w-8/12 bg-white/30' style={{
             border: 'solid grey 1px',

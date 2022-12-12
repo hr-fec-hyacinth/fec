@@ -10,9 +10,6 @@ import { calculateAverageRating } from './reviewsHelper.js';
 import totalReviews from '../../helper/totalReviews.js'; // calculate total helper
 
 const RatingsReviews = ({product, meta}) => {
-  // Retrieves Reviews of Current Product
-  // Retrieves Reviews of Product Metadata
-  // Sets form render to false on initial load
   const [activeForm, setActiveForm] = useState(false);
   const [reviews, setReviews] = useState ([]);
   const [reviewsCount, setReviewsCount] = useState(2);
@@ -27,11 +24,6 @@ const RatingsReviews = ({product, meta}) => {
     "5": false
   });
 
-  // if(product) {
-  //   console.log('this is the product being passed in', product);
-  //   console.log(product.id);
-  // }
-
   // useEffect that calls the API documentation.
   useEffect(()=> {
     // console.log('this is the productId"', product.id);
@@ -43,13 +35,6 @@ const RatingsReviews = ({product, meta}) => {
     }
   }, [product, sortBy]);
 
-  // if(reviews) {
-  //   console.log('reviews can be seen', reviews);
-  // }
-
-  // this is going to be an object that handles the various types of form submissions
-    // stars handles filtering by stars and changes the starFilter
-    // moreReviews adds two to the number of reviews to load.
   const handleOnClick = {
     stars: (starNum) => {
       setStarFilter({
@@ -76,11 +61,9 @@ const RatingsReviews = ({product, meta}) => {
   //---CSS--------------------------------------//
   const buttonCSS = 'drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105';
 
-
   //----------------------RENDERS---------------//
   const totalNumReviews = 0;
   const renderingButton = () => {}
-
 
   // ReviewForm component purposefully added in but prevented from being rendered
   return (
@@ -96,17 +79,15 @@ const RatingsReviews = ({product, meta}) => {
         <div id='review' className="w-10/12 mx-auto sm:w-8/12">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
           <Reviews product={product} meta={meta}
-                    sortBy={sortBy} reviews={reviews} filterStars={starFilter}
-                    reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
+                   sortBy={sortBy} reviews={reviews} filterStars={starFilter}
+                   reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
           <div className="mx-auto space-x-2">
-            {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) && <button id='loadMoreReviews'
-              className={buttonCSS}
-              onClick={handleOnClick.moreReviews}
-              >MORE REVIEWS
+            {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) &&
+            <button id='loadMoreReviews' className={buttonCSS} onClick={handleOnClick.moreReviews}>
+                MORE REVIEWS
             </button>}
-            <button id='submitReview' className={buttonCSS}
-              onClick={handleOnClick.toggleForm}
-              >ADD A REVIEW +
+            <button id='submitReview' className={buttonCSS} onClick={handleOnClick.toggleForm}>
+              ADD A REVIEW +
             </button>
           </div>
         </div>
@@ -114,8 +95,7 @@ const RatingsReviews = ({product, meta}) => {
     </div>}
     <div className='form-container'>
       {activeForm &&
-      <ReviewForm product={product} meta={meta} onFormSubmit={handleOnClick.toggleForm} />}
-
+      <ReviewForm product={product} meta={meta} onFormSubmit={setActiveForm} />}
     </div>
     </div>
   )

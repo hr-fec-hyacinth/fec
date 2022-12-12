@@ -1,14 +1,17 @@
 import React from 'react';
-import { render, fireEvent, screen, within, configure } from '@testing-library/react';
+import { render, fireEvent, screen, within, configure, waitFor, act } from '@testing-library/react';
 import RatingsReviews from '../RatingsReviews.jsx';
 import SortOptions from '../SortOptions.jsx';
 import Ratings from '../Ratings.jsx';
 import Reviews from '../Reviews.jsx';
 import CharacteristicInputTable from '../CharacteristicInputTable.jsx';
 import ReviewForm from '../ReviewForm.jsx';
+import StarsInput from '../StarsInput.jsx';
+import api from '../../../../server/api.js';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 
-
-// jest.setupFiles(['../../../../public/index.html']);
+// jest.mock('../../../../server/api');
 
 let product = {
   "id": 11,
@@ -56,10 +59,10 @@ let reviews = [
   {
       "review_id": 1277585,
       "rating": 5,
-      "summary": "this is anamazing product",
+      "summary": "this is an amazing product",
       "recommend": true,
       "response": null,
-      "body": "I need to fill 50 words broski, 123456789012345678fdsafas90-",
+      "body": "I need to fill 50 words bro-ski, 123456789012345678fd1safas90-",
       "date": "2022-12-02T00:00:00.000Z",
       "reviewer_name": "calvin k",
       "helpfulness": 0,
@@ -101,14 +104,14 @@ let reviews = [
           {
               "id": 2455479,
               "url": "blob:http://localhost:3000/e8584f8d-a656-4037-8d34-ec9fb2c9c438"
-          },
-          {
+            },
+            {
               "id": 2455480,
               "url": "blob:http://localhost:3000/2c37f435-d4c5-4c85-a953-40756b97ed4c"
-          }
-      ]
-  },
-  {
+            }
+          ]
+        },
+    {
       "review_id": 1275487,
       "rating": 5,
       "summary": "how now brown cow",
@@ -119,17 +122,17 @@ let reviews = [
       "reviewer_name": "browncow",
       "helpfulness": 3,
       "photos": [
-          {
-              "id": 2455392,
-              "url": "http://res.cloudinary.com/joehan/image/upload/v1658000193/l1eitivj8vybv7usvwdw.jpg"
-          },
-          {
-              "id": 2455393,
-              "url": "http://res.cloudinary.com/joehan/image/upload/v1658000213/srdrekvlzy8yi3mbesrk.jpg"
-          }
+        {
+          "id": 2455392,
+          "url": "http://res.cloudinary.com/joehan/image/upload/v1658000193/l1eitivj8vybv7usvwdw.jpg"
+        },
+        {
+          "id": 2455393,
+          "url": "http://res.cloudinary.com/joehan/image/upload/v1658000213/srdrekvlzy8yi3mbesrk.jpg"
+        }
       ]
-  }
-]
+    }
+  ]
 
 let starFilterNone = {
   "filterOn": false,
@@ -140,22 +143,40 @@ let starFilterNone = {
   "5": false
 }
 
+let cardsClassName = 'ReviewCardContainer mx-auto px-3';
+
 describe('Renders the Ratings and Reviews Section', () => {
+  // beforeEach(() => jest.clearAllMocks());
 
   it('Renders the RatingReviews sSection', () => {
+    // api.getReviews.mockResolvedValue({results: reviews});
+
     const placeholder = 'RATINGS & REVIEWS';
     const { getByText } = render(<RatingsReviews product={product} meta={metaReview} />);
     getByText(placeholder);
-  })
+  });
 
   it('Initially sorts as relevance', () => {
+    // api.getReviews.mockResolvedValue({results: reviews});
+
     const placeholder = 'relevance';
     const { getByText } = render(<RatingsReviews product={product} meta={metaReview} />);
     getByText(placeholder);
-  })
+  });
 
-}
-)
+  it('Clicking on Submit Review Opens Form and load inputs', async () => {
+    // api.getReviews.mockResolvedValue({results: reviews});
+
+    render(<RatingsReviews product={product} meta={metaReview} />);
+    const submitForm = document.getElementById('submitReview');
+    fireEvent.click(submitForm);
+    const formModal = document.getElementsByClassName('form-container');
+    screen.getAllByRole('form');
+  });
+
+  // this isn't working maybe because it relies on an api call
+
+});
 
 describe('Checking SortOptions Renders with Ratings',  () => {
   it('Sort By Section is rendered', async () => {
@@ -172,7 +193,16 @@ describe('Checking SortOptions Renders with Ratings',  () => {
 });
 
 describe('ReviewList', () => {
-  let cardsClassName = 'ReviewCardContainer mx-auto px-3';
+  const starFilterOne = {
+    ...starFilterNone,
+    "1": true
+  }
+
+  const starFilterOneAndFive = {
+    ...starFilterNone,
+    "1": true,
+    "5": true
+  }
 
   it('Check that I recommend this product works', async () => {
     const numberOfReviews = reviews.length;
@@ -191,11 +221,6 @@ describe('ReviewList', () => {
     expect(cards).toHaveLength(2);
   });
 
-  const starFilterOne = {
-    ...starFilterNone,
-    "1": true
-  }
-
   it('Filter Reviews By 1 Star Works', async () => {
     const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterOne} reviewsCount={2} starFilterActive={false}/>);
     let cards = container.getElementsByClassName(cardsClassName);
@@ -203,42 +228,94 @@ describe('ReviewList', () => {
   });
 
   it('Filtering Reviews By 2 Stars', async () => {
-    const starFilterOneAndFive = {
-      ...starFilterNone,
-      "1": true,
-      "5": true
-    }
-
     const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterOneAndFive} reviewsCount={4} starFilterActive={false}/>);
     let cards = container.getElementsByClassName(cardsClassName);
     expect(cards).toHaveLength(4);
   })
 
+  it('Should Expand the Image', async () => {
+    const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterNone} reviewsCount={2} starFilterActive={false}/>)
+    let images = await container.getElementsByClassName('object-contain reviewsImage')[0];
+    fireEvent.click(images);
+    let popupImage = await container.getElementsByClassName('ExpandedImageDiv absolute bottom-4 flex');
+    screen.getAllByRole('img');
+  });
+
+  // it('Tests Interaction between the rating chart & reviews display', async () => {
+  //   const {container} = await render(<RatingsReviews product={product} meta={metaReview} />)
+  //   let oneStarRating = await screen.getByTestId('1starrating');
+  //   act(() => {
+  //     fireEvent.click(oneStarRating);
+  //   });
+  //   let reviews = document.getElementById('reviews')
+  //   let cards = container.getElementsByClassName(cardsClassName);
+  //   console.log(cards);
+  //   screen.debug();
+  //   // expect(cards).toHaveLength(1);
+  // });
 
 });
 
-// it('Clicking the form button loads the form', async () => {
-
-// });
 
 describe('Unit Test for Posting A Review Form', () => {
 
-  it('Should Open the Form', async () => {
-    // setupFiles(["https://widget.cloudinary.com/v2.0/global/all.js"])
-  //   <script
-  //     src="https://widget.cloudinary.com/v2.0/global/all.js"
-  //     type="text/javascript"
-  // ></script>
-    jest.mock()
-
+  it(`Clicking the 'leave a review button' should open and load the Form`, async () => {
     await render(<RatingsReviews product={product} meta={metaReview} />);
     let formButton = await document.getElementById('submitReview');
     fireEvent.click(formButton);
     let form = await document.getElementById('formDiv');
-    // form load is breaking here due to widget 
     screen.getByText('Leave A Review Below:', {exact: false})
   })
 
+});
 
+
+describe('Testing StarsInput for UI / Value Changes', () => {
+  it('Should test rendering of stars if there were no inputs', async () => {
+    await render(<StarsInput selectedRating={null} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should load the stars', async () => {
+    await render(<StarsInput selectedRating={'0'} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should load the stars', async () => {
+    await render(<StarsInput selectedRating={'1'} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should load the stars', async () => {
+    await render(<StarsInput selectedRating={'2'} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should load the stars', async () => {
+    await render(<StarsInput selectedRating={'3'} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should load the stars', async () => {
+    await render(<StarsInput selectedRating={'4'} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should load the stars', async () => {
+    await render(<StarsInput selectedRating={'5'} cb={()=> {}} />)
+    screen.debug;
+  })
+
+  it('Should test if hovering over stars input changes the number of stars being highlighted', async () => {
+    const { container } = await render(<StarsInput selectedRating={'5'} cb={()=> {}} />)
+    const beforeHoverStarList = await container.querySelectorAll("[data-icon='aStarIcon']");
+    // expect(beforeHoverStarList).toHaveLength(5);
+    const star3 = screen.getByTestId('stars2')
+    fireEvent.mouseOver(star3);
+    const filledStarList = container.querySelectorAll("[data-icon='aStarIcon']");
+    expect(filledStarList).toHaveLength(3);
+
+  });
 
 });
+
