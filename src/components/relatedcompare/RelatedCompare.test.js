@@ -567,16 +567,6 @@ const currentCompare = 37314;
 
 const switchProduct = (product_id) => {product_id = 37314};
 
-// const switchProduct = (product_id) => {
-//   api.getProduct(product_id)
-//     .then(product => updateProduct(product))
-//     .then(() => api.getStyles(product_id))
-//     .then(styles => updateStyles(styles.results))
-//     .then(() => api.getMetaReviews(product_id))
-//     .then(reviews => updateMetaReview(reviews))
-//     .catch(err => console.log(err));
-// };
-
 describe('Renders the Related Products', () => {
   it('Renders the Related Products Section', async () => {
     const placeholder = 'RELATED PRODUCTS';
@@ -590,15 +580,6 @@ describe('Renders the Related Products', () => {
     getByText(placeholder);
   });
 });
-
-// describe('Renders the Related Products', () => {
-//   it('Renders the Related Products Card', async () => {
-//     const placeholder = 'RELATED PRODUCTS';
-//     const { getByText } = render(<RelatedProductsCard product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} style={style}/>);
-//     getByText(placeholder);
-//   });
-// })
-
 
 describe('Renders the Modal', () => {
   it ('toggles modal off', async () => {
@@ -682,13 +663,6 @@ describe('Renders the Related Products Carousel', () => {
         await fireEvent.click(screen.getByTestId('forward-arrow'));
         getByText(placeholder);
       });
-
-    //   it('Decrease current index by 1', async () => {
-    //     let sliderInfo2 = [[styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1], [styles, product, metaReview1] ]
-    //     const { getByText } = render(<RelatedProducts sliderInfo={sliderInfo2} switchProduct={switchProduct} openModal={() => {}} setOpenModal={() => {}} setCurrentCompare={() => {}} style={style} product={product} />);
-    //     await fireEvent.click(screen.getByTestId('back-arrow'));
-    //     getByText(placeholder);
-    //   });
   });
 
 describe('Renders the Add to Outfit Card', () => {
