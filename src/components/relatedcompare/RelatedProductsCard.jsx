@@ -13,8 +13,7 @@ const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenMo
   const original_price = '$' + slide[0].results[0].original_price;
   const ratings = slide[2].ratings;
   let sale_price;
-  console.log(slide)
-
+  
   if (product.id === slide[1].id) {
     sale_price = style.sale_price;
   } else {
