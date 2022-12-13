@@ -118,4 +118,8 @@ api.postPhotos = (data) => {
   return axios.post(`https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`, data)
 }
 
+api.voteHelpfulReview = (reviewId) => {
+  return axios.put(URL + `reviews/${reviewId}/helpful`, {}, {headers: {Authorization: AUTHKEY}})
+}
+
 export default api;

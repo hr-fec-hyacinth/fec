@@ -3,13 +3,18 @@ import { useState , useEffect} from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import StarDisplayQuarters from './StarDisplayQuarters.jsx';
 import ExpandedImage from './ExpandedImage.jsx';
+import api from '../../../server/api.js';
 
 
 const ReviewCard = ({aReview}) => {
   const [expand, setExpand] = useState(false);
   const [clickIndex, setClickIndex] = useState(0)
   const [imageIndex, setImageIndex] = useState(0);
+  const [isHelpful, setIsHelpful] = useState(0);
 
+  useEffect(() => {
+    aReview.helpfulness ? setIsHelpful(aReview.helpfulness) : isHelpful;
+  }, []);
 
   const dateString = aReview.date;
   const date = new Date(dateString);
@@ -29,8 +34,23 @@ const ReviewCard = ({aReview}) => {
     setExpand(true);
   }
 
+  let helpfulness = aReview.helpfulness ? helpfulness = aReview.helpfulness : helpfulness = 0;
+
+  const onHelpfulClick = (e) => {
+    api.voteHelpfulReview(aReview.review_id).
+      then((result) => {
+        helpfulness+= 1;
+        console.log('post works', helpfulness);
+      }).
+      then((result) => {
+        setIsHelpful(isHelpful + 1);
+      }).
+      catch((err) => {return new Error('could not add')});
+  }
+
+
   return (
-    <div id="ReviewCard" className="bg-slate-100 mx-auto p-3 mb-3 border-b-2 border-slate-700 shadow-md hover:shadow-xl
+    <div className="bg-slate-100 mx-auto p-3 mb-3 border-b-2 border-slate-700 shadow-md hover:shadow-xl
          dark:text-white dark:bg-white/20 dark:border-white rounded-lg" data-testid='reviewCard'>
       <div className="flex flex-wrap">
         <div className="flex-none"><StarDisplayQuarters number={aReview.rating} /></div>
@@ -66,7 +86,7 @@ const ReviewCard = ({aReview}) => {
       </div>}
 
       <div className='text-xs'>
-        Helpful?  <span>Yes</span> ({aReview.helpfulness})  |  <span>No</span>
+        Helpful?  <span onClick={onHelpfulClick}>Yes</span> ({isHelpful})  |  <span>No</span>
       </div>
     </div>
   )

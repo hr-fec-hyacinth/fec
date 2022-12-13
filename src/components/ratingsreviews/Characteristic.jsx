@@ -45,7 +45,7 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
   }
 
   return (
-    <div>
+    <div className="CharacteristicBarChart">
       <span className="text-l"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
       <span> </span>
       <div className="flex flex-wrap mx-auto">
