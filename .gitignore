@@ -3,3 +3,5 @@ config.js
 output.css
 package-lock.json
 coverage
+.env
+bundle.js

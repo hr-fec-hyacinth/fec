@@ -1,4 +1,7 @@
 const path = require("path");
+const webpack = require("webpack");
+const dotenv = require('dotenv').config();
+const process = require('process');
 
 module.exports = {
   mode: "development",
@@ -40,5 +43,22 @@ module.exports = {
     compress: true,
     // [port] what port on our local machine to run the dev server
     port: 3000,
+  },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+    new webpack.EnvironmentPlugin(['AUTHKEY']),
+    new webpack.EnvironmentPlugin(['CLOUDINARYCLOUDNAME']),
+  ],
+  resolve :{
+    fallback: {
+      "fs": false,
+      "os": false,
+      "path": require.resolve("path-browserify")
+    },
+    alias: {
+      process: "process/browser"
+    }
   }
 }
