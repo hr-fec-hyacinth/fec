@@ -4,9 +4,9 @@ import { AiFillCaretUp } from 'react-icons/ai'
 const Characteristic = ({characteristicName, characteristicObj}) => {
 
   const boxFill = {
-    height: '10px',
+    height: '5px',
     // width: '100%',
-    minHeight: '10px',
+    minHeight: '5px',
     backgroundColor: '#2e93ff',
   }
 
@@ -46,20 +46,20 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
 
   return (
     <div>
-      <span className="text-xl"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
+      <span className="text-l"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
       <span> </span>
       <div className="flex flex-wrap mx-auto">
-        <div className="w-4/12 border-2" style={boxFill}>
-          <p style={{textAlign: 'left', verticalAlign: 'middle'}}>{leftVar}</p>
+        <div className="w-4/12 border-1 text-xs sm:text-sm" style={boxFill}>
+          <p style={{textAlign: 'left', verticalAlign: 'bottom'}}>{leftVar}</p>
         </div>
-        <div className="w-4/12 border-2" style={boxFill}>
-          <p style={{textAlign: 'center', verticalAlign: 'middle'}}></p>
+        <div className="w-4/12 border-1 text-xs sm:text-sm" style={boxFill}>
+          <p style={{textAlign: 'center', verticalAlign: 'bottom'}}></p>
         </div>
-        <div className="w-4/12 border-2" style={boxFill}>
+        <div className="w-4/12 border-1 text-xs sm:text-sm" style={boxFill}>
           <p style={{textAlign: 'right'}}>{rightVar}</p>
         </div>
         <div style={arrowHolder}>
-        <AiFillCaretUp className='text-blue-400 relative' style={arrowStyle} />
+        <AiFillCaretUp className='text-neutral-300 sm:text-blue-400 relative' style={arrowStyle} />
         </div>
       </div>
     </div>

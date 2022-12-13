@@ -16,19 +16,19 @@ const RatingsChart = ({metaRatings, ratingsCB, starFilter}) => {
           width: `${(metaRatings[el]/totalRatings) * 100}%`,
           height: '100%',
           verticalAlign: 'middle',
-          backgroundColor: '#e0f747ee'
+          backgroundColor: '#4ba9f6ec'
         }
 
         return (
           <div key={el + i} className='flex py-1 hover:bg-sky-300'
+            data-testid={el + 'starrating'}
             onClick={(e) => {
               e.preventDefault();
               ratingsCB(el);
-            }}
-          >
+            }} >
           <div className='w-3/12 text-xs'> {el + ' Star:'} </div>
-          <div className='w-8/12' style={{
-            border: 'solid black 1px',
+          <div className='w-8/12 bg-white/30' style={{
+            border: 'solid grey 1px',
             backgroundColor: 'light gray'
           }}>
             <div style={fillStyle}></div>
