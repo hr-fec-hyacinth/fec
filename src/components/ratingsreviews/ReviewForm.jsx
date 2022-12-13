@@ -4,6 +4,7 @@ import StarsInput from './StarsInput.jsx';
 import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 import PhotoUpload from '../shared/PhotoUpload.jsx';
+import Thumbnails from '../shared/Thumbnails.jsx';
 import axios from 'axios';
 
 require('dotenv').config();

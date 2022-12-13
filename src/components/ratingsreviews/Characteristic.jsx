@@ -26,6 +26,12 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
   let rightVar = '++';
 
   switch(characteristicName) {
+    case 'Size':
+      leftVar = 'Small';
+      rightVar = 'Large';
+    case 'Width':
+      leftVar = 'Narrow';
+      rightVar = 'Wide'
     case 'Fit':
       leftVar = 'Narrow';
       rightVar = 'Wide';

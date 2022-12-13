@@ -174,7 +174,15 @@ describe('Renders the Ratings and Reviews Section', () => {
     screen.getAllByRole('form');
   });
 
-  // this isn't working maybe because it relies on an api call
+  ('Clicking on Submit Review Opens Form and load inputs', async () => {
+    // api.getReviews.mockResolvedValue({results: reviews});
+
+    render(<RatingsReviews product={product} meta={metaReview} />);
+    const submitForm = document.getElementById('moreReviews');
+    fireEvent.click(submitForm);
+
+  });
+
 
 });
 

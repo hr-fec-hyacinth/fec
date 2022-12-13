@@ -25,20 +25,6 @@ import {get100Newest37314,
 
 jest.mock('../../../../server/api.js');
 
-// describe('Reviews can be filtered with sort options', async () => {
-//   const user = userEvent.setup(); // allows writing multiple consecutive interactions
-//   render(<App />);
-//   it('should increase the counter' () => {
-//     expect(screen.getByTestId('counter')).toHaveTextContent('0');
-//     return user.click(screen.getByRole('button', {name:
-//       'Increase!'}))
-//       .then(() => {
-//         expect(screen.getByTestId('counter')).toHaveTextContent
-//         ('1');
-//       })
-//   })
-// });
-
 describe('Render the Ratings/Reviews App Component with Mock API Data', () => {
   const user = userEvent.setup();
 
@@ -93,7 +79,7 @@ describe('Render the Ratings/Reviews App Component with Mock API Data', () => {
   it('Filter Should be Additive', async () => {
     api.getReviews.mockResolvedValue(get100Relevant37314);
     await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
-  
+
     let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
 
     let Starbar = screen.getByText('1 Star:');
@@ -124,7 +110,16 @@ describe('testing clicking barChar', () => {
       then(() => {
         screen.getByClassName('inline text-blue-400 max-h-full').toHaveLength(3);
       })
-
   });
 
+
 })
+
+describe('Add inputs to Forms', () => {
+  // it(('Add Inputs to Review Forms'), () => {
+  //   render(<ReviewForm setModalOpen={setModalOpen} question={'string'}/>);
+
+  // })
+
+
+}

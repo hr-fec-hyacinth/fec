@@ -1,7 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import StarDisplayQuarters from './StarDisplayQuarters.jsx';
-import ExpandedImage from './ExpandedImage.jsx';
 import api from '../../../server/api.js';
 import Thumbnails from './../shared/Thumbnails.jsx'
 
