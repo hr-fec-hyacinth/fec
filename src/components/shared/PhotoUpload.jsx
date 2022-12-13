@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState, useEffect, Component } from 'react';
-import { PHOTOAUTHKEY } from '../../../server/config.js';
-import { cloudinaryCloudName } from '../../../server/config.js';
+require('dotenv').config();
+let PHOTOAUTHKEY = process.env.PHOTOAUTHKEY;
+let CLOUDINARYCLOUDNAME = process.env.CLOUDINARYCLOUDNAME;
 import api from '../../../server/api.js';
 
 const PhotoUpload = ({callback}) => {
