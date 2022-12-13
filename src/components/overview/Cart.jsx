@@ -158,7 +158,7 @@ const Cart = ({product, style, outfit, setOutfit, styles, metaReview}) => {
         <span>Add to Bag</span>
         <span>+</span>
       </button>
-      <button className={skus.length === 0 ? 'sm:ml-2 border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle    text-xl p-4 sm:p-2 sm:mb-0 mb-2' : 'border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle text-xl p-4 sm:p-0 sm:mb-0 mb-2 dark:bg-white/30'} onClick={toggleOutfit}>
+      <button data-testid="toggle-cart" className={skus.length === 0 ? 'sm:ml-2 border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle    text-xl p-4 sm:p-2 sm:mb-0 mb-2' : 'border-2 sm:mr-0 mt-4 sm:w-2/12 mx-auto sm:mx-0 align-middle text-xl p-4 sm:p-0 sm:mb-0 mb-2 dark:bg-white/30'} onClick={toggleOutfit}>
         {!inOutfit && <AiOutlineHeart className='mx-auto transition-colors'/>}
         {inOutfit && <AiFillHeart className='mx-auto transition-colors'/>}
       </button>

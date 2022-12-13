@@ -28,11 +28,11 @@ const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
   return (
     <>
     {filteredList &&
-    <div className="">
+    <div className="reviewsList" data-testid="reviewList">
       {filteredList.map(el => {
         return (
-          <div key={el.review_id} className="ReviewCardContainer mx-auto px-3 ">
-            <ReviewCard aReview={el} />
+          <div key={el.review_id} className="ReviewCardContainer mx-auto px-3 " >
+            <ReviewCard aReview={el} data-testid='reviewCardContainer' />
           </div>
         )
       }
