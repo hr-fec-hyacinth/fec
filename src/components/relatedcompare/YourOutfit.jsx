@@ -3,7 +3,6 @@ import axios from 'axios';
 import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
-//First card of list always needs to be add to outfit list
 const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOutfit, style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = outfit.length;

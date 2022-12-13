@@ -12,13 +12,13 @@ const CompareTable = ({ product, sliderInfo, currentCompare }) => {
     }
   })
 
-  //Adding the related product characteristics to table object
+
   comparedProduct.features.forEach((char) => {
     if (tableDetails[char.feature] === undefined) {
       tableDetails[char.feature] = [{comparedProduct: char.value}];
     }
   })
-  //Adding the current product characteristics to table object
+
   product.features.forEach((char) => {
     if (tableDetails[char.feature] === undefined) {
       tableDetails[char.feature] = [{currentProduct: char.value}];

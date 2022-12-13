@@ -24,7 +24,6 @@ const RelatedCompare = ({ product, switchProduct, styles, metaReview, outfit, se
   }, [product])
 
   useEffect(() => {
-    //Create an array of promises for the API calls
     const promises = related.map((item) => {
       return Promise.all([
         api.getStyles(item),
@@ -33,7 +32,7 @@ const RelatedCompare = ({ product, switchProduct, styles, metaReview, outfit, se
       ])
       .catch((err) => {console.log(err)})
     });
-    //Wait for all of the promises to resolve
+
     Promise.all(promises)
     .then((res) => {setSliderInfo(res)})
     .catch((err) => {console.log(err)});

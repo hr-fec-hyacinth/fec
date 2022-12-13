@@ -6,14 +6,13 @@ import averageRating from '../../helper/averageRating.js';
 import RelatedProducts from './RelatedProducts.jsx';
 
 const RelatedProductsCard = ({ slide, switchProduct, index, openModal, setOpenModal, setCurrentCompare, setCurrentIndex, style, product }) => {
-  //Using the first style as default
   const category = slide[1].category;
   const name = slide[1].name;
   const image = slide[0].results[0].photos[0].thumbnail_url || 'https://via.placeholder.com/300?text=Product Image';
   const original_price = '$' + slide[0].results[0].original_price;
   const ratings = slide[2].ratings;
   let sale_price;
-  
+
   if (product.id === slide[1].id) {
     sale_price = style.sale_price;
   } else {
