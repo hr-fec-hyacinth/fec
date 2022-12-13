@@ -111,7 +111,7 @@ module.exports = {
       80: '20rem',
       84: '21.5rem',
       96: '24rem',
-      tenVH: '0',
+      oneVW: '1vw',
       pad: '5.5rem'
     },
     animation: {
