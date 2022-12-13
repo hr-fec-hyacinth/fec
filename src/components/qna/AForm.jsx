@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 import Thumbnails from './../shared/Thumbnails.jsx'
-
+import PhotoUpload from './PhotoUpload.jsx'
 
 const AForm = ({ setModalOpen, question }) => {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-  const [photos, setPhotos] = useState([]);
   const [photosSrcList, setPhotosSrcList] = useState([]);
   const [nickWarn, setNickWarn] = useState(<div className='my-2.5'></div>);
   const [mailWarn, setMailWarn] = useState(<div className='my-2.5'></div>);
@@ -47,30 +46,6 @@ const AForm = ({ setModalOpen, question }) => {
 
   const handleEmailClick = () => {
     setMailWarn(<div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For authentication reasons, you will not be emailed</div>)
-  }
-
-  const handleFiles = e => {
-    let files = Array.from(event.target.files)
-
-    const promises = files.map(f => {
-      var formData = new FormData();
-      formData.append("file", f);
-      formData.append("upload_preset", 'wjuxohsi');
-      return api.postPhotos(formData)
-    });
-
-    Promise.all(promises)
-      .then(responses => {
-        const data = responses.map(response => response.data.url)
-        setPhotosSrcList(photosSrcList.concat(data))
-      }).catch(err => console.warn('Error uploading picture', err));
-  }
-
-  var uploadButton;
-  if(photosSrcList.length >= 5) {
-    uploadButton = <div className='my-3.5'></div>
-  } else {
-    uploadButton = <input type='file' name='image' onChange={handleFiles} multiple/>
   }
 
   return (
@@ -113,7 +88,7 @@ const AForm = ({ setModalOpen, question }) => {
           />
         </label>
         {mailWarn}
-        {uploadButton}
+        <PhotoUpload photosSrcList={photosSrcList} setPhotosSrcList={setPhotosSrcList}/>
         <Thumbnails photosSrcList={photosSrcList} expandOnClick={false}/>
         <input className='font-normal' type="submit" value="Submit"/>
       </form>
