@@ -1,15 +1,10 @@
-import React from 'react';
-import { useState , useEffect} from 'react';
+import React, { useState , useEffect} from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import StarDisplayQuarters from './StarDisplayQuarters.jsx';
-import ExpandedImage from './ExpandedImage.jsx';
+import Thumbnails from './../shared/Thumbnails.jsx'
 
 
 const ReviewCard = ({aReview}) => {
-  const [expand, setExpand] = useState(false);
-  const [clickIndex, setClickIndex] = useState(0)
-  const [imageIndex, setImageIndex] = useState(0);
-
 
   const dateString = aReview.date;
   const date = new Date(dateString);
@@ -23,11 +18,6 @@ const ReviewCard = ({aReview}) => {
 
   const renderResponse = aReview.response ? (<div className="w-9/12 justify-center">aReview.response</div>) : (<div></div>);
   const someText = '';
-
-  const handleOnImageClick = (e) => {
-    setImageIndex(Number(e.currentTarget.getAttribute('i')));
-    setExpand(true);
-  }
 
   return (
     <div id="ReviewCard" className="bg-slate-100 mx-auto p-3 mb-3 border-b-2 border-slate-700 shadow-md hover:shadow-xl
@@ -43,21 +33,7 @@ const ReviewCard = ({aReview}) => {
         {aReview.body}
         {renderResponse}
       </div>
-
-      {aReview.photos.length > 0 &&
-      <div className='flex flex-row flex-shrink flex-grow overflow-auto'>
-        {aReview.photos.map((el, i) => {
-          return (
-            <div className="max-w-[5rem] p-x-2 border rounded border-slate-300" key={'photo' + el.id}>
-              <img src={el.url} key={'url_id' + el.id} className="object-contain reviewsImage"
-              i={i} onClick={handleOnImageClick}/>
-            </div>
-          )}
-        )}
-        {(expand && aReview.photos) &&
-        <ExpandedImage setExpand={setExpand} imageIndex={imageIndex} setImageIndex={setImageIndex} imageList={aReview.photos} />}
-      </div>}
-
+      <Thumbnails photosSrcList={aReview.photos.map(p => p.url)} expandOnClick={true} />
       {aReview.recommend &&
       <div>
         <span className="text-sm">

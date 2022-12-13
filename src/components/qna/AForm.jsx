@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
+import Thumbnails from './../shared/Thumbnails.jsx'
 
 
 const AForm = ({ setModalOpen, question }) => {
@@ -72,8 +73,6 @@ const AForm = ({ setModalOpen, question }) => {
     uploadButton = <input type='file' name='image' onChange={handleFiles} multiple/>
   }
 
-  const thumbnails = photosSrcList.map((src, i) => <img className='max-w-[5rem] p-[3px] border rounded border-slate-300 bg-white/30' src={src} key={i} />);
-
   return (
     <div className='font-thin'>
       <form onSubmit={handleSubmit} className='flex flex-col'>
@@ -115,9 +114,7 @@ const AForm = ({ setModalOpen, question }) => {
         </label>
         {mailWarn}
         {uploadButton}
-        <div className='flex flex-row gap-3 m-3 self-center bg-white/30'>
-          {thumbnails}
-        </div>
+        <Thumbnails photosSrcList={photosSrcList} expandOnClick={false}/>
         <input className='font-normal' type="submit" value="Submit"/>
       </form>
     </div>
