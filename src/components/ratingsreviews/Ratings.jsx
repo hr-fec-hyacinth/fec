@@ -8,21 +8,17 @@ import StarDisplayQuarters from './StarDisplayQuarters.jsx'
 const Ratings = ({product, meta, ratingsCB, starFilter}) => {
   const [averageRating, setAverageRating] = useState(0);
 
-  // calculates average rating upon load
   useEffect(() => {
     if(meta.ratings) {
       setAverageRating(calculateAverageRating(meta.ratings));
     }
-  }, [meta]);
+  }, []);
 
-  console.log(meta.recommended.true, meta.recommended.false);
-  console.log((Number(meta.recommended.true) + Number(meta.recommended.false)));
-  console.log(Number(meta.recommended.true) / ((Number(meta.recommended.true) + Number(meta.recommended.false))))
   const percentRecommended = meta.recommended ?
-                            Math.round(
-                              (((Number(meta.recommended.true) /
-                                (Number(meta.recommended.true) + Number(meta.recommended.false)))) * 100)) :
-                            'A lot';
+    Math.round(
+      (((Number(meta.recommended.true) /
+        (Number(meta.recommended.true) + Number(meta.recommended.false)))) * 100)) :
+    'A lot';
 
   return (
     <div>

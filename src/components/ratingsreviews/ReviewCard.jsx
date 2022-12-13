@@ -38,7 +38,7 @@ const ReviewCard = ({aReview}) => {
         <div className="flex-none text-xs align-middle">{reviewerName}, {formattedDate}</div>
       </div>
       <div className='font-semibold truncate'>{aReview.summary}</div>
-      <div className='font-light'>{sometext}</div>
+      <div className='font-light'>{someText}</div>
       <div className='font-light'>
         {aReview.body}
         {renderResponse}
