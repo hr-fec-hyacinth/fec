@@ -11,36 +11,6 @@ const PhotoUpload = ({callback}) => {
 
   const uploadPreset = 'wjuxohsi';
 
-  // var myWidget = window.cloudinary.createUploadWidget(
-  //   {
-  //     cloudName: cloudinaryCloudName,
-  //     uploadPreset: uploadPreset, // Must set or it will not work (create in)
-  //     sources: [ "local", "url"], // restrict the upload sources to URL and local files
-  //     folder: "Home/FECImages", //upload files to the specified folder
-  //     context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
-  //     maxImageFileSize: 2000000,  //restrict file size to less than 2MB
-  //     cropping: true, //add a cropping step
-  //     // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-  //     // multiple: false,  //restrict upload to a single file
-  //     // tags: ["users", "profile"], //add the given tags to the uploaded files
-  //     // clientAllowedFormats: ["images"], //restrict uploading to image files only
-  //     // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-  //     // theme: "purple", //change to a purple theme
-  //   },
-  //   (error, result) => {
-  //     if (!error && result && result.event === "success") {
-  //       // console.log("Done! Here is the image info: ", result.info);
-  //       setPhotosSrcList([...photosSrcList, result.info.url])
-  //       document
-  //         .getElementById("uploadedimage")
-  //         .setAttribute("src", result.info.secure_url);
-  //       if(callback) {
-  //         callback(result.info.url);
-  //       }
-  //     }
-  //   }
-  // )
-
   const handleUploadOnClick = (e) => {
     e.preventDefault();
     console.log('Hi');
