@@ -13,11 +13,6 @@ const PhotoUpload = ({callback}) => {
 
   const handleUploadOnClick = (e) => {
     e.preventDefault();
-    console.log('Hi');
-    // if (myWidget) {
-    //   myWidget.open();
-    // }
-
     let files = Array.from(e.target.files);
 
     if(files.length > 5) {
@@ -46,7 +41,6 @@ const PhotoUpload = ({callback}) => {
 
   const fileWarning = fileWarn ? <div>Please select less than 5 photos</div> : <></>;
 
-
   return (
     <div className="flex flex-col">
       {<>
@@ -66,7 +60,6 @@ const PhotoUpload = ({callback}) => {
           </div>
         )}
       </div>}
-
     </div>
   )
 }

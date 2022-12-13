@@ -24,9 +24,8 @@ const RatingsReviews = ({product, meta}) => {
     "5": false
   });
 
-  // useEffect that calls the API documentation.
+
   useEffect(()=> {
-    // console.log('this is the productId"', product.id);
     if(product.id) {
       api.getReviews(Number(product.id), 1, 200, sortBy)
       .then(res => {
@@ -39,13 +38,11 @@ const RatingsReviews = ({product, meta}) => {
     stars: (starNum) => {
       setStarFilter({
         ...starFilter,
-        // "filterOn": true,
         [starNum]: !starFilter[starNum]
       })
     },
     sortBy: (e) => {
       e.preventDefault();
-      // console.log('this is the event target value', e.target.value);
       setSortBy(e.target.value);
     },
     moreReviews: (e) => {
@@ -54,7 +51,6 @@ const RatingsReviews = ({product, meta}) => {
     },
     toggleForm: (e) => {
       e.preventDefault();
-      // console.log('the form is being called!)
       setActiveForm(!activeForm);
     }
   }
@@ -65,7 +61,6 @@ const RatingsReviews = ({product, meta}) => {
   const totalNumReviews = 0;
   const renderingButton = () => {}
 
-  // ReviewForm component purposefully added in but prevented from being rendered
   return (
     <div>
     {meta.ratings &&
