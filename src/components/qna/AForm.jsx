@@ -6,45 +6,46 @@ const AForm = ({ setModalOpen, question }) => {
   const [answer, setAnswer] = useState('');
   const [nickname, setNickname] = useState('');
   const [email, setEmail] = useState('');
-  const [nickClick, setNickClick] = useState(false);
-  const [mailClick, setMailClick] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [photosSrcList, setPhotosSrcList] = useState([]);
+  const [nickWarn, setNickWarn] = useState(<div className='my-2.5'></div>);
+  const [mailWarn, setMailWarn] = useState(<div className='my-2.5'></div>);
+  const [answerWarn, setAnswerWarn] = useState(<div className='my-2.5'></div>);
 
   const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!answer || !nickname || !email) {
-      alert('All fields are required! Please fill out all fields.');
+    if (!answer) {
+      setAnswerWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>All fields are required! Please fill out all fields.</div>)
+    } else if (!nickname) {
+      setNickWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Nickname is too short! Please enter a longer nickname.</div>)
     } else if (email.length > 60) {
-      alert('Email is too long! Please enter a shorter email.');
+      setMailWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Email is too long! Please enter a shorter email.</div>)
     } else if (answer.length > 1000) {
-      alert('Answer is too long! Please enter a shorter answer.');
+      setAnswerWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Answer is too long! Please enter a shorter answer.</div>)
     } else if (nickname.length > 60) {
-      alert('Nickname is too long! Please enter a shorter nickname.');
+      setNickWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Nickname is too long! Please enter a shorter nickname.</div>);
     } else if (!mailformat.test(email)) {
-      alert('Email not in correct format! Please enter vaild email.');
+      setMailWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Email not in correct format! Please enter vaild email.</div>);
     } else {
       api.postAnswer(question.question_id, {body:answer, name:nickname, email:email, photos: photosSrcList})
         .then(response => {
           setModalOpen(false);
-          //TODO: Pop-up notifying the user the question has been received
         }).catch(err => {
           console.log('Error posting answer', err)
-          //TODO: Pop-up "Sorry unable to post your answer at this time. Please try again later"
         })
     }
   };
 
 
   const handleNicknameClick = () => {
-    setNickClick(true);
+    setNickWarn(<div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For privacy reasons, do not use your full name or email address</div>);
   }
 
   const handleEmailClick = () => {
-    setMailClick(true);
+    setMailWarn(<div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For authentication reasons, you will not be emailed</div>)
   }
 
   const handleFiles = e => {
@@ -62,20 +63,6 @@ const AForm = ({ setModalOpen, question }) => {
         const data = responses.map(response => response.data.url)
         setPhotosSrcList(photosSrcList.concat(data))
       }).catch(err => console.warn('Error uploading picture', err));
-  }
-
-  var nickWarn;
-  if(!nickClick) {
-    nickWarn = <div className='my-2.5'></div>
-  } else {
-    nickWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For privacy reasons, do not use your full name or email address</div>
-  }
-
-  var mailWarn;
-  if(!mailClick) {
-    mailWarn = <div className='my-2.5'></div>
-  } else {
-    mailWarn = <div className='text-xs font-normal text-yellow-500 mb-1 ml-1'>For authentication reasons, you will not be emailed</div>
   }
 
   var uploadButton;
@@ -98,6 +85,7 @@ const AForm = ({ setModalOpen, question }) => {
           placeholder="Type your answer here"
           onChange={(event) => setAnswer(event.target.value)}
         />
+        {answerWarn}
         <label className='m-1'>
           Nickname:
           <input
