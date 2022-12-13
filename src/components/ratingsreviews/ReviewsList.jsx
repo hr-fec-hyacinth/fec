@@ -1,31 +1,38 @@
 import React from 'react';
 import ReviewCard from './ReviewCard.jsx';
 
-const ReviewsList = ({reviews, displayNum}) => {
+const ReviewsList = ({reviews, filterStars, reviewsCount}) => {
 
-  // if (reviews) {
-  //   console.log('inside ReviewsList', reviews)
-  // }
+  let isFilterOn = false;
+  if(filterStars) {
+    Object.keys(filterStars).forEach(el => {
+      if (filterStars[el] === true) {
+        isFilterOn = true;
+      }
+    })
+  }
 
-  // let toRender = [];
-  // if(reviews) {
-  //   for(var i = 0; i < 2; i++) {
-  //   console.log('this should be the el', reviews[i]);
-  //   toRender.push(
-  //     (<ReviewCard aReview={reviews[i]} />)
-  //   )
-  //   console.log('this is to render', toRender);
-  // }
-  // } .
+  let filteredList = [];
+  if(reviews) {
+    filteredList = reviews.slice(0, reviewsCount);
+    let filteredList1 = [];
+    // if(filterStars.filterOn)
+    if(isFilterOn) {
+      filteredList1 = reviews.filter((el, i) => {
+        return filterStars[el.rating];
+      })
+      filteredList = filteredList1.slice(0, reviewsCount);
+    }
+  }
 
   return (
     <>
-    {reviews &&
-    <div className="">
-      {reviews.map(el => {
+    {filteredList &&
+    <div className="reviewsList" data-testid="reviewList">
+      {filteredList.map(el => {
         return (
-          <div key={el.review_id} id="a-review" className="mx-auto px-3">
-            <ReviewCard aReview={el} />
+          <div key={el.review_id} className="ReviewCardContainer mx-auto px-3 " >
+            <ReviewCard aReview={el} data-testid='reviewCardContainer' />
           </div>
         )
       }

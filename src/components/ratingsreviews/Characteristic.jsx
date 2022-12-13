@@ -4,10 +4,10 @@ import { AiFillCaretUp } from 'react-icons/ai'
 const Characteristic = ({characteristicName, characteristicObj}) => {
 
   const boxFill = {
-    height: '100%',
+    height: '5px',
     // width: '100%',
-    minHeight: '30px',
-    backgroundColor: '#8fc4fc',
+    minHeight: '5px',
+    backgroundColor: '#2e93ff',
   }
 
   const arrowStyle = {
@@ -15,7 +15,11 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
     position: 'relative',
     top: '-5px',
     padding: '2px',
-    left: `${(parseInt(characteristicObj.value) / 5) * 100}%`
+    left: `${(Number(characteristicObj.value) / 5) * 100}%`
+  }
+
+  const arrowHolder = {
+    width: `90%`
   }
 
   let leftVar = '--';
@@ -42,19 +46,20 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
 
   return (
     <div>
-      <span className="text-xl"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
+      <span className="text-l"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
+      <span> </span>
       <div className="flex flex-wrap mx-auto">
-        <div className="w-4/12 border-2" style={boxFill}>
-          <p style={{textAlign: 'left', verticalAlign: 'middle'}}>{leftVar}</p>
+        <div className="w-4/12 border-1 text-xs sm:text-sm" style={boxFill}>
+          <p style={{textAlign: 'left', verticalAlign: 'bottom'}}>{leftVar}</p>
         </div>
-        <div className="w-4/12 border-2" style={boxFill}>
-          <p style={{textAlign: 'center', verticalAlign: 'middle'}}>perfect</p>
+        <div className="w-4/12 border-1 text-xs sm:text-sm" style={boxFill}>
+          <p style={{textAlign: 'center', verticalAlign: 'bottom'}}></p>
         </div>
-        <div className="w-4/12 border-2" style={boxFill}>
+        <div className="w-4/12 border-1 text-xs sm:text-sm" style={boxFill}>
           <p style={{textAlign: 'right'}}>{rightVar}</p>
         </div>
-        <div className="mx-auto">
-        <AiFillCaretUp className='text-blue-400' style={arrowStyle} />
+        <div style={arrowHolder}>
+        <AiFillCaretUp className='text-neutral-300 sm:text-blue-400 relative' style={arrowStyle} />
         </div>
       </div>
     </div>

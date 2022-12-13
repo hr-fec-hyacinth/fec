@@ -34,10 +34,12 @@ const AList = ({ answers }) => {
   }
 
   return (
-    <div className='overflow-y-auto max-h-halfScreen'>
-      {display.map((answer, index) => <OneA answer={answer} key={index}/>)}
-      {more && <div onClick={handleMoreClick}>See more answers</div>}
-      {collapse && <div onClick={handleCollapseClick}>Collapse</div>}
+    <div className='flex flex-col max-h-halfScreen'>
+      <div className='grow overflow-auto'>
+        {display.map((answer, index) => <OneA answer={answer} key={index}/>)}
+      </div>
+      {more && <button className='ml-7 font-bold text-xs my-4 self-start' onClick={handleMoreClick}>LOAD MORE ANSWERS</button>}
+      {collapse && <button className='ml-7 font-bold text-xs my-4 self-start' onClick={handleCollapseClick}>COLLAPSE</button>}
     </div>
   )
 }

@@ -3,20 +3,19 @@ import axios from 'axios';
 import YourOutfitCard from './YourOutfitCard.jsx'
 import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
-const sliderData = [
-  {image: 'https://via.placeholder.com/200?text=1'},
-  {image: 'https://via.placeholder.com/200?text=2'},
-  {image: 'https://via.placeholder.com/200?text=3'},
-  {image: 'https://via.placeholder.com/200?text=4'},
-  {image: 'https://via.placeholder.com/200?text=5'},
-  {image: 'https://via.placeholder.com/200?text=6'},
-  {image: 'https://via.placeholder.com/200?text=7'}
-]
-
-
-const YourOutfit = ({ sliderInfo }) => {
+const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOutfit, style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const length = sliderData.length;
+  const length = outfit.length;
+
+  useEffect(() => {
+    if (metaReview) {
+      setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
+    }
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('userOutfit', JSON.stringify(outfit));
+  }, [outfit]);
 
   const nextSlide = (e) => {
     e.preventDefault();
@@ -32,12 +31,12 @@ const YourOutfit = ({ sliderInfo }) => {
     }
   }
 
-  if (!Array.isArray(sliderData) || sliderData.length <= 0) {
+  if (!Array.isArray(outfit) || outfit.length <= 0) {
     return null;
   }
 
   const getSlides = () => {
-    let currentSlides = sliderData.slice(currentIndex, currentIndex + 4);
+    let currentSlides = outfit.slice(currentIndex, currentIndex + 4);
     return currentSlides;
   }
 
@@ -48,14 +47,14 @@ const YourOutfit = ({ sliderInfo }) => {
       <div className='flex justify-center'>
         <div className='slider relative flex w-10/12'>
           {currentIndex > 0 &&
-            <MdArrowBackIos className='back-arrow position absolute left-4 top-2/4 z-10 cursor-pointer select-none' onClick={prevSlide} />
-          }
-          {currentIndex < length - 3 &&
-            <MdArrowForwardIos className='forward-arrow position absolute right-4 top-2/4 z-10 cursor-pointer select-none' onClick={nextSlide} />
+            <MdArrowBackIos data-testid='back-arrow' className='flex-none back-arrow absolute left-12 top-2/4 z-20 cursor-pointer select-none hover:text-white' onClick={prevSlide} />
           }
           {slides.map((slide, index) => (
-            <YourOutfitCard slide={slide} key={index} />
+            <YourOutfitCard slide={slide} key={index}index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} style={style} />
           ))}
+          {currentIndex < length - 3 &&
+            <MdArrowForwardIos data-testid='forward-arrow' className='flex-none forward-arrow absolute right-oneVW top-2/4 z-20 cursor-pointer select-none hover:text-white' onClick={nextSlide} />
+          }
         </div>
       </div>
     </>

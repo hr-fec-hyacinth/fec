@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MdStarBorder } from 'react-icons/md';
+import { RxCrossCircled } from 'react-icons/rx';
+import AddToOutfitCard from './AddToOutfitCard.jsx';
+import AddOutfitItem from './AddOutfitItem.jsx';
 
-const YourOutfitCard = ({slide}) => {
+const YourOutfitCard = ({ slide, product, switchProduct, styles, metaReview, outfit, setOutfit, setCurrentIndex, index, style }) => {
+  const isAddToOutfitCard = slide.addToOutfit;
 
-  //Should have onClick to allow for main product view to change to this item
   return (
-    <div className='w-12/12 px-2'>
-      <div className='container border border-black'>
-        <img src={slide.image} alt='Product Picture'/>
-        <div>
-          Category <br/>
-          Product Name <br/>
-          Price <br/>
-          Star Rating <br/>
-        </div>
-      </div>
-    </div>
+    <>
+      {isAddToOutfitCard &&
+        <AddToOutfitCard slide={slide} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} />
+      }
+      {!isAddToOutfitCard &&
+        <AddOutfitItem slide={slide} index={index} product={product} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} switchProduct={switchProduct} setCurrentIndex={setCurrentIndex} style={style} />
+      }
+    </>
   )
 }
 

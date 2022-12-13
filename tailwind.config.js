@@ -99,15 +99,20 @@ module.exports = {
       32: '8rem',
       36: '9rem',
       40: '10rem',
+      42: '10.5rem',
       44: '11rem',
       48: '12rem',
       52: '13rem',
       56: '14rem',
+      58: '14.5rem',
       60: '15rem',
       64: '16rem',
       72: '18rem',
       80: '20rem',
+      84: '21.5rem',
       96: '24rem',
+      oneVW: '1vw',
+      pad: '5.5rem'
     },
     animation: {
       none: 'none',
@@ -115,6 +120,7 @@ module.exports = {
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
+      fade: 'fadeOut 3s ease-in-out'
     },
     aria: {
       checked: 'checked="true"',
@@ -557,6 +563,7 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      zoom: '250%'
     }),
     inset: ({ theme }) => ({
       auto: 'auto',
@@ -567,9 +574,10 @@ module.exports = {
       '1/4': '25%',
       '2/4': '50%',
       '3/4': '75%',
+      '2/12': '16.666666%',
       full: '100%',
     }),
-    keyframes: {
+    keyframes: ({ theme }) => ({
       spin: {
         to: {
           transform: 'rotate(360deg)',
@@ -596,7 +604,11 @@ module.exports = {
           animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
         },
       },
-    },
+      fadeOut: {
+        '0%': { backgroundColor: theme('colors.red.300') },
+        '100%': { backgroundColor: theme('colors.transparent') },
+      },
+    }),
     letterSpacing: {
       tighter: '-0.05em',
       tight: '-0.025em',
@@ -638,6 +650,8 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      '1/12': '8.333333%',
+      '3/12': '25%'
     }),
     maxWidth: ({ theme, breakpoints }) => ({
       none: 'none',
@@ -663,10 +677,14 @@ module.exports = {
     minHeight: {
       0: '0px',
       full: '100%',
+      halfScreen: '50vh',
       screen: '100vh',
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      '3/4': '75vh',
+      '6/10': '60vh',
+      '1/10': '10vh'
     },
     minWidth: {
       0: '0px',
@@ -937,6 +955,10 @@ module.exports = {
       min: 'min-content',
       max: 'max-content',
       fit: 'fit-content',
+      zoom: '250%',
+      '5v': '5vh',
+      '6v': '6vh',
+      '7v': '7vh'
     }),
     willChange: {
       auto: 'auto',

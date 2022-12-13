@@ -4,6 +4,7 @@ import { AiFillFacebook, AiFillTwitterSquare } from "react-icons/ai";
 import { ImPinterest } from "react-icons/im"
 import Social from './Social.jsx';
 import Stars from '../shared/Stars.jsx';
+import averageRating from '../../helper/averageRating.js';
 
 const {useState, useEffect} = React;
 
@@ -14,6 +15,9 @@ const ProductInfo = ({product, style, metaReview}) => {
 
   // Calculate Price on style change
   useEffect(() => {
+    if (!style) {
+      return;
+    }
     updatePrice(style.original_price);
     if (style.sale_price !== '0' && style.sale_price) {
       updateSalePrice(style.sale_price);
@@ -30,15 +34,13 @@ const ProductInfo = ({product, style, metaReview}) => {
   }, [metaReview]);
 
   return (
-    <div>
-      <Stars />
-      {reviewCount && <p><a className='text-stone-400 underline' href="#ratings-reviews">Read all {reviewCount} reviews</a></p>}
-      <p>{product.category}</p>
-      <p>{product.name}</p>
-      {!salePrice && <p>${price}</p>}
-      {salePrice && <p><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through'>${price}</span></p>}
-      <p>{product.description}</p>
-      <Social />
+    <div className='ml-2 mt-1 text-center sm:text-left text-xl sm:text-base'>
+      {reviewCount && <span className='flex sm:justify-start justify-evenly mt-1'><Stars ratings={averageRating(metaReview.ratings)}/><a className='text-stone-400 underline text-xs ml-2' href="#ratings-reviews">Read all {reviewCount} reviews</a></span>}
+      <p className='text-sm mt-2 italic'>{product.category}</p>
+      <p className='text-2xl sm:text-4xl font-extrabold sm:mb-0 mb-2'>{product.name}</p>
+      {!salePrice && <p className='text-xl sm:mb-0 mb-2 mt-2'>${price}</p>}
+      {salePrice && <p className=' text-xl sm:mb-0 mb-2 mt-2'><span className='text-red-600 mr-2'>${salePrice}</span><span className='line-through sm:mb-0 mb-2'>${price}</span></p>}
+
     </div>
   )
 };

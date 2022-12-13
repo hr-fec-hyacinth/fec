@@ -14,9 +14,9 @@ const SortOptions = ({meta, sortBy, sortCB}) => {
     <>
       {totalNumReviews && sortBy &&
       <div>
-        {totalNumReviews} reviews, sorted by:
+        <span className="inline">{totalNumReviews}</span> reviews, sorted by: {' '}
         <div style={{display: 'inline-Block'}}>
-          <select name="sortByList" id="sortReviews" value={sortBy} onChange={sortCB}>
+          <select className="bg-slate-100 dark:bg-white/30 rounded-xl" name="sortByList" id="sortReviews" value={sortBy} onChange={sortCB}>
             <option value="relevance"> relevance </option>
             <option value="newest"> newest </option>
             <option value="helpfulness"> helpfulness </option>
