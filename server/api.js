@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { AUTHKEY, cloudinaryCloudName } from './config.js';
+require('dotenv').config();
+//import { AUTHKEY, cloudinaryCloudName } from './config.js';
+
+let AUTHKEY = process.env.AUTHKEY;
+let cloudinaryCloudName = process.env.cloudinaryCloudName;
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
 
