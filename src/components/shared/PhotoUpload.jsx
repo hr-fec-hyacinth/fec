@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, Component } from 'react';
 import { PHOTOAUTHKEY } from '../../../server/config.js';
-import { cloudinaryCloudName } from '../../../server/config.js';
+import { CLOUDINARYCLOUDNAME } from '../../../server/config.js';
 import api from '../../../server/api.js';
 
 const PhotoUpload = ({callback}) => {

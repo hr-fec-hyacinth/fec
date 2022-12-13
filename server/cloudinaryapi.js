@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {PHOTOAUTHKEY} from './config.js';
-import {cloudinaryCloudName} from '.config.js';
+import {CLOUDINARYCLOUDNAME} from '.config.js';
 
 
 /**
