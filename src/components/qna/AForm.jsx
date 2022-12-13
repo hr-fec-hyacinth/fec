@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../../server/api.js';
 import Thumbnails from './../shared/Thumbnails.jsx'
-import PhotoUpload from './PhotoUpload.jsx'
+import PhotoUpload from './../shared/PhotoUpload.jsx'
 
 const AForm = ({ setModalOpen, question }) => {
   const [answer, setAnswer] = useState('');
