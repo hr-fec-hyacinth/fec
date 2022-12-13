@@ -54,12 +54,12 @@ const OneA = ({ answer }) => {
 
   var nameComp;
   if(answer && answer.answerer_name === 'seller') {
-    nameComp = <div className='font-bold text-neutral-600 ml-1'>{answer.answerer_name}</div>;
+    nameComp = <div className='font-bold text-neutral-600 dark:text-neutral-200 ml-1'>{answer.answerer_name}</div>;
   } else {
     nameComp = <div className='ml-1'>{answer.answerer_name}</div>;
   }
 
-  const thumbnails = answer.photos.map((src, i) => <img className='max-w-[5rem] p-[3px] border rounded border-slate-300 my-3' src={src} key={i} onClick={handleThumbnailClick} index={i}/>);
+  const thumbnails = answer.photos.map((src, i) => <img className='max-w-[5rem] p-[3px] border rounded border-neutral-400 my-3 bg-white/30' src={src} key={i} onClick={handleThumbnailClick} index={i}/>);
 
   return (
     <>

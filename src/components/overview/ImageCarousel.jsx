@@ -49,16 +49,16 @@ const ImageCarousel = ({imageList, updateImageIndex, imageIndex, updateStyling})
   return (
     <div className='hidden sm:block h-fit'>
       <div className='flex h-full flex-col left-4 absolute z-10'>
-        {sliderIndex !== 0 && <IoIosArrowUp data-testid="image-up" className='my-1 z-20 self-center hover:text-slate-500' onClick={previous}/>}
+        {sliderIndex !== 0 && <IoIosArrowUp data-testid="image-up" className='my-1 z-20 text-white self-center hover:text-[#6E6E6E]' onClick={previous}/>}
         {currentImages.map((image) => {
           return (
-            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-[2px] border-b-[4px] border-blue-400 aspect-square object-cover w-6v select-none my-1' : 'aspect-square object-cover w-12 select-none my-1 w-6v border-slate-400 border-[2px]'} src={image.url} onClick={e => {
+            <img alt='view_thumbnail' key={image.index} className={image.index === imageIndex ? 'border-[2px] border-b-[4px] border-[#1E54B1] aspect-square object-cover w-6v select-none my-1' : 'aspect-square object-cover w-12 select-none my-1 w-6v border-neutral-400 border-[2px]'} src={image.url} onClick={e => {
               updateImageIndex(image.index);
               updateStyling({backgroundImage: 'url(' + image.url + ')'});
             }}/>
           )
         })}
-        {sliderIndex !== maxSliderIndex && <IoIosArrowDown data-testid="image-down" className='my-1 z-20 self-center hover:text-slate-500' onClick={next}/>}
+        {sliderIndex !== maxSliderIndex && <IoIosArrowDown data-testid="image-down" className='my-1 z-20 self-center text-white hover:text-[#6E6E6E]' onClick={next}/>}
       </div>
     </div>
   )
