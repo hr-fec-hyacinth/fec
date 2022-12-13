@@ -5,7 +5,10 @@ import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 import PhotoUpload from '../shared/PhotoUpload.jsx';
 import axios from 'axios';
-import { AUTHKEY } from '../../../server/config.js';
+
+require('dotenv').config();
+let AUTHKEY = process.env.AUTHKEY;
+
 
 const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
   const [fields, setFields] = useState({

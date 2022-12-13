@@ -50,7 +50,7 @@ const RelatedProducts = ({ sliderInfo, switchProduct, openModal, setOpenModal, s
             <RelatedProductsCard slide={slide} switchProduct={switchProduct} index={index} key={index} openModal={openModal} setOpenModal={setOpenModal} setCurrentCompare={setCurrentCompare} setCurrentIndex={setCurrentIndex} style={style} product={product} />
           ))}
           {currentIndex < length - 3 &&
-            <MdArrowForwardIos data-testid='forward-arrow' className='flex-none forward-arrow absolute right-tenVH top-2/4 z-20 cursor-pointer hover:text-white select-none' onClick={nextSlide} />
+            <MdArrowForwardIos data-testid='forward-arrow' className='flex-none forward-arrow absolute right-oneVW top-2/4 z-20 cursor-pointer hover:text-white select-none' onClick={nextSlide} />
           }
         </div>
       </div>

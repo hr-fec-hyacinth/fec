@@ -1,5 +1,7 @@
 import axios from 'axios';
-import { AUTHKEY, cloudinaryCloudName } from './config.js';
+require('dotenv').config();
+let AUTHKEY = process.env.AUTHKEY;
+let CLOUDINARYCLOUDNAME = process.env.CLOUDINARYCLOUDNAME;
 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
 
@@ -115,7 +117,7 @@ api.postAnswer = (question_id, data) => {
 }
 
 api.postPhotos = (data) => {
-  return axios.post(`https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/image/upload`, data)
+  return axios.post(`https://api.cloudinary.com/v1_1/${CLOUDINARYCLOUDNAME}/image/upload`, data)
 }
 
 api.voteHelpfulReview = (reviewId) => {

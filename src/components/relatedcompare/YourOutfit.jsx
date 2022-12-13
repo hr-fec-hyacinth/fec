@@ -53,7 +53,7 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOut
             <YourOutfitCard slide={slide} key={index}index={index} product={product} switchProduct={switchProduct} styles={styles} metaReview={metaReview} outfit={outfit} setOutfit={setOutfit} setCurrentIndex={setCurrentIndex} style={style} />
           ))}
           {currentIndex < length - 3 &&
-            <MdArrowForwardIos data-testid='forward-arrow' className='flex-none forward-arrow absolute right-tenVH top-2/4 z-20 cursor-pointer select-none hover:text-white' onClick={nextSlide} />
+            <MdArrowForwardIos data-testid='forward-arrow' className='flex-none forward-arrow absolute right-oneVW top-2/4 z-20 cursor-pointer select-none hover:text-white' onClick={nextSlide} />
           }
         </div>
       </div>
