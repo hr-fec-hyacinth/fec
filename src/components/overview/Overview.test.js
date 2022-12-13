@@ -449,6 +449,16 @@ let styles = {
   ]
 };
 
+const metaReview = {
+    "product_id": "2",
+    "ratings": {
+      2: 1,
+      3: 1,
+      4: 2,
+      5: 1
+    }
+}
+
 describe('Details Section Render', () => {
 
     it('Renders the product description', () => {
@@ -521,25 +531,74 @@ describe('Add to Cart Render', () => {
         expect(options).toBe(null)
       })
 
+    it('Clicking the heart will update the outfit', async () => {
+        let outfit = [];
+        let updateOutfit = (value) => {outfit = value};
+        const { getByTestId, getAllByTestId, queryByTestId } = render(<Cart style={style} outfit={outfit} setOutfit={updateOutfit} styles={styles} metaReview={metaReview}/>)
+        let button = getByTestId('toggle-cart');
+        fireEvent.click(button);
+        expect(outfit.length).toBe(1);
+      })
 
-    // it('Size Selector lists all available sizes', async () => {
-    //     const { getByTestId, getAllByTestId } = render(<Cart style={style} />)
-    //     const user = userEvent.setup()
-    //     //user.selectOptions(getByTestId('size-select'), "{\"id\":\"1281032\",\"size\":\"XS\",\"quantity\":8}")
-    //     //let options = getAllByTestId('size-option')
-    //     //expect(options.length).toBe(styles.results[0].skus['1281032'].quantity)
-    //     let sizeSelect = screen.getByTestId('size-select')
-    //     userEvent.selectOptions(
-    //         // Find the select element, like a real user would.
-    //         sizeSelect,
-    //         // Find and select the Ireland option, like a real user would.
-    //         //screen.getAllByTestId('size-option')[0],
-    //         "{\"id\":\"1281032\",\"size\":\"XS\",\"quantity\":8}"
-    //     )
-    //       //userEvent.selectOptions(select, ["second"], { bubbles: true });
-    //       //expect(screen.getAllByTestId("size-option")[0].selected).toBe(true)
-    //       expect(sizeSelect.value).toBe('45')
-    //   })
+    it('Clicking the heart will remove an item from the outfit if it is added', async () => {
+        let outfit = [{
+            addToOutfit: true,
+            image: 'https://via.placeholder.com/300?text=%2b'
+          }];
+        let updateOutfit = (value) => {outfit = value};
+        const { rerender, getByTestId, getAllByTestId, queryByTestId } = render(<Cart product={product} style={style} outfit={outfit} setOutfit={updateOutfit} styles={styles} metaReview={metaReview}/>)
+        let button = getByTestId('toggle-cart');
+        fireEvent.click(button);
+        expect(outfit.length).toBe(2);
+        rerender(<Cart product={product} style={style} outfit={outfit} setOutfit={updateOutfit} styles={styles} metaReview={metaReview}/>)
+        fireEvent.click(button);
+        expect(outfit.length).toBe(1);
+      })
+
+      it('Size Selector Adjusts the options in the quantity selector', async () => {
+        let outfit = [{
+            addToOutfit: true,
+            image: 'https://via.placeholder.com/300?text=%2b'
+          }];
+        let updateOutfit = (value) => {outfit = value};
+        const { rerender, getByTestId, getAllByTestId, queryByTestId } = render(<Cart product={product} style={style} outfit={outfit} setOutfit={updateOutfit} styles={styles} metaReview={metaReview}/>)
+        let sizeOptions = getAllByTestId('size-option');
+        let xsValue = sizeOptions[0].value;
+        fireEvent.change(getByTestId('size-select'), { target: { value: xsValue } })
+        expect(sizeOptions[0].selected).toBeTruthy();
+        let quantOptions = getAllByTestId('quant-option');
+        expect(quantOptions.length).toBeGreaterThan(0);
+      })
+
+      it('Size Selector Loads Max Product Quantity if less than 15', async () => {
+        let outfit = [{
+            addToOutfit: true,
+            image: 'https://via.placeholder.com/300?text=%2b'
+          }];
+        let updateOutfit = (value) => {outfit = value};
+        const { rerender, getByTestId, getAllByTestId, queryByTestId } = render(<Cart product={product} style={style} outfit={outfit} setOutfit={updateOutfit} styles={styles} metaReview={metaReview}/>)
+        let sizeOptions = getAllByTestId('size-option');
+        let xsValue = sizeOptions[0].value;
+        fireEvent.change(getByTestId('size-select'), { target: { value: xsValue } })
+        expect(sizeOptions[0].selected).toBeTruthy();
+        let quantOptions = getAllByTestId('quant-option');
+        expect(quantOptions.length).toBe(8);
+      })
+
+      it('Quantity Selector Only Shows 15 if product has more than 15', async () => {
+        let outfit = [{
+            addToOutfit: true,
+            image: 'https://via.placeholder.com/300?text=%2b'
+          }];
+        let updateOutfit = (value) => {outfit = value};
+        const { rerender, getByTestId, getAllByTestId, queryByTestId } = render(<Cart product={product} style={style} outfit={outfit} setOutfit={updateOutfit} styles={styles} metaReview={metaReview}/>)
+        let sizeOptions = getAllByTestId('size-option');
+        let mValue = sizeOptions[2].value;
+        fireEvent.change(getByTestId('size-select'), { target: { value: mValue } })
+        expect(sizeOptions[2].selected).toBeTruthy();
+        let quantOptions = getAllByTestId('quant-option');
+        expect(quantOptions.length).toBe(15);
+      })
 
 })
 
