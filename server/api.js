@@ -1,7 +1,5 @@
 import axios from 'axios';
 require('dotenv').config();
-//import { AUTHKEY, cloudinaryCloudName } from './config.js';
-
 let AUTHKEY = process.env.AUTHKEY;
 let cloudinaryCloudName = process.env.cloudinaryCloudName;
 
