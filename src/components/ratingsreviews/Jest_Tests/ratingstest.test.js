@@ -174,7 +174,15 @@ describe('Renders the Ratings and Reviews Section', () => {
     screen.getAllByRole('form');
   });
 
-  // this isn't working maybe because it relies on an api call
+  ('Clicking on Submit Review Opens Form and load inputs', async () => {
+    // api.getReviews.mockResolvedValue({results: reviews});
+
+    render(<RatingsReviews product={product} meta={metaReview} />);
+    const submitForm = document.getElementById('moreReviews');
+    fireEvent.click(submitForm);
+
+  });
+
 
 });
 
@@ -184,11 +192,6 @@ describe('Checking SortOptions Renders with Ratings',  () => {
     await render(<SortOptions meta={metaReview} sortBy={'relevance'} sortCB={() => {console.log('hi')}}/>);
     screen.getByText('reviews', {exact: false})
   })
-
-  // Test Interactions
-  // it('Sort By Dropdown is selectable', () => {
-  //   render(<SortOptions meta={metaReview} sortBy={'relevance'} sortCB={() => {console.log('hi')}}/>);
-  // })
 
 });
 
@@ -233,27 +236,6 @@ describe('ReviewList', () => {
     expect(cards).toHaveLength(4);
   })
 
-  it('Should Expand the Image', async () => {
-    const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterNone} reviewsCount={2} starFilterActive={false}/>)
-    let images = await container.getElementsByClassName('object-contain reviewsImage')[0];
-    fireEvent.click(images);
-    let popupImage = await container.getElementsByClassName('ExpandedImageDiv absolute bottom-4 flex');
-    screen.getAllByRole('img');
-  });
-
-  // it('Tests Interaction between the rating chart & reviews display', async () => {
-  //   const {container} = await render(<RatingsReviews product={product} meta={metaReview} />)
-  //   let oneStarRating = await screen.getByTestId('1starrating');
-  //   act(() => {
-  //     fireEvent.click(oneStarRating);
-  //   });
-  //   let reviews = document.getElementById('reviews')
-  //   let cards = container.getElementsByClassName(cardsClassName);
-  //   console.log(cards);
-  //   screen.debug();
-  //   // expect(cards).toHaveLength(1);
-  // });
-
 });
 
 
@@ -273,37 +255,30 @@ describe('Unit Test for Posting A Review Form', () => {
 describe('Testing StarsInput for UI / Value Changes', () => {
   it('Should test rendering of stars if there were no inputs', async () => {
     await render(<StarsInput selectedRating={null} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should load the stars', async () => {
     await render(<StarsInput selectedRating={'0'} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should load the stars', async () => {
     await render(<StarsInput selectedRating={'1'} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should load the stars', async () => {
     await render(<StarsInput selectedRating={'2'} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should load the stars', async () => {
     await render(<StarsInput selectedRating={'3'} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should load the stars', async () => {
     await render(<StarsInput selectedRating={'4'} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should load the stars', async () => {
     await render(<StarsInput selectedRating={'5'} cb={()=> {}} />)
-    screen.debug;
   })
 
   it('Should test if hovering over stars input changes the number of stars being highlighted', async () => {

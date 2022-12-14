@@ -19,7 +19,7 @@ const QForm = ({ setModalOpen, product }) => {
       setNickWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Nickname is too short! Please enter a longer nickname.</div>)
     } else if (email.length > 60) {
       setMailWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Email is too long! Please enter a shorter email.</div>)
-    } else if (answer.length > 1000) {
+    } else if (question.length > 1000) {
       setQuestionWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Answer is too long! Please enter a shorter answer.</div>)
     } else if (nickname.length > 60) {
       setNickWarn(<div className='text-xs font-normal text-rose-500 mb-1 ml-1'>Nickname is too long! Please enter a shorter nickname.</div>);
