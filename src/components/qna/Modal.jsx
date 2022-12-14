@@ -14,7 +14,7 @@ const Modal = ({ setModalOpen, children }) => {
         onClick={handleCloseClick}>
         <div className='w-fit h-fit rounded-lg dark:bg-[#091E42] bg-white flex flex-col px-6 pb-6 pt-3'
         onClick={e => e.stopPropagation()}>
-          <MdClose onClick={handleCloseClick} className='self-end'/>
+          <MdClose onClick={handleCloseClick} className='self-end' data-testid="closeIcon"/>
           {children}
         </div>
       </div>
