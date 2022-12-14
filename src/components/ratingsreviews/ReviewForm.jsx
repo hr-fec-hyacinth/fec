@@ -4,7 +4,7 @@ import StarsInput from './StarsInput.jsx';
 import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 import PhotoUpload from '../shared/PhotoUpload.jsx';
-import Thumbnails from '../shared/Thumbnails.jsx';
+import Thumbnails from '../shared/Thumbnails.jsx'
 import axios from 'axios';
 
 require('dotenv').config();
@@ -26,6 +26,7 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
 
   const [characteristics, setCharacteristics] = useState({});
   const [hasPosted, setHasPosted] = useState(false)
+  const [photosSrcList, setPhotosSrcList] = useState([]);
 
   // CSS Styling <---------------------------------------------------------------------------------------------------->
   // CSS Styling for table specifically to stretch the whole row
@@ -187,7 +188,8 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
               <span className='text-xs'>{50 - fields.body.length} needed</span>
             </div>
 
-            <div><PhotoUpload /></div>
+            <PhotoUpload photosSrcList={photosSrcList} setPhotosSrcList={setPhotosSrcList}/>
+            <Thumbnails photosSrcList={photosSrcList} expandOnClick={false}/>
 
             <div>
               <button id='submitReview' name='submitForm' onClick={submitForm}
