@@ -1218,7 +1218,7 @@ it('Renders the Modal', () => {
       <QForm setModalOpen={setModalOpen} product={product}/>
     </Modal>
   );
-  const { getByText, container } = render(comp);
+  const { getByText } = render(comp);
   getByText(placeholder);
 })
 
