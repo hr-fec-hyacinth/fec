@@ -11,7 +11,6 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
   }
 
   const arrowStyle = {
-    color: 'black',
     position: 'relative',
     top: '-5px',
     padding: '2px',
@@ -65,7 +64,7 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
           <p style={{textAlign: 'right'}}>{rightVar}</p>
         </div>
         <div style={arrowHolder}>
-        <AiFillCaretUp className='text-neutral-300 sm:text-blue-400 relative' style={arrowStyle} />
+        <AiFillCaretUp className='text-white sm:text-blue-400 relative' style={arrowStyle} />
         </div>
       </div>
     </div>

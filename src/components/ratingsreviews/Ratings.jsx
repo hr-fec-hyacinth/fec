@@ -12,7 +12,7 @@ const Ratings = ({product, meta, ratingsCB, starFilter}) => {
     if(meta.ratings) {
       setAverageRating(calculateAverageRating(meta.ratings));
     }
-  }, []);
+  }, [meta]);
 
   const percentRecommended = meta.recommended ?
     Math.round(
