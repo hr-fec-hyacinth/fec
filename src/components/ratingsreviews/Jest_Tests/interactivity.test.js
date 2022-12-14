@@ -98,7 +98,6 @@ jest.mock('../../../../server/api.js');
 
 // describe('testing clicking barChar', () => {
 //   const user = userEvent.setup();
-
 //   it('Render ReviewChart & run callback', async () => {
 //     await render(<RatingsChart metaRatings={meta37314.ratings} ratingsCB={() => {}} starFilter={{
 //       "1": true,
@@ -110,8 +109,6 @@ jest.mock('../../../../server/api.js');
 //         screen.getByClassName('inline text-blue-400 max-h-full').toHaveLength(3);
 //       })
 //   });
-
-
 // })
 
 describe('Add inputs to Forms', () => {
@@ -119,9 +116,9 @@ describe('Add inputs to Forms', () => {
 
   it(('Add Inputs to Review Forms'), async () => {
     await act(async () => render(<ReviewForm product={product37314} meta={meta37314} onFormSubmit={()=>{}} exitFormCB={() => {}} />))
-    user.click(screen.getByRole('radio', {name: 'Yes'}));
-    user.click(screen.getByRole('radio', {name: 'No'}));
-    user.click(screen.getByRole('textbox', {name: 'Your Email'}));
+    userEvent.click(screen.getByRole('radio', {name: 'Yes'}));
+    userEvent.click(screen.getByRole('radio', {name: 'No'}));
+    userEvent.click(screen.getByRole('textbox', {name: 'Your Email'}));
     let emailBox = screen.getByRole('textbox', {name: 'Your Email'});
     fireEvent.change(screen.getByPlaceholderText("Example: jackson11@email.com"), {target:{value: 'test'}}) //adds input into email
     user.type(emailBox, 'calvin');
