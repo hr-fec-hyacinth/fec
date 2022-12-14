@@ -2465,7 +2465,7 @@ export const get100Newest37314 = {
       }
   ]
 
-  export const product37314 = productList[37311 + 3];
+  export const product37314 = productList[3];
 
   export const meta37314 = {
       "product_id": "37314",

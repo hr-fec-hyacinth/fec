@@ -241,13 +241,13 @@ describe('ReviewList', () => {
     expect(cards).toHaveLength(4);
   })
 
-  it('Should Expand the Image', async () => {
-    const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterNone} reviewsCount={2} starFilterActive={false}/>)
-    let images = await container.getElementsByClassName('object-contain reviewsImage')[0];
-    fireEvent.click(images);
-    let popupImage = await container.getElementsByClassName('ExpandedImageDiv absolute bottom-4 flex');
-    screen.getAllByRole('img');
-  });
+  // it('Should Expand the Image', async () => {
+  //   const {container} = await render(<Reviews reviews={reviews} filterStars={starFilterNone} reviewsCount={2} starFilterActive={false}/>)
+  //   let images = await container.getElementsByClassName('object-contain reviewsImage')[0];
+  //   fireEvent.click(images);
+  //   let popupImage = await container.getElementsByClassName('ExpandedImageDiv absolute bottom-4 flex');
+  //   screen.getAllByRole('img');
+  // });
 
   // it('Tests Interaction between the rating chart & reviews display', async () => {
   //   const {container} = await render(<RatingsReviews product={product} meta={metaReview} />)

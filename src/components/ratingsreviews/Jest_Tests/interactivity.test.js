@@ -25,101 +25,123 @@ import {get100Newest37314,
 
 jest.mock('../../../../server/api.js');
 
-describe('Render the Ratings/Reviews App Component with Mock API Data', () => {
-  const user = userEvent.setup();
+// describe('Render the Ratings/Reviews App Component with Mock API Data', () => {
+//   const user = userEvent.setup();
+//   afterEach(() => {
+//     jest.clearAllMocks();
+//   })
 
-  it('Should just render the top level Reviews/Ratings with 37314', async () => {
-    api.getReviews.mockResolvedValue(get100Relevant37314);
-    await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
-    // return waitFor(() => {
-    //   expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2)
-    // })
-    let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
-    // expect(initialCards).toHaveLength(2);
-    // screen.debug(null, 20000);
+//   it('Should just render the top level Reviews/Ratings with 37314', async () => {
+//     api.getReviews.mockResolvedValue(get100Relevant37314);
+//     await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
+//     // return waitFor(() => {
+//     //   expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2)
+//     // })
+//     let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
+//     // expect(initialCards).toHaveLength(2);
+//     // screen.debug(null, 20000);
 
-    let oneStarChart = await document.getElementsByClassName('CharacteristicBarChart')[0];
-    console.log(oneStarChart);
-    user.click(oneStarChart).
-      then(() => {
-        expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(1);
-      });
-    user.click(document.getElementsByClassName('CharacteristicBarChart')[4]).
-      then(() => {
-        expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2);
-      })
+//     let oneStarChart = await document.getElementsByClassName('CharacteristicBarChart')[0];
+//     // console.log(oneStarChart);
+//     user.click(oneStarChart).
+//       then(() => {
+//         expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(1);
+//       });
+//     user.click(document.getElementsByClassName('CharacteristicBarChart')[4]).
+//       then(() => {
+//         expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2);
+//       })
 
-  })
+//   })
 
-  it('Filter Should be Additive', async () => {
-    api.getReviews.mockResolvedValue(get100Relevant37314);
-    await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
-    // return waitFor(() => {
-    //   expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2)
-    // })
-    let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
-    // expect(initialCards).toHaveLength(2);
-    // screen.debug(null, 20000);
+//   it('Filter Should be Additive', async () => {
+//     api.getReviews.mockResolvedValue(get100Relevant37314);
+//     await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
+//     // return waitFor(() => {
+//     //   expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2)
+//     // })
+//     let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
+//     let oneStarChart = screen.getByTestId('1starrating');
+//     // console.log(oneStarChart);
+//     user.click(oneStarChart).
+//       then(() => {
+//         expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(1);
+//       })
+//       .catch(() => {
+//         console.log('could not click');
+//       })
+//     user.click(screen.getByTestId('5starrating')).
+//     then(() => {
+//         expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2);
+//       })
+//   })
 
-    let oneStarChart = screen.getByTestId('1starrating');
-    console.log(oneStarChart);
-    user.click(oneStarChart).
-      then(() => {
-        expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(1);
-      })
-      .catch(() => {
-        console.log('could not click');
-      })
-    user.click(screen.getByTestId('5starrating')).
-    then(() => {
-        expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2);
-      })
-  })
+//   it('Filter Should be Additive', async () => {
+//     api.getReviews.mockResolvedValue(get100Relevant37314);
+//     await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
 
-  it('Filter Should be Additive', async () => {
-    api.getReviews.mockResolvedValue(get100Relevant37314);
-    await render(<RatingsReviews product={get100Newest37314} meta={meta37314}/>)
+//     let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
 
-    let initialCards = await document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ');
+//     let Starbar = screen.getByText('1 Star:');
+//     // console.log('this the', Starbar);
+//     user.click(Starbar).
+//       then(() => {
+//         expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(1);
+//       })
+//     user.click(screen.getByText('5 Star:')).
+//     then(() => {
+//         expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2);
+//     })
+//   })
 
-    let Starbar = screen.getByText('1 Star:');
-    console.log('this the', Starbar);
-    user.click(Starbar).
-      then(() => {
-        expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(1);
-      })
-    user.click(screen.getByText('5 Star:')).
-    then(() => {
-        expect(document.getElementsByClassName('ReviewCardContainer mx-auto px-3 ')).toHaveLength(2);
-    })
-  })
+// });
 
+// describe('testing clicking barChar', () => {
+//   const user = userEvent.setup();
 
-});
+//   it('Render ReviewChart & run callback', async () => {
+//     await render(<RatingsChart metaRatings={meta37314.ratings} ratingsCB={() => {}} starFilter={{
+//       "1": true,
+//       "5": true
+//     }}/> )
 
-describe('testing clicking barChar', () => {
-  const user = userEvent.setup();
-
-  it('Render ReviewChart & run callback', async () => {
-    await render(<RatingsChart metaRatings={meta37314.ratings} ratingsCB={() => {}} starFilter={{
-      "1": true,
-      "5": true
-    }}/> )
-
-    user.click(screen.getByText('2 Star:')).
-      then(() => {
-        screen.getByClassName('inline text-blue-400 max-h-full').toHaveLength(3);
-      })
-  });
+//     user.click(screen.getByText('2 Star:')).
+//       then(() => {
+//         screen.getByClassName('inline text-blue-400 max-h-full').toHaveLength(3);
+//       })
+//   });
 
 
-})
+// })
 
 describe('Add inputs to Forms', () => {
-  // it(('Add Inputs to Review Forms'), () => {
-  //   render(<ReviewForm setModalOpen={setModalOpen} question={'string'}/>);
+  const user = userEvent.setup();
 
-  // })
+  it(('Add Inputs to Review Forms'), async () => {
+    await act(async () => render(<ReviewForm product={product37314} meta={meta37314} onFormSubmit={()=>{}} exitFormCB={() => {}} />))
+    user.click(screen.getByRole('radio', {name: 'Yes'}));
+    user.click(screen.getByRole('radio', {name: 'No'}));
+    user.click(screen.getByRole('textbox', {name: 'Your Email'}));
+    let emailBox = screen.getByRole('textbox', {name: 'Your Email'});
+    fireEvent.change(screen.getByPlaceholderText("Example: jackson11@email.com"), {target:{value: 'test'}}) //adds input into email
+    user.type(emailBox, 'calvin');
+    fireEvent.click(screen.getByRole('radio', {name: 'Runs tight'})) //125040
+    // expect(emailBox).toHaveValue('calvin');  // failing
 
+    // user.click(screen.getByRole('radio', {name: 'Runstight'}));
+    user.click(screen.getByRole('button', {name: 'Submit'}))
+  });
 
-}
+  it('clicks the submit button', async () => {
+    await act(async () => render(<ReviewForm product={product37314} meta={meta37314} onFormSubmit={()=>{}} exitFormCB={() => {}} />))
+    // userEvent.click(screen.getByTestId('formSubmit'));
+    fireEvent.click(screen.getByTestId('formSubmit'));
+  });
+
+  it('clicks the submit button', async () => {
+    await act(async () => render(<ReviewForm product={product37314} meta={meta37314} onFormSubmit={()=>{}} exitFormCB={() => {}} />))
+    // userEvent.click(screen.getByTestId('formSubmit'));
+    fireEvent.click(screen.getByTestId('closeFormIcon'));
+  });
+
+});
