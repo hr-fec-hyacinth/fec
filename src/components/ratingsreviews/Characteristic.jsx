@@ -26,6 +26,12 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
   let rightVar = '++';
 
   switch(characteristicName) {
+    case 'Size':
+      leftVar = 'Small';
+      rightVar = 'Large';
+    case 'Width':
+      leftVar = 'Narrow';
+      rightVar = 'Wide'
     case 'Fit':
       leftVar = 'Narrow';
       rightVar = 'Wide';
@@ -45,7 +51,7 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
   }
 
   return (
-    <div>
+    <div className="CharacteristicBarChart">
       <span className="text-l"> {characteristicName} </span> : {parseFloat(characteristicObj.value).toFixed(1)}
       <span> </span>
       <div className="flex flex-wrap mx-auto">

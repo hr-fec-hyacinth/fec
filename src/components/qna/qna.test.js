@@ -1043,6 +1043,9 @@ const putRejectedResponse = {
   status: 400
 }
 
+const mockBodyToLong = 'NXGvkBCINKoTxqGXOLXjkpkqJweKfauXk3WUIusNMSesux19b3Z3cyPSJQZYZXcOqHPDvkrHXtAuX9JS2EKzDju21ON7yWhKVpuwMNBAjOSoFVZktmZ77RJBcxLGwqWe62mJc8uF91slRsieGwALSuWxkfpNsfkTQU2BNVz5nbPhpBllMt6ovKd8oC9t8n89HciMj3RUB5QsltpgcEYK5K2qd2GHA3zAvxJs29qzMjrJMWYOe5nfcIXcyLzYWFuUA2iBCczj1FQdJGMbsTgDAiKjZqy7mBd4f9FnvK4C4jpGdfN3mUUPchma5XsScF6nFWygnJP1tzePFa5o6FJM8xltAq6ysNvZnNUdoEVKjGkq2cOtUFzBHD8cu5JiHW38x29KpIT3NhShlYQFZR0We9m8Aq3f4s9xnLofJHa4ROI2v5q3d9o71QE7Dzm0B8ZGOdvn4Z9Rh8kTr2SP86VPPkLE6cq7xzzu7oXUlFGfxsxKCAJT84GjtyDDzOGaUqIXNa4qha63XHFzn1sQRIhkh6chmJq5ZwQnVZ4kQ3zYnxehKgIzzuZf4U5pkfRO8KzoR0a8qmPkQvesX6IN9LRn5veyMF5YIhLwJ6SAGPDkrPElnwspJ1urPb886EM2HxSEOHTI7b02CFrtjuhHKBXCp50p24NVYaIF10XvkFSGwbCjrhQ4BpuxsFDjRqCSx927yIrpCu6RicdUj884eL3UIoafO9u0b9kkUMNL6CeDScBNhgEDpBgbaNU4ycQvsJE0WXhZLZBQdUBfEUzrUm4jUJos76fnQWpxzsDoeTcTyyWEkZJvWUmD1cfhIsWTK9fDLbNG5GXxRfzFTtw7aETSVkkdLF7NFJhZFKGlhYyzw29Uo4QkDms2xHyNCrmHXqeCaIYtlEVgLN53xxRDExCT5jJwfhEZvys3k0XU6JxwIizlv1DnOAj8ZofgQ8YYp72BS7bgfDKoo3TbxInwQBIxwej9iSSkWmPjX5zpkwCfe'
+const nicknameToLong = 'rlYzqMbBk90hlXgjDO4BNH6hLBXknSXGopNqeVE4aBPWHj78GCUfM05J8LeMw';
+
 let setModalOpen = () => {};
 
 describe('Top-level Question and Answer Component', () => {
@@ -1050,7 +1053,6 @@ describe('Top-level Question and Answer Component', () => {
   it('Renders the Question & Answers Section with Resolved Response', async () => {
     api.getQuestions.mockResolvedValue(getQuestonsMockResolvedResponse)
     await act( async () => render(<QnA product={product}/>));
-    // screen.debug()
   });
 
   it('Renders the Question & Answers Section with Rejected Response', async () => {
@@ -1084,6 +1086,125 @@ describe('Top-level Question and Answer Component', () => {
     await act( async () => render(<QnA product={product}/>));
     fireEvent.click(screen.getAllByRole('img')[0]);
   })
+});
+
+describe('Answer Form', () => {
+  beforeEach(() => jest.clearAllMocks());
+  it('should click submit on answer form without nickname', () => {
+    render(<AForm setModalOpen={setModalOpen} question={'string'}/>);
+    fireEvent.change(screen.getByPlaceholderText("Type your answer here"), {target:{value: 'test'}});
+    fireEvent.click(screen.getByText('Submit'));
+  })
+
+  it('should reject a body thats too long', () => {
+    render(<AForm setModalOpen={setModalOpen} question={'string'}/>);
+    fireEvent.change(screen.getByRole('textbox', {name: 'Nickname:'}), {target:{value: 'test'}})
+    fireEvent.change(screen.getByPlaceholderText("Type your answer here"), {target:{value: mockBodyToLong}});
+    fireEvent.click(screen.getByText('Submit'));
+  })
+
+  it('should reject a nickname thats too long', () => {
+    render(<AForm setModalOpen={setModalOpen} question={'string'}/>);
+    fireEvent.change(screen.getByRole('textbox', {name: 'Nickname:'}), {target:{value: nicknameToLong}})
+    fireEvent.change(screen.getByPlaceholderText("Type your answer here"), {target:{value: 'test'}});
+    fireEvent.click(screen.getByText('Submit'));
+  })
+});
+
+describe('Question Form', () => {
+  beforeEach(() => jest.clearAllMocks());
+  it('should click submit on answer form without nickname', () => {
+    render(<QForm setModalOpen={setModalOpen} product={product}/>);
+    fireEvent.change(screen.getByPlaceholderText("Type your question here"), {target:{value: 'test'}});
+    fireEvent.click(screen.getByText('Submit'));
+  })
+
+  it('should reject a body thats too long', () => {
+    render(<QForm setModalOpen={setModalOpen} product={product}/>);
+    fireEvent.change(screen.getByRole('textbox', {name: 'Nickname:'}), {target:{value: 'test'}})
+    fireEvent.change(screen.getByPlaceholderText("Type your question here"), {target:{value: mockBodyToLong}});
+    fireEvent.click(screen.getByText('Submit'));
+  })
+
+  it('should reject a nickname thats too long', () => {
+    render(<QForm setModalOpen={setModalOpen} product={product}/>);
+    fireEvent.change(screen.getByRole('textbox', {name: 'Email:'}), {target:{value: 'test'}})
+    fireEvent.change(screen.getByRole('textbox', {name: 'Nickname:'}), {target:{value: nicknameToLong}})
+    fireEvent.change(screen.getByPlaceholderText("Type your question here"), {target:{value: 'test'}});
+    fireEvent.click(screen.getByText('Submit'));
+  })
+
+  it('should reject a email thats too long', () => {
+    render(<QForm setModalOpen={setModalOpen} product={product}/>);
+    fireEvent.change(screen.getByRole('textbox', {name: 'Nickname:'}), {target:{value: nicknameToLong}})
+    fireEvent.change(screen.getByPlaceholderText("Type your question here"), {target:{value: 'test'}});
+    fireEvent.change(screen.getByRole('textbox', {name: 'Email:'}), {target:{value: nicknameToLong}})
+    fireEvent.click(screen.getByText('Submit'));
+  })
+
+  it('should reject a email thats not in the correct format', () => {
+    render(<QForm setModalOpen={setModalOpen} product={product}/>);
+    fireEvent.change(screen.getByRole('textbox', {name: 'Nickname:'}), {target:{value: 'test'}})
+    fireEvent.change(screen.getByPlaceholderText("Type your question here"), {target:{value: 'test'}});
+    fireEvent.change(screen.getByRole('textbox', {name: 'Email:'}), {target:{value: 'test'}})
+    fireEvent.click(screen.getByText('Submit'));
+  })
+});
+
+describe('One Question', () => {
+  beforeEach(() => jest.clearAllMocks());
+  it('should handle helpful click with Resolved Response', () => {
+    api.putHelpfulQuestion.mockResolvedValue(putResolvedResponse)
+    render(<OneQ questionData={questions} product={product}/>);
+    fireEvent.click(screen.getByText('Yes'))
+  });
+
+  it('should handle helpful click with Rejected Response', () => {
+    api.putHelpfulQuestion.mockRejectedValue(putRejectedResponse)
+    render(<OneQ questionData={questions} product={product}/>);
+    fireEvent.click(screen.getByText('Yes'))
+  });
+
+  it('should handle helpful click with Resolved Response other than 204', () => {
+    api.putHelpfulQuestion.mockResolvedValue({status:200})
+    render(<OneQ questionData={questions} product={product}/>);
+    fireEvent.click(screen.getByText('Yes'))
+  });
+
+  it('should handle report click with Resolved Response', () => {
+    api.putReportQuestion.mockResolvedValue(putResolvedResponse)
+    render(<OneQ questionData={questions} product={product}/>);
+    fireEvent.click(screen.getByText('Report'))
+  });
+
+  it('should handle report click with Rejected Response', () => {
+    api.putReportQuestion.mockRejectedValue(putRejectedResponse)
+    render(<OneQ questionData={questions} product={product}/>);
+    fireEvent.click(screen.getByText('Report'))
+  });
+
+  it('should handle report click with Resolved Response other than 204', () => {
+    api.putReportQuestion.mockResolvedValue({status:200})
+    render(<OneQ questionData={questions} product={product}/>);
+    fireEvent.click(screen.getByText('Report'))
+  });
+
+});
+
+describe('Modal', () => {
+  it('should do nothing when modal is clicked on and X icon should be clickable', () => {
+    render(
+      <Modal setModalOpen={setModalOpen}>
+        <div className='flex flex-col items-center'>
+          <div className='font-thin text-xl text-netural-500'>Ask Your Question</div>
+          <div className='mb-3 font-thin text-sm text-netural-500'>About the {product.name}</div>
+        </div>
+        <QForm setModalOpen={setModalOpen} product={product}/>
+      </Modal>
+    );
+    fireEvent.click(screen.getByText('Ask Your Question'));
+    fireEvent.click(screen.getByTestId('closeIcon'))
+  });
 });
 
 it('Renders the Modal', () => {
@@ -1133,7 +1254,6 @@ it('Renders Answer Form', () => {
 })
 
 it('Renders Question Form', () => {
-  const placeholder = 'Email:'
   render(<AForm setModalOpen={setModalOpen} question={'string'}/>);
   fireEvent.click(screen.getByRole('textbox', {name: 'Nickname:'}))
   fireEvent.click(screen.getByRole('textbox', {name: 'Email:'}))

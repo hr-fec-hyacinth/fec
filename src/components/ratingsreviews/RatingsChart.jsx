@@ -6,8 +6,6 @@ const RatingsChart = ({metaRatings, ratingsCB, starFilter}) => {
     { return prev + parseInt(metaRatings[cur])}
     , 0);
 
-  // console.log('this is the total ratings', totalRatings);
-
   return (
     <div>
       {metaRatings && Object.keys(metaRatings).map((el, i) => {

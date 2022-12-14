@@ -4,6 +4,7 @@ import StarsInput from './StarsInput.jsx';
 import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 import PhotoUpload from '../shared/PhotoUpload.jsx';
+import Thumbnails from '../shared/Thumbnails.jsx'
 import axios from 'axios';
 
 require('dotenv').config();
@@ -25,6 +26,7 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
 
   const [characteristics, setCharacteristics] = useState({});
   const [hasPosted, setHasPosted] = useState(false)
+  const [photosSrcList, setPhotosSrcList] = useState([]);
 
   // CSS Styling <---------------------------------------------------------------------------------------------------->
   // CSS Styling for table specifically to stretch the whole row
@@ -36,12 +38,7 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
 
   //------------------------------------------------------------------------------------------->
 
-  // // this is a function that runs on every update and handles validation of the form
-  // const handleValidation = (inputType, value) => {
-  // }
-
   // handles onChange Functionality for everything before
-
   useEffect(() => {
     setFields({
       ...fields,
@@ -100,6 +97,7 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
         <div className='flex-initial w-10/12 sm:w-6/12 bg-slate-100 py-3 my-4 rounded-xl
                         shadow-md relative overflow-auto max-h-full'>
           <IoIosCloseCircle className='text-emerald-700 text-2xl hover:text-emerald-600 absolute top-3 right-3'
+            data-testid="closeFormIcon"
             onClick={() => {onFormSubmit(false)}} />
 
           <form className='space-y-2 my-5 mx-4 overflow-auto' aria-label="form">
@@ -117,6 +115,7 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
                 <label className='px-2'>
                   <span>Yes</span>
                   <input type='radio'
+                         role='radio'
                           name='recommend'
                           value={Boolean(true)}
                           onChange={handleOnChange}></input>
@@ -124,9 +123,10 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
                 <label className='px-2'>
                   <span>No</span>
                   <input type='radio'
-                          name='recommend'
-                          value={Boolean(false)}
-                          onChange={handleOnChange}></input>
+                         role='radio'
+                        name='recommend'
+                        value={Boolean(false)}
+                        onChange={handleOnChange}></input>
                 </label>
               </div>
             </div>
@@ -142,13 +142,16 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
             </div>
 
             <div className='flex flex-wrap w-full'>
-              <span>Your Email</span>
-              <input type='text'
-                value={fields.email}
-                name='email'
-                onChange={handleOnChange}
-                placeholder='Example: jackson11@email.com'
-                className={textCSS}/>
+              <label>
+                <span>Your Email</span>
+                <input type='text'
+                  role='textbox'
+                  value={fields.email}
+                  name='email'
+                  onChange={handleOnChange}
+                  placeholder='Example: jackson11@email.com'
+                  className={textCSS}/>
+              </label>
               <span className='text-xs'>
                 For authentication reasons, you will not be emailed</span>
             </div>
@@ -186,10 +189,12 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
               <span className='text-xs'>{50 - fields.body.length} needed</span>
             </div>
 
-            <div><PhotoUpload /></div>
+            <PhotoUpload photosSrcList={photosSrcList} setPhotosSrcList={setPhotosSrcList}/>
+            <Thumbnails photosSrcList={photosSrcList} expandOnClick={false}/>
 
             <div>
               <button id='submitReview' name='submitForm' onClick={submitForm}
+                data-testid="formSubmit"
                 className='my-3 bg-emerald-50
                 hover:file:bg-emerald-100
                 block w-full text-sm text-slate-500'>
