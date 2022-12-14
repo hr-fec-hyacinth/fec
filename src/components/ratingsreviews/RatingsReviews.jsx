@@ -55,7 +55,7 @@ const RatingsReviews = ({product, meta}) => {
     }
   }
   //---CSS--------------------------------------//
-  const buttonCSS = 'drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105';
+  const buttonCSS = 'flex drop-shadow-lg border-2 border-indigo-300 px-2 py-2 hover:scale-105';
 
   //----------------------RENDERS---------------//
   const totalNumReviews = 0;
@@ -64,22 +64,22 @@ const RatingsReviews = ({product, meta}) => {
   return (
     <div>
     {meta.ratings &&
-    <div id='ratings-reviews' className="pt-10 pb-3">
-      RATINGS & REVIEWS
+    <div id='ratings-reviews' className="pt-10 pb-3 mx-2 mb-10">
+      <span>RATINGS & REVIEWS</span>
       <div className="flex flex-col sm:flex-row space-x-3">
         <div id='ratings' className="w-10/12 m-x-3 mx-auto justify-center sm:w-4/12 pt-3" >
           <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
-        <div id='review' className="w-10/12 mx-auto sm:w-8/12">
+        <div id='review' className="w-10/12 mx-auto sm:w-8/12 justify-center">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
           <Reviews product={product} meta={meta}
                    sortBy={sortBy} reviews={reviews} filterStars={starFilter}
                    reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
-          <div className="mx-auto space-x-2">
+          <div className="flex grow space-x-4 sm:mx-auto sm:space-x-2">
             {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) &&
             <button id='loadMoreReviews' className={buttonCSS} onClick={handleOnClick.moreReviews}>
-                MORE REVIEWS
+              MORE REVIEWS
             </button>}
             <button id='submitReview' className={buttonCSS} onClick={handleOnClick.toggleForm}>
               ADD A REVIEW +
