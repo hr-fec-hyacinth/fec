@@ -8,7 +8,7 @@
     "build": "webpack --mode=production",
     "dev": "webpack server --open",
     "tail": "npx tailwindcss -i ./src/styles/main.css -o ./public/output.css --watch",
-    "prod": "node server/index.js"
+    "prod": "npx tailwindcss -i ./src/styles/main.css -o ./public/output.css && webpack --mode=production && node server/index.js"
   },
   "repository": {
     "type": "git",
