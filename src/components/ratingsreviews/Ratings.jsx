@@ -22,7 +22,10 @@ const Ratings = ({product, meta, ratingsCB, starFilter}) => {
 
   return (
     <div>
-      {averageRating && <p className="text-3xl">{averageRating}</p>}
+      <div className='flex flex-row'>
+        {averageRating && <p className="sm:text-3xl">{averageRating}</p>}
+        <div className='mx-3'><StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/></div>
+      </div>
       <p className="text-xs"><span>{percentRecommended}</span> of reviews recommend this product</p>
       {meta.ratings && <RatingsChart metaRatings={meta.ratings} ratingsCB={ratingsCB} starFilter={starFilter}/>}
       {meta.characteristics &&

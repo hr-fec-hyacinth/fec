@@ -66,7 +66,6 @@ const RatingsReviews = ({product, meta}) => {
       <span>RATINGS & REVIEWS</span>
       <div className="flex flex-col sm:flex-row space-x-3">
         <div id='ratings' className="w-10/12 m-x-3 mx-auto justify-center sm:w-4/12 pt-3" >
-          <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
         <div id='review' className="w-11/12 mx-auto sm:w-8/12 justify-center">

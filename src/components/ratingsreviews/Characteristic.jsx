@@ -58,7 +58,7 @@ const Characteristic = ({characteristicName, characteristicObj}) => {
 
   return (
     <div className="CharacteristicBarChart my-2.5">
-      <span className='text-sm sm:text-m'> {characteristicName} </span> <span className='text-sm sm:text-m'>: {parseFloat(characteristicObj.value).toFixed(1)}</span>
+      <span className='text-sm sm:text-l'> {characteristicName} </span> <span className='text-sm sm:text-l'>: {parseFloat(characteristicObj.value).toFixed(1)}</span>
       {/* <span>
       </span> */}
       <div className=''>
