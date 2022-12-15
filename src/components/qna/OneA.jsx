@@ -64,11 +64,11 @@ const OneA = ({ answer }) => {
         <div className='ml-7'>by</div>
         {nameComp}
         <div>, {formattedDate}</div>
-        <div className='ml-3'>|</div>
-        <div className='ml-3'>Helpful?</div>
+        <div className='sm:ml-3 ml-2'>|</div>
+        <div className='sm:ml-3 ml-2'>Helpful?</div>
         <button className='ml-1 underline' onClick={handleYesClick}>Yes</button>
         <div className='ml-1'>({helpfulness})</div>
-        <div className='ml-3'>|</div>
+        <div className='sm:ml-3  ml-2'>|</div>
         {reportComp}
       </div>
     </>
