@@ -18,7 +18,7 @@ const Thumbnails = ({ photosSrcList, expandOnClick }) => {
 
   return (
     <>
-      <div className='flex flex-row gap-3 self-center items-center'>
+      <div className='flex flex-row gap-3 self-center items-center overflow-auto'>
         {thumbnails}
       </div>
       {expand && <Expanded setExpand={setExpand} imageIndex={imageIndex} setImageIndex={setImageIndex} imageList={photosSrcList} />}
