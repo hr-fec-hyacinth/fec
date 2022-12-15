@@ -52,16 +52,20 @@ const OneQ = ({ questionData, product }) => {
   if (questionData)
     result = (
       <>
-        <div className="flex my-3 items-center mr-2">
-          <div className='font-bold'>Q:</div>
-          <div className='font-bold ml-3'>{questionData.question_body}</div>
-          <div className='self-end self-center ml-auto text-netural-500 text-xs font-semibold'>Helpful?</div>
-          <button className='text-netural-500 text-xs font-semibold underline ml-3' onClick={handleYesClick}>Yes</button>
-          <div className='text-netural-500 text-xs ml-1'>({helpfulness})</div>
-          <div className='text-netural-500 text-xs ml-3'>|</div>
-          <button className='text-netural-500 text-xs underline ml-3' onClick={handleAddAClick}>Add Answer</button>
-          <div className='text-netural-500 text-xs ml-3'>|</div>
-          {reportComp}
+        <div className="flex my-3 mr-2 sm:flex-row flex-col">
+          <div className='flex'>
+            <div className='font-bold'>Q:</div>
+            <div className='font-bold ml-3'>{questionData.question_body}</div>
+          </div>
+          <div className='flex sm:self-end self-center sm:ml-auto mt-1'>
+            <div className=' text-netural-500 text-xs font-semibold'>Helpful?</div>
+            <button className='text-netural-500 text-xs font-semibold underline ml-3' onClick={handleYesClick}>Yes</button>
+            <div className='text-netural-500 text-xs ml-1'>({helpfulness})</div>
+            <div className='text-netural-500 text-xs ml-3'>|</div>
+            <button className='text-netural-500 text-xs underline ml-3' onClick={handleAddAClick}>Add Answer</button>
+            <div className='text-netural-500 text-xs ml-3'>|</div>
+            {reportComp}
+          </div>
         </div>
         {modalOpen &&
           <Modal setModalOpen={setModalOpen}>
