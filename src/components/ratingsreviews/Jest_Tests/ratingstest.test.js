@@ -11,8 +11,6 @@ import api from '../../../../server/api.js';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-// jest.mock('../../../../server/api');
-
 let product = {
   "id": 11,
   "name": "Air Minis 250",
@@ -146,27 +144,20 @@ let starFilterNone = {
 let cardsClassName = 'ReviewCardContainer mx-auto px-3';
 
 describe('Renders the Ratings and Reviews Section', () => {
-  // beforeEach(() => jest.clearAllMocks());
 
   it('Renders the RatingReviews sSection', () => {
-    // api.getReviews.mockResolvedValue({results: reviews});
-
     const placeholder = 'RATINGS & REVIEWS';
     const { getByText } = render(<RatingsReviews product={product} meta={metaReview} />);
     getByText(placeholder);
   });
 
   it('Initially sorts as relevance', () => {
-    // api.getReviews.mockResolvedValue({results: reviews});
-
     const placeholder = 'relevance';
     const { getByText } = render(<RatingsReviews product={product} meta={metaReview} />);
     getByText(placeholder);
   });
 
   it('Clicking on Submit Review Opens Form and load inputs', async () => {
-    // api.getReviews.mockResolvedValue({results: reviews});
-
     render(<RatingsReviews product={product} meta={metaReview} />);
     const submitForm = document.getElementById('submitReview');
     fireEvent.click(submitForm);
@@ -175,8 +166,6 @@ describe('Renders the Ratings and Reviews Section', () => {
   });
 
   ('Clicking on Submit Review Opens Form and load inputs', async () => {
-    // api.getReviews.mockResolvedValue({results: reviews});
-
     render(<RatingsReviews product={product} meta={metaReview} />);
     const submitForm = document.getElementById('moreReviews');
     fireEvent.click(submitForm);

@@ -10,7 +10,6 @@ import axios from 'axios';
 require('dotenv').config();
 let AUTHKEY = process.env.AUTHKEY;
 
-
 const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
   const [fields, setFields] = useState({
     'product_id': 37313,
@@ -142,16 +141,15 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
             </div>
 
             <div className='flex flex-wrap w-full'>
-              <label>
-                <span>Your Email</span>
+                Your Email
                 <input type='text'
+                  data-testid='email'
                   role='textbox'
                   value={fields.email}
                   name='email'
                   onChange={handleOnChange}
                   placeholder='Example: jackson11@email.com'
                   className={textCSS}/>
-              </label>
               <span className='text-xs'>
                 For authentication reasons, you will not be emailed</span>
             </div>
