@@ -2,12 +2,13 @@ import React from 'react';
 import ProductInfo from './ProductInfo.jsx';
 import Styles from './Styles.jsx';
 import Cart from './Cart.jsx';
-import ImageView from './ImageView.jsx';
 import api from '../../../server/api.js';
 import Details from './Details.jsx';
 import Social from './Social.jsx';
 
-const { useState, useEffect } = React;
+const { useState, useEffect, Suspense, lazy } = React;
+
+const ImageView = lazy(() => import('./ImageView.jsx'));
 
 const Overview = ({ product, styles, metaReview, style, changeStyle, outfit, setOutfit }) => {
   const [styleIndex, changeStyleIndex] = useState(0);
@@ -38,7 +39,9 @@ const Overview = ({ product, styles, metaReview, style, changeStyle, outfit, set
     <div>
       <div className='flex min-h-full flex-col sm:flex-row' onClick={e => api.postInteraction(e, 'Overview')}>
         <div className={stretch ? 'min-h-full w-full ease-linear duration-150' : 'w-full sm:w-8/12 ease-linear duration-150'}>
-          <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
+          <Suspense fallback={<div>Loading</div>}>
+            <ImageView style={styles[styleIndex]} updateStretch={toggleStretch} />
+          </Suspense>
         </div>
         <div data-testid="sidebar" className={stretch ? 'hidden' : 'w-full sm:w-4/12 sm:flex hidden flex-col justify-between sm:ml-4'}>
            <div className='sm:block hidden my-1'>
