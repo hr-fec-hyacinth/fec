@@ -4,11 +4,9 @@ import SortOptions from './SortOptions.jsx';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import ReviewsList from './ReviewsList.jsx';
 
-// filterStars is selected by
 const Reviews = ({product, meta, sortBy, reviews, filterStars, reviewsCount, starFilterActive}) => {
 
   const transitionCSS = {
-    // overflow:hidden;
     transition: "all 0.75s ease-out"
   }
 

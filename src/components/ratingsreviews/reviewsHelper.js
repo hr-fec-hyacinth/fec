@@ -1,5 +1,4 @@
 // calculates Average Rating i:Object o: average num
-
 export const calculateAverageRating = (metaRatings) => {
   let totalRating = 0;
   let totalVotes = 0;
@@ -11,4 +10,8 @@ export const calculateAverageRating = (metaRatings) => {
 
   // return parseFloat((totalRating / totalVotes)).toFixed(2) ;
   return (totalRating / totalVotes).toFixed(1);
+}
+
+export const roundNearestQuarter = (number) => {
+  return ((Math.round(number * 4) / 4).toFixed(2))
 }
