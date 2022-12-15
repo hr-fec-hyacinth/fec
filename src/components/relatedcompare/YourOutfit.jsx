@@ -5,13 +5,7 @@ import {MdArrowBackIos, MdArrowForwardIos} from 'react-icons/md'
 
 const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOutfit, style }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  let length;
-
-  if (outfit) {
-    length = outfit.length;
-  } else {
-    length = 0;
-  }
+  const length = outfit.length;
 
   if (!JSON.parse(window.localStorage.getItem('userOutfit'))) {
     window.localStorage.setItem('userOutfit', JSON.stringify(outfit))
