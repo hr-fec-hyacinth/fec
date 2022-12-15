@@ -1,6 +1,3 @@
-// const { merge } = require('webpack-merge');
-// const common = require('./webpack.common.js');
-const TerserPlugin = require("terser-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 const dotenv = require('dotenv').config();
@@ -12,10 +9,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public'),
     filename: "bundle.js"
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [new TerserPlugin()],
   },
   module: {
     rules: [
