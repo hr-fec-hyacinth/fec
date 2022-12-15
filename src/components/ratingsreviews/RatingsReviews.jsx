@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import api from '../../../server/api.js';
+import totalReviews from '../../helper/totalReviews.js';
+import { calculateAverageRating } from './reviewsHelper.js';
 import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
 import ReviewForm from './ReviewForm.jsx';
 import SortOptions from './SortOptions.jsx';
-import api from '../../../server/api.js';
 import StarDisplayQuarters from './StarDisplayQuarters.jsx'
-import { calculateAverageRating } from './reviewsHelper.js';
-import totalReviews from '../../helper/totalReviews.js'; // calculate total helper
 
 const RatingsReviews = ({product, meta}) => {
   const [activeForm, setActiveForm] = useState(false);
@@ -23,7 +23,6 @@ const RatingsReviews = ({product, meta}) => {
     "4": false,
     "5": false
   });
-
 
   useEffect(()=> {
     if(product.id) {
@@ -59,7 +58,6 @@ const RatingsReviews = ({product, meta}) => {
 
   //----------------------RENDERS---------------//
   const totalNumReviews = 0;
-  const renderingButton = () => {}
 
   return (
     <div>
@@ -71,12 +69,12 @@ const RatingsReviews = ({product, meta}) => {
           <StarDisplayQuarters number={calculateAverageRating(meta.ratings)}/>
           <Ratings product={product} meta={meta} ratingsCB={handleOnClick.stars} starFilter={starFilter}/>
         </div>
-        <div id='review' className="w-10/12 mx-auto sm:w-8/12 justify-center">
+        <div id='review' className="w-11/12 mx-auto sm:w-8/12 justify-center">
           <SortOptions meta={meta} sortBy={sortBy} sortCB={handleOnClick.sortBy} />
           <Reviews product={product} meta={meta}
                    sortBy={sortBy} reviews={reviews} filterStars={starFilter}
                    reviewsCount={reviewsCount} starFilterActive={starFilterActive} />
-          <div className="flex grow space-x-4 sm:mx-auto sm:space-x-2">
+          <div className="flex grow space-x-4 sm:mx-auto sm:space-x-2 my-2.5">
             {((totalReviews(meta.ratings) >= reviewsCount) || (totalReviews(meta.ratings) > 0)) &&
             <button id='loadMoreReviews' className={buttonCSS} onClick={handleOnClick.moreReviews}>
               MORE REVIEWS

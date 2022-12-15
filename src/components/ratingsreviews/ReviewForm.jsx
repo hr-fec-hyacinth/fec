@@ -138,6 +138,9 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
                 placeholder='Example: jackson11!'
                 onChange={handleOnChange}
                 className={textCSS} />
+                <span className='text-xs'>
+                For privacy reasons, do not use your full name or email address
+                </span>
             </div>
 
             <div className='flex flex-wrap w-full'>
