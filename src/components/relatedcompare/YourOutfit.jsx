@@ -7,6 +7,10 @@ const YourOutfit = ({ product, switchProduct, styles, metaReview, outfit, setOut
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = outfit.length;
 
+  if (!JSON.parse(window.localStorage.getItem('userOutfit'))) {
+    window.localStorage.setItem('userOutfit', JSON.stringify(outfit))
+  }
+
   useEffect(() => {
     if (metaReview) {
       setOutfit(JSON.parse(window.localStorage.getItem('userOutfit')));
