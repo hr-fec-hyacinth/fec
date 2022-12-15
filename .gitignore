@@ -5,3 +5,5 @@ package-lock.json
 coverage
 .env
 bundle.js
+bundle.js.map
+bundle.js.LICENSE.txt
