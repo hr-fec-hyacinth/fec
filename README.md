@@ -23,6 +23,10 @@
 
 > On the right side of the screen is the product details and the cart. The social media icons display at the top with the star ratings. Clicking on the number of ratings will take the user down the the Ratings & Reviews section. Underneath the product details, a list of styles appear as clickable icons. Clicking on these will update the images in the carousel and the product information. The cart allows the user to select both a size and quantity, and sends an api call to add the product to the user cart.
 
+### Questions and Answers - Nathan
+
+> The Questions and Answers section is made up of many nested objects, but its main components are the search bar, the question, and the answer. There are buttons to expand and collapse both the questions and answers, as well as the option to add both a question and answer. When either is added, a modal appears and blurs the rest of the screen, allowing the user to focus on the entry. Within the answer modal, users can also upload pictures that will be displayed as thumbnails. Overall, the design of this section is clean and free of distractions, making it easy for the user to find the answer they are seeking.
+
 ## Git Tools
 Make New Branch and Push:
 ```she
