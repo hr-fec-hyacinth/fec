@@ -6,14 +6,24 @@
 
 1. [Usage](#Usage)
 2. [Modules](#modules)
-3. [Git Tools](#git-tools)
-4. [Development](#development)
-5. [Installing Dependencies](#installing-dependencies)
-6. [Additional Info](#additional-info)
+3. [Tech Stack](#tech-stack)
+4. [Git Tools](#git-tools)
+5. [Development](#development)
+6. [Installing Dependencies](#installing-dependencies)
+7. [Additional Info](#additional-info)
+8. [Contributors](#contributors)
 
 ## Usage
 
 > The `npm run prod` script creates the css file, uses webpack/babel to build the bundle file, then start the express server that servers up the bundle. See [Additional Info](#additional-info) for more information on these tools
+
+## Tech Stack
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
+![Node](https://img.shields.io/badge/-Node-9ACD32?logo=node.js&logoColor=white&style=for-the-badge)
+![Express](https://img.shields.io/badge/-Express-DCDCDC?logo=express&logoColor=black&style=for-the-badge)
+![Axios](https://img.shields.io/badge/-Axios-671ddf?logo=axios&logoColor=black&style=for-the-badge)
+
 
 ## Modules
 
@@ -74,3 +84,9 @@ Used this [Repo](https://github.com/DaltonHart/HowTo-React-Webpack-Babel/blob/ma
 For inline css styling [tailwindcss](https://tailwindcss.com/) was used. It has been configured to create and ```output.css``` file in the public folder that styles the app.
 <br>
 For creating an extremely simple server to serve the ```bundle.js``` file [express](https://expressjs.com/) was used. This was setup in ```index.js```
+
+## Contributors
+
+<a href="https://github.com/hr-fec-hyacinth/fec/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=hr-fec-hyacinth/fec" />
+</a>
