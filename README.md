@@ -23,6 +23,12 @@
 
 > On the right side of the screen is the product details and the cart. The social media icons display at the top with the star ratings. Clicking on the number of ratings will take the user down the the Ratings & Reviews section. Underneath the product details, a list of styles appear as clickable icons. Clicking on these will update the images in the carousel and the product information. The cart allows the user to select both a size and quantity, and sends an api call to add the product to the user cart.
 
+### Related Products - Carter
+
+> The "related products" section of a product page consists of two horizontal carousels: the upper one displays a list of related products as individual cards, each showing key details about the product. The lower carousel has similar functionality. The upper carousel displays four cards at a time, and users can navigate through the list of related products by moving forward and backward. The first three cards in the carousel are clickable: clicking anywhere on the card (excluding the star icon in the upper right corner) will change the main product overview on the page to the selected product. Clicking on the star icon will open a modal that compares the key features of the related product with the current overview product.
+
+> The lower carousel is the ‘Your Outfit’ section. Similar to
+
 ## Git Tools
 Make New Branch and Push:
 ```she
