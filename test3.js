@@ -1,5 +1,5 @@
 const axios = require('axios')
-let AUTHKEY = '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'
+let AUTHKEY = 
 const URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'
 const fs = require('fs');
 
@@ -40,34 +40,34 @@ for (let i = 37311; i <= 38321; i++) {
     //     console.log(fail);
     //     clearTimeout();
     //   })
-    api.getStyles(i)
-      .then(res => styles[i] = res)
-      .catch(fail => {
-        console.log(fail);
-        clearTimeout();
-      })
+    // api.getStyles(i)
+    //   .then(res => styles[i] = res)
+    //   .catch(fail => {
+    //     console.log(fail);
+    //     clearTimeout();
+    //   })
     // api.getMetaReviews(i)
     //   .then(res => metaReviews[i] = res)
     //   .catch(fail => {
     //     console.log(fail);
     //     clearTimeout();
     //   })
-    // api.getProduct(i)
-    //   .then(res => products[i] = res)
-    //   .catch(fail => {
-    //     console.log(fail);
-    //     clearTimeout();
-    // })
+    api.getProduct(i)
+      .then(res => products[i] = res)
+      .catch(fail => {
+        console.log(fail);
+        clearTimeout();
+    })
   }, 1000 * step * interval)
 }
 
 setTimeout(() => {
 
   // Convert the object to a JSON string
-  const jsonString = JSON.stringify(styles);
+  const jsonString = JSON.stringify(products);
 
   // Write the JSON string to a file
-  fs.writeFile('styles.json', jsonString, 'utf8', (err) => {
+  fs.writeFile('products.json', jsonString, 'utf8', (err) => {
     if (err) throw err;
     console.log('The file has been saved!');
   });
@@ -75,7 +75,7 @@ setTimeout(() => {
 
 for (let i = 0; i < 8; i++) {
   setTimeout(() => {
-    console.log(styles)
+    console.log(products)
   }, i * 60000)
 }
 
