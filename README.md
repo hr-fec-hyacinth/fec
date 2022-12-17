@@ -18,11 +18,10 @@
 ## Modules
 
 ### Overview - Jon
-```she
-The top of the page shows an overview of the current product. An image carousel displays on the left side of the screen, allowing the user to click on thumbnails or arrows to change the current image. Clicking on an image will open up an expanded view. This expanded view opens another carousel that displays the images at the size of the screen. Clicking on an image in expanded view will increase the zoom by 2.5 and clicking again will go back to the normal view.
 
-On the right side of the screen is the product details and the cart. The social media icons display at the top with the star ratings. Clicking on the number of ratings will take the user down the the Ratings & Reviews section. Underneath the product details, a list of styles appear as clickable icons. Clicking on these will update the images in the carousel and the product information. The cart allows the user to select both a size and quantity, and sends an api call to add the product to the user cart.
-```
+> The top of the page shows an overview of the current product. An image carousel displays on the left side of the screen, allowing the user to click on thumbnails or arrows to change the current image. Clicking on an image will open up an expanded view. This expanded view opens another carousel that displays the images at the size of the screen. Clicking on an image in expanded view will increase the zoom by 2.5 and clicking again will go back to the normal view.
+
+> On the right side of the screen is the product details and the cart. The social media icons display at the top with the star ratings. Clicking on the number of ratings will take the user down the the Ratings & Reviews section. Underneath the product details, a list of styles appear as clickable icons. Clicking on these will update the images in the carousel and the product information. The cart allows the user to select both a size and quantity, and sends an api call to add the product to the user cart.
 
 ## Git Tools
 Make New Branch and Push:
