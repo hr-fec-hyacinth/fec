@@ -1,4 +1,4 @@
-[
+const test = [
   {
     "id": 37311,
     "campus": "hr-rfe",
@@ -22,3 +22,29 @@
     "updated_at": "2021-08-13T14:37:33.145Z"
   }
 ]
+
+const mongoose = require('mongoose');
+
+const main = async () => {
+  await mongoose.connect('mongodb://localhost/fec2');
+  const productSchema = new mongoose.Schema({
+    id: Number,
+    name: String,
+    campus: String,
+    slogan: String,
+    description: String,
+    category: String,
+    default_price: String,
+    created_at: String,
+    updated_at: String
+  });
+  const Product = mongoose.model('Product', productSchema);
+
+
+  test.map(async (entry) => {
+    const oneProduct = new Product(entry);
+    await oneProduct.save();
+  })
+}
+
+main().catch(err => console.log(err));
