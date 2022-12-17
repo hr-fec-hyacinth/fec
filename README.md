@@ -43,12 +43,23 @@
 
 > The Questions and Answers section is made up of many nested objects, but its main components are the search bar, the question, and the answer. There are buttons to expand and collapse both the questions and answers, as well as the option to add both a question and answer. When either is added, a modal appears and blurs the rest of the screen, allowing the user to focus on the entry. Within the answer modal, users can also upload pictures that will be displayed as thumbnails. Overall, the design of this section is clean and free of distractions, making it easy for the user to find the answer they are seeking.
 
+### Ratings & Reviews - Calvin
+
+> By default, the maximum number of reviews are pulled from Store database but only two reviews are initially displayed unless there are no reviews, in which case only the button ‘Add A Review’ will be displayed. Reviews can be sorted by *relevance, newness, or helpfulness*. An *additive star filter* is available on ratings side and has a hover effect to indicate clickability. Below the filter are the current average ratings on each product's unique characteristics.
+
+> Clicking the submit button will render a popup form modal with the following fields: 1) Selectable stars, 2) A dynamic characteristic input table unique to each product, 3) Standard email & name fields, 4) Review Summary *(optional)*, 5) Review Details, and 6) A multiple photo upload button. User must meet min requirements stated in the form to submit.
+
+> Future Roadmap for Form:
+> - Save entered data into local storage/session storage
+> - Upon Successful Submit, render a 'success message' modal
+
+
 ## Git Tools
 Make New Branch and Push:
 ```she
 git checkout -b branch-name
 git add .
-git commmit -m "Text"
+git commit -m "Text"
 git push origin branch-name
 ```
 
@@ -68,7 +79,7 @@ git merge dev
 > The main branch is used for production code only and should only be pushed to from dev branch after testing. The dev branch is used to stage changes from feature branches. Feature branches are used for all four of the main widgets while new branches off dev are opened for bug fixes.
 
 ### Deploying with environment variables
-> By default, a browser is unable to access the environment variables stored in a .env file. To make this information available, dotenv and process libraries were installed. At the top of our webpack file, we will invoke the config command from dotenv. This gives webpack access to the environment variables. New environment plugins needed to be added to the webpack plugin array for each variable in the env file. To prevent 'process not defined' errors, we need to require the process module at the top of the webpack file. The webpack resolve needs to have an alias that matches 'process' to 'process/browser'. Lastly, we need to provide a new plugin to webpack, giving an object that matches 'process' to 'process/broswer'.
+> By default, a browser is unable to access the environment variables stored in a .env file. To make this information available, dotenv and process libraries were installed. At the top of our webpack file, we will invoke the config command from dotenv. This gives webpack access to the environment variables. New environment plugins needed to be added to the webpack plugin array for each variable in the env file. To prevent 'process not defined' errors, we need to require the process module at the top of the webpack file. The webpack resolve needs to have an alias that matches 'process' to 'process/browser'. Lastly, we need to provide a new plugin to webpack, giving an object that matches 'process' to 'process/browser'.
 
 ### Installing Dependencies
 From within the root directory:
