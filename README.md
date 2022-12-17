@@ -23,12 +23,23 @@
 
 > On the right side of the screen is the product details and the cart. The social media icons display at the top with the star ratings. Clicking on the number of ratings will take the user down the the Ratings & Reviews section. Underneath the product details, a list of styles appear as clickable icons. Clicking on these will update the images in the carousel and the product information. The cart allows the user to select both a size and quantity, and sends an api call to add the product to the user cart.
 
+### Ratings & Reviews - Calvin
+
+> By default, the maximum number of reviews are pulled from Store database but only two reviews are initially displayed unless there are no reviews, in which case only the button ‘Add A Review’ will be displayed. Reviews can be sorted by *relevance, newness, or helpfulness*. An *additive star filter* is available on ratings side and has a hover effect to indicate clickability. Below the filter are the current average ratings on each product's unique characteristics.
+
+> Clicking the submit button will render a popup form modal with the following fields: 1) Selectable stars, 2) A dynamic characteristic input table unique to each product, 3) Standard email & name fields, 4) Review Summary *(optional)*, 5) Review Details, and 6) A multiple photo upload button. User must meet min requirements stated in the form to submit.
+
+> Future Roadmap for Form:
+> - Save entered data into local storage/session storage
+> - Upon Successful Submit, render a 'success message' modal
+
+
 ## Git Tools
 Make New Branch and Push:
 ```she
 git checkout -b branch-name
 git add .
-git commmit -m "Text"
+git commit -m "Text"
 git push origin branch-name
 ```
 
