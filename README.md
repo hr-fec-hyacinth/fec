@@ -1,11 +1,11 @@
 # FEC - Hyacinth
 
-> Front End Capstone for Team Hyacinth. The project goal is to design a commerical website based on the business documents provided.
+> The goal of this project was to create a front end website that allows a user to interact with a specific product. The website is titled 'Swan' and contains four sections that were completed by each team member. Every click on the website sends an interaction to the api supplied by the business requirements. The color scheme of the website adjusts based on whether a user has dark mode or light mode enabled.
 
 ## Table of Contents
 
 1. [Usage](#Usage)
-2. [Requirements](#requirements)
+2. [Modules](#modules)
 3. [Git Tools](#git-tools)
 4. [Development](#development)
 5. [Installing Dependencies](#installing-dependencies)
@@ -15,12 +15,13 @@
 
 > The `npm run prod` script creates the css file, uses webpack/babel to build the bundle file, then start the express server that servers up the bundle. See [Additional Info](#additional-info) for more information on these tools
 
-## Requirements
+## Modules
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
+### Overview - Jon
 
-- Node 6.13.0
-- etc
+> The top of the page shows an overview of the current product. An image carousel displays on the left side of the screen, allowing the user to click on thumbnails or arrows to change the current image. Clicking on an image will open up an expanded view. This expanded view opens another carousel that displays the images at the size of the screen. Clicking on an image in expanded view will increase the zoom by 2.5 and clicking again will go back to the normal view.
+
+> On the right side of the screen is the product details and the cart. The social media icons display at the top with the star ratings. Clicking on the number of ratings will take the user down the the Ratings & Reviews section. Underneath the product details, a list of styles appear as clickable icons. Clicking on these will update the images in the carousel and the product information. The cart allows the user to select both a size and quantity, and sends an api call to add the product to the user cart.
 
 ## Git Tools
 Make New Branch and Push:
@@ -53,7 +54,6 @@ git merge dev
 From within the root directory:
 
 ```sh
-npm install -g webpack
 npm install
 ```
 
