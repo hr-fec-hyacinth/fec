@@ -124,4 +124,13 @@ api.voteHelpfulReview = (reviewId) => {
   return axios.put(URL + `reviews/${reviewId}/helpful`, {}, {headers: {Authorization: AUTHKEY}})
 }
 
+api.postReview = (postBody) => {
+  return axios.post(URL + 'reviews', postBody, {headers: {Authorization: AUTHKEY}}).
+    then(result => result).
+    catch(err => {
+      console.warn(err);
+      return new Error(err);
+    });
+}
+
 export default api;
