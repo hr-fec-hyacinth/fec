@@ -5,7 +5,7 @@ import CharInputTable from './CharacteristicInputTable.jsx';
 import { IoIosCloseCircle } from 'react-icons/io';
 import PhotoUpload from '../shared/PhotoUpload.jsx';
 import Thumbnails from '../shared/Thumbnails.jsx'
-import axios from 'axios';
+import api from '../../../server/api.js';
 
 require('dotenv').config();
 let AUTHKEY = process.env.AUTHKEY;
@@ -26,6 +26,7 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
   const [characteristics, setCharacteristics] = useState({});
   const [hasPosted, setHasPosted] = useState(false)
   const [photosSrcList, setPhotosSrcList] = useState([]);
+  const [submitError, setSubmitError] = useState(false);
 
   // CSS Styling <---------------------------------------------------------------------------------------------------->
   // CSS Styling for table specifically to stretch the whole row
@@ -80,13 +81,14 @@ const ReviewForm = ({product, meta, onFormSubmit, exitFormCB}) => {
       }
     }
 
-    axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/'+'reviews', postBody, {headers: {Authorization: AUTHKEY}})
-      .then(result => {
+    api.postReview(postBody).
+      then(result => {
+        console.log(result);
         onFormSubmit(false);
-      })
-      .catch(err => {
-        console.warn(err)
-      })
+      }).
+      catch(err => {
+        setSubmitError(true);
+      });
 
   }
 
