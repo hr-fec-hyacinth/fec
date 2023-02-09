@@ -2,6 +2,9 @@
 
 > The goal of this project was to create a front end website that allows a user to interact with a specific product. The website is titled 'Swan' and contains four sections that were completed by each team member. Every click on the website sends an interaction to the api supplied by the business requirements. The color scheme of the website adjusts based on whether a user has dark mode or light mode enabled.
 
+<br/>
+<img src="./Swan.gif" width="100%" alt="Swan App"/>
+
 ## Table of Contents
 
 1. [Usage](#Usage)
